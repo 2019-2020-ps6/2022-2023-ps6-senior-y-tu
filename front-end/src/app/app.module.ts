@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreerQuizComponent } from './Quiz/creer-quiz/creer-quiz.component';
+import { CreerQuizComponent } from './Quizs/creer-quiz/creer-quiz.component';
+import { CreerQuestionComponent } from './Questions/creer-question/creer-question.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreerQuizComponent
+    CreerQuizComponent,
+    CreerQuestionComponent
   ],
   imports: [
     BrowserModule,
