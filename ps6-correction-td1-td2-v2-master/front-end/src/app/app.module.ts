@@ -39,6 +39,9 @@ import { UserListComponent } from './users/user-list/user-list.component';
     HttpClientModule,
   ],
   providers: [],
+  exports: [
+    HeaderComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
