@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreerQuestionComponent } from './Questions/creer-question/creer-question.component';
-import { CreerQuizComponent } from './Quiz/creer-quiz/creer-quiz.component';
+import { CreerQuestionComponent } from './questions/creer-question/creer-question.component';
 import { HeaderPatientComponent } from './header/patient/headerPatient.component';
 import {HeaderProComponent} from "./header/pro/headerPro.component";
 import {HeaderAccueilComponent} from "./header/accueil/headerAccueil.component";
+import {CreerQuizComponent} from "./quizs/creer-quiz/creer-quiz.component";
+
+
+import  {RouterModule} from "@angular/router";
+import { AccueilComponent } from './accueil/accueil.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+// import * as http from "http";
 
 
 @NgModule({
@@ -18,11 +25,15 @@ import {HeaderAccueilComponent} from "./header/accueil/headerAccueil.component";
     HeaderPatientComponent,
     HeaderProComponent,
     HeaderAccueilComponent,
-    CreerQuizComponent
+    AccueilComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

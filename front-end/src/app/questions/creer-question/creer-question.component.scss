@@ -1,0 +1,26 @@
+.creer-question {
+
+  justify-content: center;
+  margin: 20px auto;
+  padding: 10px;
+  border: 2px solid #f2d7c3;
+  width: 80%;
+  position: relative;
+  background-color: white;
+
+  .input-texte{
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+  }
+
+  .bouton-question{
+    display : flex;
+    justify-content: space-between;
+  }
+
+  .bouton{
+    border:1px solid black;
+    background-color: #f2d7c3;
+  }
+}
