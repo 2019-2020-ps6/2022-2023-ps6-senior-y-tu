@@ -11,7 +11,8 @@ import { HeaderPatientComponent } from './header/patient/headerPatient.component
 import {HeaderProComponent} from "./header/pro/headerPro.component";
 import {HeaderAccueilComponent} from "./header/accueil/headerAccueil.component";
 import {CreerQuizComponent} from "./quizs/creer-quiz/creer-quiz.component";
-
+import { PatientListComponent } from './patients/patient-list/patient-list.component';
+import { PatientComponent } from './patients/patient/patient.component';
 
 import  {RouterModule} from "@angular/router";
 import { AccueilComponent } from './accueil/accueil.component';
@@ -34,6 +35,8 @@ import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
     HeaderProComponent,
     HeaderAccueilComponent,
     AccueilComponent,
+    PatientListComponent,
+    PatientComponent,
   ],
   imports: [
     BrowserModule,
