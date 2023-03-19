@@ -1,0 +1,36 @@
+@import './src/styles/variables.scss';
+
+.patient {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: $white;
+  border-radius: 24px;
+  outline: 2px solid $roseFonce;
+  width: 200px;
+  height: 284px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.patient-name {
+  margin-top: 0;
+  text-align: center;
+
+  .name {
+    font-size: 24px;
+  }
+}
+
+.patient-picture {
+  width: fit-content;
+  height: fit-content;
+
+  img {
+    width: 160px;
+    height: 215px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+}

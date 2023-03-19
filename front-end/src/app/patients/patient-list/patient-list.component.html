@@ -1,0 +1,27 @@
+<div class="blocs-patient-ergotherapeute">
+  <div class="bloc-patient">
+    <div class="bloc-patient-header">
+      <span class="titre-list-patient">Patients</span>
+    </div>
+    <div class="bloc-patient-content">
+      <div class="list-patient">
+        <ng-container *ngFor="let patient of patientList">
+          <app-patient [patient]="patient"></app-patient>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="line"></div>
+  <div class="bloc-ergotherapeute">
+    <div class="bloc-ergotherapeute-header">
+      <span class="titre-list-ergotherapeute">Ergotherapeutes</span>
+    </div>
+    <div class="bloc-ergotherapeute-content">
+      <div class="list-ergotherapeute">
+        <ng-container *ngFor="let ergo of ergoList">
+          <app-patient [patient]="ergo"></app-patient>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
