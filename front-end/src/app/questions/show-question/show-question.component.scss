@@ -1,0 +1,45 @@
+@import '../../../style/card';
+@import '../../../style/variables';
+
+
+.boite {
+  text-align: center;
+  background-color:white;
+  padding: 2%;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  outline: 2px solid $roseFonce;
+}
+
+.align{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.milieu{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+}
+
+
+.question1{
+  background-color: $vertClair;
+}
+
+.question2{
+  background-color: $violetClair;
+  margin-right: 2%;
+}
+
+.question3{
+  background-color: $bleuClair;
+  margin-left: 2%;
+}
+
+.question4{
+  background-color: $jauneClair;
+}

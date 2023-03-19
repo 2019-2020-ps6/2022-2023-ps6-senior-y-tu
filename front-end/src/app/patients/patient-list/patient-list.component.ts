@@ -14,11 +14,11 @@ export class PatientListComponent implements OnInit {
   public ergoList: Patient[] = []
 
   constructor(public patientService: PatientService) {
-      this.patientService.patients$.subscribe((patientList) => {
+      this.patientService.patients$.subscribe((patientList:Patient[]) => {
         this.patientList = patientList;
       });
 
-    this.patientService.ergos$.subscribe((ergoList) => {
+    this.patientService.ergos$.subscribe((ergoList:Patient[]) => {
       this.ergoList = ergoList;
     });
   }

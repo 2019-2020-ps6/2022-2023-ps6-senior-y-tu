@@ -19,6 +19,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ThemeComponent} from "./themes/theme/theme.component";
 import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
+import { ShowQuestionComponent } from './questions/show-question/show-question.component';
 // import * as http from "http";
 
 
@@ -37,6 +38,7 @@ import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
     AccueilComponent,
     PatientListComponent,
     PatientComponent,
+    ShowQuestionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,28 @@
+<div class="boite">
+  <div class="align">
+    <p>{{question[0].id}}/2</p>
+    <img src="assets/boutonRetour.png" routerLink="/accueil" >
+  </div>
+
+  <div class="align">
+    <div class="milieu">
+      <h2>Question {{question[0].id}} :&nbsp; </h2>
+      <h2>{{question[0].intitule}}</h2>
+    </div>
+
+    <img src="{{question[0].img}}"/>
+  </div>
+
+  <div class="reponse">
+    <button class="question1" (click)="repondre()">{{question[0].responses[0].valeur}}</button>
+  </div>
+
+  <div class="reponse">
+    <button class="question2" (click)="repondre()">{{question[0].responses[1].valeur}}</button>
+    <button class="question3" (click)="repondre()">{{question[0].responses[2].valeur}}</button>
+  </div>
+
+  <div class="reponse">
+    <button class="question4" (click)="repondre()">{{question[0].responses[3].valeur}}</button>
+  </div>
+</div>

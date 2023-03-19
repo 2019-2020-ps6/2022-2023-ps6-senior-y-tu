@@ -1,3 +1,4 @@
+
 export interface Reponse {
   type?: string;
   valeur: string;
@@ -8,4 +9,5 @@ export interface Question {
   id: string;
   intitule: string;
   responses: Reponse[];
+  img: string;
 }

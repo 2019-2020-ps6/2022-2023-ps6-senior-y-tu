@@ -21,15 +21,19 @@ export const QUESTION_GEOGRAPHIE: Question = {
             valeur: 'Marseille',
             estCorrect: false,
         },
-    ]
+    ],
+    img: '/asset/drapeauFrance.png',
 };
+
+export const QUESTION_LIST: Question[] = [QUESTION_GEOGRAPHIE];
+
 
 export const QUIZ_LISTE: Quiz[] = [
     {
         nom: 'Les Capitales',
         theme: 'Géographie',
         image: 'https://www.babelio.com/users/QUIZ_10-capitales-europeennes-dans-ces-films-cultes_5756.jpeg',
-        questions: [],
+        questions: QUESTION_LIST,
     },
     {
 
