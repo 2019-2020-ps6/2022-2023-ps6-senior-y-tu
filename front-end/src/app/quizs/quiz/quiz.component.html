@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Quiz </title>
+</head>
+
+<div class="quiz">
+  <p class="theme-quiz">
+    {{quiz?.theme}}
+  </p>
+  <p class="nom-quiz">
+    {{quiz?.nom}}
+  </p>
+  <p class="image">
+    <img src="{{quiz?.image}}" alt="image" width="100%">
+  </p>
+
+  <p class="boutons" *ngIf="options.ergo" >
+    <button class="modifier-quiz" >
+      Modifier
+    </button>
+
+    <button class="supprimer-quiz" (click)="deletedQuiz()">
+      Supprimer
+    </button>
+  </p>
+
+</div>

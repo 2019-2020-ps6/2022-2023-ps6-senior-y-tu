@@ -10,10 +10,11 @@ import {HeaderProComponent} from "./header/pro/headerPro.component";
 import {HeaderAccueilComponent} from "./header/accueil/headerAccueil.component";
 import {CreerQuizComponent} from "./quizs/creer-quiz/creer-quiz.component";
 
-
 import  {RouterModule} from "@angular/router";
 import { AccueilComponent } from './accueil/accueil.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { QuizComponent } from './quizs/quiz/quiz.component';
+import { MesQuizsComponent } from './quizs/mes-quizs/mes-quizs.component';
 // import * as http from "http";
 
 
@@ -25,7 +26,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     HeaderPatientComponent,
     HeaderProComponent,
     HeaderAccueilComponent,
-    AccueilComponent
+    AccueilComponent,
+    QuizComponent,
+    MesQuizsComponent
   ],
   imports: [
     BrowserModule,

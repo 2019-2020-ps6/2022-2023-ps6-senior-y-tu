@@ -1,0 +1,23 @@
+.quiz{
+
+  .image{
+    width: 20%;
+    height: 20%;
+  }
+
+  .boutons{
+
+    display : flex;
+    justify-content: space-between;
+
+    .modifier-quiz{
+      border: 1px solid black;
+      background-color: #f2d7c3;
+    }
+    .supprimer-quiz{
+      border: 1px solid black;
+      background-color: #f2d7c3;
+    }
+  }
+
+}

@@ -1,0 +1,31 @@
+.creation-quiz{
+  display: flex;
+  text-align: center;
+  margin: 0 auto;
+  justify-content: center;
+  border: 1px solid black;
+  background-color: #f2d7c3;
+}
+
+
+.ma-liste-quizs{
+  display: flex;
+  flex-wrap: wrap;
+
+
+
+
+  .quiz{
+    width: 100%;
+
+  }
+
+  .quiz-app{
+    border : 2px solid #f2d7c3;
+    margin:20px auto;
+    padding: 10px;
+    width: 80%;
+    position: relative;
+    background-color: white;
+  }
+}
