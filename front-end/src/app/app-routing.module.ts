@@ -4,13 +4,15 @@ import {QuizListComponent} from "./quizs/quiz-list/quiz-list.component";
 import {CreerQuizComponent} from "./quizs/creer-quiz/creer-quiz.component";
 import {CreerQuestionComponent} from "./questions/creer-question/creer-question.component";
 import {AccueilComponent} from "./accueil/accueil.component";
+import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
 
 
 const routes: Routes = [
   { path: 'creer-quiz', component: CreerQuizComponent },
   { path: 'creer-question', component: CreerQuestionComponent },
-    {path: 'quiz-list', component: QuizListComponent},
-    { path: 'accueil', component: AccueilComponent },
+  {path: 'quiz-list', component: QuizListComponent},
+  { path: 'accueil', component: AccueilComponent },
+  { path: 'theme-list', component: ThemeListComponent},
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
 ];
 
