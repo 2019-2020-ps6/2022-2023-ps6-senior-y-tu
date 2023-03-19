@@ -1,0 +1,23 @@
+@import '../../../style/card';
+
+.edit {
+    margin-left: 0.3em;
+}
+.card {
+  border-color:#F2D7C3;
+  border-style: solid;
+  margin-left: 110px;
+  display: inline-block;
+}
+h2 {
+  text-align: center;
+}
+#images {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.button-card {
+  display: block;
+  margin: auto;
+}

@@ -1,10 +1,10 @@
-@import '../../../style/card.scss';
+@import '../../../style/card';
 
 .quiz-list {
   display: flex;
   flex-wrap: wrap;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: 10%;
 }
 #entete {
   text-align: center;
