@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { QuizListComponent} from "./Quiz/quiz-list/quiz-list.component";
+import { QuizComponent} from "./Quiz/quiz/quiz.component";
 import { CreerQuestionComponent } from './questions/creer-question/creer-question.component';
 import { HeaderPatientComponent } from './header/patient/headerPatient.component';
 import {HeaderProComponent} from "./header/pro/headerPro.component";
@@ -22,6 +24,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   declarations: [
     AppComponent,
     CreerQuizComponent,
+    QuizComponent,
+    QuizListComponent,
     CreerQuestionComponent,
     HeaderPatientComponent,
     HeaderProComponent,
@@ -32,11 +36,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule,
+    FormsModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

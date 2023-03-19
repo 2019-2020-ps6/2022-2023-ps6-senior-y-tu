@@ -26,14 +26,13 @@ export const QUESTION_GEOGRAPHIE: Question = {
 
 export const QUIZ_LISTE: Quiz[] = [
     {
-        id: '1',
         nom: 'Les Capitales',
         theme: 'Géographie',
         image: 'https://img2.freepng.fr/20180205/epe/kisspng-world-map-globe-geography-global-ocean-europe-asia-america-africa-5a7851bd2038a8.063068011517834685132.jpg',
         questions: [],
     },
     {
-        id: '2',
+
         nom: 'Les plantes d intérieur',
         theme: 'Végétation',
         image: 'https://img2.freepng.fr/20180716/jjx/kisspng-flowerpot-houseplant-grasses-http-cookie-pflanzen-5b4c492bd43611.4029423015317261238692.jpg',
