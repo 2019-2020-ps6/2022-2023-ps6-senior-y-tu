@@ -1,0 +1,17 @@
+@import '../../../style/card';
+
+.quiz-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: auto;
+  margin-left: 10%;
+}
+#entete {
+  text-align: center;
+  background-color:$beige;
+  padding:3px;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+

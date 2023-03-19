@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
   <title> Quiz </title>
 </head>
 
-<div class="quiz">
+<div class="quiz" *ngIf="options.ergo">
   <p class="theme-quiz">
     {{quiz?.theme}}
   </p>
@@ -16,7 +17,7 @@
     <img src="{{quiz?.image}}" alt="image" width="100%">
   </p>
 
-  <p class="boutons" *ngIf="options.ergo" >
+  <p class="boutons" >
     <button class="modifier-quiz" >
       Modifier
     </button>
@@ -25,5 +26,18 @@
       Supprimer
     </button>
   </p>
+</div>
+
+
+<div class="card" >
+    <h2>
+        <i class="titre"></i>
+        {{quiz.nom}}
+    </h2>
+  <div id="images">
+    <img  src={{quiz.image}} width=400 height=200px>
+  </div>
+    <br>
+  <button class="button-card" routerLink="/show-question">Jouer</button>
 
 </div>
