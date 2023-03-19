@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Création de quiz </title>
+</head>
+
+<div class="creer-quiz">
+  <form class="quiz-form" [formGroup]="quizForm">
+    <p> Nom du quiz
+      <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
+    </p>
+    <p class="theme"> Thème
+      <input type="text" class="input-texte" name="theme" [formControlName]="'theme'" required>
+      <button class="valider-theme"> Valider theme </button>
+    </p>
+    <p> Image
+      <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
+    </p>
+
+    <p class="bouton-paragraphe">
+      <button routerLink="/accueil" class="bouton"> Retour </button>
+      <button (click)="onValider()" routerLink="/creer-question" class="bouton"> Valider </button>
+
+    </p>
+  </form>
+
+
+</div>

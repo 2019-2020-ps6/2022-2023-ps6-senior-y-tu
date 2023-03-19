@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
-import { QUIZ_LIST } from '../mocks/quiz-list.mock';
+import { QUIZ_LISTE } from '../mocks/quiz-list.mock';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class QuizService {
    The list of quiz.
    The list is retrieved from the mock.
    */
-  private quizzes: Quiz[] = QUIZ_LIST;
+  private quizzes: Quiz[] = QUIZ_LISTE;
 
   /*
    Observable which contains the list of the quiz.
@@ -80,3 +80,4 @@ export class QuizService {
   }
   */
 }
+
