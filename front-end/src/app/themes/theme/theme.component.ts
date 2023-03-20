@@ -9,12 +9,13 @@ import { Theme} from "../../../models/theme.model";
 export class ThemeComponent implements OnInit {
 
   @Input()
-  theme: Theme ;
+  theme: Theme | undefined;
 
   @Output()
   quizSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
+    console.log(this.theme);
   }
 
   ngOnInit(): void {

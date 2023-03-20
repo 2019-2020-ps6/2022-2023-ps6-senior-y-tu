@@ -22,7 +22,7 @@ export const QUESTION_GEOGRAPHIE: Question = {
             estCorrect: false,
         },
     ],
-    img: '/asset/drapeauFrance.png',
+    img: '/assets/drapeauFrance.png',
 };
 
 export const QUESTION_LIST: Question[] = [QUESTION_GEOGRAPHIE];

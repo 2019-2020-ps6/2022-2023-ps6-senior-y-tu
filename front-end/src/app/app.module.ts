@@ -53,8 +53,6 @@ import { ShowQuestionComponent } from './questions/show-question/show-question.c
     HttpClientModule,
     RouterModule,
     FormsModule,
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]

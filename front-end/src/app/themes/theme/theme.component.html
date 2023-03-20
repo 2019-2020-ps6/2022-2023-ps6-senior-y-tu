@@ -1,8 +1,8 @@
 <div class="card">
-  <h2> {{theme.nom}}
+  <h2> {{theme?.nom}}
   </h2>
   <div id="images">
-    <img  src={{theme.image}} width=400 height=200px>
+    <img alt="test" src="{{theme?.image}}" width="400px" height="200px">
   </div>
   <br>
   <button class="button-card" routerLink="/quiz-list">Continuer</button>

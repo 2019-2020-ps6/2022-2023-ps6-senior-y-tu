@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { Theme} from "../models/theme.model";
 import { THEME_LIST} from "../mocks/theme-list.mock";
-import { serverUrl, httpOptionsBase } from '../configs/server.config';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +23,9 @@ export class ThemeService {
    Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
   public themes$: BehaviorSubject<Theme[]>
-    = new BehaviorSubject(this.themes);
+    = new BehaviorSubject(THEME_LIST);
 
-  public themeSelected$: Subject<Theme> = new Subject();
-
-  private themeUrl = serverUrl + '/themes';
-
-  private httpOptions = httpOptionsBase;
-
-  constructor(private http: HttpClient) {
+  /*constructor(private http: HttpClient) {
     this.retrieveThemes();
   }
 
@@ -42,10 +34,10 @@ export class ThemeService {
       this.themes = themeList;
       this.themes$.next(this.themes);
     });
-  }
+  }*/
 
   addTheme(theme: Theme): void {
-    this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.retrieveThemes());
+    THEME_LIST.push(theme);
   }
 }
 
