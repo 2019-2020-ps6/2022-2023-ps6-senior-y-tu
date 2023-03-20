@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Création de patient </title>
+</head>
+
+<div class="creer-patient">
+  <form class="patient-form" [formGroup]="patientForm">
+    <p class="nom-patient"> Nom du patient
+      <input type="text" class="input-texte" name="nom-patient" [formControlName]="'nom-patient'" required>
+    </p>
+    <p class="prenom-patient"> Prénom du patient
+      <input type="text" class="input-texte" name="prenom-patient" [formControlName]="'prenom-patient'" required>
+    </p>
+    <p class="date-naissance"> Date de naissance
+      <input type="date" class="input-image" name="date-naissance" [formControlName]="'date-naissance'" required>
+    </p>
+
+    <p class="handicap"> Handicap:
+      <input type="checkbox" id="handicap" name="check-handicap" checked>
+      <label for="handicap">Oui</label>
+      <label for="handicap">Non</label>
+    </p>
+
+    <p class="explication"> Explications aux question:
+      <input type="checkbox" id="explication" name="check-explication" checked>
+      <label for="explication">Oui</label>
+      <label for="explication">Non</label>
+
+    <p> Image
+      <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
+    </p>
+
+    <p class="taille-police">Taille de police
+      <input type="checkbox" id="taille-police" name="check-taille" checked>
+      <label for="taille-police">24</label>
+      <label for="taille-police">40</label>
+      <label for="taille-police">60</label>
+    </p>
+
+    <p class="bouton-annuler">
+      <button routerLink="/accueil" class="bouton"> Annuler </button>
+      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" class="bouton"> Valider </button>
+
+    </p>
+  </form>
+
+
+</div>
