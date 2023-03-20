@@ -4,8 +4,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LISTE } from '../mocks/quiz-list.mock';
 
-import { serverUrl, httpOptionsBase } from '../configs/server.config';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -36,22 +34,6 @@ export class QuizService {
 
   public quizSelected$: Subject<Quiz> = new Subject();
 
-  private quizUrl = serverUrl + '/quizzes';
-  private questionsPath = 'questions';
-
-  private httpOptions = httpOptionsBase;
-
-  constructor(private http: HttpClient) {
-    this.retrieveQuizzes();
-  }
-
-  retrieveQuizzes(): void {
-    this.http.get<Quiz[]>(this.quizUrl).subscribe((quizList) => {
-      this.quizzes = quizList;
-      this.quizzes$.next(this.quizzes);
-    });
-  }
-
   addQuiz(quiz: Quiz): void {
 
     this.quizs.push(quiz);
@@ -62,14 +44,6 @@ export class QuizService {
     const index = this.quizs.indexOf(quiz);
     this.quizs.splice(index, 1);
     this.quizs$.next(this.quizs);
-  }
-
-  setSelectedQuiz(quizId: string): void {
-    const urlWithId = this.quizUrl + '/' + quizId;
-    this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
-      this.quizSelected$.next(quiz);
-    });
-
   }
 
 }

@@ -57,8 +57,6 @@ import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.compone
     HttpClientModule,
     RouterModule,
     FormsModule,
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]
