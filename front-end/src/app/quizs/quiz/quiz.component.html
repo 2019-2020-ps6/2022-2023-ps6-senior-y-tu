@@ -29,13 +29,13 @@
 </div>
 
 
-<div class="card" >
+<div class="card" *ngIf="options.patient">
     <h2>
         <i class="titre"></i>
         {{quiz?.nom}}
     </h2>
   <div id="images">
-    <img  src={{quiz?.image}} width=400 height=200px>
+    <img  alt="image" src={{quiz?.image}} width=400 height=200px>
   </div>
     <br>
   <button class="button-card" routerLink="/show-question">Jouer</button>
