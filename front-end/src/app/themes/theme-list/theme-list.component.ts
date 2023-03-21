@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ThemeService} from "../../../services/theme.service";
 import { Theme} from "../../../models/theme.model";
 
@@ -12,7 +11,7 @@ export class ThemeListComponent implements OnInit {
 
   public themeList: Theme[] = [];
 
-  constructor(private router: Router, public themeService: ThemeService) {
+  constructor(public themeService: ThemeService) {
     this.themeService.themes$.subscribe((themes: Theme[]) => {
       this.themeList = themes;
     });

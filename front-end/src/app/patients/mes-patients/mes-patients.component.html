@@ -1,0 +1,20 @@
+<div class="mes-patients">
+  <button class="creation-patient" routerLink="/creer-patient">Créer un nouveau patient</button>
+
+  <div class="ma-liste-patients">
+    <div class="patient" *ngFor="let patient of patientListe">
+
+      <div class="patient-app">
+        <app-patient [patient]="patient" (patientDeleted)="patientDeleted($event)">
+
+        </app-patient>
+      </div>
+    </div>
+
+  </div>
+
+  Bouton provisoire pour retourner à l'accueil en attendant le header
+  <button class="retour" routerLink="/accueil">Retour</button>
+
+</div>
+

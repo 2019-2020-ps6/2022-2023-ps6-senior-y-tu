@@ -21,4 +21,10 @@ export class PatientService {
   addErgo(ergo: Patient) {
     ERGO_LISTE.push(ergo);
   }
+
+  deletePatient(patient: Patient): void {
+    const index = this.patients.indexOf(patient);
+    this.patients.splice(index, 1);
+    this.patients$.next(this.patients);
+  }
 }

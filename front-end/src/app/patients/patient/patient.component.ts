@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from "@angular/core";
+import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import { Patient } from "src/models/patient.model";
 
 @Component({
@@ -12,8 +12,15 @@ export class PatientComponent implements OnInit{
   @Input()
   patient: Patient | undefined ;
 
+  @Output()
+  patientDeleted: EventEmitter<Patient> = new EventEmitter<Patient>();
+
   constructor() {
   }
 
   ngOnInit(): void {}
+
+  deletePatient(){
+    this.patientDeleted.emit(this.patient);
+  }
 }

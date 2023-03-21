@@ -1,5 +1,5 @@
-@import '../../../style/card';
-@import '../../../style/variables';
+@import '../../../styles/card';
+@import '../../../styles/variables';
 
 
 .boite {
@@ -9,7 +9,7 @@
   margin-top: 40px;
   margin-left: 10%;
   margin-right: 10%;
-  outline: 2px solid $roseFonce;
+  outline: 2px solid $beige;
 }
 
 .align{

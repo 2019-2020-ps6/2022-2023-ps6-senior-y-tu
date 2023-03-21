@@ -16,7 +16,6 @@ export class QuizService {
 
   constructor() {
 
-
   }
 
 
@@ -31,11 +30,6 @@ export class QuizService {
     this.quizs.splice(index, 1);
     this.quizs$.next(this.quizs);
   }
-
-
-
-
-
 
 
 }
