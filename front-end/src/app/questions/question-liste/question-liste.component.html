@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Liste des quizs </title>
+</head>
+
+<h2>Questions du quiz {{quiz?.nom}}</h2>
+
+<div class="question-liste-creation">
+  <div class="question" *ngFor="let question of questionListe">
+    <app-question ></app-question>
+
+  </div>
+</div>

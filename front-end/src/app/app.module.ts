@@ -24,6 +24,10 @@ import { MesQuizsComponent } from './quizs/mes-quizs/mes-quizs.component';
 import {ThemeComponent} from "./themes/theme/theme.component";
 import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
 import { ShowQuestionComponent } from './questions/show-question/show-question.component';
+import { QuestionComponent } from './questions/question/question.component';
+import { QuestionListeComponent } from './questions/question-liste/question-liste.component';
+import { QuestionModificationComponent } from './questions/question-modification/question-modification.component';
+import { QuizModificationComponent } from './quizs/quiz-modification/quiz-modification.component';
 
 // import * as http from "http";
 
@@ -44,7 +48,11 @@ import { ShowQuestionComponent } from './questions/show-question/show-question.c
     MesQuizsComponent,
     PatientListComponent,
     PatientComponent,
-    ShowQuestionComponent
+    ShowQuestionComponent,
+    QuestionComponent,
+    QuestionListeComponent,
+    QuestionModificationComponent,
+    QuizModificationComponent
   ],
   imports: [
     BrowserModule,

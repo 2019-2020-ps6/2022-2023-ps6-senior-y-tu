@@ -1,0 +1,28 @@
+.quiz-modification{
+
+  justify-content: center;
+  margin:20px auto;
+  padding: 10px;
+  border : 2px solid #f2d7c3;
+  width: 80%;
+  position: relative;
+  background-color: white;
+
+  .boutons{
+    display : flex;
+    position: relative;
+    margin: 10px;
+    bottom: 0;
+    right: 0;
+
+    .bouton{
+      border:1px solid black;
+      background-color: #f2d7c3;
+      bottom: 0;
+      right: 0;
+      margin-right: 10px;
+    }
+
+  }
+
+}

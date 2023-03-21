@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Modification de quiz </title>
+</head>
+
+<div class="quiz-modification">
+
+  <h2>Quiz : {{quiz?.nom}}</h2>
+  <div class="theme"> Thème : {{quiz?.theme}}</div>
+  <div class="image-quiz" > Image du quiz :
+    <div class="image">
+      <img src="{{quiz?.image}}" alt="image" width="30%">
+    </div>
+  </div>
+
+  <div class="boutons">
+    <button class="bouton" id="voir-question" routerLink="/question-liste/{{quiz?.id}}">Voir les questions</button>
+    <button class="bouton" id="Valider" routerLink="/mes-quizs">Valider</button>
+  </div>
+
+</div>
