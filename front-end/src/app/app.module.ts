@@ -26,8 +26,7 @@ import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
 import { ShowQuestionComponent } from './questions/show-question/show-question.component';
 import { QuestionComponent } from './questions/question/question.component';
 import { QuestionListeComponent } from './questions/question-liste/question-liste.component';
-import { QuestionModificationComponent } from './questions/question-modification/question-modification.component';
-import { QuizModificationComponent } from './quizs/quiz-modification/quiz-modification.component';
+import { QuizModificationComponent} from "./quizs/quiz-modification/quiz-modification.component";
 import {CreerPatientsComponent} from "./patients/creer-patients/creer-patients.component";
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
 
@@ -53,7 +52,7 @@ import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.compone
     ShowQuestionComponent,
     QuestionComponent,
     QuestionListeComponent,
-    QuestionModificationComponent,
+    QuizModificationComponent,
     QuizModificationComponent,
     CreerPatientsComponent,
     MesPatientsComponent
