@@ -6,35 +6,49 @@
 </head>
 
 <div class="creer-question">
-  <p> Intitule de la question
-    <input type="text" class="input-texte" name="nom" required>
-  </p>
+  <form class="question-form" [formGroup]="questionForm">
+    <p> Intitule de la question
+      <input type="text" class="input-texte" name="nom" [formControlName]="'intitule'" required>
+    </p>
 
-  <div>Reponse 1 :
-    <input type="text" class="input-texte" id="rep1" name="reponse" required>
-    <input type="radio" name="rep" value="rep1" checked>
-  </div>
+    <div class="reponse" formArrayName="reponseArray">
+      <div>Reponse 1 :
+        <input type="text" class="input-texte" id="rep1" name="reponse" [formControlName]="'valeur'" required>
+        <input type="radio" name="rep" value="rep1" checked>
+      </div>
 
-  <div>Reponse 2 :
-    <input type="text" class="input-texte" id="rep2" name="reponse" required>
-    <input type="radio" name="rep" value="rep2" >
-  </div>
+      <div>Reponse 2 :
+        <input type="text" class="input-texte" id="rep2" name="reponse" [formControlName]="'valeur'" required>
+        <input type="radio" name="rep" value="rep2" >
+      </div>
 
-  <div>Reponse 3 :
-    <input type="text" class="input-texte" id="rep3" name="reponse" required>
-    <input type="radio" name="rep" value="rep3" >
-  </div>
+      <div>Reponse 3 :
+        <input type="text" class="input-texte" id="rep3" name="reponse" [formControlName]="'valeur'" required>
+        <input type="radio" name="rep" value="rep3" >
+      </div>
 
-  <div>Reponse 4 :
-    <input type="text" class="input-texte" id="rep4" name="reponse" required>
-    <input type="radio" name="rep" value="rep4" >
-  </div>
-
-  <p class="bouton-question">
-    <button routerLink="/creer-quiz" class="bouton"> Retour </button>
-    <button routerLink="/creer-question" class="bouton">Ajouter question</button>
-    <button routerLink="/mes-quizs" class="bouton"> Valider Quiz </button>
-  </p>
+      <div>Reponse 4 :
+        <input type="text" class="input-texte" id="rep4" name="reponse" [formControlName]="'valeur'" required>
+        <input type="radio" name="rep" value="rep4" >
+      </div>
+    </div>
 
 
+
+    <div>
+      <p> Image de la question </p>
+      <input type="file" name="image" id="image" accept="image/*">
+    </div>
+
+    <div>
+      <p> Description de la question </p>
+      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200"> </textarea>
+    </div>
+
+    <p class="bouton-question">
+      <button routerLink="/creer-quiz" class="bouton"> Retour </button>
+      <button type="submit" routerLink="/creer-question" class="bouton" (click)="onCreer()" >Ajouter question</button>
+      <button routerLink="/mes-quizs" class="bouton"> Valider Quiz </button>
+    </p>
+  </form>
 </div>

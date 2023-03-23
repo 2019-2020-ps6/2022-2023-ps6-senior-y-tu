@@ -7,6 +7,8 @@ import {AccueilComponent} from "./accueil/accueil.component";
 import {MesQuizsComponent} from "./quizs/mes-quizs/mes-quizs.component";
 import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
 import {ShowQuestionComponent} from "./questions/show-question/show-question.component";
+import {QuizModificationComponent} from "./quizs/quiz-modification/quiz-modification.component";
+import {QuestionListeComponent} from "./questions/question-liste/question-liste.component";
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
 import {CreerPatientsComponent} from "./patients/creer-patients/creer-patients.component";
 
@@ -18,10 +20,16 @@ const routes: Routes = [
   { path: 'creer-patient', component: CreerPatientsComponent },
   {path: 'quiz-list', component: QuizListComponent },
   { path: 'accueil', component: AccueilComponent },
-  {path : 'mes-quizs', component: MesQuizsComponent },
-  { path: 'theme-list', component: ThemeListComponent },
+
+  {path : 'mes-quizs', component: MesQuizsComponent},
+    { path: 'theme-list', component: ThemeListComponent},
+  { path: 'show-question', component: ShowQuestionComponent},
+  {path: 'quiz-modification/:id', component: QuizModificationComponent},
+  {path: 'question-liste/:id', component: QuestionListeComponent},
+
+
   { path:'mes-patients', component: MesPatientsComponent },
-  { path: 'show-question', component: ShowQuestionComponent },
+
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
 ];
 
