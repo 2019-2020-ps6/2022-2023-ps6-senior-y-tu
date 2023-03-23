@@ -8,23 +8,24 @@
 <div class="creer-patient">
   <form class="patient-form" [formGroup]="patientForm">
     <p class="nom-patient"> Nom du patient
-      <input type="text" class="input-texte" name="nom-patient" [formControlName]="'nom-patient'" required>
+      <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
     </p>
     <p class="prenom-patient"> Prénom du patient
-      <input type="text" class="input-texte" name="prenom-patient" [formControlName]="'prenom-patient'" required>
+      <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" required>
     </p>
     <p class="date-naissance"> Date de naissance
-      <input type="date" class="input-image" name="date-naissance" [formControlName]="'date-naissance'" required>
+      <input type="date" class="input-image" name="date" [formControlName]="'date'" required>
     </p>
 
-    <p class="handicap"> Handicap:
+    <div class="handicap"></div>
+      <p id="handicap-text"> Handicap:
       <div id ="handicap">
-      <input type="checkbox" id="handicap-leger" name="check-handicap" checked>
-      <label for="handicap-leger">Parkinson leger</label>
-      <br>
-      <input type="checkbox" id="handicap-fort" name="check-handicap" >
-      <label for="handicap-fort">Parkinson fort</label>
-    </div>
+        <input type="checkbox" id="handicap-leger" name="check-handicap" checked>
+        <label for="handicap-leger">Parkinson leger</label>
+        <br>
+        <input type="checkbox" id="handicap-fort" name="check-handicap" >
+        <label for="handicap-fort">Parkinson fort</label>
+  </div>
 
 
     <p class="explication"> Explications aux question:
@@ -53,9 +54,9 @@
       </div>
 
 
-    <p class="bouton-annuler">
-      <button routerLink="/accueil" id="bouton-retour"> Annuler </button>
-      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" id="bouton-valider"> Valider </button>
+    <p class="bouton-patients">
+      <button routerLink="/accueil" class="bouton"> Annuler </button>
+      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" class="bouton"> Valider </button>
 
     </p>
   </form>

@@ -15,7 +15,11 @@ export class CreerPatientsComponent implements  OnInit{
     this.patientForm = this.formBuilder.group({
       nom: [''],
       prenom: [''],
-      date: ['']
+      date: [''],
+      image:[''],
+      handicap:[''],
+      explication:[''],
+      taille: 24
     });
   }
   ngOnInit(): void {  }
