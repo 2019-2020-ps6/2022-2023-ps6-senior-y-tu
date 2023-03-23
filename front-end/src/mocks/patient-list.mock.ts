@@ -5,7 +5,10 @@ export const Patient_Lucienne: Patient = {
     nom:"De La Mer",
     prenom: "Lucienne",
     dateNaissance:'14/03/1946',
-    image: '/assets/Image-Patient/Image_Lucienne.png'
+    image: '/assets/Image-Patient/Image_Lucienne.png',
+    handicap: 'leger',
+    explication: 'oui',
+    taille:40
 };
 
 export const Patient_Jean: Patient = {
@@ -13,7 +16,10 @@ export const Patient_Jean: Patient = {
   nom:"Bois",
   prenom: "Jean",
   dateNaissance:'09/07/1950',
-  image: '/assets/Image-Patient/Image_Jean.png'
+  image: '/assets/Image-Patient/Image_Jean.png',
+  handicap: 'fort',
+  explication: 'oui',
+  taille:32
 };
 
 export const Patient_Jeanne: Patient = {
@@ -21,7 +27,10 @@ export const Patient_Jeanne: Patient = {
   nom:"Dupont",
   prenom: "Jeanne",
   dateNaissance:'17/12/49',
-  image: '/assets/Image-Patient/Image_Jeanne.png'
+  image: '/assets/Image-Patient/Image_Jeanne.png',
+  handicap: 'leger',
+  explication: 'non',
+  taille:40
 };
 
 export const Patient_Jean_Pierre: Patient = {
@@ -29,7 +38,10 @@ export const Patient_Jean_Pierre: Patient = {
   nom:"Dupond",
   prenom: "Jean",
   dateNaissance:'18/12/1949',
-  image: '/assets/Image-Patient/Image_Jean.png'
+  image: '/assets/Image-Patient/Image_Jean.png',
+  handicap: 'leger',
+  explication: 'oui',
+  taille:40
 };
 
 export const Patient_Jeanne_Marie: Patient = {
@@ -37,7 +49,10 @@ export const Patient_Jeanne_Marie: Patient = {
   nom:"Durant",
   prenom: "Jeanne-Marie",
   dateNaissance:"06/07/1937",
-  image: '/assets/Image-Patient/Image_Jeanne.png'
+  image: '/assets/Image-Patient/Image_Jeanne.png',
+  handicap: 'leger',
+  explication: 'oui',
+  taille:40
 };
 
 export const Ergo_Edward: Patient = {
@@ -45,7 +60,10 @@ export const Ergo_Edward: Patient = {
   nom:"Cullen",
   prenom: "Edward",
   dateNaissance:'20/06/1987',
-  image: "/assets/Image-Patient/Image_Edward.png"
+  image: "/assets/Image-Patient/Image_Edward.png",
+  handicap: 'non',
+  explication: 'oui',
+  taille:32
 };
 
 export const PATIENT_LISTE: Patient[] = [

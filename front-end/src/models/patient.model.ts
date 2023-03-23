@@ -5,4 +5,7 @@ export interface Patient {
   dateNaissance: string;
   image : string;
 
+  explication: string;
+  taille: number;
+  handicap: string;
 }

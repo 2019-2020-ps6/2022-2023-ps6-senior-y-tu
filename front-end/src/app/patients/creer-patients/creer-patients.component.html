@@ -18,30 +18,44 @@
     </p>
 
     <p class="handicap"> Handicap:
-      <input type="checkbox" id="handicap" name="check-handicap" checked>
-      <label for="handicap">Oui</label>
-      <label for="handicap">Non</label>
-    </p>
+      <div id ="handicap">
+      <input type="checkbox" id="handicap-leger" name="check-handicap" checked>
+      <label for="handicap-leger">Parkinson leger</label>
+      <br>
+      <input type="checkbox" id="handicap-fort" name="check-handicap" >
+      <label for="handicap-fort">Parkinson fort</label>
+    </div>
+
 
     <p class="explication"> Explications aux question:
-      <input type="checkbox" id="explication" name="check-explication" checked>
-      <label for="explication">Oui</label>
-      <label for="explication">Non</label>
+      <div id="explication">
+        <input type="checkbox" id="explication-oui" name="check-explication" checked>
+        <label for="explication-oui">Oui</label>
+        <br>
+        <input type="checkbox" id="explication-non" name="check-explication">
+        <label for="explication-non">Non</label>
+      </div>
 
-    <p> Image
+    <p class="image-patient"> Image
       <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
     </p>
 
     <p class="taille-police">Taille de police
-      <input type="checkbox" id="taille-police" name="check-taille" checked>
-      <label for="taille-police">24</label>
-      <label for="taille-police">40</label>
-      <label for="taille-police">60</label>
-    </p>
+      <div id="police">
+        <input type="checkbox" id="police-24" name="check-taille" checked>
+        <label for="police-24">24</label>
+        <br>
+        <input type="checkbox" id="police-40" name="check-taille" >
+        <label for="police-40">40</label>
+        <br>
+        <input type="checkbox" id="police-60" name="check-taille" >
+        <label for="police-60">60</label>
+      </div>
+
 
     <p class="bouton-annuler">
-      <button routerLink="/accueil" class="bouton"> Annuler </button>
-      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" class="bouton"> Valider </button>
+      <button routerLink="/accueil" id="bouton-retour"> Annuler </button>
+      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" id="bouton-valider"> Valider </button>
 
     </p>
   </form>
