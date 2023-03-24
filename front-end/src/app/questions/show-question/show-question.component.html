@@ -1,6 +1,6 @@
 <div class="boite">
   <div class="align">
-    <p>{{question[0].id}}/2</p>
+    <p>{{question[0].id}}/{{question[0].id}}</p>
     <img src="assets/boutonRetour.png" routerLink="/accueil" >
   </div>
 
@@ -10,19 +10,19 @@
       <h2>{{question[0].intitule}}</h2>
     </div>
 
-    <img src="{{question[0].img}}"/>
+    <img src="{{question[0].img}}" width="80"/>
   </div>
 
   <div class="reponse">
-    <button class="question1" (click)="repondre()">{{question[0].responses[0].valeur}}</button>
+    <button class="question1" [accessKey]="repondre()">{{question[0].responses[0].valeur}}</button>
   </div>
 
   <div class="reponse">
-    <button class="question2" (click)="repondre()">{{question[0].responses[1].valeur}}</button>
-    <button class="question3" (click)="repondre()">{{question[0].responses[2].valeur}}</button>
+    <button class="question2" [accessKey]="repondre()">{{question[0].responses[1].valeur}}</button>
+    <button class="question3" [accessKey]="repondre()">{{question[0].responses[2].valeur}}</button>
   </div>
 
   <div class="reponse">
-    <button class="question4" (click)="repondre()">{{question[0].responses[3].valeur}}</button>
+    <button class="question4" [accessKey]="repondre()">{{question[0].responses[3].valeur}}</button>
   </div>
 </div>

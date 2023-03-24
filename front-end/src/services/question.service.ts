@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 // @ts-ignore
 import { BehaviorSubject } from "rxjs";
 import {Question} from "../models/question.model";
-import {QUESTION_GEOGRAPHIE, QUESTION_LIST} from "../mocks/quiz-list.mock";
+import {QUESTION_LIST} from "../mocks/quiz-list.mock";
 
 
 @Injectable({
@@ -14,9 +14,14 @@ export class QuestionService {
 
   public question$: BehaviorSubject<Question[]> = new BehaviorSubject(QUESTION_LIST);
 
+  constructor() {
+
+  }
+
   addQuestion(questions: Question) {
-    // @ts-ignore
-    QUESTION_LIST.push(questions);
+
+    this.question.push(questions);
+    this.question$.next(this.question);
   }
 
 }

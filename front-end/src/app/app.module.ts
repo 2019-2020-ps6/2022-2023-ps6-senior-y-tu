@@ -25,6 +25,13 @@ import  {RouterModule} from "@angular/router";
 import { AccueilComponent } from './accueil/accueil.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
+
+import { QuestionComponent } from './questions/question/question.component';
+import { QuestionListeComponent } from './questions/question-liste/question-liste.component';
+import { QuizModificationComponent} from "./quizs/quiz-modification/quiz-modification.component";
+import {CreerPatientsComponent} from "./patients/creer-patients/creer-patients.component";
+import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
+
 // import * as http from "http";
 
 
@@ -46,7 +53,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     PatientComponent,
     ShowQuestionComponent,
     PageAideComponent,
-    FooterComponent
+    FooterComponent,
+    QuestionComponent,
+    QuestionListeComponent,
+    QuizModificationComponent,
+    QuizModificationComponent,
+    CreerPatientsComponent,
+    MesPatientsComponent
   ],
   imports: [
     BrowserModule,

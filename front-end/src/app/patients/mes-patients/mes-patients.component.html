@@ -1,0 +1,27 @@
+<div class="mes-patients">
+  <button class="creation-patient" routerLink="/creer-patient">Créer un nouveau patient</button>
+
+  <div class="ma-liste-patients">
+    <div class="patient" *ngFor="let patient of patientListe">
+      <div class="patient-app">
+        <div id="patient-picture">
+          <img src="{{patient?.image}}" alt="Image d'un patient">
+        </div>
+        <div id="patient-information">
+          <p id="patient-nom">{{patient.nom}} </p>
+          <p id="patient-prenom">{{patient.prenom}} </p>
+          <p id="patient-naissance">Date de Naissance: {{patient.dateNaissance}} </p>
+          <p id="patient-handicap">Handicape: {{patient.handicap}}</p>
+          <p id="patient-explication">Explication aux questions: {{patient.explication}}</p>
+          <p id="patient-taille">Taille de police: {{patient.taille}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  Bouton provisoire pour retourner à l'accueil en attendant le header
+  <button class="retour" routerLink="/accueil">Retour</button>
+
+</div>
+

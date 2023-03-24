@@ -14,7 +14,7 @@ export class ShowQuestionComponent {
 
   @Input()
   public question: Question[] =[];
-  public reponse: Reponse[] = [];
+
 
   constructor(public questionService: QuestionService, private router: Router) {
     this.questionService.question$.subscribe((question1: Question[]) => {
@@ -27,7 +27,16 @@ export class ShowQuestionComponent {
   }
 
   repondre() :void{
-    this.router.navigate(['theme-list']);
+    window.addEventListener('keydown', (e) => {
+      if(e.key == 'q'|| e.key== 'w'){
+        //this.router.navigate(['theme-list']);
+
+      }
+      if(e.key == 'o'|| e.key== 'p'){
+        this.router.navigate(['quiz-list']);
+      }
+    });
   }
+
 
 }

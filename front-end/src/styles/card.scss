@@ -1,8 +1,9 @@
-@import "variables";
+@import "./variables";
 
 .card {
   background: $white;
   border-radius: 2px;
+  border-color: $blue;
   display: inline-block;
   margin: 1rem;
   position: relative;
@@ -11,8 +12,11 @@
 }
 
 .button-card {
-  background-color: $roseFonce;
+  background-color: $beige;
+  border: solid 1px $black;
+  color: $black;
   font-weight: bold;
+  font-size: large;
   padding: 0.5em 1em;
 }
 

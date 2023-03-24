@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Création de patient </title>
+</head>
+
+<div class="creer-patient">
+  <form class="patient-form" [formGroup]="patientForm">
+    <p class="nom-patient"> Nom du patient
+      <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
+    </p>
+    <p class="prenom-patient"> Prénom du patient
+      <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" required>
+    </p>
+    <p class="date-naissance"> Date de naissance
+      <input type="date" class="input-image" name="date" [formControlName]="'date'" required>
+    </p>
+
+    <div class="handicap"></div>
+      <p id="handicap-text"> Handicap:
+      <div id ="handicap">
+        <input type="checkbox" id="handicap-leger" name="check-handicap" checked>
+        <label for="handicap-leger">Parkinson leger</label>
+        <br>
+        <input type="checkbox" id="handicap-fort" name="check-handicap" >
+        <label for="handicap-fort">Parkinson fort</label>
+  </div>
+
+
+    <p class="explication"> Explications aux question:
+      <div id="explication">
+        <input type="checkbox" id="explication-oui" name="check-explication" checked>
+        <label for="explication-oui">Oui</label>
+        <br>
+        <input type="checkbox" id="explication-non" name="check-explication">
+        <label for="explication-non">Non</label>
+      </div>
+
+    <p class="image-patient"> Image
+      <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
+    </p>
+
+    <p class="taille-police">Taille de police
+      <div id="police">
+        <input type="checkbox" id="police-24" name="check-taille" checked>
+        <label for="police-24">24</label>
+        <br>
+        <input type="checkbox" id="police-40" name="check-taille" >
+        <label for="police-40">40</label>
+        <br>
+        <input type="checkbox" id="police-60" name="check-taille" >
+        <label for="police-60">60</label>
+      </div>
+
+
+    <p class="bouton-patients">
+      <button routerLink="/accueil" class="bouton"> Annuler </button>
+      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" class="bouton"> Valider </button>
+
+    </p>
+  </form>
+
+
+</div>

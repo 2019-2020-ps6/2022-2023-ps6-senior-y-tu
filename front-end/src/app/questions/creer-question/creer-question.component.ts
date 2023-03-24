@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router} from "@angular/router";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {Question} from "../../../models/question.model";
+import {QuestionService} from "../../../services/question.service";
 
 @Component({
   selector: 'app-creer-question',
@@ -8,13 +10,24 @@ import { Router} from "@angular/router";
 })
 export class CreerQuestionComponent {
 
-    constructor(private router: Router) { }
+    public questionForm : FormGroup;
+    constructor(public formBuilder : FormBuilder, public questionService : QuestionService) {
+      this.questionForm = this.formBuilder.group({
+            intitule: [''],
+            reponse: this.formBuilder.array([]),
+            image: [''],
+            description: [''],
+        });
+    }
 
     ngOnInit(): void {
     }
 
-    retour(): void {
-      this.router.navigate(['../../quizzes/creer-quiz']);
+    onCreer() {
+      const question: Question = this.questionForm.getRawValue() as Question;
+      this.questionService.addQuestion(question);
+      console.log('Question Ajoutée: ', question);
     }
+
 
 }
