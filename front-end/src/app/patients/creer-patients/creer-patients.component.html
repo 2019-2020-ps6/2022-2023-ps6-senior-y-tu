@@ -11,29 +11,29 @@
       <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
     </p>
     <p class="prenom-patient"> Prénom du patient
-      <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" required>
+      <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" checked>
     </p>
     <p class="date-naissance"> Date de naissance
-      <input type="date" class="input-image" name="date" [formControlName]="'date'" required>
+      <input type="date" class="input-image" name="date" [formControlName]="'dateNaissance'" required>
     </p>
 
     <div class="handicap"></div>
       <p id="handicap-text"> Handicap:
       <div id ="handicap">
-        <input type="checkbox" id="handicap-leger" name="check-handicap" checked>
+        <input type="radio" id="handicap-leger" value="leger" [formControlName]="'handicap'" checked>
         <label for="handicap-leger">Parkinson leger</label>
         <br>
-        <input type="checkbox" id="handicap-fort" name="check-handicap" >
+        <input type="radio" id="handicap-fort" value="fort" [formControlName]="'handicap'">
         <label for="handicap-fort">Parkinson fort</label>
   </div>
 
 
     <p class="explication"> Explications aux question:
       <div id="explication">
-        <input type="checkbox" id="explication-oui" name="check-explication" checked>
+        <input type="radio" id="explication-oui" value="oui" [formControlName]="'explication'" checked>
         <label for="explication-oui">Oui</label>
         <br>
-        <input type="checkbox" id="explication-non" name="check-explication">
+        <input type="radio" id="explication-non" value="non" [formControlName]="'explication'">
         <label for="explication-non">Non</label>
       </div>
 
@@ -43,13 +43,13 @@
 
     <p class="taille-police">Taille de police
       <div id="police">
-        <input type="checkbox" id="police-24" name="check-taille" checked>
+        <input type="radio" id="police-24" value="24" [formControlName]="'taille'" checked>
         <label for="police-24">24</label>
         <br>
-        <input type="checkbox" id="police-40" name="check-taille" >
+        <input type="radio" id="police-40" value="40" [formControlName]="'taille'" >
         <label for="police-40">40</label>
         <br>
-        <input type="checkbox" id="police-60" name="check-taille" >
+        <input type="radio" id="police-60" value="60" [formControlName]="'taille'" >
         <label for="police-60">60</label>
       </div>
 
