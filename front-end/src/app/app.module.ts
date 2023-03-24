@@ -13,17 +13,17 @@ import {HeaderAccueilComponent} from "./header/accueil/headerAccueil.component";
 import {CreerQuizComponent} from "./quizs/creer-quiz/creer-quiz.component";
 import { PatientListComponent } from './patients/patient-list/patient-list.component';
 import { PatientComponent } from './patients/patient/patient.component';
+import { PageAideComponent } from "./footer/page_aide/pageAide.component";
+import { MesQuizsComponent } from './quizs/mes-quizs/mes-quizs.component';
+import {ThemeComponent} from "./themes/theme/theme.component";
+import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
+import { ShowQuestionComponent } from './questions/show-question/show-question.component';
+import {FooterComponent} from "./footer/footer.component";
 
 
 import  {RouterModule} from "@angular/router";
 import { AccueilComponent } from './accueil/accueil.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-
-
-import { MesQuizsComponent } from './quizs/mes-quizs/mes-quizs.component';
-import {ThemeComponent} from "./themes/theme/theme.component";
-import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
-import { ShowQuestionComponent } from './questions/show-question/show-question.component';
 
 // import * as http from "http";
 
@@ -44,7 +44,9 @@ import { ShowQuestionComponent } from './questions/show-question/show-question.c
     MesQuizsComponent,
     PatientListComponent,
     PatientComponent,
-    ShowQuestionComponent
+    ShowQuestionComponent,
+    PageAideComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

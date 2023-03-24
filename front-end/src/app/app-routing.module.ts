@@ -7,7 +7,7 @@ import {AccueilComponent} from "./accueil/accueil.component";
 import {MesQuizsComponent} from "./quizs/mes-quizs/mes-quizs.component";
 import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
 import {ShowQuestionComponent} from "./questions/show-question/show-question.component";
-
+import {PageAideComponent} from "./footer/page_aide/pageAide.component";
 
 
 const routes: Routes = [
@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'theme-list', component: ThemeListComponent},
   { path: 'show-question', component: ShowQuestionComponent},
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
+  { path: 'page-aide', component: PageAideComponent}
 ];
 
 @NgModule({
