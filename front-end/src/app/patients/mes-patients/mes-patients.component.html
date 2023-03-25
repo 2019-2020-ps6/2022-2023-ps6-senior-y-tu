@@ -1,4 +1,4 @@
-<div class="mes-patients">
+<div class="mes-patients" xmlns="http://www.w3.org/1999/html">
   <button class="creation-patient" routerLink="/creer-patient">Créer un nouveau patient</button>
 
   <div class="ma-liste-patients">
@@ -10,10 +10,12 @@
         <div id="patient-information">
           <p id="patient-nom">{{patient.nom}} </p>
           <p id="patient-prenom">{{patient.prenom}} </p>
-          <p id="patient-naissance">Date de Naissance: {{patient.dateNaissance}} </p>
+          <p id="patient-naissance">Date de Naissance: {{patient.dateNaissance | date: 'dd/MM/yyy'}} </p>
           <p id="patient-handicap">Handicape: {{patient.handicap}}</p>
           <p id="patient-explication">Explication aux questions: {{patient.explication}}</p>
           <p id="patient-taille">Taille de police: {{patient.taille}}</p>
+          <button id="modifier">Modifier</button>
+          <button id="Supprimer">Suprimmer</button>
         </div>
       </div>
     </div>
