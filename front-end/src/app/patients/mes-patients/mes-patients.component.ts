@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {PatientService} from "../../../services/patient.service";
-import {Patient} from "../../../models/patient.model";
+import {Patient} from "../../../models/personne.model";
 
 @Component({
   selector: 'app-mes-patients',
@@ -17,9 +17,7 @@ export class MesPatientsComponent {
     });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   patientDeleted($event: Patient) {
     console.log('event received from child:', $event);

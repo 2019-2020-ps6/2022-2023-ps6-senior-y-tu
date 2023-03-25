@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
-import {Patient} from "../../../models/patient.model";
+import {Patient} from "../../../models/personne.model";
 import {PatientService} from "../../../services/patient.service";
 import {QuestionService} from "../../../services/question.service";
 import {Router} from "@angular/router";
@@ -23,8 +23,7 @@ export class ShowQuestionComponent {
 
   }
 
-  ngOnInit(): void{
-  }
+  ngOnInit(): void{}
 
   repondre() :void{
     window.addEventListener('keydown', (e) => {
