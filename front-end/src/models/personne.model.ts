@@ -2,7 +2,7 @@ export interface Patient {
   id: string;
   nom: string;
   prenom : string;
-  dateNaissance: string;
+  dateNaissance: Date;
   image : string;
   explication: string;
   taille: number;
