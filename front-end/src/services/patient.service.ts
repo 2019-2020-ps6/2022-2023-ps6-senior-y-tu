@@ -14,8 +14,11 @@ export class PatientService {
 
   public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject(PATIENT_LISTE);
   public ergos$: BehaviorSubject<Patient[]> = new BehaviorSubject(ERGO_LISTE);
+  constructor() {
+  }
   addPatient(patient: Patient) {
-    PATIENT_LISTE.push(patient);
+    this.patients.push(patient);
+    this.patients$.next(this.patients);
   }
 
   addErgo(ergo: Patient) {

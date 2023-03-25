@@ -1,5 +1,4 @@
 .creer-patient{
-
   justify-content: center;
   margin:20px auto;
   padding: 10px;
@@ -13,8 +12,20 @@
     border-bottom: 1px solid black;
     outline: none;
   }
-  .bouton{
-    border:1px solid black;
-    background-color: #f2d7c3;
+
+  .handicap{
+    display: flex;
+  }
+
+  .bouton-patients{
+    display : flex;
+    justify-content: space-between;
+    margin: 10px;
+
+    .bouton{
+      border:1px solid black;
+      background-color: #f2d7c3;
+      font-size:20px;
+    }
   }
 }

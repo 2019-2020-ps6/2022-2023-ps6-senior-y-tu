@@ -7,6 +7,7 @@ import {AccueilComponent} from "./accueil/accueil.component";
 import {MesQuizsComponent} from "./quizs/mes-quizs/mes-quizs.component";
 import {ThemeListComponent} from "./themes/theme-list/theme-list.component";
 import {ShowQuestionComponent} from "./questions/show-question/show-question.component";
+import {PageAideComponent} from "./footer/page_aide/pageAide.component";
 import {QuizModificationComponent} from "./quizs/quiz-modification/quiz-modification.component";
 import {QuestionListeComponent} from "./questions/question-liste/question-liste.component";
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path:'mes-patients', component: MesPatientsComponent },
 
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
+  { path: 'page-aide', component: PageAideComponent}
 ];
 
 @NgModule({
