@@ -10,4 +10,5 @@ export interface Question {
   intitule: string;
   responses: Reponse[];
   img: string;
+  explication: string;
 }

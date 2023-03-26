@@ -23,6 +23,7 @@ export const QUESTION_GEOGRAPHIE: Question = {
         },
     ],
     img: '/assets/drapeauFrance.png',
+    explication:'Paris, capitale de la France, est une grande ville européenne et un centre mondial de l\'art, de la mode, de la gastronomie et de la culture.'
 };
 
 export const QUESTION_LIST: Question[] = [QUESTION_GEOGRAPHIE];
