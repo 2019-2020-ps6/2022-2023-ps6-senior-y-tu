@@ -32,6 +32,7 @@ import { QuestionComponent } from './questions/question/question.component';
 import { QuestionListeComponent } from './questions/question-liste/question-liste.component';
 import { QuizModificationComponent} from "./quizs/quiz-modification/quiz-modification.component";
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
+import { QuestionExplicationComponent } from './questions/question-explication/question-explication.component';
 
 // import * as http from "http";
 
@@ -61,7 +62,8 @@ import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.compone
     QuizModificationComponent,
     MesPatientsComponent,
     CreerPatientsComponent,
-    ErgoComponent
+    ErgoComponent,
+    QuestionExplicationComponent
   ],
   imports: [
     BrowserModule,

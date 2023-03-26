@@ -1,7 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
-import {Patient} from "../../../models/personne.model";
-import {PatientService} from "../../../services/patient.service";
 import {QuestionService} from "../../../services/question.service";
 import {Router} from "@angular/router";
 
@@ -13,8 +11,7 @@ import {Router} from "@angular/router";
 export class ShowQuestionComponent {
 
   @Input()
-  public question: Question[] =[];
-
+  public question: Question[] = [];
 
   constructor(public questionService: QuestionService, private router: Router) {
     this.questionService.question$.subscribe((question1: Question[]) => {
@@ -25,17 +22,48 @@ export class ShowQuestionComponent {
 
   ngOnInit(): void{}
 
-  repondre() :void{
-    window.addEventListener('keydown', (e) => {
-      if(e.key == 'q'|| e.key== 'w'){
-        //this.router.navigate(['theme-list']);
-
-      }
-      if(e.key == 'o'|| e.key== 'p'){
-        this.router.navigate(['quiz-list']);
-      }
-    });
-  }
-
-
+  repondre(lettre: string, reponse:Reponse) :void{
+      window.addEventListener('keypress', (e) => {
+        //zone verte
+        if((e.key == '\''|| e.key== '('|| e.key== '-'|| e.key== 'r'|| e.key== 't') && reponse == this.question[0].responses[0]) {
+          if (reponse.estCorrect) {
+            console.log(reponse.valeur);
+            this.router.navigate(['question-explication']);
+          } else {
+            console.log(reponse.valeur)
+            this.router.navigate(['question-explication']);
+          }
+        }
+        //zone violette
+        if((e.key == 'a'|| e.key== 'z'|| e.key== 'q'|| e.key== 's'|| e.key== 'w'|| e.key== 'x') && reponse == this.question[0].responses[1]) {
+          if (reponse.estCorrect) {
+            console.log(reponse.valeur);
+            this.router.navigate(['question-explication']);
+          } else {
+            console.log(reponse.valeur)
+            this.router.navigate(['question-explication']);
+          }
+        }
+        //zone jaune
+        if((e.key == 'h'|| e.key== 'j'|| e.key== 'b'|| e.key== 'n'|| e.key== ',') && reponse == this.question[0].responses[2]) {
+          if (reponse.estCorrect) {
+            console.log(reponse.valeur);
+            this.router.navigate(['question-explication']);
+          } else {
+            console.log(reponse.valeur)
+            this.router.navigate(['question-explication']);
+          }
+        }
+        //zone bleu
+        if((e.key == 'o'|| e.key== 'p'|| e.key== 'l'|| e.key== 'm'|| e.key== ':'|| e.key== '!') && reponse == this.question[0].responses[3]) {
+          if (reponse.estCorrect) {
+            console.log(reponse.valeur);
+            this.router.navigate(['question-explication']);
+          } else {
+            console.log(reponse.valeur)
+            this.router.navigate(['question-explication']);
+          }
+        }
+      });
+    }
 }

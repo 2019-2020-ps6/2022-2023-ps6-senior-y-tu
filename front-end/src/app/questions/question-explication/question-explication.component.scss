@@ -1,0 +1,41 @@
+@import '../../../styles/card';
+@import '../../../styles/variables';
+
+
+.boite {
+  text-align: center;
+  background-color:white;
+  padding: 2%;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  outline: 2px solid $beige;
+}
+
+.align{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.milieu{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+}
+
+.explication{
+  background-color:$app-background-color;
+  padding: 2%;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  outline: 2px solid $beige;
+  text-align: justify;
+}
+
+.boutton{
+  background-color: $marron;
+  color: white;
+}
