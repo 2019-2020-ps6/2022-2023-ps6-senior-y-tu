@@ -32,7 +32,7 @@ const routes: Routes = [
   { path:'mes-patients', component: MesPatientsComponent },
 
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
-  { path: 'page-aide', component: PageAideComponent}
+  { path: 'page-aide', component: PageAideComponent, data: {id: "1", nom:"edward", image:""}}
 ];
 
 @NgModule({
