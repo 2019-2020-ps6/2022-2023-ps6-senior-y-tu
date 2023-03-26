@@ -22,7 +22,7 @@ export class ShowQuestionComponent {
 
   ngOnInit(): void{}
 
-  repondre(lettre: string, reponse:Reponse) :void{
+  repondre(reponse:Reponse) :void{
       window.addEventListener('keypress', (e) => {
         //zone verte
         if((e.key == '\''|| e.key== '('|| e.key== '-'|| e.key== 'r'|| e.key== 't') && reponse == this.question[0].responses[0]) {

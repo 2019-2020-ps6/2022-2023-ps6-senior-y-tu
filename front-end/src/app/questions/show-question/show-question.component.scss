@@ -32,7 +32,6 @@
 
 .question2{
   background-color: $violetClair;
-  margin-right: 2%;
 }
 
 .question3{
@@ -42,4 +41,12 @@
 
 .question4{
   background-color: $jauneClair;
+}
+
+button{
+  font-size: 40px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
