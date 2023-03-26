@@ -23,9 +23,12 @@ export class ShowQuestionComponent {
   ngOnInit(): void{}
 
   repondre(reponse:Reponse) :void{
+    let handicap = localStorage.getItem("patient-handicap");
+    if(handicap == null) handicap = "fort";
       window.addEventListener('keypress', (e) => {
+        console.log(e, handicap);
         //zone verte
-        if((e.key == '\''|| e.key== '('|| e.key== '-'|| e.key== 'r'|| e.key== 't') && reponse == this.question[0].responses[0]) {
+        if(((handicap == "leger" && (e.key == 'z')) || (handicap == "fort" && (e.key == '\''|| e.key== '('|| e.key== '-'|| e.key== 'r'|| e.key== 't'))) && reponse == this.question[0].responses[0]) {
           if (reponse.estCorrect) {
             console.log(reponse.valeur);
             this.router.navigate(['question-explication']);
@@ -35,7 +38,7 @@ export class ShowQuestionComponent {
           }
         }
         //zone violette
-        if((e.key == 'a'|| e.key== 'z'|| e.key== 'q'|| e.key== 's'|| e.key== 'w'|| e.key== 'x') && reponse == this.question[0].responses[1]) {
+        if (((handicap == "leger" && (e.key == 'q')) || (handicap == "fort" && (e.key == 'a'|| e.key== 'z'|| e.key== 'q'|| e.key== 's'|| e.key== 'w'|| e.key== 'x'))) && reponse == this.question[0].responses[1]) {
           if (reponse.estCorrect) {
             console.log(reponse.valeur);
             this.router.navigate(['question-explication']);
@@ -45,7 +48,7 @@ export class ShowQuestionComponent {
           }
         }
         //zone jaune
-        if((e.key == 'h'|| e.key== 'j'|| e.key== 'b'|| e.key== 'n'|| e.key== ',') && reponse == this.question[0].responses[2]) {
+        if(((handicap == "leger" && (e.key == 's')) || (handicap == "fort" && (e.key == 'h'|| e.key== 'j'|| e.key== 'b'|| e.key== 'n'|| e.key== ','))) && reponse == this.question[0].responses[2]) {
           if (reponse.estCorrect) {
             console.log(reponse.valeur);
             this.router.navigate(['question-explication']);
@@ -55,7 +58,7 @@ export class ShowQuestionComponent {
           }
         }
         //zone bleu
-        if((e.key == 'o'|| e.key== 'p'|| e.key== 'l'|| e.key== 'm'|| e.key== ':'|| e.key== '!') && reponse == this.question[0].responses[3]) {
+        if(((handicap == "leger" && (e.key == 'd')) || (handicap == "fort" && (e.key == 'o'|| e.key== 'p'|| e.key== 'l'|| e.key== 'm'|| e.key== ':'|| e.key== '!'))) && reponse == this.question[0].responses[3]) {
           if (reponse.estCorrect) {
             console.log(reponse.valeur);
             this.router.navigate(['question-explication']);

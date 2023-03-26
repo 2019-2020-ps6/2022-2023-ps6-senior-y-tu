@@ -25,8 +25,10 @@ export class QuestionExplicationComponent {
   ngOnInit(): void{}
 
   suivant() :void{
+    let handicap = localStorage.getItem("patient-handicap");
+    if(handicap == null) handicap = "fort";
     window.addEventListener('keypress', (e) => {
-      if (e.key == ' ') {
+      if ((handicap == "fort" && e.key == ' ')) {
         this.router.navigate(['quiz-list']);
       }
     });

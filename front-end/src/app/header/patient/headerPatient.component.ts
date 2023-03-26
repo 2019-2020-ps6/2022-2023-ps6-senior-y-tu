@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./headerPatient.component.scss']
 })
 export class HeaderPatientComponent implements OnInit {
+  public nom: String;
 
-  constructor() { }
+  constructor() {
+    let nomTemp = localStorage.getItem("patient-prenom");
+    this.nom = (nomTemp == null)? "James" : nomTemp;
+  }
 
   ngOnInit(): void {
   }

@@ -12,6 +12,12 @@ export class PageAideComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let handicap = localStorage.getItem("patient-handicap");
+    if(handicap == null) handicap = "fort";
+    if(handicap == "fort") {
+      let img = document.getElementById("imgClavier") as HTMLImageElement;
+      img.src = "../../../assets/Clavier2.png";
+    }
   }
 
   retour(): void {

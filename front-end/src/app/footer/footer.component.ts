@@ -12,9 +12,14 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void { }
 
   goToHelp() {
+    let handicap = localStorage.getItem("patient-handicap");
+    if(handicap == null) handicap = " ";
     window.addEventListener('keydown', (e) => {
-      if(e.key == 'ù' || e.key == '*') {
-        this.rooter.navigate(['/page-aide'])
+      if (handicap == "leger" && (e.key == 'u' || e.key == '*')) {
+          this.rooter.navigate(['/page-aide'])
+        }
+      else if(e.key == '_' || e.key == 'ç' || e.key == 'u' || e.key == 'i') {
+        this.rooter.navigate(['/page-aide']);
       }
     })
   }
