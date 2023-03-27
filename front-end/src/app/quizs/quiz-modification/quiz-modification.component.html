@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title> Modification de quiz </title>
 </head>
 
 <div class="quiz-modification">
-
-  <h2>Quiz : {{quiz?.nom}}</h2>
-  <div class="theme"> Thème : {{quiz?.theme}}</div>
-  <div class="image-quiz" > Image du quiz :
-    <div class="image">
+  <form class="quiz-form"  >
+    <p> Nom du quiz
+      <input type="text" class="input-texte"  name="nom" value="{{quiz?.nom}}" >
+    </p>
+    <p> Thème du quiz
+      <input type="text" class="input-texte"  name="theme" value="{{quiz?.theme}}">
+    </p>
+    <p> Image du quiz
       <img src="{{quiz?.image}}" alt="image" width="30%">
+      <input type="file" class="input-img"  name="image" value="{{quiz?.image}}">
+    </p>
+
+    <div class="boutons">
+      <button class="bouton" type="submit"  id="voir-question" routerLink="/question-liste/{{quiz?.id}}">Voir les questions</button>
+      <button class="bouton" type="submit"  id="Valider" routerLink="/mes-quizs">Valider</button>
     </div>
-  </div>
 
-  <div class="boutons">
-    <button class="bouton" id="voir-question" routerLink="/question-liste/{{quiz?.id}}">Voir les questions</button>
-    <button class="bouton" id="Valider" routerLink="/mes-quizs">Valider</button>
-  </div>
-
+  </form>
 </div>

@@ -1,5 +1,6 @@
 
 export interface Reponse {
+  id: string;
   type?: string;
   valeur: string;
   estCorrect: boolean;
@@ -8,6 +9,8 @@ export interface Reponse {
 export interface Question {
   id: string;
   intitule: string;
-  responses: Reponse[];
+  reponses: Reponse[];
   img: string;
+  explication: string;
+
 }

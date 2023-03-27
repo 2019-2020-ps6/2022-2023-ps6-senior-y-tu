@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { Patient} from "src/models/patient.model";
-import { PATIENT_LISTE, ERGO_LISTE} from '../mocks/patient-list.mock';
-
+import { Patient} from "src/models/personne.model";
+import { PATIENT_LISTE} from '../mocks/personne-list.mock';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +9,13 @@ import { PATIENT_LISTE, ERGO_LISTE} from '../mocks/patient-list.mock';
 
 export class PatientService {
   private patients: Patient[] = PATIENT_LISTE;
-  private ergos: Patient[] = ERGO_LISTE;
 
   public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject(PATIENT_LISTE);
-  public ergos$: BehaviorSubject<Patient[]> = new BehaviorSubject(ERGO_LISTE);
-  constructor() {
-  }
+
+  constructor() {}
   addPatient(patient: Patient) {
     this.patients.push(patient);
     this.patients$.next(this.patients);
-  }
-
-  addErgo(ergo: Patient) {
-    ERGO_LISTE.push(ergo);
   }
 
   deletePatient(patient: Patient): void {

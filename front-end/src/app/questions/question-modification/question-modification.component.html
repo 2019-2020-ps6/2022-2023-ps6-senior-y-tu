@@ -1,1 +1,55 @@
-<p>question-modification works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Modification de question </title>
+</head>
+
+
+<div class="modification-question">
+  <form class="question-form-modification" >
+    <p> Intitule de la question
+      <input type="text" class="input-texte" name="nom" value="{{question?.intitule}}" >
+    </p>
+
+    <div class="reponse" >
+      <div>Reponse 1 :
+        <input type="text" class="input-texte" id="rep1" name="reponse" value="{{reponses[0].valeur}}">
+        <input type="radio" name="rep" value="rep1" checked>
+      </div>
+
+      <div>Reponse 2 :
+        <input type="text" class="input-texte" id="rep2" name="reponse" value="{{reponses[1].valeur}}">
+        <input type="radio" name="rep" value="rep2" >
+      </div>
+
+      <div>Reponse 3 :
+        <input type="text" class="input-texte" id="rep3" name="reponse" value="{{reponses[2].valeur}}">
+        <input type="radio" name="rep" value="rep3" >
+      </div>
+
+      <div>Reponse 4 :
+        <input type="text" class="input-texte" id="rep4" name="reponse" value="{{reponses[3].valeur}}">
+        <input type="radio" name="rep" value="rep4" >
+      </div>
+    </div>
+
+
+
+    <div>
+      <p> Image de la question </p>
+      <input type="file" name="image" id="image" accept="image/*" value="{{question?.img}}">
+      <img src="{{question?.img}}" alt="image" width="20%">
+    </div>
+
+    <div>
+      <p> Description de la question </p>
+      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200" value="{{question?.explication}}"> </textarea>
+    </div>
+
+    <div class="boutons">
+      <button class="bouton" id="voir-question" routerLink="/question-liste/{{quiz?.id}}">Supprimer</button>
+      <button class="bouton" type="submit"  id="Valider" routerLink="/mes-quizs">Valider</button>
+    </div>
+  </form>
+</div>

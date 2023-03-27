@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-// @ts-ignore
 import { BehaviorSubject } from "rxjs";
 import {Question} from "../models/question.model";
-import {QUESTION_LIST} from "../mocks/quiz-list.mock";
+import {QUESTION_LISTE} from "../mocks/quiz-list.mock";
 
 
 @Injectable({
@@ -10,18 +9,15 @@ import {QUESTION_LIST} from "../mocks/quiz-list.mock";
 })
 
 export class QuestionService {
-  private question: Question[] = QUESTION_LIST;
+  private question: Question[] = QUESTION_LISTE;
 
-  public question$: BehaviorSubject<Question[]> = new BehaviorSubject(QUESTION_LIST);
+  public question$: BehaviorSubject<Question[]> = new BehaviorSubject(QUESTION_LISTE);
 
-  constructor() {
-
-  }
+  constructor() {}
 
   addQuestion(questions: Question) {
 
     this.question.push(questions);
     this.question$.next(this.question);
   }
-
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Patient} from "../../../models/patient.model";
+import { Patient} from "../../../models/personne.model";
 import { PatientService} from "../../../services/patient.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 

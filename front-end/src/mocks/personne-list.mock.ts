@@ -1,4 +1,4 @@
-import {Patient} from '../models/patient.model';
+import {Patient, Ergo} from '../models/personne.model';
 
 export const Patient_Lucienne: Patient = {
     id: '1',
@@ -55,15 +55,10 @@ export const Patient_Jeanne_Marie: Patient = {
   taille:40
 };
 
-export const Ergo_Edward: Patient = {
+export const Ergo_Edward: Ergo = {
   id: '1',
-  nom:"Cullen",
-  prenom: "Edward",
-  dateNaissance:new Date (1987-6-20),
+  nom:"Edward",
   image: "/assets/Image-Patient/Image_Edward.png",
-  handicap: 'non',
-  explication: 'oui',
-  taille:32
 };
 
 export const PATIENT_LISTE: Patient[] = [
@@ -74,6 +69,6 @@ export const PATIENT_LISTE: Patient[] = [
     Patient_Jeanne_Marie
 ];
 
-export const ERGO_LISTE: Patient[] = [
+export const ERGO_LISTE: Ergo[] = [
   Ergo_Edward
 ];

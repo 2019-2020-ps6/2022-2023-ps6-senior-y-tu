@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
+import {QuizService} from "../../../services/quiz.service";
 
 @Component({
   selector: 'app-quiz-list',
@@ -10,9 +11,11 @@ export class QuizListComponent implements OnInit {
 
   public quizList: Quiz[] = [];
 
-  constructor() {
+  constructor( public quizService: QuizService) {
+    this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
+      this.quizList = quizzes;
+    })}
 
-  }
 
   selectTheme(): string | any {
     if (this.quizList.length!=0)

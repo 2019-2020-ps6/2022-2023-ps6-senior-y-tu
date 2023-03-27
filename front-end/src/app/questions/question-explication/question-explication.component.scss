@@ -25,25 +25,19 @@
   margin: auto;
 }
 
-
-.question1{
-  background-color: $vertClair;
+.explication{
+  background-color:$app-background-color;
+  padding: 2%;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  outline: 2px solid $beige;
+  text-align: justify;
 }
 
-.question2{
-  background-color: $violetClair;
-}
-
-.question3{
-  background-color: $bleuClair;
-  margin-left: 2%;
-}
-
-.question4{
-  background-color: $jauneClair;
-}
-
-button{
+.boutton{
+  background-color: $marron;
+  color: white;
   font-size: 40px;
   padding: 10px 20px;
   margin: 10px;

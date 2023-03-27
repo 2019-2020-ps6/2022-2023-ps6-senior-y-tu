@@ -1,8 +1,52 @@
-@import './src/styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .aide {
   background-color: $white;
   border: solid $roseFonce;
-  width: 100%;
-  height: 90%;
+  padding-top: 2%;
+  text-align: center;
+  width: auto;
+}
+
+.explication_aide {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-content: space-around;
+  span {
+    margin-top: 8%;
+    margin-bottom: 8%;
+  }
+}
+
+ul {
+  list-style-position: inside;
+}
+
+.droite{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  input {
+    align-self: flex-end;
+  }
+  img{
+    max-height: 30%;
+  }
+}
+
+
+.contenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media (max-width: 1000px) {
+  img {
+    width: 80%;
+  }
 }

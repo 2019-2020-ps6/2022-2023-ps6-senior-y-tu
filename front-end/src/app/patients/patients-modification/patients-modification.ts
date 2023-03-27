@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Patient} from "../../../models/patient.model";
+import { Patient} from "../../../models/personne.model";
 import { PatientService} from "../../../services/patient.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {PATIENT_LISTE} from "../../../mocks/patient-list.mock";
+import {PATIENT_LISTE} from "../../../mocks/personne-list.mock";
 
 @Component({
   selector: 'app-patiens-modification',

@@ -1,31 +1,67 @@
 import { Quiz } from '../models/quiz.model';
 import { Question } from '../models/question.model';
 
-export const QUESTION_GEOGRAPHIE: Question = {
+export const QUESTION_CAPITALE_FRANCE: Question = {
     id: '1',
     intitule: 'Quelle est la capitale de la France ?',
-    responses: [
+    reponses: [
         {
+            id: '1',
             valeur: 'Madrid',
             estCorrect: false,
         },
         {
+            id: '2',
             valeur: 'Paris',
             estCorrect: true,
         },
         {
+            id: '3',
             valeur: 'Berlin',
             estCorrect: false,
         },
         {
+            id: '4',
             valeur: 'Marseille',
             estCorrect: false,
         },
     ],
     img: '/assets/drapeauFrance.png',
+
+    explication:'Paris, capitale de la France, est une grande ville européenne et un centre mondial de l\'art, de la mode, de la gastronomie et de la culture.'
+
 };
 
-export const QUESTION_LIST: Question[] = [QUESTION_GEOGRAPHIE];
+export const QUESTION_CAPITALE_ESPAGNE: Question = {
+    id: '2',
+    intitule: 'Quelle est la capitale de l\'Espagne ?',
+    reponses: [
+        {
+            id: '1',
+            valeur: 'Madrid',
+            estCorrect: true,
+        },
+         {
+            id: '2',
+            valeur: 'Paris',
+            estCorrect: false,
+         },
+          {
+            id: '3',
+            valeur: 'Berlin',
+            estCorrect: false,
+          },
+        {
+            id: '4',
+            valeur: 'Lisbonne',
+            estCorrect: false,
+            },
+    ],
+    img: '/assets/drapeauEspagne.png',
+    explication: 'La capitale de l\'Espagne est Madrid'
+}
+
+export const QUESTION_LISTE: Question[] = [QUESTION_CAPITALE_FRANCE, QUESTION_CAPITALE_ESPAGNE];
 
 
 export const QUIZ_LISTE: Quiz[] = [
@@ -34,7 +70,7 @@ export const QUIZ_LISTE: Quiz[] = [
         nom: 'Les Capitales',
         theme: 'Géographie',
         image: 'https://www.babelio.com/users/QUIZ_10-capitales-europeennes-dans-ces-films-cultes_5756.jpeg',
-        questions: QUESTION_LIST,
+        questions: QUESTION_LISTE,
     },
     {
         id: '2',

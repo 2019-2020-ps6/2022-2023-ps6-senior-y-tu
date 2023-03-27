@@ -15,7 +15,6 @@ export class ThemeComponent implements OnInit {
   quizSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
-    console.log(this.theme);
   }
 
   ngOnInit(): void {
