@@ -13,6 +13,8 @@ import {QuestionListeComponent} from "./questions/question-liste/question-liste.
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
 import {CreerPatientsComponent} from "./patients/creer-patients/creer-patients.component";
 import {QuestionModificationComponent} from "./questions/question-modification/question-modification.component";
+import {QuestionExplicationComponent} from "./questions/question-explication/question-explication.component";
+
 
 
 
@@ -29,14 +31,14 @@ const routes: Routes = [
   {path: 'quiz-modification/:id', component: QuizModificationComponent},
   {path: 'question-liste/:id', component: QuestionListeComponent},
   {path: 'question-modification/:id', component: QuestionModificationComponent},
-
+  {path: 'question-explication', component: QuestionExplicationComponent},
 
 
 
   { path:'mes-patients', component: MesPatientsComponent },
 
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
-  { path: 'page-aide', component: PageAideComponent}
+  { path: 'page-aide', component: PageAideComponent, data: {id: "1", nom:"edward", image:""}}
 ];
 
 @NgModule({

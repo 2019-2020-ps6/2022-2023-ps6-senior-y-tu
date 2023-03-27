@@ -11,5 +11,6 @@ export interface Question {
   intitule: string;
   reponses: Reponse[];
   img: string;
-  description: string;
+  explication: string;
+
 }

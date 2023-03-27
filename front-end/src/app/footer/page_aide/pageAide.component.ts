@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-header-aide',
@@ -7,8 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageAideComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) {
+  }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    let handicap = localStorage.getItem("patient-handicap");
+    if(handicap == null) handicap = "fort";
+    if(handicap == "fort") {
+      let img = document.getElementById("imgClavier") as HTMLImageElement;
+      img.src = "../../../assets/Clavier2.png";
+    }
+  }
+
+  retour(): void {
+    window.addEventListener('keydown', (e) => {
+      if(e.key == 'Backspace' || e.key == '=' || e.key == '$') {
+        this.location.back();
+      }
+    })
+  }
 
 }

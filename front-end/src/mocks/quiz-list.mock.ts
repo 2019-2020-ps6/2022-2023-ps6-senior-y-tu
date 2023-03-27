@@ -27,7 +27,9 @@ export const QUESTION_CAPITALE_FRANCE: Question = {
         },
     ],
     img: '/assets/drapeauFrance.png',
-    description: 'La capitale de la France est Paris'
+
+    explication:'Paris, capitale de la France, est une grande ville européenne et un centre mondial de l\'art, de la mode, de la gastronomie et de la culture.'
+
 };
 
 export const QUESTION_CAPITALE_ESPAGNE: Question = {
@@ -56,7 +58,7 @@ export const QUESTION_CAPITALE_ESPAGNE: Question = {
             },
     ],
     img: '/assets/drapeauEspagne.png',
-    description: 'La capitale de l\'Espagne est Madrid'
+    explication: 'La capitale de l\'Espagne est Madrid'
 }
 
 export const QUESTION_LISTE: Question[] = [QUESTION_CAPITALE_FRANCE, QUESTION_CAPITALE_ESPAGNE];

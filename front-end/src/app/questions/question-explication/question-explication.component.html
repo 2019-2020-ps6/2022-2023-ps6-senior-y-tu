@@ -1,0 +1,26 @@
+<app-header-patient></app-header-patient>
+<div class="boite" >
+  <div class="align">
+    <p>{{question[0].id}}/{{question[0].id}}</p>
+    <img src="assets/boutonRetour.png" routerLink="/accueil" >
+  </div>
+
+  <div class="align">
+    <div class="milieu">
+      <h2>Question {{question[0].id}} :&nbsp; </h2>
+      <h2>{{question[0].intitule}}</h2>
+    </div>
+
+    <img src="{{question[0].img}}" width="80"/>
+  </div>
+
+  <div class="explication">
+    <p>La réponse: {{question[0].responses[reponseCorrecte].valeur}} </p>
+    <p>{{question[0].explication}}</p>
+  </div>
+
+  <button class="boutton" [accessKey]="suivant()">Continuer</button>
+
+</div>
+
+<app-footer></app-footer>
