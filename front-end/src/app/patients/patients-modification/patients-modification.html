@@ -1,0 +1,60 @@
+<div class="creer-patient">
+  <form class="patient-form" [formGroup]="patientForm">
+    <p class="nom-patient"> Nom du patient
+      <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" placeholder="{{patient?.nom}}" required>
+    </p>
+    <p class="prenom-patient"> Prénom du patient
+      <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" placeholder="{{patient?.prenom}}" checked>
+    </p>
+    <p class="date-naissance"> Date de naissance
+      <input type="date" class="input-image" name="date" [formControlName]="'dateNaissance'"  required>
+    </p>
+
+    <div class="handicap"></div>
+    <p id="handicap-text"> Handicap:
+    <div id ="handicap">
+      <input type="radio" id="handicap-leger" value="leger" [formControlName]="'handicap'" checked>
+      <label for="handicap-leger">Parkinson leger</label>
+      <br>
+      <input type="radio" id="handicap-fort" value="fort" [formControlName]="'handicap'">
+      <label for="handicap-fort">Parkinson fort</label>
+    </div>
+
+
+    <p class="explication"> Explications aux question:
+    <div id="explication">
+      <input type="radio" class="explication-oui" id="oui-avant-O" value="oui" [formControlName]="'explication'"  checked >
+      <label for="oui-avant-O">Oui</label>
+      <br>
+      <input type="radio" class="explication-non" id= "oui-avant-N" value="non" [formControlName]="'explication'" >
+      <label for="oui-avant-N">Non</label>
+    </div>
+
+    <p class="image-patient"> Image
+      <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
+    </p>
+
+    <p class="taille-police">Taille de police
+    <div id="police">
+      <input type="radio" id="police-24" value="24" [formControlName]="'taille'" checked>
+      <label for="police-24">24</label>
+      <br>
+      <input type="radio" id="police-40" value="40" [formControlName]="'taille'" >
+      <label for="police-40">40</label>
+      <br>
+      <input type="radio" id="police-60" value="60" [formControlName]="'taille'" >
+      <label for="police-60">60</label>
+    </div>
+
+
+    <p class="bouton-patients">
+      <button routerLink="/accueil" class="bouton"> Annuler </button>
+      <button type="submit" routerLink="/mes-patients" class="bouton"> Valider </button>
+
+    </p>
+  </form>
+
+
+</div>
+
+
