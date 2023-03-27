@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostListener, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
 import {QuestionService} from "../../../services/question.service";
 import {Router} from "@angular/router";
@@ -9,7 +9,17 @@ import {Router} from "@angular/router";
   styleUrls: ['./question-explication.component.scss']
 })
 export class QuestionExplicationComponent {
-
+  @HostListener("document:keydown", ["$event"])
+  onkeydown(e: KeyboardEvent) {
+    let handicap = localStorage.getItem("patient-handicap");
+    if(handicap == null) handicap = "fort";
+    if(e.key == ' ') {
+      this.router.navigate(['quiz-list']);
+    }
+    else if(handicap == "leger" && e.key == "Enter") {
+      this.router.navigate(['quiz-list']);
+    }
+  }
 
   @Input()
   public question: Question[] = [];
@@ -20,17 +30,5 @@ export class QuestionExplicationComponent {
       this.question = question1;
     });
     this.reponseCorrecte = this.question[0].responses.findIndex((reponse: Reponse) => reponse.estCorrect);
-  }
-
-  ngOnInit(): void{}
-
-  suivant() :void{
-    let handicap = localStorage.getItem("patient-handicap");
-    if(handicap == null) handicap = "fort";
-    window.addEventListener('keypress', (e) => {
-      if ((handicap == "fort" && e.key == ' ') || (handicap =="leger" && (e.key == ' ' || e.key == "Enter"))) {
-        this.router.navigate(['quiz-list']);
-      }
-    });
   }
 }

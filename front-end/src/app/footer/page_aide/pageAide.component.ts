@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 
 @Component({
@@ -8,8 +8,14 @@ import {Location} from "@angular/common";
 })
 export class PageAideComponent implements OnInit {
 
-  constructor(private location: Location) {
+  @HostListener("document:keydown", ["$event"])
+  onkeydown(e: KeyboardEvent) {
+    if(e.key == 'Backspace' || e.key == '=' || e.key == '$') {
+      this.location.back();
+    }
   }
+
+  constructor(private location: Location) {}
 
   ngOnInit(): void {
     let handicap = localStorage.getItem("patient-handicap");
@@ -19,13 +25,4 @@ export class PageAideComponent implements OnInit {
       img.src = "../../../assets/Clavier2.png";
     }
   }
-
-  retour(): void {
-    window.addEventListener('keydown', (e) => {
-      if(e.key == 'Backspace' || e.key == '=' || e.key == '$') {
-        this.location.back();
-      }
-    })
-  }
-
 }
