@@ -32,9 +32,11 @@ import { QuestionComponent } from './questions/question/question.component';
 import { QuestionListeComponent } from './questions/question-liste/question-liste.component';
 import { QuizModificationComponent} from "./quizs/quiz-modification/quiz-modification.component";
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
+import {PatientsModificationComponent} from "./patients/patients-modification/patients-modification";
 import {QuestionModificationComponent} from "./questions/question-modification/question-modification.component";
 import { QuestionExplicationComponent } from './questions/question-explication/question-explication.component';
 import { CommencerQuizComponent } from './quizs/commencer-quiz/commencer-quiz.component';
+
 
 // import * as http from "http";
 
@@ -64,6 +66,8 @@ import { CommencerQuizComponent } from './quizs/commencer-quiz/commencer-quiz.co
     QuizModificationComponent,
     MesPatientsComponent,
     CreerPatientsComponent,
+    MesPatientsComponent,
+    PatientsModificationComponent,
     ErgoComponent,
     QuestionModificationComponent,
     QuestionExplicationComponent,
