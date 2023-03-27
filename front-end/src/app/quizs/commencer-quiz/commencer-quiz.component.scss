@@ -1,0 +1,41 @@
+@import '../../../styles/card';
+@import '../../../styles/variables';
+
+
+.boite {
+  text-align: center;
+  background-color:white;
+  padding: 2%;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  outline: 2px solid $beige;
+}
+
+.align{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gauche{
+  display: flex;
+  flex-direction: column;
+}
+
+button{
+  font-size: 40px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: $marron;
+  color: white;
+}
+
+.alignMilieu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
