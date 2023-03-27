@@ -12,6 +12,7 @@ import {QuizModificationComponent} from "./quizs/quiz-modification/quiz-modifica
 import {QuestionListeComponent} from "./questions/question-liste/question-liste.component";
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
 import {CreerPatientsComponent} from "./patients/creer-patients/creer-patients.component";
+import {PatientsModificationComponent} from "./patients/patients-modification/patients-modification";
 
 
 
@@ -19,16 +20,16 @@ const routes: Routes = [
   { path: 'creer-quiz', component: CreerQuizComponent },
   { path: 'creer-question', component: CreerQuestionComponent },
   { path: 'creer-patient', component: CreerPatientsComponent },
-  {path: 'quiz-list', component: QuizListComponent },
+  { path: 'quiz-list', component: QuizListComponent },
   { path: 'accueil', component: AccueilComponent },
 
-  {path : 'mes-quizs', component: MesQuizsComponent},
-    { path: 'theme-list', component: ThemeListComponent},
+  { path : 'mes-quizs', component: MesQuizsComponent},
+  { path: 'theme-list', component: ThemeListComponent},
   { path: 'show-question', component: ShowQuestionComponent},
-  {path: 'quiz-modification/:id', component: QuizModificationComponent},
-  {path: 'question-liste/:id', component: QuestionListeComponent},
+  { path: 'quiz-modification/:id', component: QuizModificationComponent},
+  { path: 'question-liste/:id', component: QuestionListeComponent},
 
-
+  { path: 'patients-modification/:id', component: PatientsModificationComponent},
   { path:'mes-patients', component: MesPatientsComponent },
 
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
