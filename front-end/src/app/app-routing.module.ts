@@ -12,6 +12,7 @@ import {QuizModificationComponent} from "./quizs/quiz-modification/quiz-modifica
 import {QuestionListeComponent} from "./questions/question-liste/question-liste.component";
 import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.component";
 import {CreerPatientsComponent} from "./patients/creer-patients/creer-patients.component";
+import {QuestionModificationComponent} from "./questions/question-modification/question-modification.component";
 
 
 
@@ -27,6 +28,9 @@ const routes: Routes = [
   { path: 'show-question', component: ShowQuestionComponent},
   {path: 'quiz-modification/:id', component: QuizModificationComponent},
   {path: 'question-liste/:id', component: QuestionListeComponent},
+  {path: 'question-modification/:id', component: QuestionModificationComponent},
+
+
 
 
   { path:'mes-patients', component: MesPatientsComponent },

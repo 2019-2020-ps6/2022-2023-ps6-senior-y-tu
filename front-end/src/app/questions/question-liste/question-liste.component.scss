@@ -1,0 +1,30 @@
+.question-liste{
+
+
+  justify-content: center;
+  margin: 20px auto;
+  padding: 10px;
+  border: 2px solid #f2d7c3;
+  width: 80%;
+  position: relative;
+  background-color: white;
+
+  .ajouter-question{
+
+      border:1px solid black;
+      background-color: #f2d7c3;
+
+  }
+
+  .valider-button{
+
+      position: absolute;
+      right : 0;
+      border:1px solid black;
+      background-color: #f2d7c3;
+      margin: 10px;
+
+
+  }
+
+}

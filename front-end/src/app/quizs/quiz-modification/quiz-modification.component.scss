@@ -8,6 +8,12 @@
   position: relative;
   background-color: white;
 
+  .input-texte{
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+  }
+
   .boutons{
     display : flex;
     position: relative;

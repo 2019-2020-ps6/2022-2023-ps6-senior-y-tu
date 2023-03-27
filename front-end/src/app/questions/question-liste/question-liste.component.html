@@ -5,11 +5,16 @@
   <title> Liste des quizs </title>
 </head>
 
-<h2>Questions du quiz {{quiz?.nom}}</h2>
+<div class="question-liste">
+  <h2>Questions du quiz {{quiz?.nom}}
+    <img  src="{{quiz?.image}}" alt="image du quiz" width=15%>
+  </h2>
 
-<div class="question-liste-creation">
   <div class="question" *ngFor="let question of questionListe">
-    <app-question ></app-question>
-
+    <app-question [question]="question"></app-question>
   </div>
+  <button class="ajouter-question" routerLink="/creer-question"> Ajouter une question</button>
+  <button class="valider-button" routerLink="/mes-quizs"> Valider</button>
+
+
 </div>

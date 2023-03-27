@@ -7,8 +7,9 @@
 
 <div class="question">
   <div class="question-list-modif">
-    <button class="question-list-modif-button"> Modifier question {{question?.id}} </button>
-    <div>{{question?.intitule}}</div>
+    <div>
+    <button class="question-list-modif-button" routerLink="/question-modification/{{question?.id}}"> Modifier question {{question?.id}} </button>
+    {{question?.intitule}}</div>
   </div>
 
 

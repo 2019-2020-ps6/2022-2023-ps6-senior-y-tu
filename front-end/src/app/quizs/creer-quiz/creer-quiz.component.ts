@@ -15,7 +15,7 @@ export class CreerQuizComponent implements  OnInit{
     this.quizForm = this.formBuilder.group({
       nom: [''],
       theme: [''],
-      image: ['']
+      image: [''],
     });
   }
   ngOnInit(): void {  }

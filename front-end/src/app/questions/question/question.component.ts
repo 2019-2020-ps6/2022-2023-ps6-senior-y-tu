@@ -10,4 +10,12 @@ export class QuestionComponent {
   @Input()
   question: Question | undefined;
 
+
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+
 }
