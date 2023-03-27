@@ -16,7 +16,7 @@ export class QuestionExplicationComponent {
     if(e.key == ' ') {
       this.router.navigate(['quiz-list']);
     }
-    else if(handicap == "leger" && e.key == "Enter") {
+    else if(handicap == "leger" && (e.key == "Enter" || e.key == ' ')) {
       this.router.navigate(['quiz-list']);
     }
   }

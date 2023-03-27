@@ -14,6 +14,7 @@ import {MesPatientsComponent} from "./patients/mes-patients/mes-patients.compone
 import {CreerPatientsComponent} from "./patients/creer-patients/creer-patients.component";
 import {QuestionModificationComponent} from "./questions/question-modification/question-modification.component";
 import {QuestionExplicationComponent} from "./questions/question-explication/question-explication.component";
+import {CommencerQuizComponent} from "./quizs/commencer-quiz/commencer-quiz.component";
 
 
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'question-liste/:id', component: QuestionListeComponent},
   {path: 'question-modification/:id', component: QuestionModificationComponent},
   {path: 'question-explication', component: QuestionExplicationComponent},
+  {path: 'commencer-quiz', component: CommencerQuizComponent},
 
 
 
