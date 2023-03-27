@@ -29,6 +29,6 @@ export class QuestionExplicationComponent {
     this.questionService.question$.subscribe((question1: Question[]) => {
       this.question = question1;
     });
-    this.reponseCorrecte = this.question[0].responses.findIndex((reponse: Reponse) => reponse.estCorrect);
+    this.reponseCorrecte = this.question[0].reponses.findIndex((reponse: Reponse) => reponse.estCorrect);
   }
 }

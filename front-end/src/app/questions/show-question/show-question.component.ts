@@ -32,44 +32,44 @@ export class ShowQuestionComponent {
 
   private reponseParkinsonFort(e : KeyboardEvent): void{
     if (e.key == '\''|| e.key== '('|| e.key== '-'|| e.key== 'r'|| e.key== 't') {
-      let reponse = this.question[0].responses[0];
+      let reponse = this.question[0].reponses[0];
       this.reponseNavigation(reponse);
     }
     //zone violette
     if (e.key == 'a'|| e.key== 'z'|| e.key== 'q'|| e.key== 's'|| e.key== 'w'|| e.key== 'x') {
-      let reponse = this.question[0].responses[1];
+      let reponse = this.question[0].reponses[1];
       this.reponseNavigation(reponse);
     }
     //zone jaune
     if(e.key == 'h'|| e.key== 'j'|| e.key== 'b'|| e.key== 'n'|| e.key== ',') {
-      let reponse = this.question[0].responses[2];
+      let reponse = this.question[0].reponses[2];
       this.reponseNavigation(reponse);
     }
     //zone bleu
     if(e.key == 'o'|| e.key== 'p'|| e.key== 'l'|| e.key== 'm'|| e.key== ':'|| e.key== '!') {
-      let reponse = this.question[0].responses[3];
+      let reponse = this.question[0].reponses[3];
       this.reponseNavigation(reponse);
     }
   }
 
   private reponseParkinsonLeger(e : KeyboardEvent): void{
     if (e.key == "ArrowUp") {
-      let reponse = this.question[0].responses[0];
+      let reponse = this.question[0].reponses[0];
       this.reponseNavigation(reponse);
     }
     //zone violette
     if (e.key == "ArrowLeft") {
-      let reponse = this.question[0].responses[1];
+      let reponse = this.question[0].reponses[1];
       this.reponseNavigation(reponse);
     }
     //zone jaune
     if(e.key == "ArrowDown") {
-      let reponse = this.question[0].responses[2];
+      let reponse = this.question[0].reponses[2];
       this.reponseNavigation(reponse);
     }
     //zone bleu
     if (e.key == "ArrowRight") {
-      let reponse = this.question[0].responses[3];
+      let reponse = this.question[0].reponses[3];
       this.reponseNavigation(reponse);
     }
   }

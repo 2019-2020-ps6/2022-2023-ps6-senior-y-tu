@@ -64,7 +64,7 @@ import { QuestionExplicationComponent } from './questions/question-explication/q
     MesPatientsComponent,
     CreerPatientsComponent,
     ErgoComponent,
-    QuestionModificationComponent
+    QuestionModificationComponent,
     QuestionExplicationComponent
   ],
   imports: [
