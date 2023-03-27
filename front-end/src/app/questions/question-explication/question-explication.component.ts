@@ -28,7 +28,7 @@ export class QuestionExplicationComponent {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
     window.addEventListener('keypress', (e) => {
-      if ((handicap == "fort" && e.key == ' ')) {
+      if ((handicap == "fort" && e.key == ' ') || (handicap =="leger" && (e.key == ' ' || e.key == "Enter"))) {
         this.router.navigate(['quiz-list']);
       }
     });
