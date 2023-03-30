@@ -2,10 +2,9 @@ import {Component, HostListener, Input} from '@angular/core';
 import {Theme} from "../../../models/theme.model";
 import {Quiz} from "../../../models/quiz.model";
 import {ThemeService} from "../../../services/theme.service";
-import {QuizListComponent} from "../quiz-list/quiz-list.component";
 import {QuizService} from "../../../services/quiz.service";
-import {Reponse} from "../../../models/question.model";
 import {Router} from "@angular/router";
+import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
 
 @Component({
   selector: 'app-commencer-quiz',
@@ -22,12 +21,10 @@ export class CommencerQuizComponent {
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
-    if(e.key == ' ') {
+
+    if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['quiz-list']);
+    else if (e.key == Handicap_Fort_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE) )
       this.router.navigate(['show-question']);
-    }
-    else if(handicap == "leger" && (e.key == "Enter" || e.key == ' ')) {
-      this.router.navigate(['show-question']);
-    }
   }
 
   constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router) {

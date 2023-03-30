@@ -1,5 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {Router} from "@angular/router";
+import {Handicap_Fort_Aide, Handicap_Leger_Aide} from "../../enums/enumPatient";
 
 @Component({
   selector: 'app-footer',
@@ -13,10 +14,11 @@ export class FooterComponent{
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = " ";
-    if (handicap == "leger" && (e.key == 'ù' || e.key == '*')) {
+    if (handicap == "leger" && (e.key == Handicap_Leger_Aide.U || e.key == Handicap_Leger_Aide.ETOILE)) {
       this.rooter.navigate(['/page-aide'])
     }
-    else if(e.key == '_' || e.key == 'ç' || e.key == 'u' || e.key == 'i') {
+    else if(e.key == Handicap_Fort_Aide.TIRET_BAS || e.key == Handicap_Fort_Aide.C
+      || e.key == Handicap_Fort_Aide.U || e.key == Handicap_Fort_Aide.I) {
       this.rooter.navigate(['/page-aide']);
     }
   }

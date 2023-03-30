@@ -2,6 +2,7 @@ import {Component, HostListener, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
 import {QuestionService} from "../../../services/question.service";
 import {Router} from "@angular/router";
+import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
 
 @Component({
   selector: 'app-question-explication',
@@ -13,12 +14,10 @@ export class QuestionExplicationComponent {
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
-    if(e.key == ' ') {
+    if(e.key == Handicap_Leger_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE))
       this.router.navigate(['quiz-list']);
-    }
-    else if(handicap == "leger" && (e.key == "Enter" || e.key == ' ')) {
-      this.router.navigate(['quiz-list']);
-    }
+    else if (e.key == Retour.BACKSPACE || e.key == Retour.DOLLAR || e.key == Retour.EGAL)
+      this.router.navigate(['acceuil']);
   }
 
   @Input()

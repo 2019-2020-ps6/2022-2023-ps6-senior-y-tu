@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'patients-modification/:id', component: PatientsModificationComponent},
   { path:'mes-patients', component: MesPatientsComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
-  { path: 'page-aide', component: PageAideComponent, data: {id: "1", nom:"edward", image:""}}
+  { path: 'page-aide', component: PageAideComponent}
 ];
 
 @NgModule({

@@ -2,6 +2,15 @@ import {Component, HostListener, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
 import {QuestionService} from "../../../services/question.service";
 import {Router} from "@angular/router";
+import {
+  Handicap_Fort_Bas, Handicap_Fort_Droite,
+  Handicap_Fort_Gauche,
+  Handicap_Fort_Haut,
+  Handicap_Leger_Bas,
+  Handicap_Leger_Droite,
+  Handicap_Leger_Gauche,
+  Handicapt_Leger_Haut, Retour
+} from "../../../enums/enumPatient";
 
 @Component({
   selector: 'app-show-question',
@@ -19,6 +28,8 @@ export class ShowQuestionComponent {
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
+
+    if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['/accueil']);
     if (handicap == "fort") this.reponseParkinsonFort(e);
     else this.reponseParkinsonLeger(e);
   }
@@ -31,47 +42,39 @@ export class ShowQuestionComponent {
   }
 
   private reponseParkinsonFort(e : KeyboardEvent): void{
-    if (e.key == '\''|| e.key== '('|| e.key== '-'|| e.key== 'r'|| e.key== 't') {
-      let reponse = this.question[0].reponses[0];
-      this.reponseNavigation(reponse);
-    }
+    let reponse = null;
+
+    if (e.key == Handicap_Fort_Haut.E || e.key == Handicap_Fort_Haut.PARENTHESE_OUVERTE || e.key == Handicap_Fort_Haut.APPOSTROPHE
+      || e.key == Handicap_Fort_Haut.MOINS|| e.key== Handicap_Fort_Haut.R|| e.key== Handicap_Fort_Haut.T)
+      reponse = this.question[0].reponses[0];
+
     //zone violette
-    if (e.key == 'a'|| e.key== 'z'|| e.key== 'q'|| e.key== 's'|| e.key== 'w'|| e.key== 'x') {
-      let reponse = this.question[0].reponses[1];
-      this.reponseNavigation(reponse);
-    }
+    if (e.key == Handicap_Fort_Gauche.A || e.key == Handicap_Fort_Gauche.Z || e.key == Handicap_Fort_Gauche.Q
+      || e.key == Handicap_Fort_Gauche.S || e.key == Handicap_Fort_Gauche.W || e.key == Handicap_Fort_Gauche.X)
+      reponse = this.question[0].reponses[1];
+
     //zone jaune
-    if(e.key == 'h'|| e.key== 'j'|| e.key== 'b'|| e.key== 'n'|| e.key== ',') {
-      let reponse = this.question[0].reponses[2];
-      this.reponseNavigation(reponse);
-    }
+    if(e.key == Handicap_Fort_Bas.H || e.key == Handicap_Fort_Bas.J || e.key == Handicap_Fort_Bas.B
+      || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE)
+      reponse = this.question[0].reponses[2];
+
     //zone bleu
-    if(e.key == 'o'|| e.key== 'p'|| e.key== 'l'|| e.key== 'm'|| e.key== ':'|| e.key== '!') {
-      let reponse = this.question[0].reponses[3];
-      this.reponseNavigation(reponse);
-    }
+    if(e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
+      || e.key == Handicap_Fort_Droite.M || e.key== Handicap_Fort_Droite.DOUBLE_POINT || e.key == Handicap_Fort_Droite.POINT_EXCLAMATION)
+      reponse = this.question[0].reponses[3];
+    if (reponse != null) this.reponseNavigation(reponse);
   }
 
   private reponseParkinsonLeger(e : KeyboardEvent): void{
-    if (e.key == "ArrowUp") {
-      let reponse = this.question[0].reponses[0];
-      this.reponseNavigation(reponse);
+    let reponse = null;
+    switch (e.key) {
+      case Handicapt_Leger_Haut.FLECHE_HAUT : reponse = this.question[0].reponses[0]; break;
+      case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = this.question[0].reponses[1]; break;
+      case Handicap_Leger_Droite.FLECHE_DROITE : reponse = this.question[0].reponses[2]; break;
+      case Handicap_Leger_Bas.FLECHE_BAS : reponse = this.question[0].reponses[3]; break;
+      default: break;
     }
-    //zone violette
-    if (e.key == "ArrowLeft") {
-      let reponse = this.question[0].reponses[1];
-      this.reponseNavigation(reponse);
-    }
-    //zone jaune
-    if(e.key == "ArrowDown") {
-      let reponse = this.question[0].reponses[2];
-      this.reponseNavigation(reponse);
-    }
-    //zone bleu
-    if (e.key == "ArrowRight") {
-      let reponse = this.question[0].reponses[3];
-      this.reponseNavigation(reponse);
-    }
+    if (reponse != null) this.reponseNavigation(reponse);
   }
 
   private reponseNavigation(reponse: Reponse): void {
