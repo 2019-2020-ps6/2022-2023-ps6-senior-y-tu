@@ -21,9 +21,8 @@
 
           <div class="bouton-patients">
             <button class="bouton" routerLink="/patients-modification/{{patient.id}}">Modifier</button>
-            <button class="bouton">Suprimmer</button>
+            <button class="bouton" (click)="deletePatient(patient)">Suprimmer</button>
           </div>
-
         </div>
 
       </div>

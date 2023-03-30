@@ -19,8 +19,8 @@ export class MesPatientsComponent {
 
   ngOnInit(): void {}
 
-  patientDeleted($event: Patient) {
-    console.log('event received from child:', $event);
-    this.patientService.deletePatient($event);
+  deletePatient(patient: Patient) {
+    console.log('event received from child:', patient);
+    this.patientService.deletePatient(patient);
   }
 }

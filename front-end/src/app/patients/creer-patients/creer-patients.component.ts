@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Patient} from "../../../models/personne.model";
 import { PatientService} from "../../../services/patient.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {PATIENT_LISTE} from "../../../mocks/personne-list.mock";
 
 @Component({
   selector: 'app-creer-patients',
@@ -19,7 +20,8 @@ export class CreerPatientsComponent implements  OnInit{
       image:[''],
       handicap:[''],
       explication:[''],
-      taille: 24
+      taille: 24,
+      id:PATIENT_LISTE.length +1
     });
   }
   ngOnInit(): void {  }
@@ -28,8 +30,9 @@ export class CreerPatientsComponent implements  OnInit{
   onCreer() {
     const patient: Patient = this.patientForm.getRawValue() as Patient;
     this.patientService.addPatient(patient);
-    console.log(patient.id); 
+    console.log(patient.id);
     console.log(this.patientService);
     console.log('Patient Ajouté: ', patient);
   }
+
 }
