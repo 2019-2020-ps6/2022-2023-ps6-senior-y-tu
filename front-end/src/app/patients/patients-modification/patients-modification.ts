@@ -26,10 +26,17 @@ export class PatientsModificationComponent {
       taille: this.patient?.taille
     });
   }
+  DateNaissance: Date | undefined;
+  DateDeNaissance: string | undefined;
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.patient = PATIENT_LISTE.find(patient => patient.id == id);
+    // @ts-ignore
+    this.DateNaissance = new Date(this.patient?.dateNaissance);
+    this.DateDeNaissance = this.DateNaissance?.toDateString();
+    console.log(this.DateDeNaissance);
+
   }
   onCreer() {
     const patient: Patient = this.patientForm.getRawValue() as Patient;

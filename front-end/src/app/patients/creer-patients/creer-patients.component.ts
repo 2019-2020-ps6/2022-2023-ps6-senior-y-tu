@@ -28,6 +28,7 @@ export class CreerPatientsComponent implements  OnInit{
   onCreer() {
     const patient: Patient = this.patientForm.getRawValue() as Patient;
     this.patientService.addPatient(patient);
+    console.log(patient.id); 
     console.log(this.patientService);
     console.log('Patient Ajouté: ', patient);
   }
