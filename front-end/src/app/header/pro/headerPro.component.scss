@@ -17,13 +17,16 @@
   justify-content: center;
 }
 
+
+
 .navigation {
   font-size: 20px;
+  justify-content: space-between;
   padding-left: 2em;
   padding-right: 2em;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   text-decoration: none;
   color: black;
-  background-color: $app-background-color;
+  background-color: $roseFonce;
 }
