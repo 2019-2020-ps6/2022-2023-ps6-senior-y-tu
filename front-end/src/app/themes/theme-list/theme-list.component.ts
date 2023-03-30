@@ -20,7 +20,7 @@ export class ThemeListComponent implements AfterViewInit {
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
-    if (e.key == Retour.EGAL || e.key == Retour.BACKSPACE|| e.key == Retour.DOLLAR) this.root.navigate(['acceuil']);
+    if (e.key == Retour.EGAL || e.key == Retour.BACKSPACE|| e.key == Retour.DOLLAR) this.root.navigate(['accueil']);
     if(handicap == "fort") this.patientFort(e);
     else this.patientLeger(e);
   }
