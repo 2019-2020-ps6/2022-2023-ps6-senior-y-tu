@@ -1,6 +1,13 @@
 <app-header-patient></app-header-patient>
-<div id="entete"><h1>Choisissez un quiz du theme {{selectTheme()}}</h1></div>
+<div id="entete">
+  <h1>Choisissez un quiz du thème {{selectTheme()}}</h1>
+</div>
 <br>
+
+<div class="droite">
+  <div></div>
+  <img src="assets/boutonRetour.png">
+</div>
 
 <div class="quiz-list">
   <div class="quiz" *ngFor="let quiz of quizList">

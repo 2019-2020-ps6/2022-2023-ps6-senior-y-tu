@@ -1,32 +1,32 @@
 <app-header-patient></app-header-patient>
 
-<div class="boite" >
+<div class="boite">
   <div class="align">
-    <p>{{question[0].id}}/{{question[0].id}}</p>
+    <p>{{questions?.id}}/{{questions?.id}}</p>
     <img src="assets/boutonRetour.png" routerLink="/accueil" >
   </div>
 
   <div class="align">
     <div class="milieu">
-      <h2>Question {{question[0].id}} :&nbsp; </h2>
-      <h2>{{question[0].intitule}}</h2>
+      <h2>Question {{questions?.id}} :&nbsp; </h2>
+      <h2>{{questions?.intitule}}</h2>
     </div>
 
-    <img src="{{question[0].img}}" width="80"/>
+    <img src="{{questions?.img}}" width="80"/>
   </div>
 
   <div>
     <div class="reponse">
-      <button class="question1">{{question[0].reponses[0].valeur}}</button>
+      <button class="question1">{{questions?.reponses?.[0]?.valeur}}</button>
     </div>
 
     <div class="reponse">
-      <button class="question2">{{question[0].reponses[1].valeur}}</button>
-      <button class="question3">{{question[0].reponses[3].valeur}}</button>
+      <button class="question2">{{questions?.reponses?.[1]?.valeur}}</button>
+      <button class="question3">{{questions?.reponses?.[3]?.valeur}}</button>
     </div>
 
     <div class="reponse">
-      <button class="question4">{{question[0].reponses[2].valeur}}</button>
+      <button class="question4">{{questions?.reponses?.[2]?.valeur}}</button>
     </div>
 
   </div>

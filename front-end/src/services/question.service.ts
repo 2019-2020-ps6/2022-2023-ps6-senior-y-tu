@@ -20,4 +20,8 @@ export class QuestionService {
     this.question.push(questions);
     this.question$.next(this.question);
   }
+
+  nextQuestion(): void{
+    this.question$.next(this.question);
+  }
 }

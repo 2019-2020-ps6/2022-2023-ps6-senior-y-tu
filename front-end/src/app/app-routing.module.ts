@@ -16,6 +16,7 @@ import {PatientsModificationComponent} from "./patients/patients-modification/pa
 import {QuestionModificationComponent} from "./questions/question-modification/question-modification.component";
 import {QuestionExplicationComponent} from "./questions/question-explication/question-explication.component";
 import {CommencerQuizComponent} from "./quizs/commencer-quiz/commencer-quiz.component";
+import {QuizResultatComponent} from "./quizs/quiz-resultat/quiz-resultat.component";
 
 
 
@@ -28,16 +29,17 @@ const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path : 'mes-quizs', component: MesQuizsComponent},
   { path: 'theme-list', component: ThemeListComponent},
-  { path: 'show-question', component: ShowQuestionComponent},
+  { path: 'show-question/:id', component: ShowQuestionComponent},
   {path: 'quiz-modification/:id', component: QuizModificationComponent},
   {path: 'question-liste/:id', component: QuestionListeComponent},
   {path: 'question-modification/:id', component: QuestionModificationComponent},
-  {path: 'question-explication', component: QuestionExplicationComponent},
+  {path: 'question-explication/:id', component: QuestionExplicationComponent},
   {path: 'commencer-quiz', component: CommencerQuizComponent},
   { path: 'patients-modification/:id', component: PatientsModificationComponent},
   { path:'mes-patients', component: MesPatientsComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
-  { path: 'page-aide', component: PageAideComponent}
+  { path: 'page-aide', component: PageAideComponent},
+  { path: 'quiz-resultat', component: QuizResultatComponent}
 ];
 
 @NgModule({
