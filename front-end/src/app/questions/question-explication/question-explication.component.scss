@@ -9,7 +9,8 @@
   margin-top: 40px;
   margin-left: 10%;
   margin-right: 10%;
-  outline: 2px solid $beige;
+  border: 2px solid $beige;
+  border-radius: 5px;
 }
 
 .align{
@@ -31,7 +32,8 @@
   margin-top: 40px;
   margin-left: 10%;
   margin-right: 10%;
-  outline: 2px solid $beige;
+  border: 2px solid $beige;
+  border-radius: 5px;
   text-align: justify;
 }
 

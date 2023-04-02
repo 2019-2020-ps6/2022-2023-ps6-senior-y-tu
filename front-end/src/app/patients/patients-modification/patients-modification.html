@@ -14,14 +14,14 @@
     <p id="handicap-text"> Handicap:
     <div class ="handicap-l" *ngIf="patient?.handicap == 'leger'">
       <input type="radio" id="handicap-leger-l" value="leger" checked>
-      <label for="handicap-leger-l">Parkinson leger</label>
+      <label for="handicap-leger-l">Parkinson léger</label>
       <br>
       <input type="radio" id="handicap-fort-l" value="fort" >
       <label for="handicap-fort-l">Parkinson fort</label>
     </div>
     <div class ="handicap-f" *ngIf="patient?.handicap == 'fort'">
       <input type="radio" id="handicap-leger-f" value="leger" >
-      <label for="handicap-leger-f">Parkinson leger</label>
+      <label for="handicap-leger-f">Parkinson léger</label>
       <br>
       <input type="radio" id="handicap-fort-f" value="fort" checked>
       <label for="handicap-fort-f">Parkinson fort</label>

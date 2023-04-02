@@ -9,27 +9,27 @@
 <app-header-pro> </app-header-pro>
 <div class="creer-question">
   <form class="question-form" [formGroup]="questionForm">
-    <p> Intitule de la question
+    <p> Intitulé de la question
       <input type="text" class="input-texte" name="nom" [formControlName]="'intitule'" required>
     </p>
 
     <div class="reponse" formArrayName="reponseArray">
-      <div>Reponse 1 :
+      <div>Réponse 1 :
         <input type="text" class="input-texte" id="rep1" name="reponse" [formControlName]="'valeur'" required>
         <input type="radio" name="rep" value="rep1" checked>
       </div>
 
-      <div>Reponse 2 :
+      <div>Réponse 2 :
         <input type="text" class="input-texte" id="rep2" name="reponse" [formControlName]="'valeur'" required>
         <input type="radio" name="rep" value="rep2" >
       </div>
 
-      <div>Reponse 3 :
+      <div>Réponse 3 :
         <input type="text" class="input-texte" id="rep3" name="reponse" [formControlName]="'valeur'" required>
         <input type="radio" name="rep" value="rep3" >
       </div>
 
-      <div>Reponse 4 :
+      <div>Réponse 4 :
         <input type="text" class="input-texte" id="rep4" name="reponse" [formControlName]="'valeur'" required>
         <input type="radio" name="rep" value="rep4" >
       </div>

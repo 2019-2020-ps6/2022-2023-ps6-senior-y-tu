@@ -15,13 +15,13 @@
           <p id="patient-nom">{{patient.nom}} </p>
           <p id="patient-prenom">{{patient.prenom}} </p>
           <p id="patient-naissance">Date de Naissance: {{patient.dateNaissance | date: 'dd/MM/yyyy'}} </p>
-          <p id="patient-handicap">Handicape: {{patient.handicap}}</p>
+          <p id="patient-handicap">Handicap: {{patient.handicap}}</p>
           <p id="patient-explication">Explication aux questions: {{patient.explication}}</p>
           <p id="patient-taille">Taille de police: {{patient.taille}}</p>
 
           <div class="bouton-patients">
             <button class="bouton" routerLink="/patients-modification/{{patient.id}}">Modifier</button>
-            <button class="bouton" (click)="deletePatient(patient)">Suprimmer</button>
+            <button class="bouton" (click)="deletePatient(patient)">Supprimer</button>
           </div>
         </div>
 
