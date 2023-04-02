@@ -1,5 +1,6 @@
 <app-header-pro> </app-header-pro>
 
+<br>
 <div class="mes-quizs">
   <button class="creation-quiz" routerLink="/creer-quiz">Créer un nouveau quiz</button>
 
@@ -7,17 +8,10 @@
     <div class="quiz" *ngFor="let quiz of quizListe">
 
       <div class="quiz-app">
-        <app-quiz [options]="{ ergo : true, patient : false}" [quiz]="quiz" (quizDeleted)="quizDeleted($event)">
-
-        </app-quiz>
+        <app-quiz [options]="{ ergo : true, patient : false}" [quiz]="quiz" (quizDeleted)="quizDeleted($event)"></app-quiz>
       </div>
     </div>
-
   </div>
-
-  Bouton provisoire pour retourner à l'accueil en attendant le header
-  <button class="retour" routerLink="/accueil">Retour</button>
-
 </div>
 
 

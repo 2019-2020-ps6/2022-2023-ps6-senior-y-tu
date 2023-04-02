@@ -1,9 +1,12 @@
-.quiz-modification{
+@import '../../../styles/card';
 
+
+.quiz-modification{
   justify-content: center;
   margin:20px auto;
   padding: 10px;
-  border : 2px solid #f2d7c3;
+  border: 2px solid $beige;
+  border-radius: 5px;
   width: 80%;
   position: relative;
   background-color: white;
@@ -12,6 +15,11 @@
     border: none;
     border-bottom: 1px solid black;
     outline: none;
+    font-size:20px;
+  }
+
+  .input-image{
+    font-size:20px;
   }
 
   .boutons{
@@ -22,11 +30,13 @@
     right: 0;
 
     .bouton{
-      border:1px solid black;
+      border: 2px solid $beige;
+      border-radius: 5px;
       background-color: #f2d7c3;
       bottom: 0;
       right: 0;
       margin-right: 10px;
+      font-size:20px;
     }
 
   }

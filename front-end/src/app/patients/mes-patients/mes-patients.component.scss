@@ -1,10 +1,15 @@
+@import '../../../styles/card';
+
+
 .creation-patient{
   display: flex;
   text-align: center;
   margin: 0 auto;
   justify-content: center;
-  border: 1px solid black;
+  border: 2px solid $beige;
+  border-radius: 5px;
   background-color: #f2d7c3;
+  font-size:20px;
 }
 
 #patient-image{
@@ -50,7 +55,8 @@
   margin: 10px;
 
   .bouton{
-    border:1px solid black;
+    border: 2px solid $beige;
+    border-radius: 5px;
     background-color: #f2d7c3;
     font-size:20px;
   }

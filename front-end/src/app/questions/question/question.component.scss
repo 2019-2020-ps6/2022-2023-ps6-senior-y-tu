@@ -1,11 +1,17 @@
+@import '../../../styles/card';
+
+
 .question{
 
   .question-list-modif{
 
 
     .question-list-modif-button{
-      border:1px solid black;
+      border: 2px solid $beige;
+      border-radius: 5px;
       background-color: #f2d7c3;
+      font-size:20px;
+      margin-bottom: 5px;
     }
   }
 
