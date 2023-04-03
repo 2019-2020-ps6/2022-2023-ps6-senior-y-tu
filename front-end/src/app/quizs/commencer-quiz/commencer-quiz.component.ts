@@ -14,6 +14,8 @@ import {Router} from "@angular/router";
 })
 export class CommencerQuizComponent {
 
+  public taille: number | string;
+
   @Input()
   theme: Theme[] = [];
   quiz: Quiz[] = [];
@@ -37,5 +39,8 @@ export class CommencerQuizComponent {
     this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
       this.quiz = quizzes;
     });
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
+
   }
 }

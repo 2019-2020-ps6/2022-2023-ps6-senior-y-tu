@@ -3,8 +3,8 @@
 <div class="boite" >
   <div class="align">
     <div class="gauche">
-      <h2>Thème : {{theme[0].nom}}</h2>
-      <h2>Quiz : {{quiz[0].nom}}</h2>
+      <h2 [style.font-size.px]="taille">Thème : {{theme[0].nom}}</h2>
+      <h2 [style.font-size.px]="taille">Quiz : {{quiz[0].nom}}</h2>
     </div>
     <img src="assets/boutonRetour.png" routerLink="/accueil" >
   </div>
@@ -12,8 +12,8 @@
   <div class="alignMilieu">
     <img src="{{quiz[0].image}}" />
     <div>
-      <p>Résultat : </p>
-      <button>Jouer</button>
+      <p [style.font-size.px]="taille">Résultat : </p>
+      <button [style.font-size.px]="taille">Jouer</button>
     </div>
     <div></div>
   </div>

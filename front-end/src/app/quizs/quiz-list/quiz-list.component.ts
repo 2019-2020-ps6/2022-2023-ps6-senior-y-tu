@@ -9,12 +9,16 @@ import {QuizService} from "../../../services/quiz.service";
 })
 export class QuizListComponent implements OnInit {
 
+  public taille: number | string;
   public quizList: Quiz[] = [];
 
   constructor( public quizService: QuizService) {
     this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
-    })}
+    })
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
+  }
 
 
   selectTheme(): string | any {

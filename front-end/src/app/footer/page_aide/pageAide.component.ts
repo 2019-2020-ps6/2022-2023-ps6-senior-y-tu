@@ -8,6 +8,7 @@ import {Location} from "@angular/common";
 })
 export class PageAideComponent implements OnInit {
 
+  public taille: number | string;
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
     if(e.key == 'Backspace' || e.key == '=' || e.key == '$') {
@@ -15,7 +16,10 @@ export class PageAideComponent implements OnInit {
     }
   }
 
-  constructor(private location: Location) {}
+  constructor(private location: Location) {
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
+  }
 
   ngOnInit(): void {
     let handicap = localStorage.getItem("patient-handicap");

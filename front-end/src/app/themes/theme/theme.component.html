@@ -1,9 +1,11 @@
-<div class="card">
-  <h2> {{theme?.nom}}
-  </h2>
+<div class="card" >
+  <div class = "theme">
+    <h2 [style.font-size.px]="taille"> {{theme?.nom}}
+    </h2>
+  </div>
   <div id="images">
     <img alt="test" src="{{theme?.image}}" width="400px" height="200px">
   </div>
   <br>
-  <button class="button-card" routerLink="/quiz-list">Continuer</button>
+  <button class="button-card" routerLink="/quiz-list" [style.font-size.px]="taille">Continuer</button>
 </div>

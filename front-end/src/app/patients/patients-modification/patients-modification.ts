@@ -38,10 +38,10 @@ export class PatientsModificationComponent {
     console.log(this.DateDeNaissance);
 
   }
-  onCreer() {
+  onModifier() {
     const patient: Patient = this.patientForm.getRawValue() as Patient;
-    this.patientService.addPatient(patient);
+    this.patientService.updatePatient(patient);
     console.log(this.patientService);
-    console.log('Patient Ajouté: ', patient);
+    console.log('Patient Modifier: ', patient);
   }
 }

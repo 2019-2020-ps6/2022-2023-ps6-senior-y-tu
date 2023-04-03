@@ -19,7 +19,7 @@ export const Patient_Jean: Patient = {
   image: '/assets/Image-Patient/Image_Jean.png',
   handicap: 'fort',
   explication: 'non',
-  taille:32
+  taille:24
 };
 
 export const Patient_Jeanne: Patient = {
@@ -41,7 +41,7 @@ export const Patient_Jean_Pierre: Patient = {
   image: '/assets/Image-Patient/Image_Jean.png',
   handicap: 'leger',
   explication: 'oui',
-  taille:40
+  taille:60
 };
 
 export const Patient_Jeanne_Marie: Patient = {

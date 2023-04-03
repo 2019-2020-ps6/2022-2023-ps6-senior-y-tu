@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-header-patient',
@@ -7,11 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderPatientComponent implements OnInit {
   public nom: String;
+  public taille: number | string;
 
   constructor() {
     let nomTemp = localStorage.getItem("patient-prenom");
     this.nom = (nomTemp == null)? "James" : nomTemp;
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
   }
+
 
   ngOnInit(): void {
   }

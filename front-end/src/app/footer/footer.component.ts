@@ -7,7 +7,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent{
-  constructor(private rooter: Router) { }
+
+  public taille: number | string;
+  constructor(private rooter: Router) {
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
+
+  }
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {

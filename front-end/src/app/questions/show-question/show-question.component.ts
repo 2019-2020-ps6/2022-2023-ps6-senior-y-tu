@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
 
 export class ShowQuestionComponent {
 
+  public taille: number | string;
+
   @Input()
   public question: Question[] = [];
 
@@ -27,7 +29,8 @@ export class ShowQuestionComponent {
     this.questionService.question$.subscribe((question1: Question[]) => {
       this.question = question1;
     });
-
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
   }
 
   private reponseParkinsonFort(e : KeyboardEvent): void{

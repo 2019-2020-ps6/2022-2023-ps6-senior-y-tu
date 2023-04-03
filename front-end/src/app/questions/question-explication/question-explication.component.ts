@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./question-explication.component.scss']
 })
 export class QuestionExplicationComponent {
+
+  public taille: number | string;
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
@@ -30,5 +32,7 @@ export class QuestionExplicationComponent {
       this.question = question1;
     });
     this.reponseCorrecte = this.question[0].reponses.findIndex((reponse: Reponse) => reponse.estCorrect);
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
   }
 }

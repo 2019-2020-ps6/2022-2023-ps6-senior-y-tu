@@ -30,14 +30,11 @@
 
 
 <div class="card" *ngIf="options?.patient">
-    <h2>
-        <i class="titre"></i>
-        {{quiz?.nom}}
-    </h2>
+  <div id="titre" [style.font-size.px]="taille"><h1>{{quiz?.nom}}</h1></div>
   <div id="images">
     <img  alt="image" src="{{quiz?.image}}" width=400 height=200px>
   </div>
     <br>
-  <button class="button-card" routerLink="/commencer-quiz">Jouer</button>
+  <button class="button-card" routerLink="/commencer-quiz" [style.font-size.px]="taille">Jouer</button>
 
 </div>

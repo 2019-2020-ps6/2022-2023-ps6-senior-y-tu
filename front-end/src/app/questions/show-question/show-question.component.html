@@ -2,14 +2,14 @@
 
 <div class="boite" >
   <div class="align">
-    <p>{{question[0].id}}/{{question[0].id}}</p>
+    <p [style.font-size.px]="taille"e>{{question[0].id}}/{{question[0].id}}</p>
     <img src="assets/boutonRetour.png" routerLink="/accueil" >
   </div>
 
   <div class="align">
     <div class="milieu">
-      <h2>Question {{question[0].id}} :&nbsp; </h2>
-      <h2>{{question[0].intitule}}</h2>
+      <h2 [style.font-size.px]="taille">Question {{question[0].id}} :&nbsp; </h2>
+      <h2 [style.font-size.px]="taille">{{question[0].intitule}}</h2>
     </div>
 
     <img src="{{question[0].img}}" width="80"/>
@@ -17,16 +17,16 @@
 
   <div>
     <div class="reponse">
-      <button class="question1">{{question[0].reponses[0].valeur}}</button>
+      <button class="question1" [style.font-size.px]="taille">{{question[0].reponses[0].valeur}}</button>
     </div>
 
     <div class="reponse">
-      <button class="question2">{{question[0].reponses[1].valeur}}</button>
-      <button class="question3">{{question[0].reponses[3].valeur}}</button>
+      <button class="question2" [style.font-size.px]="taille">{{question[0].reponses[1].valeur}}</button>
+      <button class="question3" [style.font-size.px]="taille">{{question[0].reponses[3].valeur}}</button>
     </div>
 
     <div class="reponse">
-      <button class="question4">{{question[0].reponses[2].valeur}}</button>
+      <button class="question4" [style.font-size.px]="taille">{{question[0].reponses[2].valeur}}</button>
     </div>
 
   </div>

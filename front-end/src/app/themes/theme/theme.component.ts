@@ -8,6 +8,8 @@ import { Theme} from "../../../models/theme.model";
 })
 export class ThemeComponent implements OnInit {
 
+  public taille: number | string;
+
   @Input()
   theme: Theme | undefined;
 
@@ -15,6 +17,9 @@ export class ThemeComponent implements OnInit {
   quizSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
+    console.log(this.taille+"de theme list");
   }
 
   ngOnInit(): void {

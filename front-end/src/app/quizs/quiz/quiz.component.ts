@@ -11,6 +11,8 @@ import {Quiz} from "../../../models/quiz.model";
 
 export class QuizComponent implements OnInit {
 
+  public taille: number | string;
+
   @Input()
   options : any;
 
@@ -20,7 +22,10 @@ export class QuizComponent implements OnInit {
   @Output()
   quizDeleted: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor() { }
+  constructor() {
+    let tailleTemp = localStorage.getItem("patient-taille");
+    this.taille = (tailleTemp == null)? 24: tailleTemp;
+  }
 
   ngOnInit(): void {
 
