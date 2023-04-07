@@ -23,7 +23,8 @@ export class PatientsModificationComponent {
       image: this.patient?.dateNaissance,
       handicap: this.patient?.handicap,
       explication: this.patient?.explication,
-      taille: this.patient?.taille
+      taille: this.patient?.taille,
+      souris:this.patient?.souris
     });
   }
   DateNaissance: Date | undefined;

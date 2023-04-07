@@ -21,6 +21,7 @@ export class CreerPatientsComponent implements  OnInit{
       handicap:[''],
       explication:[''],
       taille: 24,
+      souris:[''],
       id:PATIENT_LISTE.length +1
     });
   }
