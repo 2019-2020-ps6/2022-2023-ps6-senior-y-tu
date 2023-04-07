@@ -3,6 +3,7 @@ import {Quiz} from "../../../models/quiz.model";
 import {ActivatedRoute} from "@angular/router";
 import {QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {QuizService} from "../../../services/quiz.service";
 
 
 @Component({
@@ -14,22 +15,24 @@ export class QuizModificationComponent {
   public quizForm : FormGroup;
 
   @Input()
-  quiz: Quiz | undefined;
-  nom : string ;
-  theme : string ;
-  image : string ;
+  quizToUpdate: Quiz | undefined;
 
-  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder) {
+
+
+  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService : QuizService){
     const id = this.route.snapshot.paramMap.get('id');
-    this.quiz = QUIZ_LISTE.find(quiz => quiz.id === id);
+    this.quizToUpdate = QUIZ_LISTE.find(quiz => quiz.id === id);
 
-    this.nom =this.quiz?.nom as string;
-    this.theme =this.quiz?.theme as string;
-    this.image =this.quiz?.image as string;
     this.quizForm = this.formBuilder.group({
-      nom: this.quiz?.nom,
-      theme: this.quiz?.theme,
-      image: this.quiz?.image
+      nom: [''],
+      theme: [''],
+      image: ['']
+    });
+
+    this.quizForm.patchValue({
+      nom: this.quizToUpdate?.nom,
+      theme: this.quizToUpdate?.theme,
+      image: this.quizToUpdate?.image
     });
   }
 
@@ -37,5 +40,11 @@ export class QuizModificationComponent {
 
   }
 
+  modifierQuiz() {
+    const quiz: Quiz = this.quizForm.getRawValue() as Quiz;
+    this.quizService.updateQuiz(this.quizToUpdate, quiz);
+    console.log('Quiz Modifié: ', quiz);
+
+  }
 
 }
