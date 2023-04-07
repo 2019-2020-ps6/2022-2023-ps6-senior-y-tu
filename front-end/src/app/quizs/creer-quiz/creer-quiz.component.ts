@@ -13,6 +13,7 @@ export class CreerQuizComponent implements  OnInit{
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.quizForm = this.formBuilder.group({
+      id: [''],
       nom: [''],
       theme: [''],
       image: [''],

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Question} from "../../../models/question.model";
-import {QuestionService} from "../../../services/question.service";
+import {Quiz} from "../../../models/quiz.model";
+import {QuizService} from "../../../services/quiz.service";
 
 @Component({
   selector: 'app-creer-question',
@@ -11,7 +12,9 @@ import {QuestionService} from "../../../services/question.service";
 export class CreerQuestionComponent {
 
     public questionForm : FormGroup;
-    constructor(public formBuilder : FormBuilder, public questionService : QuestionService) {
+    @Input()
+    quiz: Quiz | undefined;
+    constructor(public formBuilder : FormBuilder, public quizService : QuizService) {
       this.questionForm = this.formBuilder.group({
             intitule: [''],
             reponse: this.formBuilder.array([]),
@@ -25,7 +28,7 @@ export class CreerQuestionComponent {
 
     onCreer() {
       const question: Question = this.questionForm.getRawValue() as Question;
-      this.questionService.addQuestion(question);
+      //this.quizService.addQuestion(question, this.quiz);
       console.log('Question Ajoutée: ', question);
     }
 

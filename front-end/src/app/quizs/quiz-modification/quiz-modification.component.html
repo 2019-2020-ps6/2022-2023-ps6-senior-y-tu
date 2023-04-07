@@ -6,21 +6,21 @@
 
 <app-header-pro> </app-header-pro>
 <div class="quiz-modification">
-  <form class="quiz-form"  >
+  <form class="quiz-form" [formGroup]="quizForm" >
     <p> Nom du quiz
-      <input type="text" class="input-texte"  name="nom" value="{{quiz?.nom}}" >
+      <input type="text" class="input-texte" formControlName="nom" >
     </p>
     <p> Thème du quiz
-      <input type="text" class="input-texte"  name="theme" value="{{quiz?.theme}}">
+      <input type="text" class="input-texte" formControlName="theme">
     </p>
     <p> Image du quiz
-      <img src="{{quiz?.image}}" alt="image" width="30%">
-      <input class="input-image" type="file" name="image" value="{{quiz?.image}}">
+      <img [src]="quizToUpdate?.image" alt="image" width="30%">
+      <input class="input-image" type="file" formControlName="image">
     </p>
 
     <div class="boutons">
-      <button class="bouton" type="submit"  id="voir-question" routerLink="/question-liste/{{quiz?.id}}">Voir les questions</button>
-      <button class="bouton" type="submit"  id="Valider" routerLink="/mes-quizs">Valider</button>
+      <button class="bouton" (click)="modifierQuiz()" type="button"  id="voir-question" routerLink="/question-liste/{{quizToUpdate?.id}}">Voir les questions</button>
+      <button class="bouton" (click)="modifierQuiz()" type="button"  id="Valider" routerLink="/mes-quizs">Valider</button>
     </div>
 
   </form>
