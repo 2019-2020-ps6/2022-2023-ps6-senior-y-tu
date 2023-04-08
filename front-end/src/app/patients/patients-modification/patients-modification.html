@@ -1,26 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title> Modification de patient</title>
+</head>
 <app-header-pro></app-header-pro>
 <div class="creer-patient">
   <form class="patient-form" [formGroup]="patientForm">
-    <p class="nom-patient"> Nom du patient
-      <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" placeholder="{{patient?.nom}}" required>
+    <p> Nom du patient
+      <input type="text" class="input-texte" formControlName="nom">
     </p>
-    <p class="prenom-patient"> Prénom du patient
-      <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" placeholder="{{patient?.prenom}}" checked>
+
+    <p> Prénom du patient
+      <input type="text" class="input-texte"  formControlName="prenom" >
     </p>
-    <p class="date-naissance"> Date de naissance
-      <input type="date" [value]="DateDeNaissance" required>
+
+    <p> Date de naissance
+      <input type="date" >
     </p>
 
     <div class="handicap"></div>
-    <p id="handicap-text"> Handicap:
-    <div class ="handicap-l" *ngIf="patient?.handicap == 'leger'">
+    <p> Handicap:
+    <div class ="handicap-l" *ngIf="patientAMettreJour?.handicap == 'leger'">
       <input type="radio" id="handicap-leger-l" value="leger" checked>
       <label for="handicap-leger-l">Parkinson léger</label>
       <br>
       <input type="radio" id="handicap-fort-l" value="fort" >
       <label for="handicap-fort-l">Parkinson fort</label>
     </div>
-    <div class ="handicap-f" *ngIf="patient?.handicap == 'fort'">
+    <div class ="handicap-f" *ngIf="patientAMettreJour?.handicap == 'fort'">
       <input type="radio" id="handicap-leger-f" value="leger" >
       <label for="handicap-leger-f">Parkinson léger</label>
       <br>
@@ -30,14 +37,14 @@
 
 
     <p class="explication"> Explications aux question:
-    <div class="explication-o" *ngIf="patient?.explication == 'oui'">
+    <div class="explication-o" *ngIf="patientAMettreJour?.explication == 'oui'">
       <input type="radio" class="explication-oui" id="oui-avant-O" value="oui" checked >
       <label for="oui-avant-O">Oui</label>
       <br>
       <input type="radio" class="explication-non" id= "oui-avant-N" value="non" >
       <label for="oui-avant-N">Non</label>
     </div>
-    <div class="explication-n" *ngIf="patient?.explication == 'non'">
+    <div class="explication-n" *ngIf="patientAMettreJour?.explication == 'non'">
       <input type="radio" class="explication-oui" id="non-avant-O" value="oui" >
       <label for="oui-avant-O">Oui</label>
       <br>
@@ -50,7 +57,7 @@
     </p>
 
     <p class="taille-police">Taille de police
-    <div class="police" *ngIf="patient?.taille == 24">
+    <div class="police" *ngIf="patientAMettreJour?.taille == 24">
     <input type="radio" id="police-2424" value="24"  checked>
     <label for="police-2424">24</label>
     <br>
@@ -60,7 +67,7 @@
     <input type="radio" id="police-6024" value="60" >
     <label for="police-6024">60</label>
   </div>
-    <div class="police" *ngIf="patient?.taille == 40">
+    <div class="police" *ngIf="patientAMettreJour?.taille == 40">
       <input type="radio" id="police-2440" value="24" >
       <label for="police-2440">24</label>
       <br>
@@ -70,7 +77,7 @@
       <input type="radio" id="police-6040" value="60" >
       <label for="police-6040">60</label>
     </div>
-    <div class="police" *ngIf="patient?.taille == 60">
+    <div class="police" *ngIf="patientAMettreJour?.taille == 60">
       <input type="radio" id="police-2460" value="24" >
       <label for="police-2460">24</label>
       <br>
@@ -92,9 +99,8 @@
 
 
     <p class="bouton-patients">
-      <button routerLink="/accueil" class="bouton"> Annuler </button>
-      <button type="submit" routerLink="/mes-patients" class="bouton"> Valider </button>
-
+      <button class="button" type="button" id="annuler" routerLink="/accueil" > Annuler </button>
+      <button class="button" (click)="modifierPatient()" type="button" id="valider" routerLink="/mes-patients" > Valider </button>
     </p>
   </form>
 

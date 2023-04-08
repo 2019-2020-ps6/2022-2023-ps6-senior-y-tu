@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { Patient} from "src/models/personne.model";
 import { PATIENT_LISTE} from '../mocks/personne-list.mock';
-import {Quiz} from "../models/quiz.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +25,19 @@ export class PatientService {
     this.patients$.next(this.patients);
   }
 
-  updatePatient(patient: Patient | undefined): void {
-    if (!patient) return; // vérifier si le quiz est défini
+  updatePatient(patientAModifier: Patient | undefined, patient: Patient | undefined): void {
+    if (!patientAModifier) return; // vérifier si le patient est défini
+    console.log('patients; ',this.patients);
 
-    const index = this.patients.findIndex(q => q.id == patient.id); // trouver l'index du quiz à mettre à jour
+    const index = this.patients.findIndex(q => q.id == patientAModifier.id); // trouver l'index du patient à mettre à jour
     if (index === -1) return; // vérifier si le quiz a été trouvé
+    console.log('patient; ',patient);
 
-    this.patients[index] = patient; // mettre à jour le quiz dans le tableau
+    if (patient) {
+      this.patients[index] = patient;
+    } // mettre à jour le patient dans le tableau
     this.patients$.next(this.patients);
 
-    console.log('Quiz Modifié (QuizService): ', patient);
+    console.log('Patient Modifié (PatientService): ', patient);
   }
 }

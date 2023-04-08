@@ -11,38 +11,50 @@ import {PATIENT_LISTE} from "../../../mocks/personne-list.mock";
   styleUrls: ['./patients-modification.scss']
 })
 export class PatientsModificationComponent {
+
+  public patientForm : FormGroup;
+
   @Input()
-  patient: Patient | undefined;
-  patientForm: FormGroup;
+  patientAMettreJour : Patient | undefined;
 
-  constructor(public formBuilder: FormBuilder, public patientService: PatientService, private route: ActivatedRoute) {
-    this.patientForm = this.formBuilder.group({
-      nom: this.patient?.nom,
-      prenom: this.patient?.prenom,
-      dateNaissance: this.patient?.dateNaissance,
-      image: this.patient?.dateNaissance,
-      handicap: this.patient?.handicap,
-      explication: this.patient?.explication,
-      taille: this.patient?.taille,
-      souris:this.patient?.souris
-    });
-  }
-  DateNaissance: Date | undefined;
-  DateDeNaissance: string | undefined;
-
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public patientService : PatientService){
     const id = this.route.snapshot.paramMap.get('id');
-    this.patient = PATIENT_LISTE.find(patient => patient.id == id);
-    // @ts-ignore
-    this.DateNaissance = new Date(this.patient?.dateNaissance);
-    this.DateDeNaissance = this.DateNaissance?.toDateString();
-    console.log(this.DateDeNaissance);
+    this.patientAMettreJour = PATIENT_LISTE.find(patient => patient.id == id);
 
+    this.patientForm = this.formBuilder.group( {
+      id: [''],
+      nom:[''],
+      prenom:[''],
+      dateNaissance:[''],
+      handicap:[''],
+      explication:[''],
+      taille:[''],
+      souris:[''],
+      image:['']
+    });
+
+    this.patientForm.patchValue( {
+      id: this.patientAMettreJour?.id,
+      nom: this.patientAMettreJour?.nom,
+      prenom: this.patientAMettreJour?.prenom,
+      dateNaisance: this.patientAMettreJour?.dateNaissance,
+      explication: this.patientAMettreJour?.explication,
+      handicap: this.patientAMettreJour?.handicap,
+      taille: this.patientAMettreJour?.taille,
+      souris: this.patientAMettreJour?.souris,
+      image : ''
+      }
+    )
   }
-  onCreer() {
-    const patient: Patient = this.patientForm.getRawValue() as Patient;
-    this.patientService.addPatient(patient);
-    console.log(this.patientService);
-    console.log('Patient Ajouté: ', patient);
+  ngOnInit(): void {
+  }
+  modifierPatient() {
+    const  patient : Patient = this.patientForm.getRawValue() as Patient;
+    if (patient.image == '') {
+      // @ts-ignore
+      patient.image = this.patientAMettreJour?.image;
+    }
+    this.patientService.updatePatient(this.patientAMettreJour, patient);
+    console.log('Patient Modifier: ', patient);
   }
 }
