@@ -17,6 +17,7 @@ export class CreerQuizComponent implements  OnInit{
       nom: [''],
       theme: [''],
       image: [''],
+      questions: [''],
     });
   }
   ngOnInit(): void {  }

@@ -24,15 +24,19 @@ export class QuizModificationComponent {
     this.quizToUpdate = QUIZ_LISTE.find(quiz => quiz.id === id);
 
     this.quizForm = this.formBuilder.group({
+      id: [''],
       nom: [''],
       theme: [''],
-      image: ['']
+      image: [''],
+      questions: [''],
     });
 
     this.quizForm.patchValue({
+      id: this.quizToUpdate?.id,
       nom: this.quizToUpdate?.nom,
       theme: this.quizToUpdate?.theme,
-      image: this.quizToUpdate?.image
+      image: '',
+      questions: this.quizToUpdate?.questions,
     });
   }
 
@@ -42,6 +46,9 @@ export class QuizModificationComponent {
 
   modifierQuiz() {
     const quiz: Quiz = this.quizForm.getRawValue() as Quiz;
+    if (quiz.image === '') {
+      quiz.image = this.quizToUpdate?.image;
+    }
     this.quizService.updateQuiz(this.quizToUpdate, quiz);
     console.log('Quiz Modifié: ', quiz);
 
