@@ -14,7 +14,7 @@ export const Patient_Lucienne: Patient = {
 export const Patient_Jean: Patient = {
   id: '2',
   nom:"Bois",
-  prenom: "Jean",
+  prenom: "Marc",
   dateNaissance:new Date(1950-7-9),
   image: '/assets/Image-Patient/Image_Jean.png',
   handicap: 'fort',
