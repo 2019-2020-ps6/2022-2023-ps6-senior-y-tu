@@ -8,7 +8,8 @@ export const Patient_Lucienne: Patient = {
     image: '/assets/Image-Patient/Image_Lucienne.png',
     handicap: 'leger',
     explication: 'oui',
-    taille:40
+    taille:40,
+    souris:'oui'
 };
 
 export const Patient_Jean: Patient = {
@@ -19,7 +20,8 @@ export const Patient_Jean: Patient = {
   image: '/assets/Image-Patient/Image_Jean.png',
   handicap: 'fort',
   explication: 'non',
-  taille:32
+  taille:32,
+  souris:'non'
 };
 
 export const Patient_Jeanne: Patient = {
@@ -30,7 +32,8 @@ export const Patient_Jeanne: Patient = {
   image: '/assets/Image-Patient/Image_Jeanne.png',
   handicap: 'leger',
   explication: 'oui',
-  taille:40
+  taille:40,
+  souris:'non'
 };
 
 export const Patient_Jean_Pierre: Patient = {
@@ -41,7 +44,8 @@ export const Patient_Jean_Pierre: Patient = {
   image: '/assets/Image-Patient/Image_Jean.png',
   handicap: 'leger',
   explication: 'oui',
-  taille:40
+  taille:40,
+  souris:'oui'
 };
 
 export const Patient_Jeanne_Marie: Patient = {
@@ -52,7 +56,8 @@ export const Patient_Jeanne_Marie: Patient = {
   image: '/assets/Image-Patient/Image_Jeanne.png',
   handicap: 'leger',
   explication: 'oui',
-  taille:40
+  taille:40,
+  souris:'non'
 };
 
 export const Ergo_Edward: Ergo = {

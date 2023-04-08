@@ -24,7 +24,8 @@ export class QuizService {
 
 
   addQuiz(quiz: Quiz): void {
-    quiz.id = (this.quizs.length + 1).toString();
+    const lastId = parseInt(this.quizs[this.quizs.length - 1].id);
+    quiz.id = (lastId + 1).toString();
 
     this.quizs.push(quiz);
     this.quizs$.next(this.quizs);
@@ -32,17 +33,22 @@ export class QuizService {
 
   deleteQuiz(quiz: Quiz): void {
     const index = this.quizs.indexOf(quiz);
+    console.log('index: ', index)
     this.quizs.splice(index, 1);
     this.quizs$.next(this.quizs);
   }
 
-  updateQuiz(quiz: Quiz | undefined): void {
-    if (!quiz) return; // vérifier si le quiz est défini
+  updateQuiz(quizToUpdate: Quiz | undefined, quiz: Quiz): void {
+    if (!quizToUpdate) return;
+    console.log('quizs; ', this.quizs);
 
-    const index = this.quizs.findIndex(q => q.id === quiz.id); // trouver l'index du quiz à mettre à jour
-    if (index === -1) return; // vérifier si le quiz a été trouvé
+    const index = this.quizs.findIndex(q => q.id === quizToUpdate.id)
 
-    this.quizs[index] = quiz; // mettre à jour le quiz dans le tableau
+    console.log('index: ', index)
+    if (index === -1) return;
+    console.log('quiz: ', quiz)
+
+    this.quizs[index] = quiz;
     this.quizs$.next(this.quizs);
 
     console.log('Quiz Modifié (QuizService): ', quiz);

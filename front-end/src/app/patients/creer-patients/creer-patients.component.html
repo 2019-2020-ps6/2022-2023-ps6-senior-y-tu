@@ -56,6 +56,14 @@
         <label for="police-60">60</label>
       </div>
 
+    <p class="souris"> Utilisation de la souris:
+      <div id="souris">
+        <input type="radio" id="souris-oui" value="oui" [formControlName]="'souris'" checked>
+        <label for="explication-oui">Oui</label>
+        <br>
+        <input type="radio" id="souris-non" value="non" [formControlName]="'souris'">
+        <label for="explication-non">Non</label>
+      </div>
 
     <p class="bouton-patients">
       <button routerLink="/accueil" class="bouton"> Annuler </button>

@@ -7,6 +7,7 @@ export interface Patient {
   explication: string;
   taille: number;
   handicap: string;
+  souris: string;
 }
 
 export interface Ergo {
