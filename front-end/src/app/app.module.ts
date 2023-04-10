@@ -37,6 +37,7 @@ import {QuestionModificationComponent} from "./questions/question-modification/q
 import { QuestionExplicationComponent } from './questions/question-explication/question-explication.component';
 import { CommencerQuizComponent } from './quizs/commencer-quiz/commencer-quiz.component';
 import { QuizResultatComponent } from './quizs/quiz-resultat/quiz-resultat.component';
+import { ClickableDirective } from './ClickableDirective';
 
 
 // import * as http from "http";
@@ -73,7 +74,8 @@ import { QuizResultatComponent } from './quizs/quiz-resultat/quiz-resultat.compo
     QuestionModificationComponent,
     QuestionExplicationComponent,
     CommencerQuizComponent,
-    QuizResultatComponent
+    QuizResultatComponent,
+    ClickableDirective,
   ],
   imports: [
     BrowserModule,
