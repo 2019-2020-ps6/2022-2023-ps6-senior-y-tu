@@ -1,7 +1,6 @@
 
 export interface Reponse {
   id: string;
-  type?: string;
   valeur: string;
   estCorrect: boolean;
 }

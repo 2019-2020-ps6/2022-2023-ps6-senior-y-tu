@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Question} from "../../../models/question.model";
+import {Quiz} from "../../../models/quiz.model";
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -9,6 +10,8 @@ export class QuestionComponent {
 
   @Input()
   question: Question | undefined;
+  @Input()
+  quiz : Quiz | undefined;
 
 
 

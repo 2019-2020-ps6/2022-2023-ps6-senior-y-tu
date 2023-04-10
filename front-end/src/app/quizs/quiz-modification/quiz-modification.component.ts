@@ -50,7 +50,7 @@ export class QuizModificationComponent {
       quiz.image = this.quizToUpdate?.image;
     }
     this.quizService.updateQuiz(this.quizToUpdate, quiz);
-    console.log('Quiz Modifié: ', quiz);
+    //console.log('Quiz Modifié: ', quiz);
 
   }
 

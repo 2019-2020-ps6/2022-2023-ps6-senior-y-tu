@@ -8,30 +8,19 @@
 <app-header-pro> </app-header-pro>
 
 <div class="modification-question">
-  <form class="question-form-modification" >
+  <form class="question-form-modification" [formGroup]="questionForm" >
     <p> Intitulé de la question
-      <input type="text" class="input-texte" name="nom" value="{{question?.intitule}}" >
+      <input type="text" class="input-texte" [formControlName]="'intitule'" required>
     </p>
 
-    <div class="reponse" >
-      <div>Réponse 1 :
-        <input type="text" class="input-texte" id="rep1" name="reponse" value="{{reponses[0].valeur}}">
-        <input type="radio" name="rep" value="rep1" checked>
-      </div>
-
-      <div>Réponse 2 :
-        <input type="text" class="input-texte" id="rep2" name="reponse" value="{{reponses[1].valeur}}">
-        <input type="radio" name="rep" value="rep2" >
-      </div>
-
-      <div>Réponse 3 :
-        <input type="text" class="input-texte" id="rep3" name="reponse" value="{{reponses[2].valeur}}">
-        <input type="radio" name="rep" value="rep3" >
-      </div>
-
-      <div>Réponse 4 :
-        <input type="text" class="input-texte" id="rep4" name="reponse" value="{{reponses[3].valeur}}">
-        <input type="radio" name="rep" value="rep4" >
+    <div class="reponse" formArrayName="reponses">
+      <div *ngFor="let reponse of reponses.controls; let i=index">
+        <div class="reponse-form" [formGroupName]="i" >
+          <label> Réponse {{i+1}}
+            <input type="text" class="input-texte" name="reponse{{i+1}}" [formControlName]="'valeur'" required>
+            <input type="radio" (click)="onRadioChange(i)" [value]="true" name="estCorrect" [formControlName]="'estCorrect'">
+          </label>
+        </div>
       </div>
     </div>
 
@@ -39,18 +28,18 @@
 
     <div>
       <p> Image de la question </p>
-      <input class="input-image" type="file" name="image" id="image" accept="image/*" value="{{question?.img}}">
-      <img src="{{question?.img}}" alt="image" width="20%">
+      <img [src]="questionToUpdate?.img" alt="image" width="30%">
+      <input type="file" class="input-image" name="img" [formControlName]="'img'" required>
     </div>
 
     <div>
       <p> Description de la question </p>
-      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200" value="{{question?.explication}}"> </textarea>
+      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200" formControlName="explication"> </textarea>
     </div>
 
     <div class="boutons">
-      <button class="bouton" id="voir-question" routerLink="/question-liste/{{quiz?.id}}">Supprimer</button>
-      <button class="bouton" type="submit"  id="Valider" routerLink="/mes-quizs">Valider</button>
+      <button class="bouton" (click)="deleteQuestion()" type="button" id="supprimer" routerLink="/question-liste/{{quiz?.id}}">Supprimer</button>
+      <button class="bouton" (click)="modifierQuestion()" type="button"  id="Valider" routerLink="/mes-quizs">Valider</button>
     </div>
   </form>
 </div>
