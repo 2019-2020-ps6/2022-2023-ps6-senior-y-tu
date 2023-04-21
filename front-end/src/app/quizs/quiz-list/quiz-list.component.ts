@@ -12,10 +12,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./quiz-list.component.scss']
 })
 export class QuizListComponent implements AfterViewInit {
-  lienRetour = '/theme-list';
-
+  protected lienRetour = '/theme-list';
+  private nombreCaseLargeur = 1;
   public quizList: Quiz[] = [];
   private buttonSelected: number = 1;
+
+  @HostListener("window:resize") onWindowResize(): void {
+    this.changeDeplacementBouton(window.innerWidth);
+  }
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
@@ -42,24 +46,25 @@ export class QuizListComponent implements AfterViewInit {
     this.buttonSelected = 1;
     let temp = document.getElementsByClassName("button-card") as HTMLCollectionOf<HTMLButtonElement>;
     temp[this.buttonSelected].style.backgroundColor = "#b4a7d6";
+    this.changeDeplacementBouton(window.innerWidth);
   }
 
   private patientLeger(e: KeyboardEvent) : void {
     if(e.key == Handicap_Leger_Entree.ENTREE || e.key == Handicap_Leger_Entree.ESPACE) this.goToEnter();
-    else if(e.key == Handicapt_Leger_Haut.FLECHE_HAUT) this.switchButton(-2);
+    else if(e.key == Handicapt_Leger_Haut.FLECHE_HAUT) this.switchButton(-1 * this.nombreCaseLargeur);
     else if (e.key == Handicap_Leger_Droite.FLECHE_DROITE) this.switchButton(1);
     else if (e.key == Handicap_Leger_Gauche.FLECHE_GAUCHE) this.switchButton(-1);
-    else if(e.key == Handicap_Leger_Bas.FLECHE_BAS) this.switchButton(2);
+    else if(e.key == Handicap_Leger_Bas.FLECHE_BAS) this.switchButton(this.nombreCaseLargeur);
   }
 
   private patientFort(e: KeyboardEvent) : void {
     if (e.key == Handicap_Fort_Entree.ESPACE) this.goToEnter();
     if (e.key == Handicap_Fort_Haut.T || e.key == Handicap_Fort_Haut.E || e.key == Handicap_Fort_Haut.APPOSTROPHE
-      || e.key == Handicap_Fort_Haut.MOINS || e.key == Handicap_Fort_Haut.PARENTHESE_OUVERTE || e.key == Handicap_Fort_Haut.R) this.switchButton(-2);
+      || e.key == Handicap_Fort_Haut.MOINS || e.key == Handicap_Fort_Haut.PARENTHESE_OUVERTE || e.key == Handicap_Fort_Haut.R) this.switchButton(-1 * this.nombreCaseLargeur);
     else if (e.key == Handicap_Fort_Gauche.A || e.key == Handicap_Fort_Gauche.Z || e.key == Handicap_Fort_Gauche.Q
       || e.key == Handicap_Fort_Gauche.S || e.key == Handicap_Fort_Gauche.W || e.key == Handicap_Fort_Gauche.X) this.switchButton(-1);
     else if (e.key == Handicap_Fort_Bas.H || e.key == Handicap_Fort_Bas.J || e.key == Handicap_Fort_Bas.B
-      || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE) this.switchButton(2);
+      || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE) this.switchButton(2 * this.nombreCaseLargeur);
     else if (e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
       || e.key == Handicap_Fort_Droite.M || e.key == Handicap_Fort_Droite.POINT_EXCLAMATION || e.key == Handicap_Fort_Droite.DOUBLE_POINT) this.switchButton(1);
   }
@@ -81,6 +86,16 @@ export class QuizListComponent implements AfterViewInit {
     }
   }
 
+  private changeDeplacementBouton(width: number): void {
+    this.nombreCaseLargeur = (width - 603) / 602 + 1;
+
+    if (this.nombreCaseLargeur >= 3)
+      this.nombreCaseLargeur = 3;
+    else if (this.nombreCaseLargeur >= 2)
+      this.nombreCaseLargeur = 2;
+    else
+      this.nombreCaseLargeur = 1;
+  }
   private goToEnter() : void {
     this.root.navigate(["/commencer-quiz"]);
   }
