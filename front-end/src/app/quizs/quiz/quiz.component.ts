@@ -10,6 +10,7 @@ import {Quiz} from "../../../models/quiz.model";
 })
 
 export class QuizComponent implements OnInit {
+  lienEntrer = '/commencer-quiz';
 
   @Input()
   options : any;

@@ -7,14 +7,14 @@
       <h2>Quiz : {{quiz[0].nom}}</h2>
       <p>Nombre de questions: {{quiz[0].questions.length}}</p>
     </div>
-    <img src="assets/boutonRetour.png">
+    <img src="assets/boutonRetour.png" [appClickable]="lienRetour">
   </div>
 
   <div class="alignMilieu">
     <img src="{{quiz[0].image}}" />
     <div>
       <p>Résultat: </p>
-      <button>Rejouer</button>
+      <button [appClickable]="lien">Rejouer</button>
     </div>
     <div></div>
   </div>

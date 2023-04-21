@@ -1,6 +1,5 @@
 import {Component, HostListener, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
-import {QuestionService} from "../../../services/question.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {
   Handicap_Fort_Bas, Handicap_Fort_Droite,
@@ -11,7 +10,7 @@ import {
   Handicap_Leger_Gauche,
   Handicapt_Leger_Haut, Retour
 } from "../../../enums/enumPatient";
-import {QUESTION_LISTE, QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
+import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 
 @Component({
   selector: 'app-show-question',
@@ -21,6 +20,7 @@ import {QUESTION_LISTE, QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
 
 
 export class ShowQuestionComponent {
+  public lienRetour = '/commencer-quiz'
 
   @Input()
   public questions: Question | undefined;

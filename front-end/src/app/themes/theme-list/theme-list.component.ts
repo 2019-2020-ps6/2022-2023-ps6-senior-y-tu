@@ -11,7 +11,7 @@ Handicap_Leger_Entree, Handicap_Leger_Gauche, Handicap_Leger_Droite, Handicap_Fo
   styleUrls: ['./theme-list.component.scss']
 })
 export class ThemeListComponent implements AfterViewInit {
-
+  public lienRetour = "/accueil"
   public themeList: Theme[] = [];
   private buttonSelected: number = 1;
 

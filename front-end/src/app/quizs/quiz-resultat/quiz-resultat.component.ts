@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./quiz-resultat.component.scss']
 })
 export class QuizResultatComponent {
+  public lienRetour = "/theme-list";
+  public lien = '/show-question/1';
 
   @Input()
   theme: Theme[] = [];

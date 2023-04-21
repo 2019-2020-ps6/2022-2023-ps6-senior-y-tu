@@ -1,8 +1,7 @@
 import {Component, HostListener, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
-import {QuestionService} from "../../../services/question.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
+import {Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
 import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 
 @Component({
@@ -11,6 +10,7 @@ import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
   styleUrls: ['./question-explication.component.scss']
 })
 export class QuestionExplicationComponent {
+  public lienRetour = "quiz-list";
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");

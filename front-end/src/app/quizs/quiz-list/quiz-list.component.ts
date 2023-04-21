@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./quiz-list.component.scss']
 })
 export class QuizListComponent implements AfterViewInit {
+  lienRetour = '/theme-list';
 
   public quizList: Quiz[] = [];
   private buttonSelected: number = 1;
