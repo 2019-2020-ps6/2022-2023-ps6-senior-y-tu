@@ -23,7 +23,7 @@ import {QuizResultatComponent} from "./quizs/quiz-resultat/quiz-resultat.compone
 
 const routes: Routes = [
   { path: 'creer-quiz', component: CreerQuizComponent },
-  { path: 'creer-question', component: CreerQuestionComponent },
+  { path: 'creer-question/:id', component: CreerQuestionComponent },
   { path: 'creer-patient', component: CreerPatientsComponent },
   { path: 'quiz-list', component: QuizListComponent },
   { path: 'accueil', component: AccueilComponent },
@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'show-question/:id', component: ShowQuestionComponent},
   {path: 'quiz-modification/:id', component: QuizModificationComponent},
   {path: 'question-liste/:id', component: QuestionListeComponent},
-  {path: 'question-modification/:id', component: QuestionModificationComponent},
+  {path: 'quiz-modification/:id/question-modification/:questionId', component: QuestionModificationComponent},
   {path: 'question-explication/:id', component: QuestionExplicationComponent},
   {path: 'commencer-quiz', component: CommencerQuizComponent},
   { path: 'patients-modification/:id', component: PatientsModificationComponent},

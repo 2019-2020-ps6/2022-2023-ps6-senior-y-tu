@@ -13,44 +13,32 @@
       <input type="text" class="input-texte" name="nom" [formControlName]="'intitule'" required>
     </p>
 
-    <div class="reponse" formArrayName="reponseArray">
-      <div>Réponse 1 :
-        <input type="text" class="input-texte" id="rep1" name="reponse" [formControlName]="'valeur'" required>
-        <input type="radio" name="rep" value="rep1" checked>
-      </div>
-
-      <div>Réponse 2 :
-        <input type="text" class="input-texte" id="rep2" name="reponse" [formControlName]="'valeur'" required>
-        <input type="radio" name="rep" value="rep2" >
-      </div>
-
-      <div>Réponse 3 :
-        <input type="text" class="input-texte" id="rep3" name="reponse" [formControlName]="'valeur'" required>
-        <input type="radio" name="rep" value="rep3" >
-      </div>
-
-      <div>Réponse 4 :
-        <input type="text" class="input-texte" id="rep4" name="reponse" [formControlName]="'valeur'" required>
-        <input type="radio" name="rep" value="rep4" >
+    <div class="reponse" formArrayName="reponses">
+      <div *ngFor="let reponse of reponses.controls; let i=index">
+        <div class="reponse-form" [formGroupName]="i" >
+          <label> Réponse {{i+1}}
+            <input type="text" class="input-texte" name="reponse{{i+1}}" [formControlName]="'valeur'" required>
+            <input type="radio" [value]="true" name="estCorrect" [formControlName]="'estCorrect'">
+          </label>
+          </div>
       </div>
     </div>
-
 
 
     <div>
       <p> Image de la question </p>
-      <input class="input-image" type="file" name="image" id="image" accept="image/*">
+      <input class="input-image" type="file" name="img" id="img" accept="image/*">
     </div>
 
     <div>
-      <p> Description de la question </p>
-      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200"> </textarea>
+      <p> Explication de la question </p>
+      <textarea class="input-explication" id="explication" rows="6" cols="50" maxlength="200"> </textarea>
     </div>
 
     <p class="bouton-question">
       <button routerLink="/creer-quiz" class="bouton"> Retour </button>
-      <button type="submit" routerLink="/creer-question" class="bouton" (click)="onCreer()" >Ajouter question</button>
-      <button routerLink="/mes-quizs" class="bouton"> Valider Quiz </button>
+      <button type="submit" routerLink="/question-liste/{{quiz?.id}}" class="bouton" (click)="onCreer()" >Ajouter question</button>
+      <button type="submit" routerLink="/mes-quizs" class="bouton" (click)="onCreer()"> Valider Quiz </button>
     </p>
   </form>
 </div>

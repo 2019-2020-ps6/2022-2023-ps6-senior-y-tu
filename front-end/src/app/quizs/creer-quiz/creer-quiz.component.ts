@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class CreerQuizComponent implements  OnInit{
   public quizForm : FormGroup;
+  public newId: string;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.quizForm = this.formBuilder.group({
@@ -17,8 +18,11 @@ export class CreerQuizComponent implements  OnInit{
       nom: [''],
       theme: [''],
       image: [''],
-      questions: [''],
+      questions: this.formBuilder.array([]),
     });
+
+    const listeQuiz = this.quizService.getQuizs();
+    this.newId = (listeQuiz.length + 1).toString();
   }
   ngOnInit(): void {  }
 
