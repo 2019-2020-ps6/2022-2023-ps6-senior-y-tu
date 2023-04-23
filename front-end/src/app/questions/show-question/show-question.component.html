@@ -2,14 +2,14 @@
 
 <div class="boite">
   <div class="align">
-    <p>{{questions?.id}}/{{questions?.id}}</p>
+    <p appPolice>{{questions?.id}}/{{questions?.id}}</p>
     <img src="assets/boutonRetour.png" [appClickable]="lienRetour">
   </div>
 
   <div class="align">
     <div class="milieu">
-      <h2>Question {{questions?.id}} :&nbsp; </h2>
-      <h2>{{questions?.intitule}}</h2>
+      <h2 appPolice>Question {{questions?.id}} :&nbsp; </h2>
+      <h2 appPolice>{{questions?.intitule}}</h2>
     </div>
 
     <img src="{{questions?.img}}" width="200px"/>
@@ -17,20 +17,20 @@
 
   <div>
     <div class="reponse">
-      <button class="question1" [appQuestionDirective]="questions?.reponses?.[0]">
+      <button class="question1" [appQuestionDirective]="questions?.reponses?.[0]" appPolice>
         {{questions?.reponses?.[0]?.valeur}}
       </button>
 
-      <button class="question2" [appQuestionDirective]="questions?.reponses?.[1]">
+      <button class="question2" [appQuestionDirective]="questions?.reponses?.[1]" appPolice>
         {{questions?.reponses?.[1]?.valeur}}
       </button>
-      <button class="question3" [appQuestionDirective]="questions?.reponses?.[3]">
+      <button class="question3" [appQuestionDirective]="questions?.reponses?.[3]" appPolice>
         {{questions?.reponses?.[3]?.valeur}}
       </button>
     </div>
 
     <div class="reponse">
-      <button class="question4" [appQuestionDirective]="questions?.reponses?.[2]">
+      <button class="question4" [appQuestionDirective]="questions?.reponses?.[2]" appPolice>
         {{questions?.reponses?.[2]?.valeur}}
       </button>
     </div>

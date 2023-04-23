@@ -1,6 +1,6 @@
 <app-header-patient></app-header-patient>
 <div id="entete">
-  <h1>Choisissez un quiz du thème {{selectTheme()}}</h1>
+  <h1 appPolice >Choisissez un quiz du thème {{selectTheme()}}</h1>
 </div>
 <br>
 
@@ -10,7 +10,7 @@
 </div>
 
 <div class="quiz-list">
-  <div class="quiz" *ngFor="let quiz of quizList">
+  <div class="quiz" *ngFor="let quiz of quizList" appPolice>
         <!--Inputs & Output allow communication between parent & child components.-->
         <!--More information: https://angular.io/guide/component-interaction-->
         <app-quiz [options]="{ergo : false, patient : true}" [quiz]="quiz" ></app-quiz>

@@ -42,6 +42,7 @@ import {ClickableDirectiveQuestion} from "./questions/show-question/ClickableDir
 import {ClickableDirectiveQuestionExplication} from "./questions/question-explication/ClickableDirectiveQuestionExplication";
 import {ClickableDirectiveFooter} from  "./footer/ClickableDirectiveFooter";
 import {ClickableDirectivePageAide} from "./footer/page_aide/ClickableDirectivePageAide";
+import {PoliceDirective} from "./Directive/PoliceDirective";
 
 
 // import * as http from "http";
@@ -84,6 +85,7 @@ import {ClickableDirectivePageAide} from "./footer/page_aide/ClickableDirectiveP
     ClickableDirectiveQuestionExplication,
     ClickableDirectiveFooter,
     ClickableDirectivePageAide,
+    PoliceDirective
   ],
   imports: [
     BrowserModule,

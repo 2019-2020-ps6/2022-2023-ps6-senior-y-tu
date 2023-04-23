@@ -6,8 +6,8 @@
   </div>
 
   <div class="align">
-    <div class="milieu">
-      <h2>Question {{questions?.id}} :&nbsp; </h2>
+    <div class="milieu"  appPolice>
+      <h2 >Question {{questions?.id}} :&nbsp; </h2>
       <h2>{{questions?.intitule}}</h2>
     </div>
 
@@ -15,11 +15,11 @@
   </div>
 
   <div class="explication">
-    <p>La réponse: {{questions?.reponses?.[reponseCorrecte]?.valeur}} </p>
-    <p>{{questions?.explication}}</p>
+    <p appPolice>La réponse: {{questions?.reponses?.[reponseCorrecte]?.valeur}} </p>
+    <p appPolice>{{questions?.explication}}</p>
   </div>
 
-  <button class="boutton" appDirectiveQuestionExplication>Continuer</button>
+  <button class="boutton" appDirectiveQuestionExplication appPolice>Continuer</button>
 
 </div>
 
