@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Patient} from "../../../models/personne.model";
 import { PatientService} from "../../../services/patient.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {PATIENT_LISTE} from "../../../mocks/personne-list.mock";
 
@@ -56,5 +56,78 @@ export class PatientsModificationComponent {
     }
     this.patientService.updatePatient(this.patientAMettreJour, patient);
     console.log('Patient Modifier: ', patient);
+  }
+
+  onRadioChangeExplication(name : String) {
+    if (name == "explication-oui") {
+      // @ts-ignore
+      document.getElementById("explication-oui").checked = true;
+      // @ts-ignore
+      document.getElementById("explication-non").checked = false;
+    }
+    else {
+      // @ts-ignore
+      document.getElementById("explication-oui").checked = false;
+      // @ts-ignore
+      document.getElementById("explication-non").checked = true;
+    }
+  }
+
+  onRadioChangeHandicap(name : String) {
+    if (name == "handicap-leger") {
+      // @ts-ignore
+      document.getElementById("handicap-leger").checked = true;
+      // @ts-ignore
+      document.getElementById("handicap-fort").checked = false;
+    }
+    else {
+      // @ts-ignore
+      document.getElementById("handicap-leger").checked = false;
+      // @ts-ignore
+      document.getElementById("handicap-fort").checked = true;
+    }
+  }
+
+  onRadioChangeTaille(name : String) {
+    if (name == "police-24") {
+      // @ts-ignore
+      document.getElementById("police-24").checked = true;
+      // @ts-ignore
+      document.getElementById("police-40").checked = false;
+      // @ts-ignore
+      document.getElementById("police-40").checked = false;
+    }
+    else if(name == "police-40")
+    {
+      // @ts-ignore
+      document.getElementById("police-24").checked = false;
+      // @ts-ignore
+      document.getElementById("police-40").checked = true;
+      // @ts-ignore
+      document.getElementById("police-40").checked = false;
+    }
+    else
+    {
+      // @ts-ignore
+      document.getElementById("police-24").checked = false;
+      // @ts-ignore
+      document.getElementById("police-40").checked = false;
+      // @ts-ignore
+      document.getElementById("police-40").checked = false;
+    }
+  }
+  onRadioChangeSouris(name : String) {
+    if (name == "souris-oui") {
+      // @ts-ignore
+      document.getElementById("souris-oui").checked = true;
+      // @ts-ignore
+      document.getElementById("souris-non").checked = false;
+    }
+    else {
+      // @ts-ignore
+      document.getElementById("souris-oui").checked = false;
+      // @ts-ignore
+      document.getElementById("souris-non").checked = true;
+    }
   }
 }
