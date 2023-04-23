@@ -10,6 +10,7 @@ import {QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
   styleUrls: ['./question-liste.component.scss']
 })
 export class QuestionListeComponent {
+  lien = '/mes-quizs';
 
   @Input()
   public quiz :  Quiz | undefined;

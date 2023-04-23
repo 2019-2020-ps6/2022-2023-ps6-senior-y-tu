@@ -12,6 +12,8 @@ import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enum
   styleUrls: ['./commencer-quiz.component.scss']
 })
 export class CommencerQuizComponent {
+  public lienRetour = '/quiz-list';
+  public lienEntrer = '/show-question/1';
 
   @Input()
   theme: Theme[] = [];

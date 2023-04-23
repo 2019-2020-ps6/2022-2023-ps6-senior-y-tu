@@ -1,9 +1,10 @@
 @import '../../../styles/card';
 
-.quiz-list {
+.quiz-list{
   display: flex;
   flex-wrap: wrap;
 }
+
 #entete {
   text-align: center;
   background-color:$beige;

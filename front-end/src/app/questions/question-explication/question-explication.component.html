@@ -1,6 +1,6 @@
 <app-header-patient></app-header-patient>
 <div class="boite" >
-  <div class="align">
+  <div class="align" [appClickable]="lienRetour">
     <p>{{questions?.id}}/{{questions?.id}}</p>
     <img src="assets/boutonRetour.png">
   </div>
@@ -19,7 +19,7 @@
     <p>{{questions?.explication}}</p>
   </div>
 
-  <button class="boutton">Continuer</button>
+  <button class="boutton" appDirectiveQuestionExplication>Continuer</button>
 
 </div>
 

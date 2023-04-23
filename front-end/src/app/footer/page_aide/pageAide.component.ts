@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener} from '@angular/core';
 import {Location} from "@angular/common";
 
 @Component({

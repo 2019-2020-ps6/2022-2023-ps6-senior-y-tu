@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Theme} from "../../../models/theme.model";
 
 @Component({
@@ -7,6 +7,7 @@ import { Theme} from "../../../models/theme.model";
   styleUrls: ['./theme.component.scss']
 })
 export class ThemeComponent implements OnInit {
+  lien = '/quiz-list';
 
   @Input()
   theme: Theme | undefined;

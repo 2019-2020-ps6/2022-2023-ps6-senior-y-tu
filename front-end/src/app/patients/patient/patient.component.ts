@@ -28,11 +28,13 @@ export class PatientComponent implements OnInit{
         localStorage.removeItem("patient-handicap");
         localStorage.removeItem("patient-explication");
         localStorage.removeItem("patient-taille");
+        localStorage.removeItem("patient-utilisation_souris")
       }
       localStorage.setItem("patient-prenom", this.patient.prenom);
       localStorage.setItem("patient-handicap", this.patient.handicap);
       localStorage.setItem("patient-explication", this.patient.explication);
       localStorage.setItem("patient-taille", String(this.patient.taille));
+      localStorage.setItem("patient-utilisation_souris", this.patient.souris);
       this.route.navigate(['/theme-list'])
     }
   }

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderPatientComponent implements OnInit {
   public nom: String;
+  protected lienRetour = "/accueil";
 
   constructor() {
     let nomTemp = localStorage.getItem("patient-prenom");
