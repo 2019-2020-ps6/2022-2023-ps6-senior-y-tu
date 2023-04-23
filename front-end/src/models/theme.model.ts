@@ -4,4 +4,5 @@ export interface Theme {
   nom: string ;
   image?: string;
   quizs: QuizListComponent[];
+  id: string;
 }
