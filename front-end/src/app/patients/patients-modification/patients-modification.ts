@@ -51,8 +51,7 @@ export class PatientsModificationComponent {
   modifierPatient() {
     const  patient : Patient = this.patientForm.getRawValue() as Patient;
     if (patient.image == '') {
-      // @ts-ignore
-      patient.image = this.patientAMettreJour?.image;
+      patient.image = <string>this.patientAMettreJour?.image;
     }
     this.patientService.updatePatient(this.patientAMettreJour, patient);
     console.log('Patient Modifier: ', patient);
@@ -62,6 +61,7 @@ export class PatientsModificationComponent {
     if (name == "explication-oui") {
       // @ts-ignore
       document.getElementById("explication-oui").checked = true;
+      this.patientAMettreJour!.explication = "oui";
       // @ts-ignore
       document.getElementById("explication-non").checked = false;
     }
@@ -70,7 +70,9 @@ export class PatientsModificationComponent {
       document.getElementById("explication-oui").checked = false;
       // @ts-ignore
       document.getElementById("explication-non").checked = true;
+      this.patientAMettreJour!.explication = "non";
     }
+    this.modifierPatient();
   }
 
   onRadioChangeHandicap(name : String) {
@@ -79,13 +81,16 @@ export class PatientsModificationComponent {
       document.getElementById("handicap-leger").checked = true;
       // @ts-ignore
       document.getElementById("handicap-fort").checked = false;
+      this.patientAMettreJour!.handicap = 'leger';
     }
     else {
       // @ts-ignore
       document.getElementById("handicap-leger").checked = false;
       // @ts-ignore
       document.getElementById("handicap-fort").checked = true;
+      this.patientAMettreJour!.handicap = 'fort';
     }
+    this.modifierPatient();
   }
 
   onRadioChangeTaille(name : String) {
@@ -95,7 +100,8 @@ export class PatientsModificationComponent {
       // @ts-ignore
       document.getElementById("police-40").checked = false;
       // @ts-ignore
-      document.getElementById("police-40").checked = false;
+      document.getElementById("police-52").checked = false;
+      this.patientAMettreJour!.taille = 24;
     }
     else if(name == "police-40")
     {
@@ -104,7 +110,8 @@ export class PatientsModificationComponent {
       // @ts-ignore
       document.getElementById("police-40").checked = true;
       // @ts-ignore
-      document.getElementById("police-40").checked = false;
+      document.getElementById("police-52").checked = false;
+      this.patientAMettreJour!.taille = 40;
     }
     else
     {
@@ -113,8 +120,10 @@ export class PatientsModificationComponent {
       // @ts-ignore
       document.getElementById("police-40").checked = false;
       // @ts-ignore
-      document.getElementById("police-40").checked = false;
+      document.getElementById("police-52").checked = false;
+      this.patientAMettreJour!.taille = 52;
     }
+    this.modifierPatient();
   }
   onRadioChangeSouris(name : String) {
     if (name == "souris-oui") {
@@ -122,12 +131,15 @@ export class PatientsModificationComponent {
       document.getElementById("souris-oui").checked = true;
       // @ts-ignore
       document.getElementById("souris-non").checked = false;
+      this.patientAMettreJour!.souris = 'oui';
     }
     else {
       // @ts-ignore
       document.getElementById("souris-oui").checked = false;
       // @ts-ignore
       document.getElementById("souris-non").checked = true;
+      this.patientAMettreJour!.souris = 'non';
     }
+    this.modifierPatient();
   }
 }

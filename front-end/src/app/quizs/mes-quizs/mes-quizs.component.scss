@@ -16,9 +16,8 @@
 .ma-liste-quizs{
   display: flex;
   flex-wrap: wrap;
-
-
-
+  text-align: center;
+  justify-content: center;
 
   .quiz{
     width: 100%;

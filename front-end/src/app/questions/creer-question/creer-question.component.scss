@@ -16,14 +16,12 @@
     border: none;
     border-bottom: 1px solid black;
     outline: none;
+    font-size:20px;
   }
 
   .input-image{
     font-size:20px;
   }
-
-
-
 
   .bouton-question{
     display : flex;
@@ -34,6 +32,10 @@
     border: 2px solid $beige;
     border-radius: 5px;
     background-color: #f2d7c3;
+    font-size:20px;
+  }
+
+  .input-explication{
     font-size:20px;
   }
 }

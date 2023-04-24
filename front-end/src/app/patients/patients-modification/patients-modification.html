@@ -15,7 +15,7 @@
     </p>
 
     <p> Date de naissance
-      <input type="date" >
+      <input type="date" class="input-image">
     </p>
 
     <div class="handicap"></div>
@@ -51,8 +51,8 @@
       <input type="radio" id="police-40" value="40" [checked]=" patientAMettreJour?.taille==40" (click)="onRadioChangeTaille('police-40')">
       <label for="police-40">40</label>
       <br>
-      <input type="radio" id="police-60" value="60" [checked]=" patientAMettreJour?.taille==60" (click)="onRadioChangeTaille('police-60')">
-      <label for="police-60">60</label>
+      <input type="radio" id="police-52" value="52" [checked]=" patientAMettreJour?.taille==52" (click)="onRadioChangeTaille('police-52')">
+      <label for="police-52">52</label>
     </div>
 
 
@@ -67,8 +67,8 @@
 
 
     <p class="bouton-patients">
-      <button class="button" type="button" id="annuler" routerLink="/accueil" > Annuler </button>
-      <button class="button" (click)="modifierPatient()" type="button" id="valider" routerLink="/mes-patients" > Valider </button>
+      <button type="button" id="annuler" routerLink="/mes-patients" > Annuler </button>
+      <button (click)="modifierPatient()" type="button" id="valider" routerLink="/mes-patients" > Valider </button>
     </p>
   </form>
 

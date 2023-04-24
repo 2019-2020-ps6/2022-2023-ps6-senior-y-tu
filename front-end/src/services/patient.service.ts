@@ -26,18 +26,11 @@ export class PatientService {
   }
 
   updatePatient(patientAModifier: Patient | undefined, patient: Patient | undefined): void {
-    if (!patientAModifier) return; // vérifier si le patient est défini
-    console.log('patients; ',this.patients);
-
-    const index = this.patients.findIndex(q => q.id == patientAModifier.id); // trouver l'index du patient à mettre à jour
-    if (index === -1) return; // vérifier si le quiz a été trouvé
-    console.log('patient; ',patient);
-
-    if (patient) {
-      this.patients[index] = patient;
-    } // mettre à jour le patient dans le tableau
+    if (!patientAModifier) return;
+    const index = this.patients.findIndex(q => q.id == patientAModifier.id)
+    if (index == -1) return ;
+    this.patients[index] = patientAModifier;
     this.patients$.next(this.patients);
-
-    console.log('Patient Modifié (PatientService): ', patient);
+    console.log('Patient MOdifier(PatientService): ', patientAModifier);
   }
 }

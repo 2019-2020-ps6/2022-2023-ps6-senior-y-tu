@@ -2,7 +2,6 @@
 
 
 .creer-quiz{
-
   justify-content: center;
   margin:20px auto;
   padding: 10px;
@@ -34,8 +33,6 @@
 
   }
 
-
-
   .bouton-paragraphe{
     display : flex;
     justify-content: space-between;
@@ -50,4 +47,8 @@
 
   }
 
+  .align{
+    display: flex;
+    flex-direction: row;
+  }
 }

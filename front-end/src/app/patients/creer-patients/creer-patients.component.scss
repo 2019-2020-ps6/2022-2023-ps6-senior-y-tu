@@ -15,10 +15,11 @@
     border: none;
     border-bottom: 1px solid black;
     outline: none;
+    font-size:20px;
   }
 
-  .handicap{
-    display: flex;
+  .input-image{
+    font-size:20px;
   }
 
   .bouton-patients{
@@ -33,4 +34,31 @@
       font-size:20px;
     }
   }
+}
+
+.align{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; /* center align items vertically */
+  margin-left: 10%;
+
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alignOption{
+  display: flex;
+  flex-direction: row;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.space{
+  margin-right: 25%;
 }

@@ -9,66 +9,83 @@
 <app-header-pro> </app-header-pro>
 
 <div class="creer-patient">
+  <h1>Création d'un patient</h1>
   <form class="patient-form" [formGroup]="patientForm">
-    <p class="nom-patient"> Nom du patient
-      <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
-    </p>
-    <p class="prenom-patient"> Prénom du patient
-      <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" checked>
-    </p>
-    <p class="date-naissance"> Date de naissance
-      <input type="date" class="input-image" name="date" [formControlName]="'dateNaissance'"  required>
-    </p>
+    <div class="align">
+      <div>
+        <p class="nom-patient"> Nom du patient
+          <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
+        </p>
+        <p class="prenom-patient"> Prénom du patient
+          <input type="text" class="input-texte" name="prenom" [formControlName]="'prenom'" checked>
+        </p>
+        <p class="date-naissance"> Date de naissance
+          <input type="date" class="input-image" name="date" [formControlName]="'dateNaissance'"  required>
+        </p>
+      </div>
+      <div class="center">
+        <p class="image-patient"> Image
+          <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
+        </p>
+      </div>
+    </div>
 
-    <div class="handicap"></div>
-      <p id="handicap-text"> Handicap:
-      <div id ="handicap">
-        <input type="radio" id="handicap-leger" value="leger" [formControlName]="'handicap'" checked>
-        <label for="handicap-leger">Parkinson léger</label>
-        <br>
-        <input type="radio" id="handicap-fort" value="fort" [formControlName]="'handicap'">
-        <label for="handicap-fort">Parkinson fort</label>
-  </div>
-
-
-    <p class="explication"> Explications aux questions:
-      <div id="explication">
-        <input type="radio" id="explication-oui" value="oui" [formControlName]="'explication'" checked>
-        <label for="explication-oui">Oui</label>
-        <br>
-        <input type="radio" id="explication-non" value="non" [formControlName]="'explication'">
-        <label for="explication-non">Non</label>
+    <div class="alignOption">
+      <div class="space">
+        <p id="handicap-text"> Handicap:</p>
+        <div id ="handicap">
+          <input type="radio" id="handicap-leger" value="leger" [formControlName]="'handicap'" checked>
+          <label for="handicap-leger">Parkinson léger</label>
+          <br>
+          <input type="radio" id="handicap-fort" value="fort" [formControlName]="'handicap'">
+          <label for="handicap-fort">Parkinson fort</label>
+        </div>
       </div>
 
-    <p class="image-patient"> Image
-      <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
-    </p>
+      <div class="space">
+        <p class="explication"> Explications aux questions:</p>
+          <div id="explication">
+            <input type="radio" id="explication-oui" value="oui" [formControlName]="'explication'" checked>
+            <label for="explication-oui">Oui</label>
+            <br>
+            <input type="radio" id="explication-non" value="non" [formControlName]="'explication'">
+            <label for="explication-non">Non</label>
+          </div>
+        </div>
+    </div>
 
-    <p class="taille-police">Taille de police
-      <div id="police">
-        <input type="radio" id="police-24" value="24" [formControlName]="'taille'" checked>
-        <label for="police-24">24</label>
-        <br>
-        <input type="radio" id="police-40" value="40" [formControlName]="'taille'" >
-        <label for="police-40">40</label>
-        <br>
-        <input type="radio" id="police-60" value="60" [formControlName]="'taille'" >
-        <label for="police-60">60</label>
+    <div class="alignOption">
+      <div class="space">
+        <p class="taille-police">Taille de police:</p>
+          <div id="police">
+            <input type="radio" id="police-24" value="24" [formControlName]="'taille'" checked>
+            <label for="police-24">24</label>
+            <br>
+            <input type="radio" id="police-40" value="40" [formControlName]="'taille'" >
+            <label for="police-40">40</label>
+            <br>
+            <input type="radio" id="police-52" value="52" [formControlName]="'taille'" >
+            <label for="police-52">52</label>
+          </div>
       </div>
 
-    <p class="souris"> Utilisation de la souris:
-      <div id="souris">
-        <input type="radio" id="souris-oui" value="oui" [formControlName]="'souris'" checked>
-        <label for="explication-oui">Oui</label>
-        <br>
-        <input type="radio" id="souris-non" value="non" [formControlName]="'souris'">
-        <label for="explication-non">Non</label>
+      <br>
+
+      <div class="space">
+        <p class="souris"> Utilisation de la souris:</p>
+          <div id="souris">
+            <input type="radio" id="souris-oui" value="oui" [formControlName]="'souris'" checked>
+            <label for="explication-oui">Oui</label>
+            <br>
+            <input type="radio" id="souris-non" value="non" [formControlName]="'souris'">
+            <label for="explication-non">Non</label>
+          </div>
       </div>
+    </div>
 
     <p class="bouton-patients">
-      <button routerLink="/accueil" class="bouton"> Annuler </button>
+      <button routerLink="/mes-patients" class="bouton"> Annuler </button>
       <button type="submit" (click)="onCreer()" routerLink="/mes-patients" class="bouton"> Valider </button>
-
     </p>
   </form>
 
