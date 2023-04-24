@@ -43,6 +43,7 @@ import {ClickableDirectiveQuestionExplication} from "./questions/question-explic
 import {ClickableDirectiveFooter} from  "./footer/ClickableDirectiveFooter";
 import {ClickableDirectivePageAide} from "./footer/page_aide/ClickableDirectivePageAide";
 import {PoliceDirective} from "./Directive/PoliceDirective";
+import {DeconectionComponent} from "./deconnexion/deconection.component"
 
 
 // import * as http from "http";
@@ -85,7 +86,8 @@ import {PoliceDirective} from "./Directive/PoliceDirective";
     ClickableDirectiveQuestionExplication,
     ClickableDirectiveFooter,
     ClickableDirectivePageAide,
-    PoliceDirective
+    PoliceDirective,
+    DeconectionComponent
   ],
   imports: [
     BrowserModule,
