@@ -37,4 +37,13 @@ export class CommencerQuizComponent {
       this.quiz = quizzes;
     });
   }
+
+  ngOnInit(): void {
+
+  }
+
+  jouer() {
+    this.quizService.startTimer();
+  }
+
 }

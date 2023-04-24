@@ -7,15 +7,15 @@
       <h2 appPolice>Quiz : {{quiz[0].nom}}</h2>
       <p appPolice>Nombre de questions: {{quiz[0].questions.length}}</p>
     </div>
-    <img src="assets/boutonRetour.png" [appClickable]="lienRetour">
+    <img src="assets/boutonRetour.png" [appClickable]="lienRetour" alt="image">
   </div>
 
   <div class="alignMilieu">
-    <img src="{{quiz[0].image}}" />
+    <img src="{{quiz[0].image}}" alt="image">
     <div>
       <p appPolice>Meilleur score : </p>
       <p appPolice>Nombre de parties jouées: </p>
-      <button [appClickable]="lienEntrer" appPolice>Jouer</button>
+      <button [appClickable]="lienEntrer" appPolice (click)="jouer()">Jouer</button>
     </div>
     <div></div>
   </div>
