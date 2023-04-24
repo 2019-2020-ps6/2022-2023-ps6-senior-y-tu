@@ -100,7 +100,7 @@ export class PatientsModificationComponent {
       // @ts-ignore
       document.getElementById("police-40").checked = false;
       // @ts-ignore
-      document.getElementById("police-60").checked = false;
+      document.getElementById("police-52").checked = false;
       this.patientAMettreJour!.taille = 24;
     }
     else if(name == "police-40")
@@ -110,7 +110,7 @@ export class PatientsModificationComponent {
       // @ts-ignore
       document.getElementById("police-40").checked = true;
       // @ts-ignore
-      document.getElementById("police-60").checked = false;
+      document.getElementById("police-52").checked = false;
       this.patientAMettreJour!.taille = 40;
     }
     else
@@ -120,8 +120,8 @@ export class PatientsModificationComponent {
       // @ts-ignore
       document.getElementById("police-40").checked = false;
       // @ts-ignore
-      document.getElementById("police-60").checked = false;
-      this.patientAMettreJour!.taille = 60;
+      document.getElementById("police-52").checked = false;
+      this.patientAMettreJour!.taille = 52;
     }
     this.modifierPatient();
   }
