@@ -9,8 +9,7 @@ dialog {
 form {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-content: space-between;
+  align-items: center;
   justify-content: center;
   height: 100%;
 }
@@ -18,18 +17,24 @@ form {
 input {
   height: min-content;
   width: min-content;
+  font-size: 20px;
 }
 
-bouton {
-  display: inline;
-  width: min-content;
-  align-self: end;
-  height: fit-content;
-  background: #de7e01;
-  border: 1px solid #ccc;
+button{
+  border: 2px solid $beige;
   border-radius: 5px;
-  padding: 4px;
-  font-size: 20px;
+  background-color: #f2d7c3;
+  font-size:20px;
+  margin-top: 10%;
+  margin-left: 10px;
+}
+
+
+.center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 
