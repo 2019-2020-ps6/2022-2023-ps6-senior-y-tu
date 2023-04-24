@@ -7,25 +7,31 @@
 </head>
 
 <div class="quiz" *ngIf="options?.ergo">
-  <p class="theme-quiz">
-    {{quiz?.theme}}
-  </p>
-  <p class="nom-quiz">
-    {{quiz?.nom}}
-  </p>
-  <p class="image">
-    <img src="{{quiz?.image}}" alt="image" width="100%">
-  </p>
+  <div class="theme-quiz">
+    <p>{{quiz?.theme}}</p>
+  </div>
 
-  <p class="boutons" >
-    <button class="modifier-quiz" routerLink="/quiz-modification/{{quiz?.id}}">
-      Modifier
-    </button>
+  <div class="alignHorizontal">
+    <div class="image">
+      <img src="{{quiz?.image}}" alt="image" width="100%">
+    </div>
 
-    <button class="supprimer-quiz" (click)="deletedQuiz()">
-      Supprimer
-    </button>
-  </p>
+    <div class="alignVertical">
+      <div class="nom-quiz">
+        <p>{{quiz?.nom}}</p>
+      </div>
+
+      <div class="boutons" >
+        <button class="modifier-quiz" routerLink="/quiz-modification/{{quiz?.id}}">
+          Modifier
+        </button>
+
+        <button class="supprimer-quiz" (click)="deletedQuiz()">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
