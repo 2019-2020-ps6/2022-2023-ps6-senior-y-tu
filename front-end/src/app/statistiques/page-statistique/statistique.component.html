@@ -1,0 +1,18 @@
+<app-header-pro></app-header-pro>
+
+<div class="statistique" *ngFor="let stat of statList">
+  <div class="patient-name">
+    <span class="name"> {{stat?.nomPatient}}</span>
+  </div>
+  <div class="information">
+    <p id = "stat-score"> Score : {{stat?.score}}</p>
+    <p id = "stat-temps"> Temps : {{stat?.temps}}</p>
+    <p id = "stat-handicap"> Handicap : {{stat?.handicap}}</p>
+    <p id = "stat-nombreClick"> Nombre de click moyen : {{stat?.nombreClick}}</p>
+    <p id = "stat-souris"> Utilisation de la souris : {{stat?.souris}}</p>
+  </div>
+  <div class = "image">
+    <img src="{{stat?.image}}" alt="Image d'un patient">
+  </div>
+  <button class="bouton" >Voir Plus</button>
+</div>

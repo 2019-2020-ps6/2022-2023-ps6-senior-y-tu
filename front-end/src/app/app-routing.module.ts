@@ -17,6 +17,7 @@ import {QuestionModificationComponent} from "./questions/question-modification/q
 import {QuestionExplicationComponent} from "./questions/question-explication/question-explication.component";
 import {CommencerQuizComponent} from "./quizs/commencer-quiz/commencer-quiz.component";
 import {QuizResultatComponent} from "./quizs/quiz-resultat/quiz-resultat.component";
+import {PageStatistiqueComponent} from "./statistiques/page-statistique/statistique.component";
 
 
 
@@ -39,7 +40,8 @@ const routes: Routes = [
   { path:'mes-patients', component: MesPatientsComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   { path: 'page-aide', component: PageAideComponent},
-  { path: 'quiz-resultat', component: QuizResultatComponent}
+  { path: 'quiz-resultat', component: QuizResultatComponent},
+  { path: 'page-stat-acceuil', component: PageStatistiqueComponent}
 ];
 
 @NgModule({
