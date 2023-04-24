@@ -5,6 +5,7 @@ import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enum
 import {ThemeService} from "../../../services/theme.service";
 import {QuizService} from "../../../services/quiz.service";
 import {Router} from "@angular/router";
+import {Timer} from "../../timer/Timer";
 
 @Component({
   selector: 'app-quiz-resultat',
@@ -18,6 +19,8 @@ export class QuizResultatComponent {
   @Input()
   theme: Theme[] = [];
   quiz: Quiz[] = [];
+
+  timer : Timer = new Timer();
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
@@ -36,5 +39,14 @@ export class QuizResultatComponent {
     this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
       this.quiz = quizzes;
     });
+
+    this.quizService.stopTimer();
+    this.timer = this.quizService.timer;
+  }
+
+  rejouer() {
+    this.quizService.resetTimer();
+    this.quizService.startTimer();
+    this.router.navigate(['show-question',1]);
   }
 }

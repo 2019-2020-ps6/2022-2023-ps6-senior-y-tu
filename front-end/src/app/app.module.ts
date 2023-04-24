@@ -44,6 +44,7 @@ import {ClickableDirectiveFooter} from  "./footer/ClickableDirectiveFooter";
 import {ClickableDirectivePageAide} from "./footer/page_aide/ClickableDirectivePageAide";
 import {PoliceDirective} from "./Directive/PoliceDirective";
 import {PageStatistiqueComponent} from "./statistiques/page-statistique/statistique.component";
+import {DeconectionComponent} from "./deconnexion/deconection.component"
 
 
 // import * as http from "http";
@@ -87,7 +88,8 @@ import {PageStatistiqueComponent} from "./statistiques/page-statistique/statisti
     ClickableDirectiveFooter,
     ClickableDirectivePageAide,
     PoliceDirective,
-    PageStatistiqueComponent
+    PageStatistiqueComponent,
+    DeconectionComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,11 @@ export class HeaderPatientComponent implements OnInit {
     this.nom = (nomTemp == null)? "James" : nomTemp;
   }
 
+  protected dialog(): void {
+    let dialog = document.getElementsByTagName("dialog")[0];
+    dialog.showModal();
+  }
+
   ngOnInit(): void {
   }
 

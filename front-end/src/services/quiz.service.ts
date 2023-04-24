@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LISTE } from '../mocks/quiz-list.mock';
 import {Question} from "../models/question.model";
+import {Timer} from "../app/timer/Timer";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,11 @@ export class QuizService {
 
   private quizs: Quiz[] = QUIZ_LISTE;
 
-  public quizs$: BehaviorSubject<Quiz[]> = new BehaviorSubject(QUIZ_LISTE);
+  public quizs$: BehaviorSubject<Quiz[]> = new BehaviorSubject(QUIZ_LISTE)
 
+  public timer : Timer = new Timer();
+
+  public timer$: BehaviorSubject<Timer> = new BehaviorSubject(this.timer);
 
 
   constructor() {
@@ -129,5 +133,29 @@ export class QuizService {
     }
     this.quizs$.next(this.quizs);
   }
+
+  startTimer() {
+    this.timer.start();
+    this.timer$.next(this.timer);
+  }
+  stopTimer() {
+    this.timer.stop();
+    this.timer$.next(this.timer);
+  }
+
+  resetTimer() {
+    this.timer.reset();
+    this.timer$.next(this.timer);
+  }
+
+  getTimer() {
+    return this.timer;
+  }
+
+  setTimer(timer: Timer) {
+    this.timer = timer;
+    this.timer$.next(this.timer);
+  }
+
 }
 

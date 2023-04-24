@@ -5,64 +5,81 @@
 </head>
 <app-header-pro></app-header-pro>
 <div class="modification-patient">
+  <h1>Modification de {{patientAMettreJour?.prenom}} {{patientAMettreJour?.nom}}</h1>
   <form class="patient-form" [formGroup]="patientForm">
-    <p> Nom du patient
-      <input type="text" class="input-texte" [formControlName]="'nom'">
-    </p>
+    <div class="align">
+      <div>
+        <p> Nom du patient
+          <input type="text" class="input-texte" [formControlName]="'nom'">
+        </p>
 
-    <p> Prénom du patient
-      <input type="text" class="input-texte"  [formControlName]="'prenom'" >
-    </p>
+        <p> Prénom du patient
+          <input type="text" class="input-texte"  [formControlName]="'prenom'" >
+        </p>
 
-    <p> Date de naissance
-      <input type="date" class="input-image">
-    </p>
+        <p> Date de naissance
+          <input type="date" class="input-image">
+        </p>
+      </div>
+      <div class="center">
+        <p class="image-patient"> Image
+          <input type="file" class="input-image" name="image" required>
+        </p>
+      </div>
+    </div>
 
-    <div class="handicap"></div>
-    <p> Handicap:
-    <div class ="handicap" >
-      <input type="radio" id="handicap-leger" value="leger" [checked]=" patientAMettreJour?.handicap=='leger'" (click)="onRadioChangeHandicap('handicap-leger')">
-      <label for="handicap-leger">Parkinson léger</label>
-      <br>
-      <input type="radio" id="handicap-fort" value="fort" [checked]=" patientAMettreJour?.handicap=='fort'" (click)="onRadioChangeHandicap('handicap-fort')">
-      <label for="handicap-fort">Parkinson fort</label>
+    <div class="alignOption">
+      <div class="space">
+        <p id="handicap-text"> Handicap:</p>
+          <div id ="handicap" >
+            <input type="radio" id="handicap-leger" value="leger" [checked]=" patientAMettreJour?.handicap=='leger'" (click)="onRadioChangeHandicap('handicap-leger')">
+            <label for="handicap-leger">Parkinson léger</label>
+            <br>
+            <input type="radio" id="handicap-fort" value="fort" [checked]=" patientAMettreJour?.handicap=='fort'" (click)="onRadioChangeHandicap('handicap-fort')">
+            <label for="handicap-fort">Parkinson fort</label>
+          </div>
+      </div>
+
+      <div class="space">
+        <p class="explication"> Explications aux questions:</p>
+          <div class="explication" >
+            <input type="radio" class="explication-oui" id="explication-oui" value="true" [checked]=" patientAMettreJour?.explication=='oui'" (click)="onRadioChangeExplication('explication-oui')">
+            <label for="explication-oui">Oui</label>
+            <br>
+            <input type="radio" class="explication-non" id= "explication-non" value="non" [checked]=" patientAMettreJour?.explication=='non'" (click)="onRadioChangeExplication('explication-non')">
+            <label for="explication-non">Non</label>
+          </div>
+      </div>
     </div>
 
 
-    <p class="explication"> Explications aux question:
-    <div class="explication" >
-      <input type="radio" class="explication-oui" id="explication-oui" value="true" [checked]=" patientAMettreJour?.explication=='oui'" (click)="onRadioChangeExplication('explication-oui')">
-      <label for="explication-oui">Oui</label>
+    <div class="alignOption">
+      <div class="space">
+        <p class="taille-police">Taille de police
+          <div class="taille-police">
+          <input type="radio" id="police-24" value="24" [checked]=" patientAMettreJour?.taille==24" (click)="onRadioChangeTaille('police-24')">
+          <label for="police-24">24</label>
+          <br>
+          <input type="radio" id="police-40" value="40" [checked]=" patientAMettreJour?.taille==40" (click)="onRadioChangeTaille('police-40')">
+          <label for="police-40">40</label>
+          <br>
+          <input type="radio" id="police-52" value="52" [checked]=" patientAMettreJour?.taille==52" (click)="onRadioChangeTaille('police-52')">
+          <label for="police-52">52</label>
+        </div>
+      </div>
+
       <br>
-      <input type="radio" class="explication-non" id= "explication-non" value="non" [checked]=" patientAMettreJour?.explication=='non'" (click)="onRadioChangeExplication('explication-non')">
-      <label for="explication-non">Non</label>
-    </div>
 
-
-    <p class="image-patient"> Image
-      <input type="file" class="input-image" name="image" required>
-    </p>
-
-    <p class="taille-police">Taille de police
-      <div class="taille-police">
-      <input type="radio" id="police-24" value="24" [checked]=" patientAMettreJour?.taille==24" (click)="onRadioChangeTaille('police-24')">
-      <label for="police-24">24</label>
-      <br>
-      <input type="radio" id="police-40" value="40" [checked]=" patientAMettreJour?.taille==40" (click)="onRadioChangeTaille('police-40')">
-      <label for="police-40">40</label>
-      <br>
-      <input type="radio" id="police-52" value="52" [checked]=" patientAMettreJour?.taille==52" (click)="onRadioChangeTaille('police-52')">
-      <label for="police-52">52</label>
-    </div>
-
-
-    <p class="souris">Utilisation de la souris
-      <div class="souris">
-      <input type="radio" value="oui" id="souris-oui" [checked]=" patientAMettreJour?.souris=='oui'" (click)="onRadioChangeSouris('souris-oui')" >
-      <label for="souris-oui">Oui</label>
-      <br>
-      <input type="radio" value="non" id = "souris-non" [checked]=" patientAMettreJour?.souris=='non'" (click)="onRadioChangeSouris('souris-non')">
-      <label for="souris-non">Non</label>
+      <div class="space">
+        <p class="souris">Utilisation de la souris
+          <div class="souris">
+          <input type="radio" value="oui" id="souris-oui" [checked]=" patientAMettreJour?.souris=='oui'" (click)="onRadioChangeSouris('souris-oui')" >
+          <label for="souris-oui">Oui</label>
+          <br>
+          <input type="radio" value="non" id = "souris-non" [checked]=" patientAMettreJour?.souris=='non'" (click)="onRadioChangeSouris('souris-non')">
+          <label for="souris-non">Non</label>
+        </div>
+      </div>
     </div>
 
 
