@@ -1,0 +1,35 @@
+@import "../../styles/variables.scss";
+dialog {
+  padding: 0;
+  background-color: $app-background-color;
+  width: 50%;
+  height: 50%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: center;
+  height: 100%;
+}
+
+input {
+  height: min-content;
+  width: min-content;
+}
+
+bouton {
+  display: inline;
+  width: min-content;
+  align-self: end;
+  height: fit-content;
+  background: #de7e01;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px;
+  font-size: 20px;
+}
+
+
