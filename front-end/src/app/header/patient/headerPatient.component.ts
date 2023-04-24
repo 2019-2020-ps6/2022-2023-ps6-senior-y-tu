@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./headerPatient.component.scss']
 })
 export class HeaderPatientComponent implements OnInit {
-  public nom: String;
+  public nom: string;
   protected lienRetour = "/accueil";
 
   constructor() {
