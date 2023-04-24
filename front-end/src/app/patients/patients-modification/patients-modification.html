@@ -15,7 +15,7 @@
     </p>
 
     <p> Date de naissance
-      <input type="date" >
+      <input type="date" class="input-image">
     </p>
 
     <div class="handicap"></div>
@@ -67,8 +67,8 @@
 
 
     <p class="bouton-patients">
-      <button class="button" type="button" id="annuler" routerLink="/accueil" > Annuler </button>
-      <button class="button" (click)="modifierPatient()" type="button" id="valider" routerLink="/mes-patients" > Valider </button>
+      <button type="button" id="annuler" routerLink="/mes-patients" > Annuler </button>
+      <button (click)="modifierPatient()" type="button" id="valider" routerLink="/mes-patients" > Valider </button>
     </p>
   </form>
 
