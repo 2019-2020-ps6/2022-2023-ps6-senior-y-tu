@@ -1,0 +1,11 @@
+<app-header-pro> </app-header-pro>
+
+<br>
+<div class="stat-quizs">
+
+    <div class="quiz" *ngFor="let stat of statListe">
+      <div class="stat-quiz-app">
+        <app-stat-quiz  [stat]="stat" ></app-stat-quiz>
+      </div>
+    </div>
+</div>

@@ -44,7 +44,9 @@ import {ClickableDirectiveFooter} from  "./footer/ClickableDirectiveFooter";
 import {ClickableDirectivePageAide} from "./footer/page_aide/ClickableDirectivePageAide";
 import {PoliceDirective} from "./Directive/PoliceDirective";
 import {PageStatistiqueComponent} from "./statistiques/page-statistique/statistique.component";
-import {DeconectionComponent} from "./deconnexion/deconection.component"
+import {DeconectionComponent} from "./deconnexion/deconection.component";
+import { StatQuizComponent } from './quizs/stat-quiz/stat-quiz.component';
+import { ListStatQuizComponent } from './statistiques/list-stat-quiz/list-stat-quiz.component'
 
 
 // import * as http from "http";
@@ -89,7 +91,9 @@ import {DeconectionComponent} from "./deconnexion/deconection.component"
     ClickableDirectivePageAide,
     PoliceDirective,
     PageStatistiqueComponent,
-    DeconectionComponent
+    DeconectionComponent,
+    StatQuizComponent,
+    ListStatQuizComponent
   ],
   imports: [
     BrowserModule,

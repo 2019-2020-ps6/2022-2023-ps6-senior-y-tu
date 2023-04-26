@@ -1,3 +1,5 @@
+import {StatQuiz} from "./stat-quiz.model";
+
 export interface Patient {
   id: string;
   nom: string;
@@ -8,6 +10,7 @@ export interface Patient {
   taille: number;
   handicap: string;
   souris: string;
+  statistiques: StatQuiz[];
 }
 
 export interface Ergo {

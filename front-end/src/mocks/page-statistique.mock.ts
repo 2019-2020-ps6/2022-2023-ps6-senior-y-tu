@@ -1,23 +1,23 @@
-import {PageStatistique} from "../models/page-statistique.model";
-import {Patient} from "../models/personne.model";
-import {
-  Patient_Jean,
-  Patient_Jean_Pierre,
-  Patient_Jeanne,
-  Patient_Jeanne_Marie,
-  Patient_Lucienne
-} from "./personne-list.mock";
+import {PageStatistique, temps} from "../models/page-statistique.model";
+
+import {StatQuiz_Capitale, StatQuiz_Capitale2} from "./stat-quiz.mock";
+
+export const temps_lucienne: temps = {
+  minutes: "1",
+  secondes: "27"
+}
 
 export const PageStatistique_Lucienne: PageStatistique = {
   nomPatient: "Lucienne",
-  id: "1",
+  idPatient: "1",
   score: "1/2",
-  temps: "1 min 27s",
+  temps: temps_lucienne,
   handicap: "leger",
   nombreClick: "3",
   souris: "oui",
   police: 40,
-  image: '/assets/Image-Patient/Image_Lucienne.png'
+  image: '/assets/Image-Patient/Image_Lucienne.png',
+  listStatQuiz: [StatQuiz_Capitale, StatQuiz_Capitale2]
 }
 
 export const STAT_LIST: PageStatistique[] = [
