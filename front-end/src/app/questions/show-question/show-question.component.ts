@@ -11,6 +11,8 @@ import {
   Handicapt_Leger_Haut, Retour
 } from "../../../enums/enumPatient";
 import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
+import {ClickableDirective} from "../../Directive/ClickableDirective";
+import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
 
 @Component({
   selector: 'app-show-question',
@@ -21,6 +23,7 @@ import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 
 export class ShowQuestionComponent {
   public lienRetour = '/commencer-quiz'
+  private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
 
   @Input()
   public questions: Question | undefined;
@@ -39,6 +42,9 @@ export class ShowQuestionComponent {
   constructor(private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id) ;
+    let clickable = localStorage.getItem("patient-utilisation_souris");
+    if (clickable != null && clickable == "oui")
+      ClickableDirective.deplacementPageCursor(this.changementDeplacement);
   }
 
   private reponseParkinsonFort(e : KeyboardEvent): void{
@@ -51,25 +57,27 @@ export class ShowQuestionComponent {
       }
 
     //zone violette
-    if (e.key == Handicap_Fort_Gauche.A || e.key == Handicap_Fort_Gauche.Z || e.key == Handicap_Fort_Gauche.Q
+    else if (e.key == Handicap_Fort_Gauche.A || e.key == Handicap_Fort_Gauche.Z || e.key == Handicap_Fort_Gauche.Q
       || e.key == Handicap_Fort_Gauche.S || e.key == Handicap_Fort_Gauche.W || e.key == Handicap_Fort_Gauche.X)
       {
         reponse = this.questions?.reponses[1];
       }
 
     //zone jaune
-    if(e.key == Handicap_Fort_Bas.H || e.key == Handicap_Fort_Bas.J || e.key == Handicap_Fort_Bas.B
+    else if(e.key == Handicap_Fort_Bas.H || e.key == Handicap_Fort_Bas.J || e.key == Handicap_Fort_Bas.B
       || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE)
       {
         reponse = this.questions?.reponses[2];
       }
 
     //zone bleu
-    if(e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
+    else if(e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
       || e.key == Handicap_Fort_Droite.M || e.key== Handicap_Fort_Droite.DOUBLE_POINT || e.key == Handicap_Fort_Droite.POINT_EXCLAMATION)
       {
         reponse = this.questions?.reponses[3];
       }
+    else
+      ThemeListComponent.ajouterAutreTouche(e);
     if (reponse != null) this.reponseNavigation(reponse);
   }
 
@@ -80,7 +88,7 @@ export class ShowQuestionComponent {
       case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = this.questions?.reponses[1]; break;
       case Handicap_Leger_Droite.FLECHE_DROITE : reponse = this.questions?.reponses[2]; break;
       case Handicap_Leger_Bas.FLECHE_BAS : reponse = this.questions?.reponses[3]; break;
-      default: break;
+      default: ThemeListComponent.ajouterAutreTouche(e); break;
     }
     if (reponse != null) this.reponseNavigation(reponse);
   }

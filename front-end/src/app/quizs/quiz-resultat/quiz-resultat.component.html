@@ -13,6 +13,11 @@
   <div class="alignMilieu">
     <img src="{{quiz[0].image}}" />
     <div>
+      <p *ngIf="nombreClick != 0" appPolice>Nombre d'utilisation souris : {{nombreClick}}</p>
+      <p *ngIf="autresLettreTaper.length != 1" appPolice>Utilisation autre touche :</p>
+      <div *ngFor="let lettre of autresLettreTaper">
+        <p *ngIf="lettre.lettre != ''"> Lettre {{lettre.lettre}} utilisé {{lettre.occurence}} fois</p>
+      </div>
       <p appPolice>Résultat: </p>
       <button [appClickable]="lien" appPolice>Rejouer</button>
     </div>
