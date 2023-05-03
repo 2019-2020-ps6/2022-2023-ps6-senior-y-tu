@@ -14,6 +14,7 @@ import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
 export class QuestionExplicationComponent {
   public lienRetour = "quiz-list";
   private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
+
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
@@ -29,6 +30,12 @@ export class QuestionExplicationComponent {
       this.router.navigate(['quiz-list']);
     else
       ThemeListComponent.ajouterAutreTouche(e);
+  }
+
+  @HostListener("window:mousemove", ["$event.clientX", "$event.clientY"])
+  onMouseMove(e: any, e2: any){
+    this.changementDeplacement[0] = e;
+    this.changementDeplacement[1] = e2;
   }
 
   @Input()

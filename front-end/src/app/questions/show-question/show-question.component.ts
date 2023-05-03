@@ -39,6 +39,12 @@ export class ShowQuestionComponent {
     else this.reponseParkinsonLeger(e);
   }
 
+  @HostListener("window:mousemove", ["$event.clientX", "$event.clientY"])
+  onMouseMove(e: any, e2: any){
+    this.changementDeplacement[0] = e;
+    this.changementDeplacement[1] = e2;
+  }
+
   constructor(private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id) ;

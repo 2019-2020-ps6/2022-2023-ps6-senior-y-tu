@@ -28,9 +28,9 @@ export class ClickableDirective {
 
   public static deplacementPageCursor(changementDeplacement: number[]): void {
     setInterval(() => {
-      if (changementDeplacement[0] == changementDeplacement[2] && changementDeplacement[5])
+      if (changementDeplacement[0] == changementDeplacement[2] && changementDeplacement[4])
         changementDeplacement[4] = 0;
-      else if (changementDeplacement[0] != changementDeplacement[2] && !changementDeplacement[5]){
+      else if (changementDeplacement[0] != changementDeplacement[2] && !changementDeplacement[4]){
         changementDeplacement[4] = 1;
         changementDeplacement[2] = changementDeplacement[0];
         changementDeplacement[3] = changementDeplacement[1];

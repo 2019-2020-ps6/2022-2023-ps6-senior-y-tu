@@ -65,6 +65,8 @@ export class QuizResultatComponent {
         lettreCourante = autreTouche.charAt(i);
         occurence = 1;
       }
+      else
+        occurence++;
     }
     this.autresLettreTaper.push({lettre: lettreCourante, occurence: occurence});
     localStorage.setItem("autresTouchesAppuyer", "");
