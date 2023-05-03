@@ -5,6 +5,7 @@ import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enum
 import {ThemeService} from "../../../services/theme.service";
 import {QuizService} from "../../../services/quiz.service";
 import {Router} from "@angular/router";
+import {Timer} from "../../timer/Timer";
 
 @Component({
   selector: 'app-quiz-resultat',
@@ -20,6 +21,8 @@ export class QuizResultatComponent {
   @Input()
   theme: Theme[] = [];
   quiz: Quiz[] = [];
+
+  timer : Timer = new Timer();
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
@@ -47,6 +50,9 @@ export class QuizResultatComponent {
     let autreTouche = localStorage.getItem("autresTouchesAppuyer");
     if (autreTouche != null)
         this.compterLettre(autreTouche);
+
+    this.quizService.stopTimer();
+    this.timer = this.quizService.timer;
   }
 
   private compterLettre(autreTouche: string) {
@@ -62,5 +68,11 @@ export class QuizResultatComponent {
     }
     this.autresLettreTaper.push({lettre: lettreCourante, occurence: occurence});
     localStorage.setItem("autresTouchesAppuyer", "");
+  }
+
+  rejouer() {
+    this.quizService.resetTimer();
+    this.quizService.startTimer();
+    this.router.navigate(['show-question',1]);
   }
 }

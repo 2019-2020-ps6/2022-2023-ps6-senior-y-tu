@@ -1,0 +1,21 @@
+.stat-quizs{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+
+  .quiz{
+    width: 100%;
+
+  }
+
+  .stat-quiz-app{
+    border : 2px solid #f2d7c3;
+    border-radius: 5px;
+    margin:20px auto;
+    padding: 10px;
+    width: 80%;
+    position: relative;
+    background-color: white;
+  }
+}

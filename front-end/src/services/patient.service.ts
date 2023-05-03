@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { Patient} from "src/models/personne.model";
 import { PATIENT_LISTE} from '../mocks/personne-list.mock';
+import {StatQuiz} from "../models/stat-quiz.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,13 @@ export class PatientService {
     this.patients[index] = patientAModifier;
     this.patients$.next(this.patients);
     console.log('Patient MOdifier(PatientService): ', patientAModifier);
+  }
+
+  getStatListe(patientid: string | null): StatQuiz[] | undefined {
+    let statListe: StatQuiz[] | undefined = [];
+    if (patientid) {
+      statListe = this.patients.find(patient => patient.id === patientid)?.statistiques;
+    }
+    return statListe;
   }
 }

@@ -1,4 +1,5 @@
 import {Patient, Ergo} from '../models/personne.model';
+import {PageStatistique_Lucienne} from "./page-statistique.mock";
 
 export const Patient_Lucienne: Patient = {
     id: '1',
@@ -9,7 +10,8 @@ export const Patient_Lucienne: Patient = {
     handicap: 'leger',
     explication: 'oui',
     taille:40,
-    souris:'oui'
+    souris:'oui',
+    statistiques : PageStatistique_Lucienne.listStatQuiz
 };
 
 export const Patient_Jean: Patient = {
@@ -21,7 +23,8 @@ export const Patient_Jean: Patient = {
   handicap: 'fort',
   explication: 'non',
   taille:52,
-  souris:'non'
+  souris:'non',
+  statistiques : []
 };
 
 export const Patient_Jeanne: Patient = {
@@ -33,7 +36,8 @@ export const Patient_Jeanne: Patient = {
   handicap: 'leger',
   explication: 'oui',
   taille:40,
-  souris:'non'
+  souris:'non',
+  statistiques : []
 };
 
 export const Patient_Jean_Pierre: Patient = {
@@ -45,7 +49,8 @@ export const Patient_Jean_Pierre: Patient = {
   handicap: 'leger',
   explication: 'oui',
   taille:40,
-  souris:'oui'
+  souris:'oui',
+  statistiques : []
 };
 
 export const Patient_Jeanne_Marie: Patient = {
@@ -57,7 +62,8 @@ export const Patient_Jeanne_Marie: Patient = {
   handicap: 'leger',
   explication: 'oui',
   taille:24,
-  souris:'non'
+  souris:'non',
+  statistiques : []
 };
 
 export const Ergo_Edward: Ergo = {
