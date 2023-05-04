@@ -15,6 +15,8 @@ import {Timer} from "../../timer/Timer";
 export class QuizResultatComponent {
   public lienRetour = "/theme-list";
   public lien = '/show-question/1';
+  protected nombreClick: number = 0;
+  protected autresLettreTaper : Array<{lettre: string, occurence: number}> = [];
 
   @Input()
   theme: Theme[] = [];
@@ -39,9 +41,35 @@ export class QuizResultatComponent {
     this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
       this.quiz = quizzes;
     });
+    let clickable = localStorage.getItem("nombreDeplacement");
+    if (clickable != null) {
+      this.nombreClick = parseInt(clickable);
+      localStorage.setItem("nombreDeplacement", "0");
+    }
+
+    let autreTouche = localStorage.getItem("autresTouchesAppuyer");
+    if (autreTouche != null)
+        this.compterLettre(autreTouche);
 
     this.quizService.stopTimer();
     this.timer = this.quizService.timer;
+  }
+
+  private compterLettre(autreTouche: string) {
+    let n: number = autreTouche.length;
+    let lettreCourante: string = autreTouche.charAt(0);
+    let occurence: number = 1;
+    for (let i: number = 1; i < n; i++) {
+      if (lettreCourante != autreTouche.charAt(i)) {
+        this.autresLettreTaper.push({lettre: lettreCourante, occurence: occurence});
+        lettreCourante = autreTouche.charAt(i);
+        occurence = 1;
+      }
+      else
+        occurence++;
+    }
+    this.autresLettreTaper.push({lettre: lettreCourante, occurence: occurence});
+    localStorage.setItem("autresTouchesAppuyer", "");
   }
 
   rejouer() {

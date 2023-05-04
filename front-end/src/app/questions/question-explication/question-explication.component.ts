@@ -3,6 +3,8 @@ import {Question, Reponse} from "../../../models/question.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
 import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
+import {ClickableDirective} from "../../Directive/ClickableDirective";
+import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
 
 @Component({
   selector: 'app-question-explication',
@@ -11,6 +13,8 @@ import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 })
 export class QuestionExplicationComponent {
   public lienRetour = "quiz-list";
+  private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
+
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
@@ -24,6 +28,14 @@ export class QuestionExplicationComponent {
     }
     else if (e.key == Retour.BACKSPACE || e.key == Retour.DOLLAR || e.key == Retour.EGAL)
       this.router.navigate(['quiz-list']);
+    else
+      ThemeListComponent.ajouterAutreTouche(e);
+  }
+
+  @HostListener("window:mousemove", ["$event.clientX", "$event.clientY"])
+  onMouseMove(e: any, e2: any){
+    this.changementDeplacement[0] = e;
+    this.changementDeplacement[1] = e2;
   }
 
   @Input()
@@ -36,5 +48,8 @@ export class QuestionExplicationComponent {
     this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id);
 
     this.reponseCorrecte = this.questions?.reponses?.findIndex((reponse: Reponse) => reponse.estCorrect) ?? -1;
+    let clickable = localStorage.getItem("patient-utilisation_souris");
+    if (clickable != null && clickable == "oui")
+      ClickableDirective.deplacementPageCursor(this.changementDeplacement);
   }
 }

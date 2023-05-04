@@ -1,10 +1,12 @@
-import {AfterContentInit, AfterViewInit, Component, HostListener} from '@angular/core';
+import {AfterViewInit, Component, HostListener} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
 import {QuizService} from "../../../services/quiz.service";
 import {Handicap_Fort_Bas, Handicap_Fort_Entree, Handicap_Leger_Entree, Handicap_Fort_Droite, Handicap_Fort_Gauche,
 Handicap_Fort_Haut, Handicap_Leger_Bas,  Handicap_Leger_Droite, Handicap_Leger_Gauche, Handicapt_Leger_Haut,
 Retour} from "../../../enums/enumPatient";
 import {Router} from "@angular/router";
+import {ClickableDirective} from "../../Directive/ClickableDirective";
+import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
 import {ThemeComponent} from "../../themes/theme/theme.component";
 
 @Component({
@@ -17,8 +19,14 @@ export class QuizListComponent implements AfterViewInit {
   private nombreCaseLargeur = 1;
   public quizList: Quiz[] = [];
   private buttonSelected: number = 1;
+  private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
   ThemeParent: string | null | undefined;
 
+  @HostListener("window:mousemove", ["$event.clientX", "$event.clientY"])
+  onMouseMove(e: any, e2: any){
+    this.changementDeplacement[0] = e;
+    this.changementDeplacement[1] = e2;
+  }
   @HostListener("window:resize") onWindowResize(): void {
     this.changeDeplacementBouton(window.innerWidth);
   }
@@ -35,7 +43,10 @@ export class QuizListComponent implements AfterViewInit {
   constructor( public quizService: QuizService, private root : Router) {
     this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
-    })
+    });
+    let clickable = localStorage.getItem("patient-utilisation_souris");
+    if (clickable != null && clickable == "oui")
+      ClickableDirective.deplacementPageCursor(this.changementDeplacement);
   }
 
 
@@ -60,6 +71,8 @@ export class QuizListComponent implements AfterViewInit {
     else if (e.key == Handicap_Leger_Droite.FLECHE_DROITE) this.switchButton(1);
     else if (e.key == Handicap_Leger_Gauche.FLECHE_GAUCHE) this.switchButton(-1);
     else if(e.key == Handicap_Leger_Bas.FLECHE_BAS) this.switchButton(this.nombreCaseLargeur);
+    else
+      ThemeListComponent.ajouterAutreTouche(e);
   }
 
   private patientFort(e: KeyboardEvent) : void {
@@ -72,6 +85,8 @@ export class QuizListComponent implements AfterViewInit {
       || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE) this.switchButton(2 * this.nombreCaseLargeur);
     else if (e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
       || e.key == Handicap_Fort_Droite.M || e.key == Handicap_Fort_Droite.POINT_EXCLAMATION || e.key == Handicap_Fort_Droite.DOUBLE_POINT) this.switchButton(1);
+    else
+      ThemeListComponent.ajouterAutreTouche(e);
   }
 
   private switchButton(deplacementPage : number) : void {
@@ -101,6 +116,7 @@ export class QuizListComponent implements AfterViewInit {
     else
       this.nombreCaseLargeur = 1;
   }
+
   private goToEnter() : void {
     this.root.navigate(["/commencer-quiz"]);
   }
