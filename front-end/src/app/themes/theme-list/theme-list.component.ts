@@ -4,6 +4,7 @@ import { Theme} from "../../../models/theme.model";
 import { Router } from '@angular/router';
 import {Handicap_Fort_Haut, Handicap_Fort_Bas, Handicap_Fort_Gauche, Handicap_Fort_Droite, Handicap_Leger_Bas,
 Handicap_Leger_Entree, Handicap_Leger_Gauche, Handicap_Leger_Droite, Handicap_Fort_Entree, Handicapt_Leger_Haut, Retour} from "../../../enums/enumPatient";
+import {ThemeComponent} from "../theme/theme.component";
 
 @Component({
   selector: 'app-theme-list',
@@ -92,6 +93,7 @@ export class ThemeListComponent implements AfterViewInit {
   }
 
   private goToEnter() : void {
+    ThemeComponent.selectQuiz(this.themeList[this.buttonSelected - 1].nom);
     this.root.navigate(["/quiz-list"]);
   }
 }

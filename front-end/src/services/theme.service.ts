@@ -39,5 +39,6 @@ export class ThemeService {
   addTheme(theme: Theme): void {
     THEME_LIST.push(theme);
   }
+
 }
 

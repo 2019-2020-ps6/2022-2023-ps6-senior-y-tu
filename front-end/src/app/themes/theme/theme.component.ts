@@ -1,5 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Theme} from "../../../models/theme.model";
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-theme',
@@ -7,21 +9,30 @@ import { Theme} from "../../../models/theme.model";
   styleUrls: ['./theme.component.scss']
 })
 export class ThemeComponent implements OnInit {
-  lien = '/quiz-list';
+  lienQuiz = '/quiz-list';
 
   @Input()
   theme: Theme | undefined;
 
   @Output()
   quizSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private router: any;
 
-  constructor() {
+  constructor(public root : Router) {
   }
 
   ngOnInit(): void {
   }
 
-  selectQuiz(): void {
-    this.quizSelected.emit(true);
+  selectQuizClick(themeNom: string | undefined): void {
+    ThemeComponent.selectQuiz(themeNom);
+    this.root.navigate([this.lienQuiz]);
+  }
+
+  public static selectQuiz(themeNom: string | undefined): void {
+    if (typeof themeNom === "string") {
+      console.log(themeNom);
+      localStorage.setItem("nomTheme", themeNom);
+    }
   }
 }

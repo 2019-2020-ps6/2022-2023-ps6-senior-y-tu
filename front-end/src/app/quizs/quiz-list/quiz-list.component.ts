@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, HostListener} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, HostListener} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
 import {QuizService} from "../../../services/quiz.service";
 import {Handicap_Fort_Bas, Handicap_Fort_Entree, Handicap_Leger_Entree, Handicap_Fort_Droite, Handicap_Fort_Gauche,
 Handicap_Fort_Haut, Handicap_Leger_Bas,  Handicap_Leger_Droite, Handicap_Leger_Gauche, Handicapt_Leger_Haut,
 Retour} from "../../../enums/enumPatient";
 import {Router} from "@angular/router";
+import {ThemeComponent} from "../../themes/theme/theme.component";
 
 @Component({
   selector: 'app-quiz-list',
@@ -16,6 +17,7 @@ export class QuizListComponent implements AfterViewInit {
   private nombreCaseLargeur = 1;
   public quizList: Quiz[] = [];
   private buttonSelected: number = 1;
+  ThemeParent: string | null | undefined;
 
   @HostListener("window:resize") onWindowResize(): void {
     this.changeDeplacementBouton(window.innerWidth);
@@ -33,20 +35,23 @@ export class QuizListComponent implements AfterViewInit {
   constructor( public quizService: QuizService, private root : Router) {
     this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
-    })}
+    })
+  }
 
 
-  selectTheme(): string | any {
-    if (this.quizList.length!=0)
-      return this.quizList[0].theme;
+  selectTheme(): string | null{
+   this.ThemeParent = localStorage.getItem("nomTheme");
+   return this.ThemeParent;
   }
 
 
   ngAfterViewInit() {
     this.buttonSelected = 1;
     let temp = document.getElementsByClassName("button-card") as HTMLCollectionOf<HTMLButtonElement>;
-    temp[this.buttonSelected].style.backgroundColor = "#b4a7d6";
-    this.changeDeplacementBouton(window.innerWidth);
+    if(temp.length > 1) {
+      temp[this.buttonSelected].style.backgroundColor = "#b4a7d6";
+      this.changeDeplacementBouton(window.innerWidth);
+    }
   }
 
   private patientLeger(e: KeyboardEvent) : void {
