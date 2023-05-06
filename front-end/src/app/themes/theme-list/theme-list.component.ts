@@ -117,7 +117,6 @@ export class ThemeListComponent implements AfterViewInit {
   public static ajouterAutreTouche(e: KeyboardEvent) {
     let newChaine: string = "";
     let ancienneChaine = localStorage.getItem("autresTouchesAppuyer");
-    console.log(e);
     if (ancienneChaine == null)
       localStorage.setItem("autresTouchesAppuyer", e.key);
     else if (e.key >= "a" && e.key <= "z"){

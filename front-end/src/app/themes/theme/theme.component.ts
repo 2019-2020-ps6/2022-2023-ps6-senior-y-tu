@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class ThemeComponent implements OnInit {
   lienQuiz = '/quiz-list';
+  protected utilisationSouris: boolean = false;
 
   @Input()
   theme: Theme | undefined;
@@ -19,6 +20,9 @@ export class ThemeComponent implements OnInit {
   private router: any;
 
   constructor(public root : Router) {
+    let souris = localStorage.getItem("patient-utilisation_souris");
+    if (souris != null && souris == "oui")
+      this.utilisationSouris = true;
   }
 
   ngOnInit(): void {

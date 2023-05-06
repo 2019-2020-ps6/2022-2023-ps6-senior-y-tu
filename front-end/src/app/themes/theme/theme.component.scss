@@ -22,3 +22,7 @@ h2 {
   display: block;
   margin: auto;
 }
+
+.nonClickable:hover {
+  cursor: default;
+}
