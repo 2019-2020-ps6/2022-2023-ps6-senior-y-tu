@@ -1,18 +1,24 @@
 <app-header-pro></app-header-pro>
 
 <div class="statistique" *ngFor="let stat of statList">
-  <div class="patient-name">
-    <span class="name"> {{stat?.nomPatient}}</span>
+  <div class="boite">
+    <div class = "image">
+      <img src="{{stat?.image}}" alt="Image d'un patient">
+    </div>
+
+    <div>
+      <div class="patient-name">
+        <span class="name"> {{stat?.nomPatient}}</span>
+      </div>
+
+      <div class="information">
+        <p id = "stat-score"> Score : {{stat?.score}}</p>
+        <p id = "stat-temps"> Temps : {{stat?.temps?.minutes}} min {{stat?.temps?.secondes}} sec </p>
+        <p id = "stat-handicap"> Handicap : {{stat?.handicap}}</p>
+        <p id = "stat-nombreClick"> Nombre de click moyen : {{stat?.nombreClick}}</p>
+        <p id = "stat-souris"> Utilisation de la souris : {{stat?.souris}}</p>
+      </div>
+      <button class="bouton" routerLink="/list-stat-quiz/{{stat?.idPatient}}">Voir Plus</button>
+    </div>
   </div>
-  <div class="information">
-    <p id = "stat-score"> Score : {{stat?.score}}</p>
-    <p id = "stat-temps"> Temps : {{stat?.temps?.minutes}} min {{stat?.temps?.secondes}} sec </p>
-    <p id = "stat-handicap"> Handicap : {{stat?.handicap}}</p>
-    <p id = "stat-nombreClick"> Nombre de click moyen : {{stat?.nombreClick}}</p>
-    <p id = "stat-souris"> Utilisation de la souris : {{stat?.souris}}</p>
-  </div>
-  <div class = "image">
-    <img src="{{stat?.image}}" alt="Image d'un patient">
-  </div>
-  <button class="bouton" routerLink="/list-stat-quiz/{{stat?.idPatient}}">Voir Plus</button>
 </div>

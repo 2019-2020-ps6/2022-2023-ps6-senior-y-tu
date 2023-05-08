@@ -6,15 +6,14 @@
   </div>
 
   <div class="align">
-    <div class="milieu"  appPolice>
-      <h2>{{questions?.intitule}}</h2>
+    <div class="milieu" appPolice>
+      <h3>{{questions?.intitule}}</h3>
     </div>
 
     <img src="{{questions?.img}}" width="200px"/>
   </div>
 
   <div class="explication">
-    <div id="message"></div>
     <p appPolice>La réponse: {{questions?.reponses?.[reponseCorrecte]?.valeur}} </p>
     <p appPolice>{{questions?.explication}}</p>
   </div>

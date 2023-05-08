@@ -1,0 +1,33 @@
+@import '../../../styles/card';
+
+.boite{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 15px;
+}
+
+.image {
+  width: 20%;
+  height: 20%;
+}
+
+.bouton {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  border: 2px solid $beige;
+  border-radius: 5px;
+  background-color: #f2d7c3;
+  font-size:20px;
+}
+
+.statistique {
+  border : 2px solid #f2d7c3;
+  border-radius: 5px;
+  margin:20px auto;
+  padding: 10px;
+  width: 80%;
+  position: relative;
+  background-color: white;
+}
