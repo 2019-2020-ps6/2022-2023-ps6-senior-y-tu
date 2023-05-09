@@ -39,7 +39,7 @@
 
     <div class="boutons">
       <button class="bouton" (click)="deleteQuestion()" type="button" id="supprimer" routerLink="/question-liste/{{quiz?.id}}">Supprimer</button>
-      <button class="bouton" (click)="modifierQuestion()" type="button"  id="Valider" routerLink="/mes-quizs">Valider</button>
+      <button class="bouton" (click)="modifierQuestion()" type="button"  id="Valider" routerLink="/question-liste/{{quiz?.id}}">Valider</button>
     </div>
   </form>
 </div>
