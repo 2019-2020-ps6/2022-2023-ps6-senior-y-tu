@@ -5,7 +5,8 @@ import {ThemeService} from "../../../services/theme.service";
 import {QuizService} from "../../../services/quiz.service";
 import {Router} from "@angular/router";
 import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
-import {ClickableDirective} from "../../Directive/ClickableDirective";
+import {ClickableDirective} from "../../autre/ClickableDirective";
+import {Tuple} from "../../autre/Tuple";
 
 @Component({
   selector: 'app-commencer-quiz',
@@ -13,8 +14,8 @@ import {ClickableDirective} from "../../Directive/ClickableDirective";
   styleUrls: ['./commencer-quiz.component.scss']
 })
 export class CommencerQuizComponent {
-  public lienRetour = '/quiz-list';
-  public lienEntrer = '/show-question/1';
+  public tupleRetour: Tuple = new Tuple('/theme-list', undefined);
+  public tupleEntrer: Tuple = new Tuple('/show-question', '1');
   private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
 
   @Input()

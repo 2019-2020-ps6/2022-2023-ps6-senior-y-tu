@@ -3,8 +3,9 @@ import {Question, Reponse} from "../../../models/question.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
 import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
-import {ClickableDirective} from "../../Directive/ClickableDirective";
-import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
+import {ClickableDirective} from "../../autre/ClickableDirective";
+import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
+import {Tuple} from "../../autre/Tuple";
 
 @Component({
   selector: 'app-question-explication',
@@ -12,7 +13,7 @@ import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
   styleUrls: ['./question-explication.component.scss']
 })
 export class QuestionExplicationComponent {
-  public lienRetour = "quiz-list";
+  public tupleRetour: Tuple = new Tuple("theme-list", undefined);
   private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
 
   @HostListener("document:keydown", ["$event"])
@@ -29,7 +30,7 @@ export class QuestionExplicationComponent {
     else if (e.key == Retour.BACKSPACE || e.key == Retour.DOLLAR || e.key == Retour.EGAL)
       this.router.navigate(['quiz-list']);
     else
-      ThemeListComponent.ajouterAutreTouche(e);
+      FonctionCommuneThemeQuiz.ajouterAutreTouche(e);
   }
 
   @HostListener("window:mousemove", ["$event.clientX", "$event.clientY"])

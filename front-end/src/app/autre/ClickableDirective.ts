@@ -1,5 +1,6 @@
 import {Directive, Input, HostListener, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
+import {Tuple} from "./Tuple";
 
 @Directive({
   selector: "[appClickable]"
@@ -9,11 +10,14 @@ export class ClickableDirective {
   private verifyUtilisationSouris : boolean;
 
   @Input()
-  appClickable = ' ';
+  appClickable: Tuple | undefined;
 
   @HostListener('click') onClick() {
     if (this.verifyUtilisationSouris) {
-      this.root.navigate([this.appClickable]);
+      if (this.appClickable?.getParam() == null)
+        this.root.navigate([this.appClickable?.getLien()]);
+      else
+        this.root.navigate([this.appClickable.getLien(), this.appClickable.getParam()])
     }
   }
 

@@ -37,12 +37,12 @@ import {QuestionModificationComponent} from "./questions/question-modification/q
 import { QuestionExplicationComponent } from './questions/question-explication/question-explication.component';
 import { CommencerQuizComponent } from './quizs/commencer-quiz/commencer-quiz.component';
 import { QuizResultatComponent } from './quizs/quiz-resultat/quiz-resultat.component';
-import { ClickableDirective } from './Directive/ClickableDirective';
+import { ClickableDirective } from './autre/ClickableDirective';
 import {ClickableDirectiveQuestion} from "./questions/show-question/ClickableDirectiveQuestion";
 import {ClickableDirectiveQuestionExplication} from "./questions/question-explication/ClickableDirectiveQuestionExplication";
 import {ClickableDirectiveFooter} from  "./footer/ClickableDirectiveFooter";
 import {ClickableDirectivePageAide} from "./footer/page_aide/ClickableDirectivePageAide";
-import {PoliceDirective} from "./Directive/PoliceDirective";
+import {PoliceDirective} from "./autre/PoliceDirective";
 import {PageStatistiqueComponent} from "./statistiques/page-statistique/statistique.component";
 import {DeconectionComponent} from "./deconnexion/deconection.component";
 import { StatQuizComponent } from './quizs/stat-quiz/stat-quiz.component';

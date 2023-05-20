@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Theme} from "../../../models/theme.model";
 import {Router} from "@angular/router";
+import {Tuple} from "../../autre/Tuple";
 
 
 @Component({
@@ -8,16 +9,18 @@ import {Router} from "@angular/router";
   templateUrl: './theme.component.html',
   styleUrls: ['./theme.component.scss']
 })
-export class ThemeComponent implements OnInit {
-  lienQuiz = '/quiz-list';
+export class ThemeComponent implements OnInit{
   protected utilisationSouris: boolean = false;
+  protected goto : Tuple | undefined;
 
   @Input()
   theme: Theme | undefined;
 
+  @Input()
+  couleur : boolean = false;
+
   @Output()
   quizSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private router: any;
 
   constructor(public root : Router) {
     let souris = localStorage.getItem("patient-utilisation_souris");
@@ -25,12 +28,13 @@ export class ThemeComponent implements OnInit {
       this.utilisationSouris = true;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.goto = new Tuple( '/quiz-list', this.theme?.id)
   }
 
   selectQuizClick(themeNom: string | undefined): void {
     ThemeComponent.selectQuiz(themeNom);
-    this.root.navigate([this.lienQuiz]);
+    this.root.navigate([ '/quiz-list']);
   }
 
   public static selectQuiz(themeNom: string | undefined): void {

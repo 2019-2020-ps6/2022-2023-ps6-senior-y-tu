@@ -1,19 +1,20 @@
 <app-header-patient></app-header-patient>
 <div id="entete">
-  <h1 appPolice >Choisissez un quiz du thème {{selectTheme()}}</h1>
+  <h1 appPolice >Choisissez un quiz du thème {{ThemeParent?.nom}}</h1>
 </div>
 <br>
 
 <div class="droite">
   <div></div>
-  <img src="assets/boutonRetour.png" [appClickable]="lienRetour">
+  <img src="assets/boutonRetour.png" [appClickable]="tupleRetour">
 </div>
 
 <div class="quiz-list">
-  <div class="quiz" *ngFor="let quiz of quizList" appPolice>
+  <div class="quiz" *ngFor="let quiz of quizList; index as i" appPolice>
         <!--Inputs & Output allow communication between parent & child components.-->
         <!--More information: https://angular.io/guide/component-interaction-->
-    <app-quiz [options]="{ergo : false, patient : true}" [quiz]="quiz" *ngIf="selectTheme() == quiz.theme"> </app-quiz>
+    <app-quiz [color]="(i === 0)"
+      [options]="{ergo : false, patient : true}" [quiz]="quiz" *ngIf="ThemeParent?.id == quiz.idTheme"> </app-quiz>
     </div>
   </div>
 <app-footer></app-footer>

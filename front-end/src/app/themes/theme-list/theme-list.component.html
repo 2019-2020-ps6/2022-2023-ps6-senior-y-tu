@@ -11,8 +11,8 @@
 </div>
 
 <div class="theme-list">
-  <div class="theme" *ngFor="let theme of themeList">
-    <app-theme [theme]="theme"></app-theme>
+  <div class="theme" *ngFor="let theme of themeList, index as i">
+    <app-theme [theme]="theme" [couleur]="(i==0)"></app-theme>
   </div>
 </div>
 <app-footer></app-footer>

@@ -11,8 +11,10 @@ import {
   Handicapt_Leger_Haut, Retour
 } from "../../../enums/enumPatient";
 import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
-import {ClickableDirective} from "../../Directive/ClickableDirective";
+import {ClickableDirective} from "../../autre/ClickableDirective";
 import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
+import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
+import {Tuple} from "../../autre/Tuple";
 
 @Component({
   selector: 'app-show-question',
@@ -22,7 +24,7 @@ import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
 
 
 export class ShowQuestionComponent {
-  public lienRetour = '/commencer-quiz'
+  public tupleRetour: Tuple = new Tuple('/commencer-quiz', undefined);
   private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
 
   @Input()
@@ -83,7 +85,7 @@ export class ShowQuestionComponent {
         reponse = this.questions?.reponses[3];
       }
     else
-      ThemeListComponent.ajouterAutreTouche(e);
+      FonctionCommuneThemeQuiz.ajouterAutreTouche(e);
     if (reponse != null) this.reponseNavigation(reponse);
   }
 
@@ -94,7 +96,7 @@ export class ShowQuestionComponent {
       case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = this.questions?.reponses[1]; break;
       case Handicap_Leger_Droite.FLECHE_DROITE : reponse = this.questions?.reponses[2]; break;
       case Handicap_Leger_Bas.FLECHE_BAS : reponse = this.questions?.reponses[3]; break;
-      default: ThemeListComponent.ajouterAutreTouche(e); break;
+      default: FonctionCommuneThemeQuiz.ajouterAutreTouche(e); break;
     }
     if (reponse != null) this.reponseNavigation(reponse);
   }

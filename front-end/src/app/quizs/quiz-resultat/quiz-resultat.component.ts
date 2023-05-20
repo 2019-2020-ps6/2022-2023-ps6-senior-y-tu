@@ -6,6 +6,7 @@ import {ThemeService} from "../../../services/theme.service";
 import {QuizService} from "../../../services/quiz.service";
 import {Router} from "@angular/router";
 import {Timer} from "../../timer/Timer";
+import {Tuple} from "../../autre/Tuple";
 
 @Component({
   selector: 'app-quiz-resultat',
@@ -13,8 +14,8 @@ import {Timer} from "../../timer/Timer";
   styleUrls: ['./quiz-resultat.component.scss']
 })
 export class QuizResultatComponent {
-  public lienRetour = "/theme-list";
-  public lien = '/show-question/1';
+  public tupleRetour: Tuple = new Tuple("/theme-list", undefined);
+  public tuple: Tuple = new Tuple('/show-question', '1');
   protected nombreClick: number = 0;
   protected autresLettreTaper : Array<{lettre: string, occurence: number}> = [];
 

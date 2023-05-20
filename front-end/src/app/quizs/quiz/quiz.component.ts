@@ -1,6 +1,7 @@
 
 import {Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
 import {Quiz} from "../../../models/quiz.model";
+import {Tuple} from "../../autre/Tuple";
 
 
 @Component({
@@ -10,13 +11,16 @@ import {Quiz} from "../../../models/quiz.model";
 })
 
 export class QuizComponent implements OnInit {
-  lienEntrer = '/commencer-quiz';
+  lien: Tuple = new Tuple('commencer-quiz', undefined);
 
   @Input()
   options : any;
 
   @Input()
   quiz: Quiz | undefined;
+
+  @Input()
+  color: boolean = false;
 
   @Output()
   quizDeleted: EventEmitter<Quiz> = new EventEmitter<Quiz>();
@@ -34,5 +38,4 @@ export class QuizComponent implements OnInit {
   //selectQuiz(): void {
   //  this.quizSelected.emit(true);
   //}
-
 }

@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'creer-quiz', component: CreerQuizComponent },
   { path: 'creer-question/:id', component: CreerQuestionComponent },
   { path: 'creer-patient', component: CreerPatientsComponent },
-  { path: 'quiz-list', component: QuizListComponent },
+  { path: 'quiz-list/:id', component: QuizListComponent },
   { path: 'accueil', component: AccueilComponent },
   { path : 'mes-quizs', component: MesQuizsComponent},
   { path: 'theme-list', component: ThemeListComponent},
