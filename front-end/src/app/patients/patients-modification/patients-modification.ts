@@ -4,6 +4,8 @@ import { PatientService} from "../../../services/patient.service";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {PATIENT_LISTE} from "../../../mocks/personne-list.mock";
+import {Configuration} from "../../../models/configuration.model";
+import {ConfigurationService} from "../../../services/configuration.service";
 
 @Component({
   selector: 'app-patiens-modification',
@@ -16,21 +18,24 @@ export class PatientsModificationComponent {
 
   @Input()
   patientAMettreJour : Patient | undefined;
+  configurationAMettreJour: Configuration | undefined;
 
-  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public patientService : PatientService){
+
+  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public patientService : PatientService, public configuration : ConfigurationService){
     const id = this.route.snapshot.paramMap.get('id');
     this.patientAMettreJour = PATIENT_LISTE.find(patient => patient.id == id);
+    this.configuration.configurations$.subscribe((configurations) => {
+      this.configurationAMettreJour = configurations.at(0);
+    })
 
     this.patientForm = this.formBuilder.group( {
       id: [''],
       nom:[''],
       prenom:[''],
       dateNaissance:[''],
-      handicap:[''],
-      explication:[''],
-      taille:[''],
-      souris:[''],
-      image:['']
+      idconfiguration : [''],
+      image:[''],
+      idstatitique: ['']
     });
 
     this.patientForm.patchValue( {
@@ -38,11 +43,8 @@ export class PatientsModificationComponent {
       nom: this.patientAMettreJour?.nom,
       prenom: this.patientAMettreJour?.prenom,
       dateNaisance: this.patientAMettreJour?.dateNaissance,
-      explication: this.patientAMettreJour?.explication,
-      handicap: this.patientAMettreJour?.handicap,
-      taille: this.patientAMettreJour?.taille,
-      souris: this.patientAMettreJour?.souris,
-      image : ''
+      idconfiguration: this.patientAMettreJour?.idconfiguration,
+      idstatitique : this.patientAMettreJour?.idstatistiques
       }
     )
   }
@@ -61,7 +63,7 @@ export class PatientsModificationComponent {
     if (name == "explication-oui") {
       // @ts-ignore
       document.getElementById("explication-oui").checked = true;
-      this.patientAMettreJour!.explication = "oui";
+      this.configurationAMettreJour!.explication = "oui";
       // @ts-ignore
       document.getElementById("explication-non").checked = false;
     }
@@ -70,7 +72,7 @@ export class PatientsModificationComponent {
       document.getElementById("explication-oui").checked = false;
       // @ts-ignore
       document.getElementById("explication-non").checked = true;
-      this.patientAMettreJour!.explication = "non";
+      this.configurationAMettreJour!.explication = "non";
     }
     this.modifierPatient();
   }
@@ -81,14 +83,14 @@ export class PatientsModificationComponent {
       document.getElementById("handicap-leger").checked = true;
       // @ts-ignore
       document.getElementById("handicap-fort").checked = false;
-      this.patientAMettreJour!.handicap = 'leger';
+      this.configurationAMettreJour!.handicap = 'leger';
     }
     else {
       // @ts-ignore
       document.getElementById("handicap-leger").checked = false;
       // @ts-ignore
       document.getElementById("handicap-fort").checked = true;
-      this.patientAMettreJour!.handicap = 'fort';
+      this.configurationAMettreJour!.handicap = 'fort';
     }
     this.modifierPatient();
   }
@@ -101,7 +103,7 @@ export class PatientsModificationComponent {
       document.getElementById("police-40").checked = false;
       // @ts-ignore
       document.getElementById("police-52").checked = false;
-      this.patientAMettreJour!.taille = 24;
+      this.configurationAMettreJour!.taille = 24;
     }
     else if(name == "police-40")
     {
@@ -111,7 +113,7 @@ export class PatientsModificationComponent {
       document.getElementById("police-40").checked = true;
       // @ts-ignore
       document.getElementById("police-52").checked = false;
-      this.patientAMettreJour!.taille = 40;
+      this.configurationAMettreJour!.taille = 40;
     }
     else
     {
@@ -121,7 +123,7 @@ export class PatientsModificationComponent {
       document.getElementById("police-40").checked = false;
       // @ts-ignore
       document.getElementById("police-52").checked = false;
-      this.patientAMettreJour!.taille = 52;
+      this.configurationAMettreJour!.taille = 52;
     }
     this.modifierPatient();
   }
@@ -131,14 +133,14 @@ export class PatientsModificationComponent {
       document.getElementById("souris-oui").checked = true;
       // @ts-ignore
       document.getElementById("souris-non").checked = false;
-      this.patientAMettreJour!.souris = 'oui';
+      this.configurationAMettreJour!.souris = 'oui';
     }
     else {
       // @ts-ignore
       document.getElementById("souris-oui").checked = false;
       // @ts-ignore
       document.getElementById("souris-non").checked = true;
-      this.patientAMettreJour!.souris = 'non';
+      this.configurationAMettreJour!.souris = 'non';
     }
     this.modifierPatient();
   }

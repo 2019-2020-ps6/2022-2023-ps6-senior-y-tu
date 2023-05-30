@@ -17,7 +17,7 @@ export class ListStatQuizComponent {
 
   constructor(private route: ActivatedRoute, public patientService: PatientService) {
     this.patientid = this.route.snapshot.paramMap.get('id');
-    this.statListe = patientService.getStatListe(this.patientid);
+    //this.statListe = patientService.getStatListe(this.patientid);
 
   }
 

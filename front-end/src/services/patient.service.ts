@@ -1,45 +1,63 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import { Patient} from "src/models/personne.model";
 import { PATIENT_LISTE} from '../mocks/personne-list.mock';
 import {StatQuiz} from "../models/stat-quiz.model";
+import {HttpClient} from "@angular/common/http";
+import {httpOptionsBase, serverUrl} from "../configs/server.config";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PatientService {
-  private patients: Patient[] = PATIENT_LISTE;
+  private patients: Patient[] = [];
+  private patientsUrl = serverUrl + '/patients'
+  private httpOptions = httpOptionsBase;
 
   public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject(PATIENT_LISTE);
+public patientSelected$ : Subject<Patient> = new Subject<Patient>();
+  constructor(private http: HttpClient) {
+    this.getPatients();
+  }
 
-  constructor() {}
+  getPatients(): void {
+    this.http.get<Patient[]>(this.patientsUrl).subscribe((patientsListe) => {
+      this.patients = patientsListe;
+      this.patients$.next(this.patients);
+    });
+  }
+
+  getPatientsById (id: string): void {
+    this.http.get<Patient>(this.patientsUrl + '/'+ id).subscribe((patient) => {
+      this.patientSelected$.next(patient);
+    })
+  }
+
+  retrievePatient(): void {
+    this.http.get<Patient[]>(this.patientsUrl).subscribe((patientsList) => {
+      this.patients = patientsList;
+      this.patients$.next(this.patients);
+    });
+  }
   addPatient(patient: Patient) {
-    patient.id = (this.patients.length+1).toString();
-    this.patients.push(patient);
-    this.patients$.next(this.patients);
+    this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).subscribe(() => this.retrievePatient());
   }
 
   deletePatient(patient: Patient): void {
-    const index = this.patients.indexOf(patient);
-    this.patients.splice(index, 1);
-    this.patients$.next(this.patients);
+    const urlWithId = this.patientsUrl+'/'+patient.id;
+    this.http.delete<Patient>(urlWithId, this.httpOptions).subscribe(() => this.retrievePatient());
   }
 
-  updatePatient(patientAModifier: Patient | undefined, patient: Patient | undefined): void {
-    if (!patientAModifier) return;
-    const index = this.patients.findIndex(q => q.id == patientAModifier.id)
-    if (index == -1) return ;
-    this.patients[index] = patientAModifier;
-    this.patients$.next(this.patients);
-    console.log('Patient MOdifier(PatientService): ', patientAModifier);
+  updatePatient(idPatient: Patient | undefined, patient: Patient): void {
+    this.http.put<Patient>(this.patients+'/'+idPatient, patient, this.httpOptions).subscribe( () => this.getPatients());
   }
 
-  getStatListe(patientid: string | null): StatQuiz[] | undefined {
+  /*getStatListe(patientid: string | null): StatQuiz[] | undefined {
     let statListe: StatQuiz[] | undefined = [];
     if (patientid) {
-      statListe = this.patients.find(patient => patient.id === patientid)?.statistiques;
+      statListe = this.patients.find(patient => patient.id === patientid)?.idstatistiques;
     }
     return statListe;
-  }
+  }*/
 }

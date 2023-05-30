@@ -32,10 +32,10 @@
       <div class="space">
         <p id="handicap-text"> Handicap:</p>
           <div id ="handicap" >
-            <input type="radio" id="handicap-leger" value="leger" [checked]=" patientAMettreJour?.handicap=='leger'" (click)="onRadioChangeHandicap('handicap-leger')">
+            <input type="radio" id="handicap-leger" value="leger" [checked]=" configurationAMettreJour?.handicap=='leger'" (click)="onRadioChangeHandicap('handicap-leger')">
             <label for="handicap-leger">Parkinson léger</label>
             <br>
-            <input type="radio" id="handicap-fort" value="fort" [checked]=" patientAMettreJour?.handicap=='fort'" (click)="onRadioChangeHandicap('handicap-fort')">
+            <input type="radio" id="handicap-fort" value="fort" [checked]=" configurationAMettreJour?.handicap=='fort'" (click)="onRadioChangeHandicap('handicap-fort')">
             <label for="handicap-fort">Parkinson fort</label>
           </div>
       </div>
@@ -43,10 +43,10 @@
       <div class="space">
         <p class="explication"> Explications aux questions:</p>
           <div class="explication" >
-            <input type="radio" class="explication-oui" id="explication-oui" value="true" [checked]=" patientAMettreJour?.explication=='oui'" (click)="onRadioChangeExplication('explication-oui')">
+            <input type="radio" class="explication-oui" id="explication-oui" value="true" [checked]=" configurationAMettreJour?.explication=='oui'" (click)="onRadioChangeExplication('explication-oui')">
             <label for="explication-oui">Oui</label>
             <br>
-            <input type="radio" class="explication-non" id= "explication-non" value="non" [checked]=" patientAMettreJour?.explication=='non'" (click)="onRadioChangeExplication('explication-non')">
+            <input type="radio" class="explication-non" id= "explication-non" value="non" [checked]=" configurationAMettreJour?.explication=='non'" (click)="onRadioChangeExplication('explication-non')">
             <label for="explication-non">Non</label>
           </div>
       </div>
@@ -57,13 +57,13 @@
       <div class="space">
         <p class="taille-police">Taille de police
           <div class="taille-police">
-          <input type="radio" id="police-24" value="24" [checked]=" patientAMettreJour?.taille==24" (click)="onRadioChangeTaille('police-24')">
+          <input type="radio" id="police-24" value="24" [checked]=" configurationAMettreJour?.taille==24" (click)="onRadioChangeTaille('police-24')">
           <label for="police-24">24</label>
           <br>
-          <input type="radio" id="police-40" value="40" [checked]=" patientAMettreJour?.taille==40" (click)="onRadioChangeTaille('police-40')">
+          <input type="radio" id="police-40" value="40" [checked]=" configurationAMettreJour?.taille==40" (click)="onRadioChangeTaille('police-40')">
           <label for="police-40">40</label>
           <br>
-          <input type="radio" id="police-52" value="52" [checked]=" patientAMettreJour?.taille==52" (click)="onRadioChangeTaille('police-52')">
+          <input type="radio" id="police-52" value="52" [checked]=" configurationAMettreJour?.taille==52" (click)="onRadioChangeTaille('police-52')">
           <label for="police-52">52</label>
         </div>
       </div>
@@ -73,10 +73,10 @@
       <div class="space">
         <p class="souris">Utilisation de la souris
           <div class="souris">
-          <input type="radio" value="oui" id="souris-oui" [checked]=" patientAMettreJour?.souris=='oui'" (click)="onRadioChangeSouris('souris-oui')" >
+          <input type="radio" value="oui" id="souris-oui" [checked]=" configurationAMettreJour?.souris=='oui'" (click)="onRadioChangeSouris('souris-oui')" >
           <label for="souris-oui">Oui</label>
           <br>
-          <input type="radio" value="non" id = "souris-non" [checked]=" patientAMettreJour?.souris=='non'" (click)="onRadioChangeSouris('souris-non')">
+          <input type="radio" value="non" id = "souris-non" [checked]=" configurationAMettreJour?.souris=='non'" (click)="onRadioChangeSouris('souris-non')">
           <label for="souris-non">Non</label>
         </div>
       </div>

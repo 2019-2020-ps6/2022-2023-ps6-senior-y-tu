@@ -1,6 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import { Patient } from "src/models/personne.model";
 import {Router} from "@angular/router";
+import {ConfigurationService} from "../../../services/configuration.service";
+import {Configuration} from "../../../models/configuration.model";
 
 @Component({
   selector: 'app-patient',
@@ -12,17 +14,21 @@ export class PatientComponent implements OnInit{
 
   @Input()
   patient: Patient | undefined ;
+  configuration : Configuration | undefined ;
 
   @Output()
   patientDeleted: EventEmitter<Patient> = new EventEmitter<Patient>();
 
-  constructor(private route : Router) {
+  constructor(private route : Router, public configurationService : ConfigurationService) {
+    this.configurationService.configurations$.subscribe((configurations) => {
+      this.configuration = configurations.at(0);
+    })
   }
 
   ngOnInit(): void {}
 
   stockerPatient(): void {
-    if (this.patient != undefined) {
+    if (this.patient != undefined && this.configuration != undefined) {
       if(localStorage.getItem("patient-prenom") != undefined) {
         localStorage.removeItem("patient-prenom");
         localStorage.removeItem("patient-handicap");
@@ -31,10 +37,10 @@ export class PatientComponent implements OnInit{
         localStorage.removeItem("patient-utilisation_souris")
       }
       localStorage.setItem("patient-prenom", this.patient.prenom);
-      localStorage.setItem("patient-handicap", this.patient.handicap);
-      localStorage.setItem("patient-explication", this.patient.explication);
-      localStorage.setItem("patient-taille", String(this.patient.taille));
-      localStorage.setItem("patient-utilisation_souris", this.patient.souris);
+      localStorage.setItem("patient-handicap", this.configuration.handicap);
+      localStorage.setItem("patient-explication", this.configuration.explication);
+      localStorage.setItem("patient-taille", String(this.configuration.taille));
+      localStorage.setItem("patient-utilisation_souris", this.configuration.souris);
       this.route.navigate(['/theme-list'])
     }
   }

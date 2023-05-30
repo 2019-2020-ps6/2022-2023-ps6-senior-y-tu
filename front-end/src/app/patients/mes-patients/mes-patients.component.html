@@ -6,7 +6,8 @@
   <button class="creation-patient" routerLink="/creer-patient">Créer un nouveau patient</button>
 
   <div class="ma-liste-patients">
-    <div class="patient" *ngFor="let patient of patientListe">
+    <div class="patient" *ngFor="let patient of patientListe" >
+
       <div class="patient-app">
 
         <div id="patient-image">
@@ -16,11 +17,11 @@
         <div id="patient-information">
           <p id="patient-nom">{{patient.nom}} </p>
           <p id="patient-prenom">{{patient.prenom}} </p>
-          <p id="patient-naissance">Date de Naissance: {{patient.dateNaissance | date: 'dd/MM/yyyy'}} </p>
-          <p id="patient-handicap">Handicap: {{patient.handicap}}</p>
-          <p id="patient-explication">Explication aux questions: {{patient.explication}}</p>
-          <p id="patient-taille">Taille de police: {{patient.taille}}</p>
-          <p id="patient-souris">Utilisation de la souris: {{patient.souris}}</p>
+          <p id="patient-naissance">Date de Naissance: {{patient.dateNaissance}} </p>
+          <p id="patient-handicap">Handicap: leger</p>
+          <p id="patient-explication">Explication aux questions: non</p>
+          <p id="patient-taille">Taille de police: 40</p>
+          <p id="patient-souris">Utilisation de la souris: oui</p>
 
           <div class="bouton-patients">
             <button class="bouton" routerLink="/patients-modification/{{patient.id}}">Modifier</button>

@@ -16,13 +16,10 @@ export class CreerPatientsComponent implements  OnInit{
     this.patientForm = this.formBuilder.group({
       nom: [''],
       prenom: [''],
-      dateNaissance: [''],
-      image:[''],
-      handicap:[''],
-      explication:[''],
-      taille: 24,
-      souris:[''],
-      id:PATIENT_LISTE.length +1
+      dateNaissance: [' '],
+      image:[' '],
+      idconfiguration: [' '],
+      idstatistiques: [' ']
     });
   }
   ngOnInit(): void {  }
@@ -31,7 +28,7 @@ export class CreerPatientsComponent implements  OnInit{
   onCreer() {
     const patient: Patient = this.patientForm.getRawValue() as Patient;
     this.patientService.addPatient(patient);
-    console.log(patient.id);
+    console.log(patient);
     console.log(this.patientService);
     console.log('Patient Ajouté: ', patient);
   }
