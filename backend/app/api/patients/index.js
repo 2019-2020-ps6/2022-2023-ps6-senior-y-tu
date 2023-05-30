@@ -41,7 +41,7 @@ router.put('/:patientId', (req, res) => {
 
 router.delete('/:patientId', (req, res) => {
   try {
-    Patient.delete(res.params.patientId)
+    Patient.delete(req.params.patientId)
     res.status(204).end()
   } catch (err) {
     manageAllErrors(res, err)
