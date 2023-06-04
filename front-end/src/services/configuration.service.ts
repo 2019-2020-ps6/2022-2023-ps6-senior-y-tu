@@ -30,6 +30,7 @@ export class ConfigurationService {
   }
 
   addConfiguration(configuration: Configuration): void {
+    console.log("je suis dans le service add configuration");
     this.http.post<Configuration>(this.configurationUrl, configuration, this.httpOptions).subscribe(() => this.retrieveConfiguration());
   }
 

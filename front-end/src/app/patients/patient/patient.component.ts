@@ -39,7 +39,7 @@ export class PatientComponent implements OnInit{
       localStorage.setItem("patient-prenom", this.patient.prenom);
       localStorage.setItem("patient-handicap", this.configuration.handicap);
       localStorage.setItem("patient-explication", this.configuration.explication);
-      localStorage.setItem("patient-taille", String(this.configuration.taille));
+      localStorage.setItem("patient-taille", String(this.configuration.police));
       localStorage.setItem("patient-utilisation_souris", this.configuration.souris);
       this.route.navigate(['/theme-list'])
     }

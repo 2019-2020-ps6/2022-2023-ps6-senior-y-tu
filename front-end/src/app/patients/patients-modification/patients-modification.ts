@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Patient} from "../../../models/personne.model";
 import { PatientService} from "../../../services/patient.service";
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {PATIENT_LISTE} from "../../../mocks/personne-list.mock";
 import {Configuration} from "../../../models/configuration.model";
@@ -14,21 +14,34 @@ import {ConfigurationService} from "../../../services/configuration.service";
 })
 export class PatientsModificationComponent {
 
-  public patientForm : FormGroup;
+  public patientForm : FormGroup = new FormGroup({
+    id: new FormControl(''),
+    nom: new FormControl(''),
+    prenom: new FormControl(''),
+    dateNaisance: new FormControl(''),
+    idconfiguration: new FormControl(''),
+    idstatitique : new FormControl('')
+  });
+
+  protected patientAMettreJour : Patient | undefined;
 
   @Input()
-  patientAMettreJour : Patient | undefined;
   configurationAMettreJour: Configuration | undefined;
 
 
   constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public patientService : PatientService, public configuration : ConfigurationService){
     const id = this.route.snapshot.paramMap.get('id');
-    this.patientAMettreJour = PATIENT_LISTE.find(patient => patient.id == id);
+    if(id != null) {
+      this.patientService.getPatientsById(id);
+      this.patientService.patientSelected$.subscribe((patient) => {
+        this.patientAMettreJour = patient;
+      })
+    }
     this.configuration.configurations$.subscribe((configurations) => {
-      this.configurationAMettreJour = configurations.at(0);
+      this.configurationAMettreJour = configurations.find(config => config.id == this.patientAMettreJour?.idconfiguration);
     })
 
-    this.patientForm = this.formBuilder.group( {
+    /*this.patientForm = this.formBuilder.group( {
       id: [''],
       nom:[''],
       prenom:[''],
@@ -36,9 +49,9 @@ export class PatientsModificationComponent {
       idconfiguration : [''],
       image:[''],
       idstatitique: ['']
-    });
+    });*/
 
-    this.patientForm.patchValue( {
+    /*this.patientForm.patchValue( {
       id: this.patientAMettreJour?.id,
       nom: this.patientAMettreJour?.nom,
       prenom: this.patientAMettreJour?.prenom,
@@ -46,12 +59,14 @@ export class PatientsModificationComponent {
       idconfiguration: this.patientAMettreJour?.idconfiguration,
       idstatitique : this.patientAMettreJour?.idstatistiques
       }
-    )
+    )*/
   }
   ngOnInit(): void {
   }
-  modifierPatient() {
-    const  patient : Patient = this.patientForm.getRawValue() as Patient;
+  modifierPatient() { // faire que prend aussi les valeur non modifier
+
+    const  patient : Patient = this.patientForm.value as Patient;
+    console.log('patient', patient)
     if (patient.image == '') {
       patient.image = <string>this.patientAMettreJour?.image;
     }
@@ -103,7 +118,7 @@ export class PatientsModificationComponent {
       document.getElementById("police-40").checked = false;
       // @ts-ignore
       document.getElementById("police-52").checked = false;
-      this.configurationAMettreJour!.taille = 24;
+      this.configurationAMettreJour!.police = 24;
     }
     else if(name == "police-40")
     {
@@ -113,7 +128,7 @@ export class PatientsModificationComponent {
       document.getElementById("police-40").checked = true;
       // @ts-ignore
       document.getElementById("police-52").checked = false;
-      this.configurationAMettreJour!.taille = 40;
+      this.configurationAMettreJour!.police = 40;
     }
     else
     {
@@ -123,7 +138,7 @@ export class PatientsModificationComponent {
       document.getElementById("police-40").checked = false;
       // @ts-ignore
       document.getElementById("police-52").checked = false;
-      this.configurationAMettreJour!.taille = 52;
+      this.configurationAMettreJour!.police = 52;
     }
     this.modifierPatient();
   }

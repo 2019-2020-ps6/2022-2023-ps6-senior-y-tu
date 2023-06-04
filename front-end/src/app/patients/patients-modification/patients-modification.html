@@ -10,11 +10,11 @@
     <div class="align">
       <div>
         <p> Nom du patient
-          <input type="text" class="input-texte" [formControlName]="'nom'">
+          <input type="text" class="input-texte" [value]="patientAMettreJour?.nom" formControlName="nom" >
         </p>
 
         <p> Prénom du patient
-          <input type="text" class="input-texte"  [formControlName]="'prenom'" >
+          <input type="text" class="input-texte"  [value]="patientAMettreJour?.prenom"formControlName="prenom" >
         </p>
 
         <p> Date de naissance
@@ -57,13 +57,13 @@
       <div class="space">
         <p class="taille-police">Taille de police
           <div class="taille-police">
-          <input type="radio" id="police-24" value="24" [checked]=" configurationAMettreJour?.taille==24" (click)="onRadioChangeTaille('police-24')">
+          <input type="radio" id="police-24" value="24" [checked]=" configurationAMettreJour?.police==24" (click)="onRadioChangeTaille('police-24')">
           <label for="police-24">24</label>
           <br>
-          <input type="radio" id="police-40" value="40" [checked]=" configurationAMettreJour?.taille==40" (click)="onRadioChangeTaille('police-40')">
+          <input type="radio" id="police-40" value="40" [checked]=" configurationAMettreJour?.police==40" (click)="onRadioChangeTaille('police-40')">
           <label for="police-40">40</label>
           <br>
-          <input type="radio" id="police-52" value="52" [checked]=" configurationAMettreJour?.taille==52" (click)="onRadioChangeTaille('police-52')">
+          <input type="radio" id="police-52" value="52" [checked]=" configurationAMettreJour?.police==52" (click)="onRadioChangeTaille('police-52')">
           <label for="police-52">52</label>
         </div>
       </div>

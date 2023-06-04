@@ -11,15 +11,17 @@ import {ConfigurationService} from "../../../services/configuration.service";
 })
 export class MesPatientsComponent {
   public patientListe: Patient[] = [];
-  configurationList : Configuration[] | undefined;
+  public configurationList : Configuration | undefined;
 
 
   constructor(public patientService: PatientService, public configurationService : ConfigurationService) {
     this.patientService.patients$.subscribe((patientListe) => {
       this.patientListe = patientListe;
     });
+    var i = 0;
     this.configurationService.configurations$.subscribe((configurations) => {
-      this.configurationList = configurations;
+      this.configurationList = configurations.find(config => config.id == this.patientListe.at(i)?.idconfiguration);
+      i = i+1;
     })
   }
 

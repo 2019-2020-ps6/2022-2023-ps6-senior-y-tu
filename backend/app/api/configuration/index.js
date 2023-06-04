@@ -16,12 +16,7 @@ router.get('/', (req, res) => {
 
 router.get('/:idPatient', (req, res) => {
     try {
-        const test = Configuration.get().filter((configuration) => configuration.idPatient === req.params.idPatient)
-        if (test.length !== 0) {
-            res.status(200).json(test[0])
-        } else {
-            res.status(404).end()
-        }
+        res.status(200).json(test[0])
     } catch (err) {
         manageAllErrors(res, err)
     }
@@ -38,18 +33,12 @@ router.post('/', (req, res) => {
 
 router.put('/:idPatient', (req, res) => {
     try {
-        const test = Configuration.get().filter((configuration) => configuration.idPatient === req.params.idPatient)
-        if (test.length !== 0) {
-            res.status(200).json(Configuration.update(test[0].id, {
-                idPatient: test[0].idPatient,
-                souris: req.body.souris,
-                police: req.body.police,
-                explication: res.body.explication,
-                handicap: req.body.handicap,
-            }))
-        } else {
-            res.status(404).end()
-        }
+        res.status(200).json(Configuration.update(test[0].id, {
+            souris: req.body.souris,
+            police: req.body.police,
+            explication: res.body.explication,
+            handicap: req.body.handicap,
+        }))
     } catch (err) {
         manageAllErrors(res, err)
     }

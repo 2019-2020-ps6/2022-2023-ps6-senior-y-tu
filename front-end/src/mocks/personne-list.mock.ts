@@ -7,11 +7,8 @@ export const Patient_Lucienne: Patient = {
     prenom: "Lucienne",
     dateNaissance:new Date(1946-3-14),
     image: '/assets/Image-Patient/Image_Lucienne.png',
-    handicap: 'leger',
-    explication: 'oui',
-    taille:40,
-    souris:'oui',
-    statistiques : PageStatistique_Lucienne.listStatQuiz
+    idconfiguration : '501',
+    idstatistiques: '100'
 };
 
 export const Patient_Jean: Patient = {
@@ -20,11 +17,8 @@ export const Patient_Jean: Patient = {
   prenom: "Marc",
   dateNaissance:new Date(1950-7-9),
   image: '/assets/Image-Patient/Image_Jean.png',
-  handicap: 'fort',
-  explication: 'non',
-  taille:52,
-  souris:'non',
-  statistiques : []
+  idconfiguration: '502',
+  idstatistiques: '1002'
 };
 
 export const Patient_Jeanne: Patient = {
@@ -33,11 +27,8 @@ export const Patient_Jeanne: Patient = {
   prenom: "Jeanne",
   dateNaissance:new Date(1949-12-17),
   image: '/assets/Image-Patient/Image_Jeanne.png',
-  handicap: 'leger',
-  explication: 'oui',
-  taille:40,
-  souris:'non',
-  statistiques : []
+  idconfiguration: '503',
+  idstatistiques: '1003'
 };
 
 export const Patient_Jean_Pierre: Patient = {
@@ -46,11 +37,8 @@ export const Patient_Jean_Pierre: Patient = {
   prenom: "Jean",
   dateNaissance:new Date(1949-12-18),
   image: '/assets/Image-Patient/Image_Jean.png',
-  handicap: 'leger',
-  explication: 'oui',
-  taille:40,
-  souris:'oui',
-  statistiques : []
+  idconfiguration: '504',
+  idstatistiques: '1004'
 };
 
 export const Patient_Jeanne_Marie: Patient = {
@@ -59,11 +47,8 @@ export const Patient_Jeanne_Marie: Patient = {
   prenom: "Jeanne-Marie",
   dateNaissance:new Date(1937-7-6),
   image: '/assets/Image-Patient/Image_Jeanne.png',
-  handicap: 'leger',
-  explication: 'oui',
-  taille:24,
-  souris:'non',
-  statistiques : []
+  idconfiguration: '505',
+  idstatistiques: '1005'
 };
 
 export const Ergo_Edward: Ergo = {
