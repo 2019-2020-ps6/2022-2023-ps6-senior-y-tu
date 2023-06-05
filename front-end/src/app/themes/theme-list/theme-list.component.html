@@ -5,11 +5,6 @@
 </div>
 <br>
 
-<div class="droite">
-  <div></div>
-  <img src="assets/boutonRetour.png" [appClickable]="lienRetour">
-</div>
-
 <div class="theme-list">
   <div class="theme" *ngFor="let theme of themeList, index as i">
     <app-theme [theme]="theme" [couleur]="(i==0)"></app-theme>
