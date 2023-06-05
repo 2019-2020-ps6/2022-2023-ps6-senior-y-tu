@@ -6,4 +6,5 @@ module.exports = new BaseModel('Configuration', {
   police: Joi.number().required(),
   explication: Joi.string().required(),
   handicap: Joi.string().required(),
+  idPatient: Joi.string(),
 })

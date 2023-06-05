@@ -2,7 +2,7 @@ const { Router } = require('express')
 const PatientsRouter = require('./patients')
 const ThemesRouter = require('./themes')
 const StatistiqueJeuRouter = require('./statistiqueJeu')
-const ConfigurationRouter = require('./configuration')
+const ConfigurationRouter = require('./patients/configuration')
 const QuizsRouter = require('./quizs')
 const QuestionsRouter = require('./questions')
 

@@ -3,7 +3,6 @@ import { Patient} from "../../../models/personne.model";
 import { PatientService} from "../../../services/patient.service";
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {PATIENT_LISTE} from "../../../mocks/personne-list.mock";
 import {Configuration} from "../../../models/configuration.model";
 import {ConfigurationService} from "../../../services/configuration.service";
 
@@ -14,13 +13,16 @@ import {ConfigurationService} from "../../../services/configuration.service";
 })
 export class PatientsModificationComponent {
 
-  public patientForm : FormGroup = new FormGroup({
+  public valeurForm : FormGroup = new FormGroup({
     id: new FormControl(''),
     nom: new FormControl(''),
     prenom: new FormControl(''),
     dateNaisance: new FormControl(''),
-    idconfiguration: new FormControl(''),
-    idstatitique : new FormControl('')
+    idstatitique : new FormControl(''),
+    police : new FormControl(''),
+    explication: new FormControl(''),
+    souris : new FormControl(''),
+    handicap: new FormControl('')
   });
 
   protected patientAMettreJour : Patient | undefined;
@@ -29,49 +31,52 @@ export class PatientsModificationComponent {
   configurationAMettreJour: Configuration | undefined;
 
 
-  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public patientService : PatientService, public configuration : ConfigurationService){
+  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public patientService : PatientService, public configurationService : ConfigurationService){
     const id = this.route.snapshot.paramMap.get('id');
     if(id != null) {
       this.patientService.getPatientsById(id);
       this.patientService.patientSelected$.subscribe((patient) => {
         this.patientAMettreJour = patient;
       })
+      this.configurationService.configurations$.subscribe((configurations) => {
+        this.configurationAMettreJour = configurations.find(config => config.idPatient == id);
+      })
     }
-    this.configuration.configurations$.subscribe((configurations) => {
-      this.configurationAMettreJour = configurations.find(config => config.id == this.patientAMettreJour?.idconfiguration);
-    })
-
-    /*this.patientForm = this.formBuilder.group( {
-      id: [''],
-      nom:[''],
-      prenom:[''],
-      dateNaissance:[''],
-      idconfiguration : [''],
-      image:[''],
-      idstatitique: ['']
-    });*/
-
-    /*this.patientForm.patchValue( {
-      id: this.patientAMettreJour?.id,
-      nom: this.patientAMettreJour?.nom,
-      prenom: this.patientAMettreJour?.prenom,
-      dateNaisance: this.patientAMettreJour?.dateNaissance,
-      idconfiguration: this.patientAMettreJour?.idconfiguration,
-      idstatitique : this.patientAMettreJour?.idstatistiques
-      }
-    )*/
   }
   ngOnInit(): void {
   }
   modifierPatient() { // faire que prend aussi les valeur non modifier
+    console.log("Hello")
+    const valeur = this.valeurForm.getRawValue();
+    const id = this.route.snapshot.paramMap.get('id');
 
-    const  patient : Patient = this.patientForm.value as Patient;
-    console.log('patient', patient)
-    if (patient.image == '') {
-      patient.image = <string>this.patientAMettreJour?.image;
+    if (id != null) {
+
+      const patient: Patient = {
+        nom: valeur.nom,
+        prenom: valeur.prenom,
+        dateNaissance: valeur.dateNaissance,
+        image: valeur.image,
+        idstatistiques: valeur.idstatistiques,
+        id: id
+      };
+      console.log('patient', patient)
+      if (patient.image == '') {
+        patient.image = <string>this.patientAMettreJour?.image;
+      }
+
+      const config: Configuration = {
+        handicap: valeur.handicap,
+        souris: valeur.souris,
+        explication: valeur.explication,
+        police: valeur.police,
+        idPatient: id,
+        id: valeur.id
+      }
+      this.patientService.updatePatient(this.patientAMettreJour, patient);
+      this.configurationService.updateConfiguration(config)
+      console.log('Configuration Modifier: ',config);
     }
-    this.patientService.updatePatient(this.patientAMettreJour, patient);
-    console.log('Patient Modifier: ', patient);
   }
 
   onRadioChangeExplication(name : String) {
@@ -89,7 +94,6 @@ export class PatientsModificationComponent {
       document.getElementById("explication-non").checked = true;
       this.configurationAMettreJour!.explication = "non";
     }
-    this.modifierPatient();
   }
 
   onRadioChangeHandicap(name : String) {
@@ -107,7 +111,6 @@ export class PatientsModificationComponent {
       document.getElementById("handicap-fort").checked = true;
       this.configurationAMettreJour!.handicap = 'fort';
     }
-    this.modifierPatient();
   }
 
   onRadioChangeTaille(name : String) {
@@ -140,7 +143,6 @@ export class PatientsModificationComponent {
       document.getElementById("police-52").checked = false;
       this.configurationAMettreJour!.police = 52;
     }
-    this.modifierPatient();
   }
   onRadioChangeSouris(name : String) {
     if (name == "souris-oui") {
@@ -157,6 +159,5 @@ export class PatientsModificationComponent {
       document.getElementById("souris-non").checked = true;
       this.configurationAMettreJour!.souris = 'non';
     }
-    this.modifierPatient();
   }
 }

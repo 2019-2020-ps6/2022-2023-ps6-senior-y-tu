@@ -6,4 +6,5 @@ export interface Configuration {
   police: number;
   handicap: string;
   souris: string;
+  idPatient: string;
 }

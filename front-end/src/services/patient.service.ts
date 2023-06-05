@@ -15,7 +15,7 @@ export class PatientService {
   private patientsUrl = serverUrl + '/patients'
   private httpOptions = httpOptionsBase;
 
-  public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject(PATIENT_LISTE);
+  public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject(<Patient[]> []);
 public patientSelected$ : Subject<Patient> = new Subject<Patient>();
   constructor(private http: HttpClient) {
     this.getPatients();
@@ -40,8 +40,11 @@ public patientSelected$ : Subject<Patient> = new Subject<Patient>();
       this.patients$.next(this.patients);
     });
   }
-  addPatient(patient: Patient) {
-    this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).subscribe(() => this.retrievePatient());
+  addPatient(patient: Patient) : void {
+    this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).subscribe((patientAjouter) => {
+      this.retrievePatient()
+      this.patientSelected$.next(patientAjouter);
+    });
   }
 
   deletePatient(patient: Patient): void {

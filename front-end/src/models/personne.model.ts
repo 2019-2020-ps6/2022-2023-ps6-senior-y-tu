@@ -7,7 +7,6 @@ export interface Patient {
   prenom : string;
   dateNaissance: Date;
   image : string;
-  idconfiguration: string;
   idstatistiques: string;
 }
 

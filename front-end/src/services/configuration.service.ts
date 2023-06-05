@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 import { Configuration} from "../models/configuration.model";
+import {Patient} from "../models/personne.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +35,15 @@ export class ConfigurationService {
     this.http.post<Configuration>(this.configurationUrl, configuration, this.httpOptions).subscribe(() => this.retrieveConfiguration());
   }
 
-  setSelectedConfiguration(userId: string): void {
+  getSelectedConfiguration(userId: string): void {
     const urlWithId = this.configurationUrl + '/' + userId;
     this.http.get<Configuration>(urlWithId).subscribe((user) => {
       this.configurationSelected$.next(user);
     });
+  }
+
+  updateConfiguration(config: Configuration): void {
+    this.http.put<Configuration>(this.configurationUrl+'/'+config.idPatient,config, this.httpOptions).subscribe( () => this.retrieveConfiguration());
   }
 
   deleteConfiguration(configuration: Configuration): void {

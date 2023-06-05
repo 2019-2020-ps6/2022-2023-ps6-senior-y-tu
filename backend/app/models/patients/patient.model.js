@@ -6,6 +6,5 @@ module.exports = new BaseModel('Patient', {
   prenom: Joi.string().required(),
   image: Joi.string(),
   dateNaissance: Joi.string(),
-  idconfiguration: Joi.string(),
   idstatistiques: Joi.string(),
 })

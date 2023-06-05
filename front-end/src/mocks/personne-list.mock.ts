@@ -7,7 +7,6 @@ export const Patient_Lucienne: Patient = {
     prenom: "Lucienne",
     dateNaissance:new Date(1946-3-14),
     image: '/assets/Image-Patient/Image_Lucienne.png',
-    idconfiguration : '501',
     idstatistiques: '100'
 };
 
@@ -17,7 +16,6 @@ export const Patient_Jean: Patient = {
   prenom: "Marc",
   dateNaissance:new Date(1950-7-9),
   image: '/assets/Image-Patient/Image_Jean.png',
-  idconfiguration: '502',
   idstatistiques: '1002'
 };
 
@@ -27,7 +25,6 @@ export const Patient_Jeanne: Patient = {
   prenom: "Jeanne",
   dateNaissance:new Date(1949-12-17),
   image: '/assets/Image-Patient/Image_Jeanne.png',
-  idconfiguration: '503',
   idstatistiques: '1003'
 };
 
@@ -37,7 +34,6 @@ export const Patient_Jean_Pierre: Patient = {
   prenom: "Jean",
   dateNaissance:new Date(1949-12-18),
   image: '/assets/Image-Patient/Image_Jean.png',
-  idconfiguration: '504',
   idstatistiques: '1004'
 };
 
@@ -47,7 +43,6 @@ export const Patient_Jeanne_Marie: Patient = {
   prenom: "Jeanne-Marie",
   dateNaissance:new Date(1937-7-6),
   image: '/assets/Image-Patient/Image_Jeanne.png',
-  idconfiguration: '505',
   idstatistiques: '1005'
 };
 
