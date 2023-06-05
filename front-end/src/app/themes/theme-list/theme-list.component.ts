@@ -34,8 +34,6 @@ export class ThemeListComponent {
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
-    if (e.key == Retour.EGAL || e.key == Retour.BACKSPACE|| e.key == Retour.DOLLAR)
-      this.root.navigate(['accueil']);
     if(handicap == "fort")
       this.buttonSelected = FonctionCommuneThemeQuiz.patientFort(e, this.nombreCaseLargeur, this.buttonSelected, this.root,
         '/quiz-list', this.themeList[this.buttonSelected - 1].id);
