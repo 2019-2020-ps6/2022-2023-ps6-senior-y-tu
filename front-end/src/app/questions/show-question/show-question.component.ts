@@ -12,7 +12,6 @@ import {
 } from "../../../enums/enumPatient";
 import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 import {ClickableDirective} from "../../autre/ClickableDirective";
-import {ThemeListComponent} from "../../themes/theme-list/theme-list.component";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 

@@ -5,6 +5,7 @@ const StatistiqueJeuRouter = require('./statistiqueJeu')
 const ConfigurationRouter = require('./configuration')
 const QuizsRouter = require('./quizs')
 const QuestionsRouter = require('./questions')
+const ReponsesRouter = require('./reponses')
 
 const router = new Router()
 router.get('/status', (req, res) => res.status(200).json('ok'))
@@ -14,5 +15,6 @@ router.use('/statistiqueJeu', StatistiqueJeuRouter)
 router.use('/configuration', ConfigurationRouter)
 router.use('/quizs', QuizsRouter)
 router.use('/questions', QuestionsRouter)
+router.use('./reponses', ReponsesRouter)
 
 module.exports = router
