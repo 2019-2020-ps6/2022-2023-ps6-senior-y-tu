@@ -19,7 +19,7 @@
     </p>
 
     <div class="boutons">
-      <button class="bouton" (click)="modifierQuiz()" type="button"  id="voir-question" [appClickable]="lienQuestionListeTuple">Voir les questions</button>
+      <button class="bouton" (click)="modifierQuiz()" type="button"  id="voir-question" routerLink="/quiz/{{quizToUpdate?.id}}/question-liste">Voir les questions</button>
       <button class="bouton" (click)="modifierQuiz()" type="button"  id="Valider" routerLink="/mes-quizs">Valider</button>
     </div>
 

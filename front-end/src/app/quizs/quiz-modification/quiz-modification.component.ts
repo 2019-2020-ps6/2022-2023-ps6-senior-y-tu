@@ -1,11 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {Quiz} from "../../../models/quiz.model";
 import {ActivatedRoute} from "@angular/router";
-import {QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {QuizService} from "../../../services/quiz.service";
-import {Tuple} from "../../autre/Tuple";
-import {Theme} from "../../../models/theme.model";
 import {ThemeService} from "../../../services/theme.service";
 
 
@@ -20,8 +17,7 @@ export class QuizModificationComponent {
   @Input()
   quizToUpdate: Quiz | undefined;
   themeNom : string | undefined;
-  public lienQuestionListe: string | undefined;
-  protected lienQuestionListeTuple = new Tuple('','');
+
 
 
 
@@ -47,8 +43,6 @@ export class QuizModificationComponent {
       theme: this.themeNom,
     });
 
-    this.lienQuestionListe = '/quiz/' + id + '/question-liste';
-    this.lienQuestionListeTuple = new Tuple(this.lienQuestionListe, undefined);
 
 
   }
