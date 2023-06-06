@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, map, Subject} from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LISTE } from '../mocks/quiz-list.mock';
-import {Question} from "../models/question.model";
+import {Question, Reponse} from "../models/question.model";
 import {Timer} from "../app/timer/Timer";
+
+import {serverUrl, httpOptionsBase} from "../configs/server.config";
+import {HttpClient} from '@angular/common/http';
+
+import {ThemeService} from "./theme.service";
+import {Theme} from "../models/theme.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +18,53 @@ export class QuizService {
 
   private quizs: Quiz[] = QUIZ_LISTE;
 
-  public quizs$: BehaviorSubject<Quiz[]> = new BehaviorSubject(QUIZ_LISTE)
+  public quizs$: BehaviorSubject<Quiz[]> = new BehaviorSubject(<Quiz[]>[]);
+  public quizSelected$: Subject<Quiz> = new Subject();
+
 
   public timer : Timer = new Timer();
 
   public timer$: BehaviorSubject<Timer> = new BehaviorSubject(this.timer);
 
+  private quizUrl = serverUrl + '/quiz'
 
-  constructor() {
+  private httpOptions = httpOptionsBase;
+  private questionsPath = 'questions';
+  private questionListe = 'question-liste';
+  public questionSelected$: Subject<Question> = new Subject();
+
+  private reponsesPath = 'reponses';
+  private reponseSelected$: Subject<Reponse> = new Subject()
+
+
+
+  constructor(private http: HttpClient) {
+    this.recupererQuizs()
 
   }
+
+  recupererQuizs(){
+    this.http.get<Quiz[]>(this.quizUrl).subscribe((listeQuiz) => {
+      this.quizs = listeQuiz;
+      this.quizs$.next(this.quizs);
+    });
+  }
+
+  setSelectedQuiz(quizId: string): void {
+    const urlWithId = this.quizUrl + '/' + quizId;
+    this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
+      this.quizSelected$.next(quiz);
+    });
+  }
+
 
   getQuizs(): Quiz[] {
     return this.quizs;
   }
 
 
+  //addQuiz front
+  /*
   addQuiz(quiz: Quiz): void {
     if(!this.quizs) return;
     if(this.quizs.length !== 0) {
@@ -37,19 +74,37 @@ export class QuizService {
     else {
       quiz.id = '1';
     }
-
-
     this.quizs.push(quiz);
     this.quizs$.next(this.quizs);
   }
+  */
+  addQuiz(quiz: Quiz, theme : Theme): void {
+    //quiz.themeId = this.themeService.getIdByNom(theme, quiz.image);
+    if(!quiz.themeId) quiz.themeId = '1';
+    if(!quiz.image) quiz.image ='sansImage';
 
+    this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe((quizz) => {
+      this.recupererQuizs()
+      this.quizSelected$.next(quizz);
+    });
+  }
+
+  //front
+  /*
   deleteQuiz(quiz: Quiz): void {
     const index = this.quizs.indexOf(quiz);
     console.log('index: ', index)
     this.quizs.splice(index, 1);
     this.quizs$.next(this.quizs);
   }
+   */
+  deleteQuiz(quiz: Quiz): void {
+    const urlWithId = this.quizUrl + '/' + quiz.id;
+    this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.recupererQuizs());
+  }
 
+  //front
+  /*
   updateQuiz(quizToUpdate: Quiz | undefined, quiz: Quiz): void {
     if (!quizToUpdate) return;
     const index = this.quizs.findIndex(q => q.id === quizToUpdate.id)
@@ -59,7 +114,24 @@ export class QuizService {
 
     console.log('Quiz Modifié (QuizService): ', quiz);
   }
+   */
 
+  updateQuiz(quizToUpdate: Quiz | undefined, quiz: Quiz): void{
+    if (!quizToUpdate) return;
+    const urlWithId = this.quizUrl + '/' + quizToUpdate.id;
+    this.http.put<Quiz>(urlWithId, quiz, this.httpOptions).subscribe(() => this.recupererQuizs());
+    console.log('Quiz Modifié (QuizService): ', quiz);
+  }
+
+  getIdQuizWithName(quiz: Quiz): string {
+    const taille = this.quizs.length;
+    if(taille === 0) return '';
+    return this.quizs[taille - 1].id;
+  }
+
+
+  //front
+  /*
   addQuestion(question: Question, quiz: Quiz | undefined): void {
     if (!quiz) return;
     if(!this.quizs) return;
@@ -86,8 +158,19 @@ export class QuizService {
 
     console.log('Question Ajoutée: ', question);
   }
+   */
 
+  addQuestion(question: Question, quiz: Quiz | undefined): void {
+    if (!quiz) return;
+    const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
+    this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe((question) => {
+        this.setSelectedQuiz(quiz.id);
+        this.questionSelected$.next(question);
+    });
+  }
 
+  //front
+  /*
   getQuestionById(id: string | null, questionId: string | null) {
     if (!id || !questionId) return;
     const quiz = this.quizs.find(q => q.id === id);
@@ -95,7 +178,17 @@ export class QuizService {
     return quiz.questions.find(q => q.id === questionId);
 
   }
+   */
 
+  getQuestionById(id: string | null, questionId: string | null) {
+    if (!id || !questionId) return;
+    const urlWithId = this.quizUrl + '/' + id + '/' + this.questionsPath + '/' + questionId;
+    console.log(urlWithId)
+    return this.http.get<Question>(urlWithId);
+  }
+
+//front
+  /*
   updateQuestion(question: Question, id: string) {
 
     const quiz = this.quizs.find(q => q.id === id);
@@ -108,12 +201,29 @@ export class QuizService {
     console.log('Question Modifiée: ', question);
 
   }
+   */
+  updateQuestion(question: Question, id: string) {
+    const urlWithId = this.quizUrl + '/' + id + '/' + this.questionsPath + '/' + question.id;
+    this.http.put<Question>(urlWithId, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(id));
+    console.log('Question Modifiée: ', question);
+  }
 
+  //front
+  /*
   getQuizById(id: string | null) {
     if (!id) return;
     return this.quizs.find(q => q.id === id);
   }
+   */
 
+  getQuizById(id: string | null) {
+    const urlWithId = this.quizUrl + '/' + id;
+    return this.http.get<Quiz>(urlWithId);
+  }
+
+
+  //front
+  /*
   deleteQuestion(question: Question | undefined, quiz: Quiz | undefined) {
     if (!quiz) return;
     if (!question) return;
@@ -125,13 +235,48 @@ export class QuizService {
     console.log('Question Supprimée: ', question);
     this.remiseAZeroQuestionsId(quiz);
   }
+   */
 
+  deleteQuestion(question: Question | undefined, quiz: Quiz | undefined) {
+    if (!quiz) return;
+    if (!question) return;
+    const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
+    this.http.delete<Question>(urlWithId, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+    console.log('Question Supprimée: ', question);
+  }
 
+  //front
+  /*
   private remiseAZeroQuestionsId(quiz: Quiz) {
     for(let i = 0; i < quiz.questions.length; i++) {
       quiz.questions[i].id = (i + 1).toString();
     }
     this.quizs$.next(this.quizs);
+  }
+
+   */
+
+  getQuestionsByQuizId(id: string | null) {
+    if (!id) return;
+    const urlWithId = this.quizUrl + '/' + id + '/questions' ;
+    return this.http.get<Question[]>(urlWithId);
+  }
+
+  getNbQuestionsByQuizId(id: string | null) {
+    if (!id) return;
+    const urlWithId = this.quizUrl + '/' + id + '/' + this.questionListe;
+    return this.http.get<Question[]>(urlWithId).pipe(map(questions => questions.length));
+  }
+
+  addReponse(reponse: Reponse, quiz: Quiz | undefined): void {
+    if (!quiz) return;
+    console.log('reponse: ', reponse);
+    console.log('quiz: ', quiz);
+    const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + reponse.questionId + '/' + this.reponsesPath;
+    this.http.post<Reponse>(urlWithId, reponse, this.httpOptions).subscribe((Reponse) => {
+      this.setSelectedQuiz(quiz.id)
+      this.reponseSelected$.next(Reponse);
+    });
   }
 
   startTimer() {
@@ -155,6 +300,11 @@ export class QuizService {
   setTimer(timer: Timer) {
     this.timer = timer;
     this.timer$.next(this.timer);
+  }
+
+  getReponseListe(quizId: string | undefined, questionId: string | undefined) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/' + this.questionsPath + '/' + questionId + '/' + this.reponsesPath
+    return this.http.get<Reponse[]>(urlWithId);
   }
 
 }

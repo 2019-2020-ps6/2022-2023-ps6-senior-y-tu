@@ -10,15 +10,16 @@
 <div class="modification-question">
   <form class="question-form-modification" [formGroup]="questionForm" >
     <p> Intitulé de la question
-      <input type="text" class="input-texte" [formControlName]="'intitule'" required>
+      <input type="text" class="input-texte" [value]="questionToUpdate?.intitule" [formControlName]="'intitule'" required>
     </p>
 
     <div class="reponse" formArrayName="reponses">
+
       <div *ngFor="let reponse of reponses.controls; let i=index">
         <div class="reponse-form" [formGroupName]="i" >
           <label> Réponse {{i+1}}
-            <input type="text" class="input-texte" name="reponse{{i+1}}" [formControlName]="'valeur'" required>
-            <input type="radio" (click)="onRadioChange(i)" [value]="true" name="estCorrect" [formControlName]="'estCorrect'">
+            <input type="text" class="input-texte" name="reponse{{i+1}}" [value]="reponseListe[i].valeur" [formControlName]="'valeur'" required>
+            <input type="radio" (click)="onRadioChange(i)" [value]="true" name="estCorrect"  [formControlName]="'estCorrect'">
           </label>
         </div>
       </div>
@@ -28,18 +29,18 @@
 
     <div>
       <p> Image de la question </p>
-      <img [src]="questionToUpdate?.img" alt="image" width="30%">
-      <input type="file" class="input-image" name="img" [formControlName]="'img'" required>
+      <img [src]="questionToUpdate?.image" alt="image" width="30%">
+      <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
     </div>
 
     <div>
       <p> Description de la question </p>
-      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200" formControlName="explication"> </textarea>
+      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200" [value]="questionToUpdate?.explication" formControlName="explication"> </textarea>
     </div>
 
     <div class="boutons">
-      <button class="bouton" (click)="deleteQuestion()" type="button" id="supprimer" routerLink="/question-liste/{{quiz?.id}}">Supprimer</button>
-      <button class="bouton" (click)="modifierQuestion()" type="button"  id="Valider" routerLink="/question-liste/{{quiz?.id}}">Valider</button>
+      <button class="bouton" (click)="deleteQuestion()" type="button" id="supprimer" routerLink="/quiz/{{quiz?.id}}/question-liste">Supprimer</button>
+      <button class="bouton" (click)="modifierQuestion()" type="button"  id="Valider" routerLink="/quiz/{{quiz?.id}}/question-liste">Valider</button>
     </div>
   </form>
 </div>

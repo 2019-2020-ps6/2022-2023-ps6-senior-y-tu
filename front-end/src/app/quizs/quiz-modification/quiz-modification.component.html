@@ -8,10 +8,10 @@
 <div class="quiz-modification">
   <form class="quiz-form" [formGroup]="quizForm" >
     <p> Nom du quiz
-      <input type="text" class="input-texte" formControlName="nom" >
+      <input type="text" class="input-texte" [value]="quizToUpdate?.nom" formControlName="nom" >
     </p>
     <p> Thème du quiz
-      <input type="text" class="input-texte" formControlName="theme">
+      <input type="text" class="input-texte" [value]="themeNom" formControlName="theme">
     </p>
     <p> Image du quiz
       <img [src]="quizToUpdate?.image" alt="image" width="30%">
@@ -19,7 +19,7 @@
     </p>
 
     <div class="boutons">
-      <button class="bouton" (click)="modifierQuiz()" type="button"  id="voir-question" routerLink="/question-liste/{{quizToUpdate?.id}}">Voir les questions</button>
+      <button class="bouton" (click)="modifierQuiz()" type="button"  id="voir-question" [appClickable]="lienQuestionListeTuple">Voir les questions</button>
       <button class="bouton" (click)="modifierQuiz()" type="button"  id="Valider" routerLink="/mes-quizs">Valider</button>
     </div>
 

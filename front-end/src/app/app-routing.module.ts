@@ -26,7 +26,8 @@ import {ListStatQuizComponent} from "./statistiques/list-stat-quiz/list-stat-qui
 
 const routes: Routes = [
   { path: 'creer-quiz', component: CreerQuizComponent },
-  { path: 'creer-question/:id', component: CreerQuestionComponent },
+  { path: 'creer-quiz/:id/creer-question', component: CreerQuestionComponent },
+  { path: 'quiz/:id/creer-question', component: CreerQuestionComponent},
   { path: 'creer-patient', component: CreerPatientsComponent },
   { path: 'quiz-list/:id', component: QuizListComponent },
   { path: 'accueil', component: AccueilComponent },
@@ -34,10 +35,10 @@ const routes: Routes = [
   { path: 'theme-list', component: ThemeListComponent},
   { path: 'show-question/:id', component: ShowQuestionComponent},
   {path: 'quiz-modification/:id', component: QuizModificationComponent},
-  {path: 'question-liste/:id', component: QuestionListeComponent},
+  {path: 'quiz/:id/question-liste', component: QuestionListeComponent},
   {path: 'quiz-modification/:id/question-modification/:questionId', component: QuestionModificationComponent},
   {path: 'question-explication/:id', component: QuestionExplicationComponent},
-  {path: 'commencer-quiz', component: CommencerQuizComponent},
+  {path: 'commencer-quiz/:id', component: CommencerQuizComponent},
   { path: 'patients-modification/:id', component: PatientsModificationComponent},
   { path:'mes-patients', component: MesPatientsComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },

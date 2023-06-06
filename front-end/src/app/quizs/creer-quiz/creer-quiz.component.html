@@ -12,9 +12,8 @@
     <p> Nom du quiz
       <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
     </p>
-    <p class="theme"> Thème
-      <input type="text" class="input-texte" name="theme" [formControlName]="'theme'" required>
-      <button class="valider-theme"> Valider theme </button>
+    <p class="theme" > Thème
+      <input type="text" class="input-texte" name="nomTheme" [formControlName]="'nomTheme'" required>
     </p>
     <p> Image
       <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
@@ -22,7 +21,7 @@
 
     <p class="bouton-paragraphe">
       <button routerLink="/mes-quizs" class="bouton"> Retour </button>
-      <button type="submit" (click)="onCreer()" routerLink="/creer-question/{{newId}}" class="bouton"> Valider </button>
+      <button type="submit" (click)="onCreer()"  class="bouton"> Valider </button>
 
     </p>
   </form>

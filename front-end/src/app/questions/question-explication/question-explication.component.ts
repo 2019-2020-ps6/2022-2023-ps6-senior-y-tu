@@ -6,6 +6,8 @@ import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
+import {QuizService} from "../../../services/quiz.service";
+import {Quiz} from "../../../models/quiz.model";
 
 @Component({
   selector: 'app-question-explication',
@@ -41,14 +43,22 @@ export class QuestionExplicationComponent {
 
   @Input()
   public questions: Question | undefined;
+
+  public quiz : Quiz | undefined;
   public reponseCorrecte: number;
   public id: string | null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id);
+  public reponseListe: Reponse[] = [];
 
-    this.reponseCorrecte = this.questions?.reponses?.findIndex((reponse: Reponse) => reponse.estCorrect) ?? -1;
+  constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
+    this.id = this.route.snapshot.paramMap.get('id');
+    if(this.id == null) this.id = '1';
+    this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id);
+    this.quizService.getReponseListe(this.questions?.quizId, this.id).subscribe((reponseListe) => {
+      this.reponseListe = reponseListe;
+    });
+
+    this.reponseCorrecte = this.reponseListe.findIndex((reponse: Reponse) => reponse.estCorrect) ?? -1;
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);

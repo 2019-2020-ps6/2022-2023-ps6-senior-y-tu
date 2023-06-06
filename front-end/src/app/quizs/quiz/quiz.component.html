@@ -8,7 +8,7 @@
 
 <div class="quiz" *ngIf="options?.ergo">
   <div class="theme-quiz">
-    <p>{{quiz?.theme}}</p>
+    <p>{{themeName}}</p>
   </div>
 
   <div class="alignHorizontal">
@@ -44,6 +44,6 @@
     <img  alt="image" src="{{quiz?.image}}" width=400 height=200px>
   </div>
     <br>
-  <button class="button-card"  [style]="color? {'background-color': '#b4a7d6'} : ''" [appClickable]="lien" appPolice>Jouer</button>
+  <button class="button-card"  [style]="color? {'background-color': '#b4a7d6'} : ''" [appClickable]="lienTuple" appPolice>Jouer</button>
 
 </div>

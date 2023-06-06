@@ -24,7 +24,9 @@ router.get('/:themeId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
+    console.log(req.body)
     const theme = Theme.create({ ...req.body })
+    console.log(theme)
     res.status(201).json(theme)
   } catch (err) {
     manageAllErrors(res, err)

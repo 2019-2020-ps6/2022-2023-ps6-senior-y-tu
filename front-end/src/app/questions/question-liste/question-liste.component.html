@@ -18,7 +18,7 @@
   <div class="sans-question" *ngIf="!questionListe || questionListe.length === 0">
     <p> Aucune question pour ce quiz </p>
   </div>
-  <button class="ajouter-question" routerLink="/creer-question/{{quiz?.id}}"> Ajouter une question</button>
+  <button class="ajouter-question" routerLink="/quiz/{{quiz?.id}}/creer-question"> Ajouter une question</button>
   <button class="valider-button" routerLink="/mes-quizs"> Valider</button>
 
 

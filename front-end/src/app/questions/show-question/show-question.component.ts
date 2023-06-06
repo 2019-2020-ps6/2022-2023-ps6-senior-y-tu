@@ -14,6 +14,7 @@ import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
+import {QuizService} from "../../../services/quiz.service";
 
 @Component({
   selector: 'app-show-question',
@@ -29,6 +30,9 @@ export class ShowQuestionComponent {
   @Input()
   public questions: Question | undefined;
   public id: string | null;
+
+  reponseListe: Reponse[] = [];
+
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
@@ -46,42 +50,47 @@ export class ShowQuestionComponent {
     this.changementDeplacement[1] = e2;
   }
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id) ;
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
+
+    this.quizService.getReponseListe(this.questions?.quizId, this.questions?.id).subscribe((reponseListe) => {
+      this.reponseListe = reponseListe;
+    });
   }
 
   private reponseParkinsonFort(e : KeyboardEvent): void{
     let reponse = null;
 
+
     if (e.key == Handicap_Fort_Haut.E || e.key == Handicap_Fort_Haut.PARENTHESE_OUVERTE || e.key == Handicap_Fort_Haut.APPOSTROPHE
       || e.key == Handicap_Fort_Haut.MOINS|| e.key== Handicap_Fort_Haut.R|| e.key== Handicap_Fort_Haut.T)
       {
-        reponse = this.questions?.reponses[0];
+        reponse = (this.reponseListe)[0];
       }
 
     //zone violette
     else if (e.key == Handicap_Fort_Gauche.A || e.key == Handicap_Fort_Gauche.Z || e.key == Handicap_Fort_Gauche.Q
       || e.key == Handicap_Fort_Gauche.S || e.key == Handicap_Fort_Gauche.W || e.key == Handicap_Fort_Gauche.X)
       {
-        reponse = this.questions?.reponses[1];
+        reponse = (this.reponseListe)[1];
       }
 
     //zone jaune
     else if(e.key == Handicap_Fort_Bas.H || e.key == Handicap_Fort_Bas.J || e.key == Handicap_Fort_Bas.B
       || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE)
       {
-        reponse = this.questions?.reponses[2];
+        reponse = (this.reponseListe)[2];
       }
 
     //zone bleu
     else if(e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
       || e.key == Handicap_Fort_Droite.M || e.key== Handicap_Fort_Droite.DOUBLE_POINT || e.key == Handicap_Fort_Droite.POINT_EXCLAMATION)
       {
-        reponse = this.questions?.reponses[3];
+        reponse = (this.reponseListe)[3];
       }
     else
       FonctionCommuneThemeQuiz.ajouterAutreTouche(e);
@@ -91,10 +100,10 @@ export class ShowQuestionComponent {
   private reponseParkinsonLeger(e : KeyboardEvent): void{
     let reponse = null;
     switch (e.key) {
-      case Handicapt_Leger_Haut.FLECHE_HAUT : reponse = this.questions?.reponses[0]; break;
-      case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = this.questions?.reponses[1]; break;
-      case Handicap_Leger_Droite.FLECHE_DROITE : reponse = this.questions?.reponses[2]; break;
-      case Handicap_Leger_Bas.FLECHE_BAS : reponse = this.questions?.reponses[3]; break;
+      case Handicapt_Leger_Haut.FLECHE_HAUT : reponse = (this.reponseListe)[0]; break;
+      case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = (this.reponseListe)[1]; break;
+      case Handicap_Leger_Droite.FLECHE_DROITE : reponse = (this.reponseListe)[2]; break;
+      case Handicap_Leger_Bas.FLECHE_BAS : reponse = (this.reponseListe)[3]; break;
       default: FonctionCommuneThemeQuiz.ajouterAutreTouche(e); break;
     }
     if (reponse != null) this.reponseNavigation(reponse);

@@ -1,15 +1,18 @@
 
 export interface Reponse {
-  id: string;
+  //id: string;
   valeur: string;
   estCorrect: boolean;
+
+  questionId: string;
 }
 
 export interface Question {
   id: string;
   intitule: string;
-  reponses: Reponse[];
-  img: string;
+  image: string;
   explication: string;
+
+  quizId: string;
 
 }

@@ -2,6 +2,7 @@
 import {Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
 import {Quiz} from "../../../models/quiz.model";
 import {Tuple} from "../../autre/Tuple";
+import {ThemeService} from "../../../services/theme.service";
 
 
 @Component({
@@ -11,7 +12,8 @@ import {Tuple} from "../../autre/Tuple";
 })
 
 export class QuizComponent implements OnInit {
-  lien: Tuple = new Tuple('commencer-quiz', undefined);
+  lien : string = "";
+  lienTuple: Tuple = new Tuple("","");
 
   @Input()
   options : any;
@@ -25,7 +27,15 @@ export class QuizComponent implements OnInit {
   @Output()
   quizDeleted: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor() { }
+
+  themeName: string | undefined = "";
+
+  constructor(private themeService: ThemeService) {
+    const id = this.quiz?.id;
+    this.lien = "/commencer-quiz/" + id;
+    this.lienTuple = new Tuple(this.lien, undefined);
+    this.themeName = themeService.getThemeById(this.quiz?.themeId)?.nomTheme;
+  }
 
   ngOnInit(): void {
 

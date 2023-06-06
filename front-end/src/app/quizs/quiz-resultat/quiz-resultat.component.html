@@ -3,9 +3,9 @@
 <div class="boite" >
   <div class="align">
     <div class="gauche">
-      <h2 appPolice>Thème : {{theme[0].nom}}</h2>
+      <h2 appPolice>Thème : {{theme[0].nomTheme}}</h2>
       <h2 appPolice>Quiz : {{quiz[0].nom}}</h2>
-      <p appPolice>Nombre de questions: {{quiz[0].questions.length}}</p>
+      <p appPolice>Nombre de questions: {{nbQuestion}}</p>
     </div>
     <img alt="image" src="assets/boutonRetour.png" [appClickable]="tupleRetour">
   </div>

@@ -10,11 +10,11 @@
       <h3>{{questions?.intitule}}</h3>
     </div>
 
-    <img src="{{questions?.img}}" width="200px"/>
+    <img src="{{questions?.image}}" width="200px"/>
   </div>
 
   <div class="explication">
-    <p appPolice>La réponse: {{questions?.reponses?.[reponseCorrecte]?.valeur}} </p>
+    <p appPolice>La réponse: {{reponseListe[reponseCorrecte].valeur}} </p>
     <p appPolice>{{questions?.explication}}</p>
   </div>
 

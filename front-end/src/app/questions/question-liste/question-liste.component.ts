@@ -3,6 +3,9 @@ import {Question} from "../../../models/question.model";
 import {Quiz} from "../../../models/quiz.model";
 import {ActivatedRoute} from "@angular/router";
 import {QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
+import {QuizService} from "../../../services/quiz.service";
+
+import {httpOptionsBase, serverUrl} from "../../../configs/server.config";
 
 @Component({
   selector: 'app-question-liste',
@@ -18,15 +21,23 @@ export class QuestionListeComponent {
   public questionListe: Question[] | undefined = [];
 
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private quizService: QuizService) {
 
 
   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.quiz = QUIZ_LISTE.find(quiz => quiz.id === id);
-    this.questionListe = this.quiz?.questions;
+    this.quizService.getQuizById(id)?.subscribe((quiz) => {
+      console.log(quiz)
+      this.quiz = quiz;
+    });
+    //this.quiz = QUIZ_LISTE.find(quiz => quiz.id === id);
+    this.quizService.getQuestionsByQuizId(id)?.subscribe((questions) => {
+      console.log(questions)
+      this.questionListe = questions;
+    });
+    //this.questionListe = this.quiz?.questions;
   }
 
 

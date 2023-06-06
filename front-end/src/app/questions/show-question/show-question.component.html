@@ -11,28 +11,28 @@
       <h2 appPolice>{{questions?.intitule}}</h2>
     </div>
 
-    <img src="{{questions?.img}}" width="200px"/>
+    <img src="{{questions?.image}}" width="200px"/>
   </div>
 
   <div>
     <div class="reponse">
-      <button class="question1" [appQuestionDirective]="questions?.reponses?.[0]" appPolice>
-        {{questions?.reponses?.[0]?.valeur}}
+      <button class="question1" [appQuestionDirective]="reponseListe[0]" appPolice>
+        {{reponseListe[0].valeur}}
       </button>
     </div>
 
     <div class="reponse">
-      <button class="question2" [appQuestionDirective]="questions?.reponses?.[1]" appPolice>
-        {{questions?.reponses?.[1]?.valeur}}
+      <button class="question2" [appQuestionDirective]="reponseListe[1]" appPolice>
+        {{reponseListe[1].valeur}}
       </button>
-      <button class="question3" [appQuestionDirective]="questions?.reponses?.[3]" appPolice>
-        {{questions?.reponses?.[3]?.valeur}}
+      <button class="question3" [appQuestionDirective]="reponseListe[3]" appPolice>
+        {{reponseListe[3].valeur}}
       </button>
     </div>
 
     <div class="reponse">
-      <button class="question4" [appQuestionDirective]="questions?.reponses?.[2]" appPolice>
-        {{questions?.reponses?.[2]?.valeur}}
+      <button class="question4" [appQuestionDirective]="reponseListe[2]" appPolice>
+        {{reponseListe[2].valeur}}
       </button>
     </div>
 

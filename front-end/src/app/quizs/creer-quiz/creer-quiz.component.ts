@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { Quiz} from "../../../models/quiz.model";
 import { QuizService } from "../../../services/quiz.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Theme} from "../../../models/theme.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-creer-quiz',
@@ -10,26 +12,52 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class CreerQuizComponent implements  OnInit{
   public quizForm : FormGroup;
-  public newId: string;
+  //public newId: string;
+  quiz: Quiz | undefined;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
+  theme: Theme | undefined;
+
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router : Router) {
     this.quizForm = this.formBuilder.group({
-      id: [''],
       nom: [''],
-      theme: [''],
       image: [''],
-      questions: this.formBuilder.array([]),
+      nomTheme: [''],
     });
 
-    const listeQuiz = this.quizService.getQuizs();
-    this.newId = (listeQuiz.length + 1).toString();
+    //front
+    //const listeQuiz = this.quizService.getQuizs();
+    //this.newId = (listeQuiz.length + 1).toString();
   }
   ngOnInit(): void {  }
 
 
   onCreer() {
-    const quiz: Quiz = this.quizForm.getRawValue() as Quiz;
-    this.quizService.addQuiz(quiz);
-    console.log('Quiz Ajouté: ', quiz);
+    const valeur = this.quizForm.getRawValue() ;
+    const quiz: Quiz = {
+      nom: valeur.nom,
+      image: valeur.image,
+      themeId: valeur.themeId,
+      id: valeur.id,
+    }
+    const theme: Theme = {
+      nomTheme: valeur.nomTheme,
+      image: valeur.image,
+      id: valeur.themeId,
+
+    }
+
+    this.quizService.addQuiz(quiz, theme);
+
+    this.quizService.quizSelected$.subscribe((quiz) => {
+      const quizId = quiz.id;
+
+      this.router.navigate(["/creer-quiz", quizId, "creer-question"]);
+    });
+
+
+
+
+
+
   }
 }

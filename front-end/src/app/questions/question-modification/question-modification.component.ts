@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {Question} from "../../../models/question.model";
+import {Question, Reponse} from "../../../models/question.model";
 import {ActivatedRoute} from "@angular/router";
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Quiz} from "../../../models/quiz.model";
 import {QuizService} from "../../../services/quiz.service";
 
@@ -15,6 +15,7 @@ export class QuestionModificationComponent {
 
   @Input()
   questionToUpdate: Question | undefined;
+  reponseListe: Reponse[] = [];
 
   @Input()
   quiz: Quiz | undefined;
@@ -28,7 +29,7 @@ export class QuestionModificationComponent {
         id: [''],
         intitule: [''],
         reponses: this.formBuilder.array([]),
-        img: [''],
+        image: [''],
         explication: ['']
       });
 
@@ -36,20 +37,31 @@ export class QuestionModificationComponent {
 
     ngOnInit() {
       this.loadQuestion();
-      this.quiz = this.quizService.getQuizById(this.route.snapshot.paramMap.get('id'));
-
     }
 
   get reponses(): FormArray {
       return this.questionForm.get('reponses') as FormArray;
   }
 
+  initReponsesFormArray() {
+    const reponsesFormArray = this.questionForm.get('reponses') as FormArray;
+    this.reponseListe.forEach(reponse => {
+      reponsesFormArray.push(
+        this.formBuilder.group({
+          valeur: new FormControl(reponse.valeur),
+          estCorrect: new FormControl(reponse.estCorrect)
+        })
+      );
+    });
+  }
+
 
 
   loadQuestion() {
 
-      const id = this.route.snapshot.paramMap.get('id');
       const questionId = this.route.snapshot.paramMap.get('questionId');
+      //front
+    /*
       const question = this.quizService.getQuestionById(id, questionId);
       if(!question) return;
       this.questionToUpdate = question;
@@ -59,27 +71,58 @@ export class QuestionModificationComponent {
         img: '',
         explication: question.explication,
       });
+
+     */
+
+
+    const quizId = this.route.snapshot.paramMap.get('id');
+    if(!quizId || !questionId) return;
+    if (quizId) {
+      this.quizService.getQuizById(quizId).subscribe((quiz) => {
+        this.quiz = quiz;
+        this.quizService.getReponseListe(quizId, questionId).subscribe((reponseListe) => {
+          this.reponseListe = reponseListe;
+          this.initReponsesFormArray();
+        });
+      });
+    }
+
+
+    this.quizService.getQuestionById(quizId, questionId)?.subscribe((question) => {
+      this.questionToUpdate = question;
+      console.log(this.questionToUpdate?.explication)
+      console.log(this.questionToUpdate)
+      if(!this.questionToUpdate) return;
+      this.questionForm.patchValue({
+        id: this.questionToUpdate.id,
+        intitule: this.questionToUpdate.intitule,
+        reponses: [],
+        image: '',
+        explication: this.questionToUpdate.explication,
+      });
+
       const reponsesFormArray = this.questionForm.get('reponses') as FormArray;
       while (reponsesFormArray.length) {
         reponsesFormArray.removeAt(0);
       }
-      question.reponses.forEach(reponse => {
+
+      this.reponseListe.forEach(reponse => {
         reponsesFormArray.push(this.formBuilder.group({
-          id: reponse.id,
+          //id: reponse.id,
           valeur: reponse.valeur,
           estCorrect: reponse.estCorrect,
         }));
       });
 
-
+    });
 
   }
 
   modifierQuestion() {
       if(!this.quiz) return;
       const question: Question = this.questionForm.getRawValue() as Question;
-      if(question.img === '') {
-        question.img = this.questionToUpdate?.img || '';
+      if(question.image === '') {
+        question.image = this.questionToUpdate?.image || '';
       }
       this.quizService.updateQuestion(question, this.quiz.id);
 

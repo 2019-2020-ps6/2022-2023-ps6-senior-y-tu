@@ -4,7 +4,7 @@ import {Quiz} from "../../../models/quiz.model";
 import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
 import {ThemeService} from "../../../services/theme.service";
 import {QuizService} from "../../../services/quiz.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Timer} from "../../timer/Timer";
 import {Tuple} from "../../autre/Tuple";
 
@@ -18,6 +18,7 @@ export class QuizResultatComponent {
   public tuple: Tuple = new Tuple('/show-question', '1');
   protected nombreClick: number = 0;
   protected autresLettreTaper : Array<{lettre: string, occurence: number}> = [];
+  protected nbQuestion: number = 0;
 
   @Input()
   theme: Theme[] = [];
@@ -35,7 +36,7 @@ export class QuizResultatComponent {
       this.router.navigate(['show-question',1]);
   }
 
-  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router) {
+  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute) {
     this.themeService.themes$.subscribe((themes: Theme[]) => {
       this.theme = themes;
     });
@@ -54,6 +55,11 @@ export class QuizResultatComponent {
 
     this.quizService.stopTimer();
     this.timer = this.quizService.timer;
+
+    const id = this.route.snapshot.paramMap.get('id');
+    this.quizService.getNbQuestionsByQuizId(id)?.subscribe((nb) => {
+      this.nbQuestion = nb;
+    });
   }
 
   private compterLettre(autreTouche: string) {

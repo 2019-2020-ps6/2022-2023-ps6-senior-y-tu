@@ -4,8 +4,9 @@ const Theme = require('./themes/theme.model.js')
 const StatistiqueJeu = require('./statistiqueJeu/statistiqueJeu.js')
 const Configuration = require('./configuration/configuration.model')
 const Quiz = require('./quizs/quiz.model')
-const Question = require('./questions/question.model')
-const Reponse = require('./reponses/reponses.model')
+
+const Question = require('./quizs/questions/question.model')
+const Reponses = require('./quizs/questions/reponses/reponses.model')
 
 module.exports = {
   Patient,
@@ -14,5 +15,5 @@ module.exports = {
   Configuration,
   Quiz,
   Question,
-  Reponse,
+  Reponses,
 }

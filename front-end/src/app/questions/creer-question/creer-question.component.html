@@ -36,9 +36,9 @@
     </div>
 
     <p class="bouton-question">
-      <button routerLink="/creer-quiz" class="bouton"> Retour </button>
-      <button type="submit" routerLink="/question-liste/{{quiz?.id}}" class="bouton" (click)="onCreer()" >Ajouter question</button>
-      <button type="submit" routerLink="/mes-quizs" class="bouton" (click)="onCreer()"> Valider Quiz </button>
+      <button [routerLink]="retour" class="bouton"> Retour </button>
+      <button type="submit" class="bouton" (click)="ajouterQuestion($event)" >Ajouter question</button>
+      <button type="submit" class="bouton" (click)="validerQuiz($event)" > Valider Quiz </button>
     </p>
   </form>
 </div>

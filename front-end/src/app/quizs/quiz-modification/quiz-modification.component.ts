@@ -4,6 +4,9 @@ import {ActivatedRoute} from "@angular/router";
 import {QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {QuizService} from "../../../services/quiz.service";
+import {Tuple} from "../../autre/Tuple";
+import {Theme} from "../../../models/theme.model";
+import {ThemeService} from "../../../services/theme.service";
 
 
 @Component({
@@ -16,28 +19,38 @@ export class QuizModificationComponent {
 
   @Input()
   quizToUpdate: Quiz | undefined;
+  themeNom : string | undefined;
+  public lienQuestionListe: string | undefined;
+  protected lienQuestionListeTuple = new Tuple('','');
 
 
 
-  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService : QuizService){
+  constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService : QuizService, public themeService : ThemeService){
     const id = this.route.snapshot.paramMap.get('id');
-    this.quizToUpdate = QUIZ_LISTE.find(quiz => quiz.id === id);
+    this.quizService.getQuizById(id).subscribe((quiz) => {
+      this.quizToUpdate = quiz;
+    });
+    //this.quizToUpdate = QUIZ_LISTE.find(quiz => quiz.id === id);
+    this.themeNom = this.themeService.getThemeById(this.quizToUpdate?.themeId)?.nomTheme;
 
     this.quizForm = this.formBuilder.group({
       id: [''],
       nom: [''],
-      theme: [''],
       image: [''],
-      questions: [''],
+      theme: [''],
     });
 
     this.quizForm.patchValue({
       id: this.quizToUpdate?.id,
       nom: this.quizToUpdate?.nom,
-      theme: this.quizToUpdate?.theme,
       image: '',
-      questions: this.quizToUpdate?.questions,
+      theme: this.themeNom,
     });
+
+    this.lienQuestionListe = '/quiz/' + id + '/question-liste';
+    this.lienQuestionListeTuple = new Tuple(this.lienQuestionListe, undefined);
+
+
   }
 
   ngOnInit(): void {
