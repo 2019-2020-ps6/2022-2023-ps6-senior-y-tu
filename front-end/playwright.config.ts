@@ -1,6 +1,7 @@
 import  { PlaywrightTestConfig } from "@playwright/test";
 
 const config : PlaywrightTestConfig = {
+  testDir: "./src/e2e",
   reporter : [['html', { open: 'always' }]],
   use: {
     headless: false,
