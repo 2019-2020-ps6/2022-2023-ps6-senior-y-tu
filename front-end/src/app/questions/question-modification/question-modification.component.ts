@@ -90,7 +90,7 @@ export class QuestionModificationComponent {
 
     this.quizService.getQuestionById(quizId, questionId)?.subscribe((question) => {
       this.questionToUpdate = question;
-      console.log(this.questionToUpdate?.explication)
+      console.log("explication : " + this.questionToUpdate?.explication)
       console.log(this.questionToUpdate)
       if(!this.questionToUpdate) return;
       this.questionForm.patchValue({

@@ -27,10 +27,11 @@ router.get('/:questionId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    console.log(req.body)
     Quiz.getById(req.params.quizId)
     const quizId = parseInt(req.params.quizId, 10)
-    let question = Question.create({ intitule: req.body.intitule, quizId })
+    let question = Question.create({
+      intitule: req.body.intitule, image: req.body.image, explication: req.body.explication, quizId,
+    })
     if (req.body.reponses && req.body.reponses.length > 0) {
       const reponses = req.body.reponses.map((reponse) => Reponses.create({ ...reponse, questionId: question.id }))
       question = { ...question, reponses }
@@ -45,7 +46,9 @@ router.post('/', (req, res) => {
 router.put('/:questionId', (req, res) => {
   try {
     const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
-    const questionModifie = Question.update(req.params.questionId, { intitule: req.body.intitule, quizId: question.quizId })
+    const questionModifie = Question.update(req.params.questionId, {
+      intitule: req.body.intitule, image: req.body.image, explication: req.body.explication, quizId: question.quizId,
+    })
     res.status(200).json(questionModifie)
     // res.status(200).json(Question.update(req.params.questionId, req.body))
   } catch (err) {
