@@ -5,8 +5,12 @@
 <div class="mes-patients" xmlns="http://www.w3.org/1999/html">
   <button class="creation-patient" routerLink="/creer-patient">Créer un nouveau patient</button>
 
+  <div class="recherche-patient">
+    <input class="recherche" type="text" [(ngModel)]="searchTerm" placeholder="Rechercher un patient">
+  </div>
+
   <div class="ma-liste-patients">
-    <div class="patient" *ngFor="let patient of patientListe"  >
+    <div class="patient" *ngFor="let patient of filterPatients(searchTerm)"  >
 
       <div class="patient-app">
 

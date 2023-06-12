@@ -4,8 +4,12 @@
 <div class="mes-quizs">
   <button class="creation-quiz" routerLink="/creer-quiz">Créer un nouveau quiz</button>
 
+  <div class="recherche-quiz">
+    <input class="recherche" type="text" [(ngModel)]="searchTerm" placeholder="Rechercher un quiz">
+  </div>
+
   <div class="ma-liste-quizs">
-    <div class="quiz" *ngFor="let quiz of quizListe">
+    <div class="quiz" *ngFor="let quiz of filterQuizs(searchTerm)">
 
       <div class="quiz-app">
         <app-quiz [options]="{ ergo : true, patient : false}" [quiz]="quiz" (quizDeleted)="quizDeleted($event)"></app-quiz>

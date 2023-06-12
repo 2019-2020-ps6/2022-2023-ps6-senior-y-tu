@@ -3,9 +3,12 @@
     <div class="bloc-patient-header">
       <span class="titre-list-patient">Patients</span>
     </div>
+    <div class="recherche-patient">
+      <input class="recherche" type="text" [(ngModel)]="searchTerm" placeholder="Rechercher un patient">
+    </div>
     <div class="bloc-patient-content">
       <div class="list-patient">
-        <ng-container *ngFor="let patient of patientList">
+        <ng-container *ngFor="let patient of filterPatients(searchTerm)">
           <app-patient [patient]="patient"></app-patient>
         </ng-container>
       </div>
