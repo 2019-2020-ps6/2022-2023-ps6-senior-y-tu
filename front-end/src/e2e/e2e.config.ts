@@ -1,1 +1,2 @@
-export const testUrl = 'http://localhost:4200';
+export const accueil = 'http://localhost:4200';
+
