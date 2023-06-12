@@ -12,7 +12,6 @@ test.describe('Patient Feature',() => {
     await test.step('Cree un Patient', async () => {
       const boutonCreationPatient = await page.locator('button.creation-patient');
       boutonCreationPatient.evaluateHandle((element: {click:() => any; })=> element.click());
-
       await expect(page).toHaveURL('http://localhost:4200/creer-patient');
       const nomEntree = await patientFromFixture.getInput('input-nom-patient');
       await nomEntree.type('Dumaillet');
@@ -22,22 +21,27 @@ test.describe('Patient Feature',() => {
       await dateEntree.type('12-12-1956');
       const imageEntree = await patientFromFixture.getInput('input-image-patient')
       await imageEntree.type('12-12-1956');
-
       const handicapeEntree = await patientFromFixture.getInput('input-handicap-patient');
       await handicapeEntree.check();
-
       const policeEntree = await patientFromFixture.getInput('input-police-patient');
       await policeEntree.check();
-
       const explicationEntree = await patientFromFixture.getInput('input-explication-patient');
       await explicationEntree.check();
-
       const sourisEntree = await patientFromFixture.getInput('input-souris-patient');
       await sourisEntree.check();
-
       const boutonValiderPatient = await page.locator('button#valider');
       boutonValiderPatient.evaluateHandle((element: {click:() => any; })=> element.click());
       await expect(page).toHaveURL('http://localhost:4200/mes-patients');
     });
+  });
+  test('Patient Deletion', async ({page}) => {
+    await page.goto(patientUrl);
+    const patientFromFixture = new PatientFormFixture(page);
+    const patient = await page.getByText('Dumaillet');
+    expect(patient).toBeVisible();
+    const boutonSuppPatient = await page.locator('button#suprimer-patient');
+    boutonSuppPatient.evaluateHandle((element: {click:() => any; })=> element.click());
+    await expect(page).toHaveURL('http://localhost:4200/mes-patients');
+    expect(patient).not.toBeVisible();
   });
 })

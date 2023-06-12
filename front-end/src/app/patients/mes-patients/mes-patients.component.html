@@ -24,8 +24,8 @@
           <p id="patient-souris">Utilisation de la souris: {{getConfiguration(patient)?.souris}}</p>
 
           <div class="bouton-patients">
-            <button class="bouton" routerLink="/patients-modification/{{patient.id}}">Modifier</button>
-            <button class="bouton" (click)="deletePatient(patient)">Supprimer</button>
+            <button class="bouton" id="modifier-patient" routerLink="/patients-modification/{{patient.id}}">Modifier</button>
+            <button class="bouton" id="suprimer-patient" (click)="deletePatient(patient)">Supprimer</button>
           </div>
         </div>
 
