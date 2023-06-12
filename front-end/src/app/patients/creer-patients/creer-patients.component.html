@@ -34,7 +34,7 @@
       <div class="space">
         <p id="handicap-text"> Handicap:</p>
         <div id ="handicap">
-          <input type="radio" id="handicap-leger" name="handicap-leger" value="leger" [formControlName]="'handicap'" checked>
+          <input type="radio" id="handicap-leger" name="handicap-leger" value="leger" [formControlName]="'handicap'" data-testid="input-handicap-patient"checked>
           <label for="handicap-leger">Parkinson léger</label>
           <br>
           <input type="radio" id="handicap-fort" name="handicap-fort" value="fort" [formControlName]="'handicap'">
@@ -45,7 +45,7 @@
       <div class="space">
         <p class="explication"> Explications aux questions:</p>
           <div id="explication">
-            <input type="radio" id="explication-oui" name="explication-oui"value="oui" [formControlName]="'explication'" checked>
+            <input type="radio" id="explication-oui" name="explication-oui"value="oui" [formControlName]="'explication'" data-testid="input-explication-patient" checked>
             <label for="explication-oui">Oui</label>
             <br>
             <input type="radio" id="explication-non" name = "explication-non"value="non" [formControlName]="'explication'">
@@ -58,7 +58,7 @@
       <div class="space">
         <p class="taille-police">Taille de police:</p>
           <div id="police">
-            <input type="radio" id="police-24" name = "police-24"value="24" [formControlName]="'police'" checked>
+            <input type="radio" id="police-24" name = "police-24"value="24" [formControlName]="'police'" data-testid="input-police-patient" checked>
             <label for="police-24">24</label>
             <br>
             <input type="radio" id="police-40" name = "police-40" value="40" [formControlName]="'police'" >
@@ -74,7 +74,7 @@
       <div class="space">
         <p class="souris"> Utilisation de la souris:</p>
           <div id="souris">
-            <input type="radio" id="souris-oui" value="oui" [formControlName]="'souris'" checked>
+            <input type="radio" id="souris-oui" value="oui" [formControlName]="'souris'" data-testid="input-souris-patient"checked>
             <label for="explication-oui">Oui</label>
             <br>
             <input type="radio" id="souris-non" value="non" [formControlName]="'souris'">
@@ -85,7 +85,7 @@
 
     <p class="bouton-patients">
       <button routerLink="/mes-patients" class="bouton"> Annuler </button>
-      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" class="bouton"> Valider </button>
+      <button type="submit" (click)="onCreer()" routerLink="/mes-patients" id="valider" class="bouton"> Valider </button>
     </p>
   </form>
 

@@ -22,18 +22,22 @@ test.describe('Patient Feature',() => {
       await dateEntree.type('12-12-1956');
       const imageEntree = await patientFromFixture.getInput('input-image-patient')
       await imageEntree.type('12-12-1956');
-      /*
-      const handicapeEntree = await patientFromFixture.getInput('handicap-leger');
+
+      const handicapeEntree = await patientFromFixture.getInput('input-handicap-patient');
       await handicapeEntree.check();
 
-      const policeEntree = await patientFromFixture.getInput('police-24');
+      const policeEntree = await patientFromFixture.getInput('input-police-patient');
       await policeEntree.check();
 
-      const explicationEntree = await patientFromFixture.getInput('explication-oui');
+      const explicationEntree = await patientFromFixture.getInput('input-explication-patient');
       await explicationEntree.check();
 
-      const sourisEntree = await patientFromFixture.getInput('souris-oui');
-      await sourisEntree.check();*/
+      const sourisEntree = await patientFromFixture.getInput('input-souris-patient');
+      await sourisEntree.check();
+
+      const boutonValiderPatient = await page.locator('button#valider');
+      boutonValiderPatient.evaluateHandle((element: {click:() => any; })=> element.click());
+      await expect(page).toHaveURL('http://localhost:4200/mes-patients');
     });
   });
 })
