@@ -14,34 +14,38 @@ export class PatientComponent implements OnInit{
 
   @Input()
   patient: Patient | undefined ;
-  configuration : Configuration | undefined ;
 
   @Output()
   patientDeleted: EventEmitter<Patient> = new EventEmitter<Patient>();
 
-  constructor(private route : Router, public configurationService : ConfigurationService) {
-    this.configurationService.configurations$.subscribe((configurations) => {
-      this.configuration = configurations.at(0);
-    })
-  }
+  constructor(private route : Router, public configurationService : ConfigurationService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   stockerPatient(): void {
-    if (this.patient != undefined && this.configuration != undefined) {
-      if(localStorage.getItem("patient-prenom") != undefined) {
-        localStorage.removeItem("patient-prenom");
-        localStorage.removeItem("patient-handicap");
-        localStorage.removeItem("patient-explication");
-        localStorage.removeItem("patient-taille");
-        localStorage.removeItem("patient-utilisation_souris")
-      }
-      localStorage.setItem("patient-prenom", this.patient.prenom);
-      localStorage.setItem("patient-handicap", this.configuration.handicap);
-      localStorage.setItem("patient-explication", this.configuration.explication);
-      localStorage.setItem("patient-taille", String(this.configuration.police));
-      localStorage.setItem("patient-utilisation_souris", this.configuration.souris);
-      this.route.navigate(['/theme-list'])
+    if (this.patient != undefined) {
+      this.configurationService.getSelectedConfiguration(this.patient.id)
+      this.configurationService.configurationSelected$.subscribe((config) =>{
+        if (localStorage.getItem("patient-prenom") != undefined) {
+          localStorage.removeItem("patient-prenom");
+          localStorage.removeItem("patient-handicap");
+          localStorage.removeItem("patient-explication");
+          localStorage.removeItem("patient-taille");
+          localStorage.removeItem("patient-utilisation_souris")
+          localStorage.removeItem("autresTouchesAppuyer")
+          localStorage.removeItem("nombreDeplacement")
+          localStorage.removeItem("patient-utilisation_souris")
+        }
+        if (this.patient != undefined)
+          localStorage.setItem("patient-prenom", this.patient.prenom);
+        localStorage.setItem("patient-handicap", config.handicap);
+        localStorage.setItem("patient-explication", config.explication);
+        localStorage.setItem("patient-taille", String(config.police));
+        localStorage.setItem("autresTouchesAppuyer", "")
+        localStorage.setItem("nombreDeplacement", "0")
+        localStorage.setItem("patient-utilisation_souris", config.souris);
+        this.route.navigate(['/theme-list'])
+      })
     }
   }
 
