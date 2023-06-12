@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
 import {Question, Reponse} from '../../../models/question.model';
 import { Quiz } from '../../../models/quiz.model';
@@ -65,7 +65,7 @@ export class CreerQuestionComponent implements  OnInit{
       quizId: valeur.quizId
     }
     this.quizService.addQuestion(question, this.quiz);
-    console.log('Question Ajoutée: ', question);
+    //console.log('Question Ajoutée: ', question);
     this.quizService.questionSelected$.subscribe((question) => {
       this.onCreerReponse(question, valeur);
     });

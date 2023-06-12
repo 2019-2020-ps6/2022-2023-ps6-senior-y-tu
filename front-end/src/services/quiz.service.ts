@@ -162,9 +162,12 @@ export class QuizService {
 
   addQuestion(question: Question, quiz: Quiz | undefined): void {
     if (!quiz) return;
+    if(!question.image) question.image = 'sansImage';
+    if (!question.explication) question.explication = 'Pas d\'explication';
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
     this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe((question) => {
-        this.setSelectedQuiz(quiz.id);
+      console.log('question: ', question)
+      this.setSelectedQuiz(quiz.id);
         this.questionSelected$.next(question);
     });
   }
