@@ -35,7 +35,7 @@
 
     <div>
       <p> Description de la question </p>
-      <textarea class="input-description" id="description" rows="6" cols="50" maxlength="200" [value]="questionToUpdate?.explication" formControlName="explication"> </textarea>
+      <textarea class="input-description" id="description" [formControlName]="'explication'" rows="6" cols="50" maxlength="200" [value]="questionToUpdate?.explication" formControlName="explication"> </textarea>
     </div>
 
     <div class="boutons">

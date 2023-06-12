@@ -10,18 +10,18 @@
 <div class="creer-quiz">
   <form class="quiz-form" [formGroup]="quizForm">
     <p> Nom du quiz
-      <input type="text" class="input-texte" name="nom" [formControlName]="'nom'" required>
+      <input type="text" id="nom" class="input-texte" name="nom" [formControlName]="'nom'" required>
     </p>
     <p class="theme" > Thème
-      <input type="text" class="input-texte" name="nomTheme" [formControlName]="'nomTheme'" required>
+      <input type="text" id="theme" class="input-texte" name="nomTheme" [formControlName]="'nomTheme'" required>
     </p>
     <p> Image
       <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
     </p>
 
     <p class="bouton-paragraphe">
-      <button routerLink="/mes-quizs" class="bouton"> Retour </button>
-      <button type="submit" (click)="onCreer()"  class="bouton"> Valider </button>
+      <button routerLink="/mes-quizs" class="bouton" id="retour"> Retour </button>
+      <button type="submit" (click)="onCreer()"  class="bouton" id="valider"> Valider </button>
 
     </p>
   </form>
