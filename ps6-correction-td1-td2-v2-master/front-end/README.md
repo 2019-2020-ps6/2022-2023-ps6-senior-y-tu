@@ -6,19 +6,15 @@
 
 Note, for those using linux, you can find instruction to install NodeJS [here](https://github.com/nodesource/distributions/blob/master/README.md#debinstall) (install the latest LTS Version 14.15.4).
 
-2) Fork this repository
-
-Click on the fork button on the page of the repository on github to create your own copy of the starter.
-
-2) Clone your repository, your fork
+2) Clone your repository
 
 ```
-git clone https://github.com/YOUR_USERNAME/starter-quiz-two.git
+git clone git@github.com:2019-2020-ps6/2022-2023-ps6-NAME_OF_YOUR_TEAM.git
 ```
 
-4) Install the dependencies
+3) Install the dependencies
 
-Open command prompt inside the repository (starter-quiz-two) and run: 
+Open command prompt inside the cloned repository and run: 
 
 ```
 npm install
@@ -32,6 +28,12 @@ If you have an error saying that npm is not a known command, it means that NodeJ
 npm install -g @angular/cli
 ```
 
+5) Install playwright
+
+```
+npm install --save-dev playwright @playwright/test
+```
+
 ## Run the app
 
 ```
@@ -41,19 +43,14 @@ Then navigate to `http://localhost:4200/` to see the application. The app will a
 
 You can also use the command `ng serve` to start the app and also `ng serve --open` to open directly the app in the browser.
 
-## Run the linter
+## Run the end to end tests
 
-```
-npm run lint
-```
+Before running the tests, you need to run your front-end and back-end:
 
-Note: The linter will be executed before each commit. If the linter fails then the commit will be canceled.
+1) Run your back-end: `npm run start:e2e`
+2) Run your front-end: `npm run start`
+3) Run the tests:  `npm run test:e2e`
 
-Several issues from the linter can be fixed automatically (for instance: trailing whitespace, missing new line etc...) thanks to the following command:
-```
-npm run lint -- --fix
-```
-But you will have to manually manage the other types of error.
 
 ## Angular documentation
 
