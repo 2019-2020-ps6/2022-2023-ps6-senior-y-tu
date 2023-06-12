@@ -1,9 +1,11 @@
+// @ts-ignore
 import { test, expect } from '@playwright/test';
 import { testUrl } from 'e2e/e2e.config';
 import { AppFixture } from 'src/app/app.fixture';
 
 // https://playwright.dev/docs/locators
 test.describe('Home page display', () => {
+  // @ts-ignore
   test('Basic test', async ({ page }) => {
     await page.goto(testUrl);
     const appComponentFixture = new AppFixture(page);
