@@ -1,7 +1,9 @@
 <div class="patient-item" (click)="stockerPatient()">
   <div class="patient">
     <div class="patient-picture">
-      <img src="{{patient?.image}}" alt="Image d'un patient">
+      <a *ngIf="patient" [href]="patient.image" target="_blank">
+        <img [src]="sanitizeImageUrl(patient.image)" alt="Image d'un patient">
+      </a>
     </div>
     <div class="patient-name">
       <span class="name">{{patient?.prenom}}</span>

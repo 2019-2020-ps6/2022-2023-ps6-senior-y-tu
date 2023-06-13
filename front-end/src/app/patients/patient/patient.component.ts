@@ -3,6 +3,7 @@ import { Patient } from "src/models/personne.model";
 import {Router} from "@angular/router";
 import {ConfigurationService} from "../../../services/configuration.service";
 import {Configuration} from "../../../models/configuration.model";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-patient',
@@ -18,9 +19,13 @@ export class PatientComponent implements OnInit{
   @Output()
   patientDeleted: EventEmitter<Patient> = new EventEmitter<Patient>();
 
-  constructor(private route : Router, public configurationService : ConfigurationService) { }
+  constructor(private route : Router, public configurationService : ConfigurationService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void { }
+
+  sanitizeImageUrl(imageUrl: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+  }
 
   stockerPatient(): void {
     if (this.patient != undefined) {

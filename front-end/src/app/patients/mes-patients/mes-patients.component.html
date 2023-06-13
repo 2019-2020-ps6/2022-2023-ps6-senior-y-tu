@@ -15,7 +15,9 @@
       <div class="patient-app">
 
         <div id="patient-image">
-          <img src="{{patient?.image}}" alt="Image d'un patient">
+          <a *ngIf="patient" [href]="patient.image" target="_blank">
+            <img [height]="450" [width]="350" [src]="sanitizeImageUrl(patient.image)" alt="Image d'un patient">
+          </a>
         </div>
 
         <div id="patient-information">
