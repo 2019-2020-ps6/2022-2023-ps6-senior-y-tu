@@ -12,6 +12,7 @@ import {ConfigurationService} from "../../../services/configuration.service";
 export class MesPatientsComponent {
   public patientListe: Patient[] = [];
   public configurationList : Configuration[] = [];
+  public searchTerm: string = '';
 
 
   constructor(public patientService: PatientService, public configurationService : ConfigurationService) {
@@ -33,5 +34,15 @@ export class MesPatientsComponent {
 
   getConfiguration(patient: Patient) {
     return this.configurationList.find(config => config.idPatient == patient.id);
+  }
+
+
+  public filterPatients(searchTerm: string): any[] {
+    if (!searchTerm) {
+      return this.patientListe;
+    }
+    return this.patientListe.filter((patient: any) => {
+      return patient.nom.toLowerCase().includes(searchTerm.toLowerCase()) || patient.prenom.toLowerCase().includes(searchTerm.toLowerCase());
+    });
   }
 }

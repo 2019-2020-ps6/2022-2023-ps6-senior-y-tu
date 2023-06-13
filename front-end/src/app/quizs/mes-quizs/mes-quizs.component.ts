@@ -9,6 +9,7 @@ import {QuizService} from "../../../services/quiz.service";
 })
 export class MesQuizsComponent {
   public quizListe: Quiz[] = [];
+  public searchTerm: string = '';
 
 
   constructor(public quizService: QuizService) {
@@ -25,4 +26,15 @@ export class MesQuizsComponent {
     console.log('event received from child:', $event);
     this.quizService.deleteQuiz($event);
   }
+
+  public filterQuizs(searchTerm: string): any[] {
+    if (!searchTerm) {
+      return this.quizListe;
+    }
+    return this.quizListe.filter((quiz: any) => {
+      return quiz.nom.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }
+
+
 }
