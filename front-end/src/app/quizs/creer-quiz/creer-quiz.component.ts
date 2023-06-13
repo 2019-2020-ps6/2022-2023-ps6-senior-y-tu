@@ -4,6 +4,7 @@ import { QuizService } from "../../../services/quiz.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Theme} from "../../../models/theme.model";
 import {Router} from "@angular/router";
+import {ThemeService} from "../../../services/theme.service";
 
 @Component({
   selector: 'app-creer-quiz',
@@ -17,7 +18,7 @@ export class CreerQuizComponent implements  OnInit{
 
   theme: Theme | undefined;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router : Router) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private themeService: ThemeService, private router : Router) {
     this.quizForm = this.formBuilder.group({
       nom: [''],
       image: [''],
@@ -33,31 +34,29 @@ export class CreerQuizComponent implements  OnInit{
 
   onCreer() {
     const valeur = this.quizForm.getRawValue() ;
-    const quiz: Quiz = {
-      nom: valeur.nom,
-      image: valeur.image,
-      themeId: valeur.themeId,
-      id: valeur.id,
-    }
+
     const theme: Theme = {
       nomTheme: valeur.nomTheme,
       image: valeur.image,
       id: valeur.themeId,
-
     }
 
-    this.quizService.addQuiz(quiz, theme);
+    this.themeService.addTheme(theme);
+    this.themeService.themesSelected$.subscribe((theme) => {
+      const quiz: Quiz = {
+        nom: valeur.nom,
+        image: valeur.image,
+        themeId: valeur.themeId,
+        id: theme.id,
+      }
 
-    this.quizService.quizSelected$.subscribe((quiz) => {
-      const quizId = quiz.id;
+      this.quizService.addQuiz(quiz, theme);
 
-      this.router.navigate(["/quiz", quizId, "creer-question"]);
-    });
+      this.quizService.quizSelected$.subscribe((quiz) => {
+        const quizId = quiz.id;
 
-
-
-
-
-
+        this.router.navigate(["/quiz", quizId, "creer-question"]);
+      });
+    })
   }
 }
