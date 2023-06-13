@@ -281,6 +281,15 @@ export class QuizService {
     });
   }
 
+  updateReponse(reponse: Reponse, quiz: Quiz | undefined) {
+    if (!quiz) return;
+    const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + reponse.questionId + '/' + this.reponsesPath + '/' + reponse.id;
+    this.http.put<Reponse>(urlWithId, reponse, this.httpOptions).subscribe((Reponse) => {
+      this.reponseSelected$.next(Reponse);
+    });
+    console.log('Reponse Modifiée: ', reponse);
+  }
+
   startTimer() {
     this.timer.start();
     this.timer$.next(this.timer);

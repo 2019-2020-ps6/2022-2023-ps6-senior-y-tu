@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
 
 router.put('/:reponseId', (req, res) => {
   try {
-    const reponse = getReponseFromQuestion(req.params.quizId, req.params.questionId, req.params.reponsId)
+    const reponse = getReponseFromQuestion(req.params.quizId, req.params.questionId, req.params.reponseId)
     console.log(reponse)
     const updatedReponse = Reponses.update(req.params.reponseId, { ...req.body, questionId: reponse.questionId })
     res.status(200).json(updatedReponse)
