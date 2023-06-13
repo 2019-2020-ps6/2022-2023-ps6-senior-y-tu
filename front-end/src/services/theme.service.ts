@@ -61,6 +61,12 @@ export class ThemeService {
     })
   }
 
+  getThemeId(idTheme: string) {
+    this.themesSelected$ = new Subject<Theme>();
+    this.http.get<Theme>(this.themeUrl + '/' + idTheme).subscribe((theme) => {
+      this.themesSelected$.next(theme);
+    });
+  }
 
   getThemeById(id: string | undefined): Theme | undefined {
     return this.themes.find(theme => theme.id === id);
