@@ -181,9 +181,7 @@ export class QuizService {
 
   getQuestionById(id: string | null, questionId: string | null) {
     if (!id || !questionId) return;
-    console.log(id, questionId)
     const urlWithId = this.quizUrl + '/' + id + '/' + this.questionsPath + '/' + questionId;
-    console.log(urlWithId)
     return this.http.get<Question>(urlWithId);
   }
 
@@ -313,10 +311,10 @@ export class QuizService {
   }
 
   getReponseListe(quizId: string | undefined, questionId: string | undefined) {
-    console.log(quizId, questionId)
     const urlWithId = this.quizUrl + '/' + quizId + '/' + this.questionsPath + '/' + questionId + '/' + this.reponsesPath
     return this.http.get<Reponse[]>(urlWithId);
   }
+
 
 }
 

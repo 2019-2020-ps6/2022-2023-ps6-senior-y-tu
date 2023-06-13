@@ -70,10 +70,8 @@ export class ShowQuestionComponent implements OnInit{
     this.quizService.getQuestionById(this.idQz, this.idQt)?.subscribe((question) => {
       this.question = question;
       const idQuiz = (this.idQz)? this.idQz: undefined
-      console.log(idQuiz);
       this.quizService.getReponseListe(idQuiz, question.id).subscribe((reponse) =>{
         this.reponseListe = reponse;
-        console.log(this.reponseListe);
       });
     });
 
@@ -132,7 +130,6 @@ export class ShowQuestionComponent implements OnInit{
 
   private reponseNavigation(reponse: Reponse): void {
     this.idRp = reponse.id;
-    console.log(this.idQz, this.idQt)
     this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp]);
   }
 }
