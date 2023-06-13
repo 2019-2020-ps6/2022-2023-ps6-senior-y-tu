@@ -10,7 +10,7 @@
 <div class="modification-question">
   <form class="question-form-modification" [formGroup]="questionForm" >
     <p> Intitulé de la question
-      <input type="text" class="input-texte" [value]="questionToUpdate?.intitule" [formControlName]="'intitule'" required>
+      <input type="text" id="intitule" class="input-texte" [value]="questionToUpdate?.intitule" [formControlName]="'intitule'" required>
     </p>
 
     <div class="reponse" formArrayName="reponses">
@@ -30,7 +30,7 @@
     <div>
       <p> Image de la question </p>
       <img [src]="questionToUpdate?.image" alt="image" width="30%">
-      <input type="file" class="input-image" name="image" [formControlName]="'image'" required>
+      <input type="file" id="image" class="input-image" name="image" [formControlName]="'image'" required>
     </div>
 
     <div>
