@@ -1,21 +1,22 @@
 <app-header-patient></app-header-patient>
 <div class="boite" >
   <div class="align" [appClickable]="tupleRetour">
-    <p appPolice>{{questions?.id}}/{{questions?.id}}</p>
+    <p appPolice>{{question?.id}}/{{nbQuestion}}</p>
     <img src="assets/boutonRetour.png">
   </div>
 
   <div class="align">
     <div class="milieu" appPolice>
-      <h3>{{questions?.intitule}}</h3>
+      <h3>{{question?.intitule}}</h3>
     </div>
 
-    <img src="{{questions?.image}}" width="200px"/>
+    <img src="{{question?.image}}" width="200px"/>
   </div>
 
   <div class="explication">
-    <p appPolice>La réponse: {{reponseListe[reponseCorrecte].valeur}} </p>
-    <p appPolice>{{questions?.explication}}</p>
+    <p appPolice>La réponse: {{reponseCorrecte?.valeur}} </p>
+    <p class="bravo" *ngIf="afficherBravo">Bravo!</p>
+    <p appPolice>{{question?.explication}}</p>
   </div>
 
   <button class="boutton" appDirectiveQuestionExplication appPolice>Continuer</button>

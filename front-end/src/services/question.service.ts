@@ -9,7 +9,7 @@ import {QUESTION_LISTE} from "../mocks/quiz-list.mock";
 })
 
 export class QuestionService {
-  private question: Question[] = QUESTION_LISTE;
+  private question: Question[] = [];
 
   public question$: BehaviorSubject<Question[]> = new BehaviorSubject(QUESTION_LISTE);
 

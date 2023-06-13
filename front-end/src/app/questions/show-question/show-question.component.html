@@ -2,16 +2,16 @@
 
 <div class="boite">
   <div class="align">
-    <p appPolice>{{questions?.id}}/{{questions?.id}}</p>
+    <p appPolice>{{index}}/{{nbQuestion}}</p>
     <img src="assets/boutonRetour.png" [appClickable]="tupleRetour">
   </div>
 
   <div class="align">
     <div class="milieu">
-      <h2 appPolice>{{questions?.intitule}}</h2>
+      <h2 appPolice>{{question?.intitule}}</h2>
     </div>
 
-    <img src="{{questions?.image}}" width="200px"/>
+    <img src="{{question?.image}}" width="200px"/>
   </div>
 
   <div>

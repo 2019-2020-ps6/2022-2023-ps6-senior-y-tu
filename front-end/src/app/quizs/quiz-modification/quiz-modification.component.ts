@@ -19,8 +19,6 @@ export class QuizModificationComponent {
   themeNom : string | undefined;
 
 
-
-
   constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService : QuizService, public themeService : ThemeService){
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.getQuizById(id).subscribe((quiz) => {

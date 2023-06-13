@@ -2,10 +2,8 @@ import {Component, Input} from '@angular/core';
 import {Question} from "../../../models/question.model";
 import {Quiz} from "../../../models/quiz.model";
 import {ActivatedRoute} from "@angular/router";
-import {QUIZ_LISTE} from "../../../mocks/quiz-list.mock";
 import {QuizService} from "../../../services/quiz.service";
 
-import {httpOptionsBase, serverUrl} from "../../../configs/server.config";
 
 @Component({
   selector: 'app-question-liste',

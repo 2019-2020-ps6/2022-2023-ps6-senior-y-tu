@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test"
 import { accueil } from "../e2e.config";
 
+
 test.describe("stat display", () => {
   test("Stat Display", async ({ page }) => {
     await page.goto(accueil)

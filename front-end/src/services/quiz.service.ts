@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, map, Subject} from 'rxjs';
 import { Quiz } from '../models/quiz.model';
-import { QUIZ_LISTE } from '../mocks/quiz-list.mock';
 import {Question, Reponse} from "../models/question.model";
 import {Timer} from "../app/timer/Timer";
 
 import {serverUrl, httpOptionsBase} from "../configs/server.config";
 import {HttpClient} from '@angular/common/http';
 
-import {ThemeService} from "./theme.service";
 import {Theme} from "../models/theme.model";
 
 @Injectable({
@@ -16,7 +14,7 @@ import {Theme} from "../models/theme.model";
 })
 export class QuizService {
 
-  private quizs: Quiz[] = QUIZ_LISTE;
+  private quizs: Quiz[] = [];
 
   public quizs$: BehaviorSubject<Quiz[]> = new BehaviorSubject(<Quiz[]>[]);
   public quizSelected$: Subject<Quiz> = new Subject();
@@ -30,7 +28,6 @@ export class QuizService {
 
   private httpOptions = httpOptionsBase;
   private questionsPath = 'questions';
-  private questionListe = 'question-liste';
   public questionSelected$: Subject<Question> = new Subject();
 
   private reponsesPath = 'reponses';
@@ -185,6 +182,7 @@ export class QuizService {
 
   getQuestionById(id: string | null, questionId: string | null) {
     if (!id || !questionId) return;
+    console.log(id, questionId)
     const urlWithId = this.quizUrl + '/' + id + '/' + this.questionsPath + '/' + questionId;
     console.log(urlWithId)
     return this.http.get<Question>(urlWithId);
@@ -223,6 +221,7 @@ export class QuizService {
     const urlWithId = this.quizUrl + '/' + id;
     return this.http.get<Quiz>(urlWithId);
   }
+
 
 
   //front
@@ -267,7 +266,7 @@ export class QuizService {
 
   getNbQuestionsByQuizId(id: string | null) {
     if (!id) return;
-    const urlWithId = this.quizUrl + '/' + id + '/' + this.questionListe;
+    const urlWithId = this.quizUrl + '/' + id + '/' + this.questionsPath;
     return this.http.get<Question[]>(urlWithId).pipe(map(questions => questions.length));
   }
 
@@ -306,6 +305,7 @@ export class QuizService {
   }
 
   getReponseListe(quizId: string | undefined, questionId: string | undefined) {
+    console.log(quizId, questionId)
     const urlWithId = this.quizUrl + '/' + quizId + '/' + this.questionsPath + '/' + questionId + '/' + this.reponsesPath
     return this.http.get<Reponse[]>(urlWithId);
   }
