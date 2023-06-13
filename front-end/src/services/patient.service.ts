@@ -55,10 +55,11 @@ public patientSelected$ : Subject<Patient> = new Subject<Patient>();
   updatePatient(idPatient: Patient | undefined, patient: Patient): void {
     if (idPatient != undefined) {
       patient.id = idPatient.id
-      if(patient.nom == undefined) {patient.nom == idPatient.nom;}
-      if(patient.prenom == undefined) {patient.prenom == idPatient.prenom;}
-      if(patient.image == undefined) {patient.image == idPatient.image;}
-      if(patient.dateNaissance == undefined) {patient.dateNaissance == idPatient.dateNaissance;}
+      if(patient.nom == undefined || patient.nom == ' ' || patient.nom == " ") {patient.nom = idPatient.nom;}
+      if(patient.prenom == undefined || patient.prenom == ' ' || patient.prenom == " ") {patient.prenom = idPatient.prenom;}
+      if(patient.image == undefined || patient.image == ' ' || patient.image == " ") {patient.image = idPatient.image;}
+      if(patient.dateNaissance == undefined) {patient.dateNaissance = idPatient.dateNaissance;}
+      console.log("p", patient)
       this.http.put<Patient>(this.patientsUrl + '/' + idPatient.id, patient, this.httpOptions).subscribe(() => this.getPatients());
     }
   }

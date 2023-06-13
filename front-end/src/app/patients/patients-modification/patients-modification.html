@@ -23,7 +23,7 @@
       </div>
       <div class="center">
         <p class="image-patient"> Image
-          <input type="text" class="input-image" name="image" data-testid="input-image-patient-modif" required>
+          <input type="text" class="input-image" name="image" [value]="patientAMettreJour?.image"formControlName="image"data-testid="input-image-patient-modif" >
         </p>
       </div>
     </div>

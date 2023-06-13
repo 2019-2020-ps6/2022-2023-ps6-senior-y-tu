@@ -18,6 +18,7 @@ export class PatientsModificationComponent {
     nom: new FormControl(' '),
     prenom: new FormControl(' '),
     dateNaisance: new FormControl(' '),
+    image: new FormControl(' '),
     idstatitique : new FormControl(' '),
     police : new FormControl(' '),
     explication: new FormControl(' '),
@@ -59,7 +60,7 @@ export class PatientsModificationComponent {
         id: id
       };
       console.log('patient', patient)
-      if (patient.image == '') {
+      if (patient.image == ' ') {
         patient.image = <string>this.patientAMettreJour?.image;
       }
 

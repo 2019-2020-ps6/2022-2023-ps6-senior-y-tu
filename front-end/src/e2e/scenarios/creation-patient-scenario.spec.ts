@@ -20,7 +20,7 @@ test.describe('Patient Feature',() => {
       const dateEntree = await patientFromFixture.getInput('input-date-patient')
       await dateEntree.type('12-12-1956');
       const imageEntree = await patientFromFixture.getInput('input-image-patient')
-      await imageEntree.type('12-12-1956');
+      await imageEntree.type('https://img.freepik.com/vecteurs-premium/personnes-agees-grand-pere-grand-pere-senior-personne-agee-personnage-dessin-anime_24640-61818.jpg?w=2000');
       const handicapeEntree = await patientFromFixture.getInput('input-handicap-patient');
       await handicapeEntree.check();
       const policeEntree = await patientFromFixture.getInput('input-police-patient');
@@ -48,7 +48,7 @@ test.describe('Patient Feature',() => {
     const dateEntree = await patientFromFixture.getInput('input-date-patient-modif');
     await dateEntree.type('13-12-1956');
     const imageEntree = await patientFromFixture.getInput('input-image-patient-modif');
-    await imageEntree.type('12-12-1956');
+    await imageEntree.type('https://img.freepik.com/vecteurs-premium/personnes-agees-grand-pere-grand-pere-senior-personne-agee-personnage-dessin-anime_24640-61818.jpg?w=2000');
     const handicapeEntree = await patientFromFixture.getInput('input-handicap-patient-modif');
     await handicapeEntree.check();
     const policeEntree = await patientFromFixture.getInput('input-police-patient-modif');
