@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Subject} from 'rxjs';
+import {BehaviorSubject, map, Observable, of, Subject} from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import {Question, Reponse} from "../models/question.model";
 import {Timer} from "../app/timer/Timer";
@@ -31,7 +31,7 @@ export class QuizService {
   public questionSelected$: Subject<Question> = new Subject();
 
   private reponsesPath = 'reponses';
-  private reponseSelected$: Subject<Reponse> = new Subject()
+  public reponseSelected$: Subject<Reponse> = new Subject()
 
 
 
@@ -258,8 +258,8 @@ export class QuizService {
 
    */
 
-  getQuestionsByQuizId(id: string | null) {
-    if (!id) return;
+  getQuestionsByQuizId(id: string | null | undefined): Observable<Question[]> {
+    if (!id) return of([]);
     const urlWithId = this.quizUrl + '/' + id + '/questions' ;
     return this.http.get<Question[]>(urlWithId);
   }
@@ -276,7 +276,7 @@ export class QuizService {
     console.log('quiz: ', quiz);
     const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + reponse.questionId + '/' + this.reponsesPath;
     this.http.post<Reponse>(urlWithId, reponse, this.httpOptions).subscribe((Reponse) => {
-      this.setSelectedQuiz(quiz.id)
+      //this.setSelectedQuiz(quiz.id)
       this.reponseSelected$.next(Reponse);
     });
   }

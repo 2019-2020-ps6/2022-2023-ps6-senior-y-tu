@@ -51,7 +51,7 @@ export class CreerQuizComponent implements  OnInit{
     this.quizService.quizSelected$.subscribe((quiz) => {
       const quizId = quiz.id;
 
-      this.router.navigate(["/creer-quiz", quizId, "creer-question"]);
+      this.router.navigate(["/quiz", quizId, "creer-question"]);
     });
 
 

@@ -19,7 +19,7 @@ export class CreerQuestionComponent implements  OnInit{
   public lienQuestionListe: string | undefined;
   protected lienQuestionListeTuple = new Tuple('','');
 
-  protected retour = "/mes-quiz/";
+  private isSend = false;
 
   public questionForm: FormGroup;
   constructor( public formBuilder: FormBuilder, public quizService: QuizService, private route: ActivatedRoute, private router : Router) {
@@ -76,30 +76,47 @@ export class CreerQuestionComponent implements  OnInit{
 
   onCreerReponse(question : Question, valeur : any){
     const idQuestion = question.id;
+    this.isSend = true;
+    let lres: AbstractControl | undefined = this.reponses.controls.at(3)
+    let lreponse : Reponse| undefined;
+    if(lres != undefined) {
+      lreponse = {
+        valeur: lres.get('valeur')?.value,
+        estCorrect: lres.get('estCorrect')?.value,
+        questionId: idQuestion
+      };
+    }
+
     this.reponses.controls.forEach((reponse: AbstractControl) => {
+      this.isSend = false;
       const rep: Reponse = {
         valeur: reponse.get('valeur')?.value,
         estCorrect: reponse.get('estCorrect')?.value,
         questionId: idQuestion
       };
       this.quizService.addReponse(rep, this.quiz);
-      console.log('Reponse Ajoutée: ', rep);
     });
+
+    let reponsesCreees = this.quizService.reponseSelected$.subscribe((reponse) => {
+      if(lreponse?.valeur == reponse.valeur){
+        this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
+      }
+    });
+
   }
 
   ajouterQuestion(event: Event) {
-    event.preventDefault();
     const valeur = this.questionForm.getRawValue();
     this.onCreer(valeur);
-    this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
   }
-
+/**
   validerQuiz(event: Event){
     event.preventDefault();
     const valeur = this.questionForm.getRawValue();
     this.onCreer(valeur);
     this.router.navigate(['/mes-quizs']);
   }
+ */
 
   addReponse(): void {
     this.reponses.push(this.createReponse());
@@ -111,5 +128,20 @@ export class CreerQuestionComponent implements  OnInit{
       valeur: [''],
       estCorrect: [false]
     });
+  }
+
+  retour(){
+    if(!this.quiz?.id) return;
+    let nbQuestions ;
+    this.quizService.getQuestionsByQuizId(this.quiz.id).subscribe((questions) => {
+      nbQuestions = questions.length;
+      if(nbQuestions == 0 ){
+        this.router.navigate(['/mes-quizs']);
+      }
+      else{
+        this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
+      }
+    });
+
   }
 }
