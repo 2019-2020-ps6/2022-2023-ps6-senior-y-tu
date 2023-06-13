@@ -71,7 +71,7 @@ test.describe('Patient Feature',() => {
 
 
     await page.keyboard.press('ArrowRight');
-    await page.keyboard.press('Enter');
+    await page.keyboard.press('Space');
 
     const idPattern = /\d+/;
     const expectedURLPattern = `http://localhost:4200/quiz-list/${idPattern.source}`;
