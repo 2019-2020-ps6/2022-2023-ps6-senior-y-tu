@@ -38,10 +38,10 @@ export class QuizListComponent implements OnInit{
     if (e.key == Retour.EGAL || e.key == Retour.BACKSPACE|| e.key == Retour.DOLLAR) this.root.navigate(['theme-list']);
     if(handicap == "fort")
       this.buttonSelected = FonctionCommuneThemeQuiz.patientFort(e, this.nombreCaseLargeur, this.buttonSelected, this.root,
-        "/commencer-quiz", "")
+        "/commencer-quiz", this.quizList[this.buttonSelected - 1].id)
     else
       this.buttonSelected = FonctionCommuneThemeQuiz.patientLeger(e, this.nombreCaseLargeur, this.buttonSelected, this.root,
-        "/commencer-quiz", "");
+        "/commencer-quiz", this.quizList[this.buttonSelected - 1].id);
   }
 
   constructor( public quizService: QuizService, private root : Router, private themeService : ThemeService, private rootT : ActivatedRoute) {
