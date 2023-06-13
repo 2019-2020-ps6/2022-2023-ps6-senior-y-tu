@@ -12,6 +12,28 @@
   font-size:20px;
 }
 
+
+.recherche-patient{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  position: relative;
+
+
+  .recherche{
+    width: 40%;
+    margin: 0 auto;
+    justify-content: center;
+    border: 2px solid $beige;
+    border-radius: 5px;
+    background-color: $beigeSearch;
+    font-size:20px;
+  }
+}
+
 #patient-image{
   margin: 5%;
 

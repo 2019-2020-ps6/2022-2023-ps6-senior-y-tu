@@ -17,6 +17,7 @@ export class PersonneListComponent implements OnInit {
 
   public patientList: Patient[] = [];
   public ergoList: Ergo[] = []
+  public searchTerm: string = '';
 
   constructor(private patientService: PatientService, private ergoService: ErgoService) {
       this.patientService.patients$.subscribe((patientList:Patient[]) => {
@@ -29,4 +30,15 @@ export class PersonneListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+
+
+  public filterPatients(searchTerm: string): any[] {
+    if (!searchTerm) {
+      return this.patientList;
+    }
+    return this.patientList.filter((patient: any) => {
+      return patient.nom.toLowerCase().includes(searchTerm.toLowerCase()) || patient.prenom.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }
 }

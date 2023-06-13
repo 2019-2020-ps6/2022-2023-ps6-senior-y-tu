@@ -17,6 +17,29 @@
   max-width: 80%;
   width: fit-content;
   height: 100%;
+
+
+
+  .recherche-patient{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+    position: relative;
+
+
+    .recherche{
+      width: 100%;
+      margin: 0 auto;
+      justify-content: center;
+      border: 2px solid $beige;
+      border-radius: 5px;
+      background-color: $beigeSearch;
+      font-size:20px;
+    }
+  }
 }
 
 // Difference entre bloc-patient et bloc-ergo est le max-width car en largeur, ils ne prennent pas la même taille

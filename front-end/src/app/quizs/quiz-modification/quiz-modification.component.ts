@@ -20,8 +20,6 @@ export class QuizModificationComponent {
   theme : Theme | undefined;
 
 
-
-
   constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService : QuizService, public themeService : ThemeService){
     this.quizForm = this.formBuilder.group({
       id: [''],

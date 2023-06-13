@@ -5,12 +5,13 @@
   <title> Question </title>
 </head>
 
-<div class="question">
-  <div class="question-list-modif">
-    <div>
-    <button class="question-list-modif-button" routerLink="/quiz-modification/{{quiz?.id}}/question-modification/{{question?.id}}"> Modifier question {{rangDansQuiz}} </button>
-    {{question?.intitule}}</div>
-  </div>
+ <div class="question">
+    <div class="question-list-modif">
+      <div>
+      <button  class="question-list-modif-button" routerLink="/quiz-modification/{{quiz?.id}}/question-modification/{{question?.id}}">
+        Modifier question {{index + 1 }} </button>
+      {{question?.intitule}}</div>
+    </div>
 
 
 </div>

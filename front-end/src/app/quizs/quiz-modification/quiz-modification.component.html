@@ -8,7 +8,7 @@
 <div class="quiz-modification">
   <form class="quiz-form" [formGroup]="quizForm" >
     <p> Nom du quiz
-      <input type="text" class="input-texte" [value]="quizToUpdate?.nom" formControlName="nom" >
+      <input type="text" id="nom" class="input-texte" [value]="quizToUpdate?.nom" formControlName="nom" >
     </p>
     <p> Thème du quiz
       <input type="text" class="input-texte" [value]="theme?.nomTheme" formControlName="theme">

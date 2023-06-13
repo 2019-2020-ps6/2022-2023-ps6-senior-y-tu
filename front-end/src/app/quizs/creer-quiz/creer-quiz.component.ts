@@ -49,10 +49,11 @@ export class CreerQuizComponent implements  OnInit{
       }
 
       this.quizService.addQuiz(quiz, theme);
+
       this.quizService.quizSelected$.subscribe((quiz) => {
         const quizId = quiz.id;
         this.router.navigate(["/creer-quiz", quizId, "creer-question"]);
       });
-    })
+    });
   }
 }

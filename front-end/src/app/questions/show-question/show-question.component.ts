@@ -1,4 +1,4 @@
-import {Component, HostListener, Input} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {
@@ -10,7 +10,6 @@ import {
   Handicap_Leger_Gauche,
   Handicapt_Leger_Haut, Retour
 } from "../../../enums/enumPatient";
-import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
@@ -23,15 +22,21 @@ import {QuizService} from "../../../services/quiz.service";
 })
 
 
-export class ShowQuestionComponent {
+export class ShowQuestionComponent implements OnInit{
   public tupleRetour: Tuple = new Tuple('/commencer-quiz', undefined);
   private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
 
   @Input()
-  public questions: Question | undefined;
-  public id: string | null;
+  question: Question | undefined;
+  questionListe: Question[]  | undefined;
+  index : number | undefined =0;
 
-  reponseListe: Reponse[] = [];
+  public reponseListe: Reponse[] = [];
+  protected nbQuestion: number = 0;
+
+  public idQz : string | null = null;
+  public idQt : string | null = null;
+  public idRp: string | undefined = "";
 
 
   @HostListener("document:keydown", ["$event"])
@@ -51,20 +56,35 @@ export class ShowQuestionComponent {
   }
 
   constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService) {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id) ;
+
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
 
-    this.quizService.getReponseListe(this.questions?.quizId, this.questions?.id).subscribe((reponseListe) => {
-      this.reponseListe = reponseListe;
+    this.index = 1;
+  }
+
+  ngOnInit() {
+    this.idQz = this.route.snapshot.paramMap.get('id');
+    this.idQt = this.route.snapshot.paramMap.get('questionId');
+    console.log("test", this.idQz, this.idQt)
+    this.quizService.getQuestionById(this.idQz, this.idQt)?.subscribe((question) => {
+      this.question = question;
+      const idQuiz = (this.idQz)? this.idQz: undefined
+      console.log(idQuiz);
+      this.quizService.getReponseListe(idQuiz, question.id).subscribe((reponse) =>{
+        this.reponseListe = reponse;
+        console.log(this.reponseListe);
+      });
+    });
+
+    this.quizService.getNbQuestionsByQuizId(this.idQz)?.subscribe((nb) => {
+      this.nbQuestion = nb;
     });
   }
 
   private reponseParkinsonFort(e : KeyboardEvent): void{
     let reponse = null;
-
 
     if (e.key == Handicap_Fort_Haut.E || e.key == Handicap_Fort_Haut.PARENTHESE_OUVERTE || e.key == Handicap_Fort_Haut.APPOSTROPHE
       || e.key == Handicap_Fort_Haut.MOINS|| e.key== Handicap_Fort_Haut.R|| e.key== Handicap_Fort_Haut.T)
@@ -95,10 +115,12 @@ export class ShowQuestionComponent {
     else
       FonctionCommuneThemeQuiz.ajouterAutreTouche(e);
     if (reponse != null) this.reponseNavigation(reponse);
+
   }
 
   private reponseParkinsonLeger(e : KeyboardEvent): void{
     let reponse = null;
+
     switch (e.key) {
       case Handicapt_Leger_Haut.FLECHE_HAUT : reponse = (this.reponseListe)[0]; break;
       case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = (this.reponseListe)[1]; break;
@@ -110,18 +132,8 @@ export class ShowQuestionComponent {
   }
 
   private reponseNavigation(reponse: Reponse): void {
-    if(reponse.estCorrect) {
-      if (this.id == '1'){
-        this.router.navigate(['question-explication',1])
-      }if (this.id == '2'){
-        this.router.navigate(['question-explication',2])
-      }
-    }
-    else {
-      if (this.id == '1'){
-        this.router.navigate(['question-explication',1])
-      }if (this.id == '2'){
-        this.router.navigate(['question-explication',2])
-      }    }
+    this.idRp = reponse.id;
+    console.log(this.idQz, this.idQt)
+    this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp]);
   }
 }

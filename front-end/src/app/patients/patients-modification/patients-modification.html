@@ -10,20 +10,20 @@
     <div class="align">
       <div>
         <p> Nom du patient
-          <input type="text" class="input-texte" [value]="patientAMettreJour?.nom" formControlName="nom" >
+          <input type="text" class="input-texte" [value]="patientAMettreJour?.nom" formControlName="nom" data-testid="input-nom-patient-modif" >
         </p>
 
         <p> Prénom du patient
-          <input type="text" class="input-texte"  [value]="patientAMettreJour?.prenom"formControlName="prenom" >
+          <input type="text" class="input-texte"  [value]="patientAMettreJour?.prenom"formControlName="prenom" data-testid="input-prenom-patient-modif">
         </p>
 
         <p> Date de naissance
-          <input type="date" class="input-image">
+          <input type="date" class="input-image" data-testid="input-date-patient-modif">
         </p>
       </div>
       <div class="center">
         <p class="image-patient"> Image
-          <input type="file" class="input-image" name="image" required>
+          <input type="text" class="input-image" name="image" [value]="patientAMettreJour?.image"formControlName="image"data-testid="input-image-patient-modif" >
         </p>
       </div>
     </div>
@@ -35,7 +35,7 @@
             <input type="radio" id="handicap-leger" value="leger" [checked]=" configurationAMettreJour?.handicap=='leger'" (click)="onRadioChangeHandicap('handicap-leger')">
             <label for="handicap-leger">Parkinson léger</label>
             <br>
-            <input type="radio" id="handicap-fort" value="fort" [checked]=" configurationAMettreJour?.handicap=='fort'" (click)="onRadioChangeHandicap('handicap-fort')">
+            <input type="radio" id="handicap-fort" value="fort" [checked]=" configurationAMettreJour?.handicap=='fort'" (click)="onRadioChangeHandicap('handicap-fort')" data-testid="input-handicap-patient-modif">
             <label for="handicap-fort">Parkinson fort</label>
           </div>
       </div>
@@ -46,7 +46,7 @@
             <input type="radio" class="explication-oui" id="explication-oui" value="true" [checked]=" configurationAMettreJour?.explication=='oui'" (click)="onRadioChangeExplication('explication-oui')">
             <label for="explication-oui">Oui</label>
             <br>
-            <input type="radio" class="explication-non" id= "explication-non" value="non" [checked]=" configurationAMettreJour?.explication=='non'" (click)="onRadioChangeExplication('explication-non')">
+            <input type="radio" class="explication-non" id= "explication-non" value="non" [checked]=" configurationAMettreJour?.explication=='non'" (click)="onRadioChangeExplication('explication-non')" data-testid="input-explication-patient-modif">
             <label for="explication-non">Non</label>
           </div>
       </div>
@@ -60,7 +60,7 @@
           <input type="radio" id="police-24" value="24" [checked]=" configurationAMettreJour?.police==24" (click)="onRadioChangeTaille('police-24')">
           <label for="police-24">24</label>
           <br>
-          <input type="radio" id="police-40" value="40" [checked]=" configurationAMettreJour?.police==40" (click)="onRadioChangeTaille('police-40')">
+          <input type="radio" id="police-40" value="40" [checked]=" configurationAMettreJour?.police==40" (click)="onRadioChangeTaille('police-40')" data-testid="input-police-patient-modif">
           <label for="police-40">40</label>
           <br>
           <input type="radio" id="police-52" value="52" [checked]=" configurationAMettreJour?.police==52" (click)="onRadioChangeTaille('police-52')">
@@ -76,7 +76,7 @@
           <input type="radio" value="oui" id="souris-oui" [checked]=" configurationAMettreJour?.souris=='oui'" (click)="onRadioChangeSouris('souris-oui')" >
           <label for="souris-oui">Oui</label>
           <br>
-          <input type="radio" value="non" id = "souris-non" [checked]=" configurationAMettreJour?.souris=='non'" (click)="onRadioChangeSouris('souris-non')">
+          <input type="radio" value="non" id = "souris-non" [checked]=" configurationAMettreJour?.souris=='non'" (click)="onRadioChangeSouris('souris-non')" data-testid="input-souris-patient-modif">
           <label for="souris-non">Non</label>
         </div>
       </div>

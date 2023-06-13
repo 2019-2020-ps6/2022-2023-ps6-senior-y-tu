@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 
 router.put('/:patientId', (req, res) => {
   try {
-    res.status(200).json(Patient.update(res.params.patientId, req.body))
+    res.status(200).json(Patient.update(req.params.patientId, req.body))
   } catch (err) {
     manageAllErrors(res, err)
   }

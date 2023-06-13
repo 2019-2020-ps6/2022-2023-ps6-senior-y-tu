@@ -2,12 +2,10 @@ import {Component, HostListener, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Handicap_Leger_Entree, Retour} from "../../../enums/enumPatient";
-import {QUESTION_LISTE} from "../../../mocks/quiz-list.mock";
 import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 import {QuizService} from "../../../services/quiz.service";
-import {Quiz} from "../../../models/quiz.model";
 
 @Component({
   selector: 'app-question-explication',
@@ -23,11 +21,7 @@ export class QuestionExplicationComponent {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
     if(e.key == Handicap_Leger_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE)){
-      if (this.id == '1'){
-        this.router.navigate(['show-question',2]);
-      }if (this.id == '2'){
-        this.router.navigate(['quiz-resultat'])
-      }
+
     }
     else if (e.key == Retour.BACKSPACE || e.key == Retour.DOLLAR || e.key == Retour.EGAL)
       this.router.navigate(['quiz-list']);
@@ -42,23 +36,45 @@ export class QuestionExplicationComponent {
   }
 
   @Input()
-  public questions: Question | undefined;
+  public question: Question | undefined;
 
-  public quiz : Quiz | undefined;
-  public reponseCorrecte: number;
-  public id: string | null;
+  public reponseCorrecte: Reponse | undefined;
+  public idQz: string | null;
+  public idQt: string | null;
+  public idRp: string | null;
+
+  protected nbQuestion: number = 0;
 
   public reponseListe: Reponse[] = [];
+  public afficherBravo: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if(this.id == null) this.id = '1';
-    this.questions = QUESTION_LISTE.find(quiz => quiz.id === this.id);
-    this.quizService.getReponseListe(this.questions?.quizId, this.id).subscribe((reponseListe) => {
-      this.reponseListe = reponseListe;
+    this.idQz = this.route.snapshot.paramMap.get('id');
+    this.idQt = this.route.snapshot.paramMap.get('questionId');
+    this.idRp = this.route.snapshot.paramMap.get('reponseId');
+
+    if(this.idQz == null) this.idQz = '1';
+
+    this.quizService.getQuestionById(this.idQz, this.idQt)?.subscribe((question) => {
+        this.question = question;
+
+      this.quizService.getReponseListe(question.quizId, question.id).subscribe((reponseListe) => {
+        this.reponseListe = reponseListe;
+        this.reponseCorrecte = this.reponseListe.find((reponse: Reponse) => reponse.estCorrect);
+      });
     });
 
-    this.reponseCorrecte = this.reponseListe.findIndex((reponse: Reponse) => reponse.estCorrect) ?? -1;
+    this.quizService.getNbQuestionsByQuizId(this.idQz)?.subscribe((nb) => {
+      this.nbQuestion = nb;
+    });
+
+    console.log(this.reponseCorrecte);
+
+    if(this.idRp == this.reponseCorrecte?.id){
+      console.log("ok")
+      this.afficherBravo = true;
+    }
+
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);

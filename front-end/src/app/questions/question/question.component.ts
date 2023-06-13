@@ -14,20 +14,18 @@ export class QuestionComponent {
   @Input()
   quiz : Quiz | undefined;
 
+  @Input()
+  index : number = 0;
+
   protected listeQuestions: Question[] | undefined;
 
   protected rangDansQuiz: number | undefined;
 
 
 
-  constructor(private QuizService : QuizService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.QuizService.getQuestionsByQuizId(this.quiz?.id as string)?.subscribe((questions) => {
-      this.listeQuestions = questions;
-      this.rangDansQuiz = this.listeQuestions?.findIndex(question => question.id === this.question?.id) as number + 1;
-    });
-
 
   }
 

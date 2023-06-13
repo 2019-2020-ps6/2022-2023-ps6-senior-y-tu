@@ -5,13 +5,19 @@
 <div class="mes-patients" xmlns="http://www.w3.org/1999/html">
   <button class="creation-patient" routerLink="/creer-patient">Créer un nouveau patient</button>
 
+  <div class="recherche-patient">
+    <input class="recherche" type="text" [(ngModel)]="searchTerm" placeholder="Rechercher un patient">
+  </div>
+
   <div class="ma-liste-patients">
-    <div class="patient" *ngFor="let patient of patientListe"  >
+    <div class="patient" *ngFor="let patient of filterPatients(searchTerm)"  >
 
       <div class="patient-app">
 
         <div id="patient-image">
-          <img src="{{patient?.image}}" alt="Image d'un patient">
+          <a *ngIf="patient" [href]="patient.image" target="_blank">
+            <img [height]="450" [width]="350" [src]="sanitizeImageUrl(patient.image)" alt="Image d'un patient">
+          </a>
         </div>
 
         <div id="patient-information">
@@ -24,8 +30,8 @@
           <p id="patient-souris">Utilisation de la souris: {{getConfiguration(patient)?.souris}}</p>
 
           <div class="bouton-patients">
-            <button class="bouton" routerLink="/patients-modification/{{patient.id}}">Modifier</button>
-            <button class="bouton" (click)="deletePatient(patient)">Supprimer</button>
+            <button class="bouton" id="modifier-patient" routerLink="/patients-modification/{{patient.id}}">Modifier</button>
+            <button class="bouton" id="suprimer-patient" (click)="deletePatient(patient)">Supprimer</button>
           </div>
         </div>
 

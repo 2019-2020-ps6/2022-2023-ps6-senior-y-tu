@@ -43,6 +43,7 @@ router.put('/:idPatient', (req, res) => {
         idPatient: test[0].idPatient,
         nombreDeplacement: req.body.nombreDeplacement,
         autreTouchesAppuyer: req.body.autreTouchesAppuyer,
+        score: req.body.score,
       }))
     } else {
       res.status(404).end()

@@ -43,7 +43,8 @@ export class ConfigurationService {
   }
 
   updateConfiguration(config: Configuration): void {
-    this.http.put<Configuration>(this.configurationUrl+'/'+config.idPatient,config, this.httpOptions).subscribe( () => this.retrieveConfiguration());
+    console.log(this.configurationUrl+'/'+config.idPatient)
+    this.http.put<Configuration>(this.configurationUrl+'/'+config.idPatient, config, this.httpOptions).subscribe( () => this.retrieveConfiguration());
   }
 
   deleteConfiguration(configuration: Configuration): void {

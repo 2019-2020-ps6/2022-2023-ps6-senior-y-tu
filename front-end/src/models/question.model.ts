@@ -1,9 +1,8 @@
 
 export interface Reponse {
-  //id: string;
+  id?: string;
   valeur: string;
   estCorrect: boolean;
-
   questionId: string;
 }
 
@@ -12,7 +11,6 @@ export interface Question {
   intitule: string;
   image: string;
   explication: string;
-
   quizId: string;
 
 }

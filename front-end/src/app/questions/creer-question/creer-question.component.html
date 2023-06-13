@@ -36,9 +36,8 @@
     </div>
 
     <p class="bouton-question">
-      <button [routerLink]="retour" class="bouton"> Retour </button>
+      <button (click)="retour()" class="bouton"> Retour </button>
       <button type="submit" class="bouton" (click)="ajouterQuestion($event)" >Ajouter question</button>
-      <button type="submit" class="bouton" (click)="validerQuiz($event)" > Valider Quiz </button>
     </p>
   </form>
 </div>
