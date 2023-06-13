@@ -24,7 +24,8 @@ export class CommencerQuizComponent {
   public tupleRetour: Tuple = new Tuple('/theme-list', undefined);
   public tupleEntrer: Tuple | undefined;
   private changementDeplacement: number[] = [0, 0, 0, 0, 0]; // deplacementXActuelle, deplacementYactuelle, deplacementXprécédent, deplacementYprecedent
-
+  private firstQuestion: string = ""
+  private themeId: string = ""
   protected nbQuestion: number = 0;
 
   @HostListener("window:mousemove", ["$event.clientX", "$event.clientY"])
@@ -37,9 +38,9 @@ export class CommencerQuizComponent {
     let handicap = localStorage.getItem("patient-handicap");
     if(handicap == null) handicap = "fort";
 
-    if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['quiz-list']);
+    if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['quiz-list', this.themeId]);
     else if (e.key == Handicap_Fort_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE) )
-      this.router.navigate(['show-question/' + this.quiz?.id + '/1' ]);
+      this.router.navigate(['show-question/' + this.quiz?.id, this.firstQuestion ]);
   }
 
 
@@ -51,6 +52,9 @@ export class CommencerQuizComponent {
       this.quizService.getQuestionsByQuizId(idP)?.subscribe((question) =>{
         console.log(question)
         question1 = question[0].id;
+        this.firstQuestion = question1;
+        this.themeId = quiz.themeId
+        this.tupleRetour = new Tuple('/quiz-list', quiz.themeId);
         this.tupleEntrer = new Tuple('/show-question/' + this.quiz?.id + '/' + question1, undefined);
       });
 

@@ -67,7 +67,6 @@ export class ShowQuestionComponent implements OnInit{
   ngOnInit() {
     this.idQz = this.route.snapshot.paramMap.get('id');
     this.idQt = this.route.snapshot.paramMap.get('questionId');
-    console.log("test", this.idQz, this.idQt)
     this.quizService.getQuestionById(this.idQz, this.idQt)?.subscribe((question) => {
       this.question = question;
       const idQuiz = (this.idQz)? this.idQz: undefined
