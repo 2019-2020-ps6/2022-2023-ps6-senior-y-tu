@@ -77,7 +77,6 @@ export class QuizService {
   */
   addQuiz(quiz: Quiz, theme : Theme): void {
     //quiz.themeId = this.themeService.getIdByNom(theme, quiz.image);
-    if(!quiz.themeId) quiz.themeId = '1';
     if(!quiz.image) quiz.image ='sansImage';
 
     this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe((quizz) => {

@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
     const themes = Theme.get()
     let themeGet = null
 
-    themes.forEach((theme) => { if (req.body.nomTheme === theme.nomTheme) themeGet = theme.nomTheme })
+    themes.forEach((theme) => { if (req.body.nomTheme === theme.nomTheme) themeGet = theme })
 
     if (themeGet == null) themeGet = Theme.create({ ...req.body })
     res.status(201).json(themeGet)

@@ -48,7 +48,7 @@ export class ThemeService {
 
   //back
   addTheme(themeAdd : Theme): void {
-    this.themesSelected$ = new Subject();
+    this.themesSelected$ = new Subject<Theme>();
     this.http.post<Theme>(this.themeUrl, themeAdd, this.httpOptions).subscribe((theme) => {
       this.themes$.next(this.themes);
       this.themesSelected$.next(theme);

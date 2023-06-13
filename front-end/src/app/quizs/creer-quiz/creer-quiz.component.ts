@@ -42,12 +42,12 @@ export class CreerQuizComponent implements  OnInit{
     }
 
     this.themeService.addTheme(theme);
-    this.themeService.themesSelected$.subscribe((theme) => {
+    this.themeService.themesSelected$.subscribe((themeGet) => {
       const quiz: Quiz = {
         nom: valeur.nom,
         image: valeur.image,
-        themeId: valeur.themeId,
-        id: theme.id,
+        themeId: themeGet.id,
+        id: themeGet.id,
       }
 
       this.quizService.addQuiz(quiz, theme);
