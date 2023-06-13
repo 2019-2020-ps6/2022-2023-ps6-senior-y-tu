@@ -34,12 +34,39 @@ test.describe('Patient Feature',() => {
       await expect(page).toHaveURL('http://localhost:4200/mes-patients');
     });
   });
-  test('Patient Deletion', async ({page}) => {
+  test('Patient Modification', async ({page})=> {
     await page.goto(patientUrl);
     const patientFromFixture = new PatientFormFixture(page);
-    const patient = await page.getByText('Dumaillet');
+    const boutonModificationPatient = await page.locator('button#modifier-patient').last();
+    boutonModificationPatient.evaluateHandle((element: {click:() => any; })=> element.click());
+    const nomEntree = await patientFromFixture.getInput('input-nom-patient-modif');
+    await nomEntree.fill('');
+    await nomEntree.type('Dumailler');
+    const prenomEntree = await patientFromFixture.getInput('input-prenom-patient-modif');
+    await prenomEntree.fill('');
+    await prenomEntree.type('Marie-janne');
+    const dateEntree = await patientFromFixture.getInput('input-date-patient-modif');
+    await dateEntree.type('13-12-1956');
+    const imageEntree = await patientFromFixture.getInput('input-image-patient-modif');
+    await imageEntree.type('12-12-1956');
+    const handicapeEntree = await patientFromFixture.getInput('input-handicap-patient-modif');
+    await handicapeEntree.check();
+    const policeEntree = await patientFromFixture.getInput('input-police-patient-modif');
+    await policeEntree.check();
+    const explicationEntree = await patientFromFixture.getInput('input-explication-patient-modif');
+    await explicationEntree.check();
+    const sourisEntree = await patientFromFixture.getInput('input-souris-patient-modif');
+    await sourisEntree.check();
+    const boutonValiderPatient = await page.locator('button#valider');
+    boutonValiderPatient.evaluateHandle((element: {click:() => any; })=> element.click());
+    await expect(page).toHaveURL('http://localhost:4200/mes-patients');
+
+  });
+  test('Patient Deletion', async ({page}) => {
+    await page.goto(patientUrl);
+    const patient = await page.getByText('Dumailler');
     expect(patient).toBeVisible();
-    const boutonSuppPatient = await page.locator('button#suprimer-patient');
+    const boutonSuppPatient = await page.locator('button#suprimer-patient').last();
     boutonSuppPatient.evaluateHandle((element: {click:() => any; })=> element.click());
     await expect(page).toHaveURL('http://localhost:4200/mes-patients');
     expect(patient).not.toBeVisible();

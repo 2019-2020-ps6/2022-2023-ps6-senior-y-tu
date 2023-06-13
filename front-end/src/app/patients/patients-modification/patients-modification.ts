@@ -14,15 +14,15 @@ import {ConfigurationService} from "../../../services/configuration.service";
 export class PatientsModificationComponent {
 
   public valeurForm : FormGroup = new FormGroup({
-    id: new FormControl(''),
-    nom: new FormControl(''),
-    prenom: new FormControl(''),
-    dateNaisance: new FormControl(''),
-    idstatitique : new FormControl(''),
-    police : new FormControl(''),
-    explication: new FormControl(''),
-    souris : new FormControl(''),
-    handicap: new FormControl('')
+    id: new FormControl(' '),
+    nom: new FormControl(' '),
+    prenom: new FormControl(' '),
+    dateNaisance: new FormControl(' '),
+    idstatitique : new FormControl(' '),
+    police : new FormControl(' '),
+    explication: new FormControl(' '),
+    souris : new FormControl(' '),
+    handicap: new FormControl(' ')
   });
 
   protected patientAMettreJour : Patient | undefined;
@@ -46,12 +46,10 @@ export class PatientsModificationComponent {
   ngOnInit(): void {
   }
   modifierPatient() { // faire que prend aussi les valeur non modifier
-    console.log("Hello")
     const valeur = this.valeurForm.getRawValue();
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id != null) {
-
       const patient: Patient = {
         nom: valeur.nom,
         prenom: valeur.prenom,

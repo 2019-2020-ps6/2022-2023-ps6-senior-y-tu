@@ -53,7 +53,14 @@ public patientSelected$ : Subject<Patient> = new Subject<Patient>();
   }
 
   updatePatient(idPatient: Patient | undefined, patient: Patient): void {
-    this.http.put<Patient>(this.patients+'/'+idPatient, patient, this.httpOptions).subscribe( () => this.getPatients());
+    if (idPatient != undefined) {
+      patient.id = idPatient.id
+      if(patient.nom == undefined) {patient.nom == idPatient.nom;}
+      if(patient.prenom == undefined) {patient.prenom == idPatient.prenom;}
+      if(patient.image == undefined) {patient.image == idPatient.image;}
+      if(patient.dateNaissance == undefined) {patient.dateNaissance == idPatient.dateNaissance;}
+      this.http.put<Patient>(this.patientsUrl + '/' + idPatient.id, patient, this.httpOptions).subscribe(() => this.getPatients());
+    }
   }
 
   /*getStatListe(patientid: string | null): StatQuiz[] | undefined {

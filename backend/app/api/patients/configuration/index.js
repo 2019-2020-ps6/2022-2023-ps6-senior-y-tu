@@ -34,6 +34,8 @@ router.post('/', (req, res) => {
 
 router.put('/:idPatient', (req, res) => {
   try {
+    console.log('Hello')
+    const test = Configuration.get().filter((config) => config.idPatient === req.params.idPatient)
     res.status(200).json(Configuration.update(test[0].id, {
       souris: req.body.souris,
       police: req.body.police,
