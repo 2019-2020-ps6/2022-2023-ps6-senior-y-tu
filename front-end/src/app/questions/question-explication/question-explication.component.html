@@ -13,13 +13,14 @@
     <img src="{{question?.image}}" width="200px"/>
   </div>
 
+  <p class="bravo" *ngIf="afficherBravo">Bravo!</p>
+
   <div class="explication">
     <p appPolice>La réponse: {{reponseCorrecte?.valeur}} </p>
-    <p class="bravo" *ngIf="afficherBravo">Bravo!</p>
     <p appPolice>{{question?.explication}}</p>
   </div>
 
-  <button class="boutton" appDirectiveQuestionExplication appPolice>Continuer</button>
+  <button class="boutton" appDirectiveQuestionExplication appPolice (click)="suivant()">Continuer</button>
 
 </div>
 

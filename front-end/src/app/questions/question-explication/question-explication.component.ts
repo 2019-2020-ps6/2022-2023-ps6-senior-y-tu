@@ -6,6 +6,7 @@ import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 import {QuizService} from "../../../services/quiz.service";
+import {Quiz} from "../../../models/quiz.model";
 
 @Component({
   selector: 'app-question-explication',
@@ -47,6 +48,7 @@ export class QuestionExplicationComponent {
 
   public reponseListe: Reponse[] = [];
   public afficherBravo: boolean = false;
+  public nextquestion: string |undefined;
 
   constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
     this.idQz = this.route.snapshot.paramMap.get('id');
@@ -60,7 +62,11 @@ export class QuestionExplicationComponent {
 
       this.quizService.getReponseListe(question.quizId, question.id).subscribe((reponseListe) => {
         this.reponseListe = reponseListe;
-        this.reponseCorrecte = this.reponseListe.find((reponse: Reponse) => reponse.estCorrect);
+        this.reponseCorrecte = this.reponseListe.find((reponse) => reponse.estCorrect === true);
+
+        if(this.idRp == this.reponseCorrecte?.id){
+          this.afficherBravo = true;
+        }
       });
     });
 
@@ -68,15 +74,34 @@ export class QuestionExplicationComponent {
       this.nbQuestion = nb;
     });
 
-    console.log(this.reponseCorrecte);
-
-    if(this.idRp == this.reponseCorrecte?.id){
-      console.log("ok")
-      this.afficherBravo = true;
-    }
 
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
   }
+
+  suivant(){
+    this.quizService.getQuestionsByQuizId(this.idQz)?.subscribe((questions) => {
+      let currentIndex = -1;
+      console.log(questions[0].id, this.idQt)
+      for (let i = 0; i < this.nbQuestion; i++) {
+        if (questions[i].id+"" === this.idQt) {
+          currentIndex = i;
+          break;
+        }
+      }
+
+      // Vérification de l'index de la question actuelle
+      if (currentIndex !== -1 && currentIndex < questions.length - 1) {
+        // L'index de la question suivante
+        const nextIndex = currentIndex + 1;
+        const nextQuestionId = questions[nextIndex].id;
+        this.router.navigate(['/show-question/' + this.idQz + '/' + nextQuestionId]);
+      } else {
+        // Pas de question suivante
+        console.log('Pas de question suivante');
+      }
+    });
+  }
+
 }
