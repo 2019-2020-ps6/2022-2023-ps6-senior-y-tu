@@ -164,8 +164,7 @@ export class QuizService {
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
     this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe((question) => {
       console.log('question: ', question)
-      this.setSelectedQuiz(quiz.id);
-        this.questionSelected$.next(question);
+      this.questionSelected$.next(question);
     });
   }
 

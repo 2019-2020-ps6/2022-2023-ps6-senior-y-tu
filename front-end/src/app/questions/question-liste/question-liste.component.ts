@@ -27,12 +27,10 @@ export class QuestionListeComponent {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.getQuizById(id)?.subscribe((quiz) => {
-      console.log(quiz)
       this.quiz = quiz;
     });
     //this.quiz = QUIZ_LISTE.find(quiz => quiz.id === id);
     this.quizService.getQuestionsByQuizId(id)?.subscribe((questions) => {
-      console.log(questions)
       this.questionListe = questions;
     });
     //this.questionListe = this.quiz?.questions;
