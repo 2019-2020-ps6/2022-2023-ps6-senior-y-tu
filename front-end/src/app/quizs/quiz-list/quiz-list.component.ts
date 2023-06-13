@@ -45,27 +45,24 @@ export class QuizListComponent implements OnInit{
   }
 
   constructor( public quizService: QuizService, private root : Router, private themeService : ThemeService, private rootT : ActivatedRoute) {
-    this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
-      this.quizList = quizzes;
-    });
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
     FonctionCommuneThemeQuiz.changeDeplacementBouton(window.innerWidth);
-    this.selectTheme();
   }
 
   ngOnInit() {
     let idTheme = this.rootT.snapshot.paramMap.get('id');
-    if (idTheme != null)
-      this.themeService.getThemesById(idTheme);
+    if (idTheme != null) {
+      this.quizService.recupererQuizs()
+      this.quizService.quizs$.subscribe((quizs) => {
+        this.quizList = quizs.filter((quiz) => quiz.themeId.toString() == idTheme)
+      })
+      this.themeService.getThemeById(idTheme)
+      this.themeService.themesSelected$.subscribe((theme) => {
+        this.ThemeParent = theme;
+      })
+    }
   }
-
-  private selectTheme() {
-    this.themeService.themesSelected$.subscribe((Theme => {
-      this.ThemeParent = Theme;
-    }));
-  }
-
 
 }

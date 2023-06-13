@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {QuizService} from "../../../services/quiz.service";
 import {ThemeService} from "../../../services/theme.service";
+import {Theme} from "../../../models/theme.model";
 
 
 @Component({
@@ -16,49 +17,78 @@ export class QuizModificationComponent {
 
   @Input()
   quizToUpdate: Quiz | undefined;
-  themeNom : string | undefined;
+  theme : Theme | undefined;
 
 
 
 
   constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService : QuizService, public themeService : ThemeService){
-    const id = this.route.snapshot.paramMap.get('id');
-    this.quizService.getQuizById(id).subscribe((quiz) => {
-      this.quizToUpdate = quiz;
-    });
-    //this.quizToUpdate = QUIZ_LISTE.find(quiz => quiz.id === id);
-    this.themeNom = this.themeService.getThemeById(this.quizToUpdate?.themeId)?.nomTheme;
-
     this.quizForm = this.formBuilder.group({
       id: [''],
       nom: [''],
       image: [''],
       theme: [''],
     });
-
-    this.quizForm.patchValue({
-      id: this.quizToUpdate?.id,
-      nom: this.quizToUpdate?.nom,
-      image: '',
-      theme: this.themeNom,
-    });
-
-
-
   }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.quizService.getQuizById(id).subscribe((quiz) => {
+      this.quizToUpdate = quiz;
 
+      this.themeService.getThemesById(quiz.themeId)
+      this.themeService.themesSelected$.subscribe((theme) => {
+        this.theme = theme;
+
+        this.quizForm.patchValue({
+          id: this.quizToUpdate?.id,
+          nom: this.quizToUpdate?.nom,
+          image: quiz.image,
+          theme: this.theme?.nomTheme,
+        });
+      })
+    });
   }
 
   modifierQuiz() {
-    const quiz: Quiz = this.quizForm.getRawValue() as Quiz;
-    if (quiz.image === '') {
-      quiz.image = this.quizToUpdate?.image;
-    }
-    this.quizService.updateQuiz(this.quizToUpdate, quiz);
-    //console.log('Quiz Modifié: ', quiz);
+    const quizGetForm = this.quizForm.getRawValue();
+    const idQuiz = this.route.snapshot.paramMap.get('id');
 
+    if (idQuiz != null) {
+      const quiz: Quiz = {
+        id: idQuiz,
+        nom: quizGetForm.nom,
+        image: quizGetForm.image,
+        themeId: "5",
+      }
+
+      this.changementQuiz(quiz, quizGetForm.theme)
+    }
+  }
+
+  private changementQuiz(quiz: Quiz, nomTheme: string) {
+    if (this.theme != undefined) {
+      let checkDiff = this.checkDifference(quiz);
+
+      if (this.theme.nomTheme != nomTheme && nomTheme != '') {
+        this.theme.nomTheme = nomTheme;
+        this.themeService.updateTheme(this.theme);
+
+        this.themeService.themesSelected$.subscribe((theme) => {
+          quiz.themeId = theme.id
+          this.quizService.updateQuiz(quiz);
+        })
+      }
+
+      else if (checkDiff) {
+        quiz.themeId = this.theme.id
+        this.quizService.updateQuiz(quiz)
+      }
+    }
+  }
+
+  private checkDifference(quiz: Quiz): boolean {
+    return this.quizToUpdate?.nom == quiz.nom && this.quizToUpdate.image == quiz.image
   }
 
 }

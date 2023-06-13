@@ -20,6 +20,7 @@ export class QuizService {
 
   public quizs$: BehaviorSubject<Quiz[]> = new BehaviorSubject(<Quiz[]>[]);
   public quizSelected$: Subject<Quiz> = new Subject();
+  public quizFiltered$: BehaviorSubject<Quiz[]> = new BehaviorSubject(<Quiz[]> []);
 
 
   public timer : Timer = new Timer();
@@ -116,9 +117,8 @@ export class QuizService {
   }
    */
 
-  updateQuiz(quizToUpdate: Quiz | undefined, quiz: Quiz): void{
-    if (!quizToUpdate) return;
-    const urlWithId = this.quizUrl + '/' + quizToUpdate.id;
+  updateQuiz(quiz: Quiz): void{
+    const urlWithId = this.quizUrl + '/' + quiz.id;
     this.http.put<Quiz>(urlWithId, quiz, this.httpOptions).subscribe(() => this.recupererQuizs());
     console.log('Quiz Modifié (QuizService): ', quiz);
   }

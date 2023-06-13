@@ -24,10 +24,16 @@ router.get('/:themeId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    console.log(req.body)
-    const theme = Theme.create({ ...req.body })
-    console.log(theme)
-    res.status(201).json(theme)
+    const themes = Theme.get()
+    let themeGet = null
+
+    themes.forEach((theme) => {
+      if (req.body.nomTheme === theme.nomTheme) themeGet = theme
+    })
+
+    if (themeGet == null) themeGet = Theme.create({ ...req.body })
+
+    res.status(201).json(themeGet)
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -35,7 +41,15 @@ router.post('/', (req, res) => {
 
 router.put('/:themeId', (req, res) => {
   try {
-    res.status(200).json(Theme.update(req.params.themeId, req.body))
+    const themes = Theme.get()
+    let themeGet = null
+
+    themes.forEach((theme) => {
+      if (req.body.nomTheme === theme.nomTheme) { themeGet = theme }
+    })
+
+    if (themeGet == null) themeGet = Theme.update(req.params.themeId, req.body)
+    res.status(200).json(themeGet)
   } catch (err) {
     manageAllErrors(res, err)
   }

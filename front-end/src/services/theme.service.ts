@@ -39,40 +39,22 @@ export class ThemeService {
   }
 
   //front
-
-  /**
-  addTheme(theme: Theme): void {
-    THEME_LIST.push(theme);
-  }
-   */
-
-  //back
-  addTheme(themeAdd : Theme, image : string | undefined): void {
-    console.log("addTheme");
-    console.log(themeAdd);
-    themeAdd.image = image;
-    console.log(themeAdd)
-
+  addTheme(themeAdd : Theme): void {
     this.http.post<Theme>(this.themeUrl, themeAdd, this.httpOptions).subscribe((theme) => {
-      this.themes.push(theme);
       this.themes$.next(this.themes);
+      this.themesSelected$.next(theme)
     });
+  }
 
+  updateTheme(theme: Theme): void {
+    this.http.put<Theme>(this.themeUrl + '/' + theme.id, theme, this.httpOptions).subscribe((theme) => {
+      this.themesSelected$.next(theme)
+    });
   }
 
 
   getThemeById(id: string | undefined): Theme | undefined {
     return this.themes.find(theme => theme.id === id);
-  }
-
-  getIdByNom(themeAdd: Theme, image : string | undefined): string {
-    const id = this.themes.find(theme => theme.nomTheme === themeAdd.nomTheme)?.id;
-    if (id) {
-      return id;
-    } else {
-      this.addTheme(themeAdd, image);
-      return this.themes.find(theme => theme.nomTheme === themeAdd.nomTheme)?.id || '';
-    }
   }
 
 }

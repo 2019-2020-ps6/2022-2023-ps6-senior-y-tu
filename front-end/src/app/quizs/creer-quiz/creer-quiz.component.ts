@@ -4,6 +4,7 @@ import { QuizService } from "../../../services/quiz.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Theme} from "../../../models/theme.model";
 import {Router} from "@angular/router";
+import {ThemeService} from "../../../services/theme.service";
 
 @Component({
   selector: 'app-creer-quiz',
@@ -17,47 +18,41 @@ export class CreerQuizComponent implements  OnInit{
 
   theme: Theme | undefined;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router : Router) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router : Router, private themeService: ThemeService) {
     this.quizForm = this.formBuilder.group({
       nom: [''],
       image: [''],
       nomTheme: [''],
     });
-
-    //front
-    //const listeQuiz = this.quizService.getQuizs();
-    //this.newId = (listeQuiz.length + 1).toString();
   }
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+  }
 
 
   onCreer() {
     const valeur = this.quizForm.getRawValue() ;
-    const quiz: Quiz = {
-      nom: valeur.nom,
-      image: valeur.image,
-      themeId: valeur.themeId,
-      id: valeur.id,
-    }
-    const theme: Theme = {
+
+    const theme = {
       nomTheme: valeur.nomTheme,
       image: valeur.image,
-      id: valeur.themeId,
-
+      id: "1"
     }
 
-    this.quizService.addQuiz(quiz, theme);
+    this.themeService.addTheme(theme);
+    this.themeService.themesSelected$.subscribe((theme) => {
 
-    this.quizService.quizSelected$.subscribe((quiz) => {
-      const quizId = quiz.id;
+      const quiz: Quiz = {
+        nom: valeur.nom,
+        image: valeur.image,
+        themeId: theme.id,
+        id: valeur.id,
+      }
 
-      this.router.navigate(["/creer-quiz", quizId, "creer-question"]);
-    });
-
-
-
-
-
-
+      this.quizService.addQuiz(quiz, theme);
+      this.quizService.quizSelected$.subscribe((quiz) => {
+        const quizId = quiz.id;
+        this.router.navigate(["/creer-quiz", quizId, "creer-question"]);
+      });
+    })
   }
 }
