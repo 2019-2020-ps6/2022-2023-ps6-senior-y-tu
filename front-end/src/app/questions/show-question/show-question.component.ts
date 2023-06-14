@@ -110,14 +110,14 @@ export class ShowQuestionComponent implements OnInit{
     else if(e.key == Handicap_Fort_Bas.H || e.key == Handicap_Fort_Bas.J || e.key == Handicap_Fort_Bas.B
       || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE)
       {
-        reponse = (this.reponseListe)[2];
+        reponse = (this.reponseListe)[3];
       }
 
     //zone bleu
     else if(e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
       || e.key == Handicap_Fort_Droite.M || e.key== Handicap_Fort_Droite.DOUBLE_POINT || e.key == Handicap_Fort_Droite.POINT_EXCLAMATION)
       {
-        reponse = (this.reponseListe)[3];
+        reponse = (this.reponseListe)[2];
       }
     else
       FonctionCommuneThemeQuiz.ajouterAutreTouche(e);
@@ -131,8 +131,8 @@ export class ShowQuestionComponent implements OnInit{
     switch (e.key) {
       case Handicapt_Leger_Haut.FLECHE_HAUT : reponse = (this.reponseListe)[0]; break;
       case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = (this.reponseListe)[1]; break;
-      case Handicap_Leger_Droite.FLECHE_DROITE : reponse = (this.reponseListe)[2]; break;
-      case Handicap_Leger_Bas.FLECHE_BAS : reponse = (this.reponseListe)[3]; break;
+      case Handicap_Leger_Droite.FLECHE_DROITE : reponse = (this.reponseListe)[3]; break;
+      case Handicap_Leger_Bas.FLECHE_BAS : reponse = (this.reponseListe)[2]; break;
       default: FonctionCommuneThemeQuiz.ajouterAutreTouche(e); break;
     }
     if (reponse != null) this.reponseNavigation(reponse);
