@@ -1,5 +1,5 @@
 import {test, expect} from "@playwright/test";
-import {patientUrl} from "../e2e.config";
+import {accueil, patientUrl, themeList} from "../e2e.config";
 import {PatientFormFixture} from "../../app/patients/mes-patients/mes-patients.fixture";
 
 test.describe('Patient Feature',() => {
@@ -62,6 +62,28 @@ test.describe('Patient Feature',() => {
     await expect(page).toHaveURL('http://localhost:4200/mes-patients');
 
   });
+
+  test('jeu patient', async ({page}) => {
+    await page.goto(accueil);
+    const boutonPatient = await page.locator('app-patient').last();
+    await boutonPatient.click();
+    await expect(page).toHaveURL(themeList);
+
+
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('Space');
+
+    const idPattern = /\d+/;
+    const expectedURLPattern = `http://localhost:4200/quiz-list/${idPattern.source}`;
+
+    const currentURL = page.url();
+    await expect(currentURL).toEqual(expect.stringMatching(new RegExp(expectedURLPattern)));
+
+
+
+  });
+
+
   test('Patient Deletion', async ({page}) => {
     await page.goto(patientUrl);
     const patient = await page.getByText('Dumailler');

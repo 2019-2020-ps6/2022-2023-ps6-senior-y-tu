@@ -26,7 +26,6 @@ import {ListStatQuizComponent} from "./statistiques/list-stat-quiz/list-stat-qui
 
 const routes: Routes = [
   { path: 'creer-quiz', component: CreerQuizComponent },
-  { path: 'creer-quiz/:id/creer-question', component: CreerQuestionComponent },
   { path: 'quiz/:id/creer-question', component: CreerQuestionComponent},
   { path: 'creer-patient', component: CreerPatientsComponent },
   { path: 'quiz-list/:id', component: QuizListComponent },

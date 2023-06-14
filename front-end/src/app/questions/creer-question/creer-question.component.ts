@@ -19,7 +19,7 @@ export class CreerQuestionComponent implements  OnInit{
   public lienQuestionListe: string | undefined;
   protected lienQuestionListeTuple = new Tuple('','');
 
-  protected retour = "/mes-quiz/";
+  private isSend = false;
 
   public questionForm: FormGroup;
   constructor( public formBuilder: FormBuilder, public quizService: QuizService, private route: ActivatedRoute, private router : Router) {
@@ -76,6 +76,8 @@ export class CreerQuestionComponent implements  OnInit{
 
   onCreerReponse(question : Question, valeur : any){
     const idQuestion = question.id;
+
+
     this.reponses.controls.forEach((reponse: AbstractControl) => {
       const rep: Reponse = {
         valeur: reponse.get('valeur')?.value,
@@ -85,21 +87,28 @@ export class CreerQuestionComponent implements  OnInit{
       this.quizService.addReponse(rep, this.quiz);
       console.log('Reponse Ajoutée: ', rep);
     });
+
+    this.reponses.clear();
+
+
+
   }
 
+
+
   ajouterQuestion(event: Event) {
-    event.preventDefault();
     const valeur = this.questionForm.getRawValue();
     this.onCreer(valeur);
     this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
   }
-
+/**
   validerQuiz(event: Event){
     event.preventDefault();
     const valeur = this.questionForm.getRawValue();
     this.onCreer(valeur);
     this.router.navigate(['/mes-quizs']);
   }
+ */
 
   addReponse(): void {
     this.reponses.push(this.createReponse());
@@ -111,5 +120,20 @@ export class CreerQuestionComponent implements  OnInit{
       valeur: [''],
       estCorrect: [false]
     });
+  }
+
+  retour(){
+    if(!this.quiz?.id) return;
+    let nbQuestions ;
+    this.quizService.getQuestionsByQuizId(this.quiz.id).subscribe((questions) => {
+      nbQuestions = questions.length;
+      if(nbQuestions == 0 ){
+        this.router.navigate(['/mes-quizs']);
+      }
+      else{
+        this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
+      }
+    });
+
   }
 }

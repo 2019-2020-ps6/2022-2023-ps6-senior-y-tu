@@ -47,19 +47,26 @@ export class ThemeService {
    */
 
   //back
-  addTheme(themeAdd : Theme, image : string | undefined): void {
-    console.log("addTheme");
-    console.log(themeAdd);
-    themeAdd.image = image;
-    console.log(themeAdd)
-
+  addTheme(themeAdd : Theme): void {
+    this.themesSelected$ = new Subject<Theme>();
     this.http.post<Theme>(this.themeUrl, themeAdd, this.httpOptions).subscribe((theme) => {
-      this.themes.push(theme);
       this.themes$.next(this.themes);
+      this.themesSelected$.next(theme);
     });
-
   }
 
+  updateTheme(themeAAdd: Theme): void {
+    this.http.put<Theme>(this.themeUrl + '/' + themeAAdd.id, themeAAdd, this.httpOptions).subscribe((theme) => {
+      this.themesSelected$.next(theme)
+    })
+  }
+
+  getThemeId(idTheme: string) {
+    this.themesSelected$ = new Subject<Theme>();
+    this.http.get<Theme>(this.themeUrl + '/' + idTheme).subscribe((theme) => {
+      this.themesSelected$.next(theme);
+    });
+  }
 
   getThemeById(id: string | undefined): Theme | undefined {
     return this.themes.find(theme => theme.id === id);
@@ -70,7 +77,7 @@ export class ThemeService {
     if (id) {
       return id;
     } else {
-      this.addTheme(themeAdd, image);
+      this.addTheme(themeAdd);
       return this.themes.find(theme => theme.nomTheme === themeAdd.nomTheme)?.id || '';
     }
   }

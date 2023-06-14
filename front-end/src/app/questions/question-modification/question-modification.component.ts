@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Question, Reponse} from "../../../models/question.model";
-import {ActivatedRoute} from "@angular/router";
-import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Quiz} from "../../../models/quiz.model";
 import {QuizService} from "../../../services/quiz.service";
 
@@ -16,6 +16,7 @@ export class QuestionModificationComponent {
   @Input()
   questionToUpdate: Question | undefined;
   reponseListe: Reponse[] = [];
+  private isSend = false;
 
   @Input()
   quiz: Quiz | undefined;
@@ -24,7 +25,7 @@ export class QuestionModificationComponent {
 
 
 
-    constructor(private route : ActivatedRoute,public formBuilder : FormBuilder, public quizService : QuizService) {
+    constructor(private route : ActivatedRoute,public formBuilder : FormBuilder, public quizService : QuizService, private router : Router) {
       this.questionForm = this.formBuilder.group({
         id: [''],
         intitule: [''],
@@ -90,8 +91,6 @@ export class QuestionModificationComponent {
 
     this.quizService.getQuestionById(quizId, questionId)?.subscribe((question) => {
       this.questionToUpdate = question;
-      console.log("explication : " + this.questionToUpdate?.explication)
-      console.log(this.questionToUpdate)
       if(!this.questionToUpdate) return;
       this.questionForm.patchValue({
         id: this.questionToUpdate.id,
@@ -119,15 +118,77 @@ export class QuestionModificationComponent {
   }
 
   modifierQuestion() {
+      const valeur = this.questionForm.getRawValue() as Question;
       if(!this.quiz) return;
-      const question: Question = this.questionForm.getRawValue() as Question;
+      const question: Question = {
+        id: valeur.id,
+        intitule: valeur.intitule,
+        image: valeur.image,
+        explication: valeur.explication,
+        quizId: valeur.quizId
+      };
+
       if(question.image === '') {
         question.image = this.questionToUpdate?.image || '';
       }
       this.quizService.updateQuestion(question, this.quiz.id);
 
+      this.updateReponse(question, valeur);
+
       //console.log('Question modifiée: ', question);
   }
+
+  updateReponse(question: Question, valeur: any) {
+    const idQuestion = question.id;
+    this.isSend = true;
+    let lres: AbstractControl | undefined = this.reponses.controls.at(3)
+    let lrep: Reponse | undefined;
+    if (lres != undefined) {
+      lrep = {
+        valeur: lres.get('valeur')?.value,
+        estCorrect: lres.get('estCorrect')?.value,
+        questionId: idQuestion
+      };
+    }
+    let index = 0;
+
+    const reponsesQuestion: Reponse[] = [];
+
+    this.reponses.controls.forEach((reponse: AbstractControl) => {
+      this.isSend = false;
+      let rep: Reponse;
+      const indexOfReponse = this.reponses.controls.indexOf(reponse); // Récupérer l'indice de la réponse
+      rep = {
+        id: this.reponseListe.at(indexOfReponse)?.id,
+        valeur: reponse.get('valeur')?.value,
+        estCorrect: reponse.get('estCorrect')?.value,
+        questionId: idQuestion
+      };
+      reponsesQuestion.push(rep);
+      index++;
+    });
+
+    console.log(reponsesQuestion.length)
+
+
+    reponsesQuestion.forEach((reponse: Reponse) => {
+      this.quizService.updateReponse(reponse, this.quiz);
+
+    });
+
+    for(let i = 0; i < reponsesQuestion.length; i++) {
+      reponsesQuestion.pop();
+
+    }
+
+    let reponsesModifiees = this.quizService.reponseSelected$.subscribe((reponse) => {
+      if (lrep?.valeur == reponse.valeur) {
+        this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
+      }
+    });
+
+  }
+
 
   onRadioChange(index: number) {
     const reponsesFormArray = this.questionForm.get('reponses') as FormArray;
