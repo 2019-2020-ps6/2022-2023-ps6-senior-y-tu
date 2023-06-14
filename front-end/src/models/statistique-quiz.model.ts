@@ -1,5 +1,5 @@
 export interface StatistiqueQuiz {
-  id: string;
+  id?:string;
   bonneReponse: number;
   nombreReponse: number;
   idPatient: string;

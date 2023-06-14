@@ -14,6 +14,8 @@ import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 import {QuizService} from "../../../services/quiz.service";
+import {StatistiqueQuizService} from "../../../services/statistique-quiz.service";
+import {StatistiqueQuiz} from "../../../models/statistique-quiz.model";
 
 @Component({
   selector: 'app-show-question',
@@ -33,6 +35,8 @@ export class ShowQuestionComponent implements OnInit{
 
   public reponseListe: Reponse[] = [];
   protected nbQuestion: number = 0;
+  public score: number = 0;
+  public statistique: StatistiqueQuiz | undefined;
 
   public idQz : string | null = null;
   public idQt : string | null = null;
@@ -55,7 +59,7 @@ export class ShowQuestionComponent implements OnInit{
     this.changementDeplacement[1] = e2;
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService) {
+  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService, public statistiqueService: StatistiqueQuizService) {
     this.idQz = this.route.snapshot.paramMap.get('id');
 
     let clickable = localStorage.getItem("patient-utilisation_souris");
@@ -140,6 +144,15 @@ export class ShowQuestionComponent implements OnInit{
 
   private reponseNavigation(reponse: Reponse): void {
     this.idRp = reponse.id;
+
+    if (this.idQz != null) {
+      this.statistiqueService.getStatistiqueByQuizId(this.idQz).subscribe((statistiqueQuiz) => {
+        const currentScore = statistiqueQuiz?.bonneReponse || 0;
+        const newScore = currentScore + 1;
+        this.statistiqueService.updateStatistiqueScore(this.idQz, newScore);
+      });
+    }
+
     this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp]);
 
   }

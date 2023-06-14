@@ -1,6 +1,6 @@
 const { Router } = require('express')
 
-const { StatistiqueQuiz, Patient} = require('../../models')
+const { StatistiqueQuiz } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
 
 const router = new Router()
@@ -13,9 +13,9 @@ router.get('/', (req, res) => {
   }
 })
 
-router.get('/:idStatistiqueQuiz', (req, res) => {
+router.get('/:id', (req, res) => {
   try {
-    const statistiqueQuiz = StatistiqueQuiz.getById(req.params.idstatistiquesQuiz)
+    const statistiqueQuiz = StatistiqueQuiz.getById(req.params.id)
     res.status(200).json(statistiqueQuiz)
   } catch (err) {
     manageAllErrors(res, err)
@@ -32,17 +32,17 @@ router.post('/', (req, res) => {
   }
 })
 
-router.put('/:idStatistiqueQuiz', (req, res) => {
+router.put('/:id', (req, res) => {
   try {
-    res.status(200).json(StatistiqueQuiz.update(req.params.idstatistiquesQuiz, req.body))
+    res.status(200).json(StatistiqueQuiz.update(req.params.id, req.body))
   } catch (err) {
     manageAllErrors(res, err)
   }
 })
 
-router.delete('/:idStatistiqueQuiz', (req, res) => {
+router.delete('/:id', (req, res) => {
   try {
-    StatistiqueQuiz.delete(req.params.idstatistiquesQuiz)
+    StatistiqueQuiz.delete(req.params.id)
     res.status(204).end()
   } catch (err) {
     manageAllErrors(res, err)
