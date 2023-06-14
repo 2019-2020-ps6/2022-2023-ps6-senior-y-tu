@@ -55,16 +55,16 @@ export class CommencerQuizComponent {
         this.firstQuestion = question1;
         this.themeId = quiz.themeId
         this.tupleRetour = new Tuple('/quiz-list', quiz.themeId);
-        this.tupleEntrer = new Tuple('/show-question/' + this.quiz?.id + '/' + question1, undefined);
+        this.tupleEntrer = new Tuple('/show-question/' + this.quiz?.id + '/' + this.firstQuestion, undefined);
       });
+
+      this.themeNom = this.themeService.getThemeById(this.quiz?.themeId)?.nomTheme;
 
     });
 
     this.quizService.getQuestionsByQuizId(idP)?.subscribe((questions) => {
       this.questionListe = questions;
     });
-
-    this.themeNom = this.themeService.getThemeById(this.quiz?.themeId)?.nomTheme;
 
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")

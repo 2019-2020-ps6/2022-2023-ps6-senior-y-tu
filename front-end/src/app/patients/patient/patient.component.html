@@ -1,7 +1,7 @@
 <div class="patient-item" (click)="stockerPatient()">
   <div class="patient">
     <div class="patient-picture">
-      <a *ngIf="patient" [href]="patient.image" target="_blank">
+      <a *ngIf="patient">
         <img [src]="sanitizeImageUrl(patient.image)" alt="Image d'un patient">
       </a>
     </div>

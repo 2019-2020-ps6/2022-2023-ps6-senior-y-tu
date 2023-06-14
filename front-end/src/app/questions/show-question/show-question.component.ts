@@ -29,7 +29,7 @@ export class ShowQuestionComponent implements OnInit{
   @Input()
   question: Question | undefined;
   questionListe: Question[]  | undefined;
-  index : number | undefined =0;
+  index : number = 0;
 
   public reponseListe: Reponse[] = [];
   protected nbQuestion: number = 0;
@@ -56,20 +56,21 @@ export class ShowQuestionComponent implements OnInit{
   }
 
   constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService) {
+    this.idQz = this.route.snapshot.paramMap.get('id');
 
     let clickable = localStorage.getItem("patient-utilisation_souris");
     if (clickable != null && clickable == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
 
-    this.index = 1;
   }
 
   ngOnInit() {
-    this.idQz = this.route.snapshot.paramMap.get('id');
     this.idQt = this.route.snapshot.paramMap.get('questionId');
+
     this.quizService.getQuestionById(this.idQz, this.idQt)?.subscribe((question) => {
       this.question = question;
       const idQuiz = (this.idQz)? this.idQz: undefined
+
       this.quizService.getReponseListe(idQuiz, question.id).subscribe((reponse) =>{
         this.reponseListe = reponse;
       });
@@ -77,6 +78,15 @@ export class ShowQuestionComponent implements OnInit{
 
     this.quizService.getNbQuestionsByQuizId(this.idQz)?.subscribe((nb) => {
       this.nbQuestion = nb;
+    });
+
+    this.quizService.getQuestionsByQuizId(this.idQz)?.subscribe((questions) => {
+      for (let i = 0; i < this.nbQuestion; i++) {
+        if (questions[i].id + "" === this.idQt) {
+          this.index = i;
+          break;
+        }
+      }
     });
   }
 
@@ -131,5 +141,6 @@ export class ShowQuestionComponent implements OnInit{
   private reponseNavigation(reponse: Reponse): void {
     this.idRp = reponse.id;
     this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp]);
+
   }
 }
