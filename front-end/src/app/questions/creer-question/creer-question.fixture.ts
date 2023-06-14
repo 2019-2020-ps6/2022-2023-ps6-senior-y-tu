@@ -20,4 +20,14 @@ export class QuestionFormFixture extends E2EComponentFixture {
     return this.getCreateButton().click({ clickCount: numberOfClick });
   }
 
+  getInput(id: string) {
+    const selector = `app-creer-question input[id="${id}"]`;
+    return this.page.waitForSelector(selector);
+  }
+
+  getTextArea() {
+    const selector = `app-creer-question textarea`;
+    return this.page.waitForSelector(selector);
+  }
+
 }

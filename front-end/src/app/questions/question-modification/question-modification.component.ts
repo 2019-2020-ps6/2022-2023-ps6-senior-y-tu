@@ -96,7 +96,7 @@ export class QuestionModificationComponent {
         id: this.questionToUpdate.id,
         intitule: this.questionToUpdate.intitule,
         reponses: [],
-        image: '',
+        image: this.questionToUpdate.image,
         explication: this.questionToUpdate.explication,
       });
 

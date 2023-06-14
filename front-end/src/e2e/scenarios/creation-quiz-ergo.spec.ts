@@ -40,6 +40,8 @@ test.describe('Creation quiz', () => {
       await inputName.type('Quiz E2E');
       const inputTheme = await quizFormFixture.getInput('theme');
       await inputTheme.type('E2E');
+      const inputImage = await quizFormFixture.getInput('image');
+      await inputImage.type('a');
 
       const boutonCreationQuiz = await page.locator('button#valider');
       await boutonCreationQuiz.evaluateHandle((element: { click: () => any; }) => element.click());
@@ -62,6 +64,12 @@ test.describe('Creation quiz', () => {
 
       const inputVraiRep = (await questionFormFixture.getAllAnswersInputs('radio'));
       await inputVraiRep[0].check();
+
+      const inputImage = await questionFormFixture.getInput('img');
+      await inputImage.type('a');
+
+      const inputExplication = await questionFormFixture.getTextArea();
+      await inputExplication.type('Paris est la capitale de la France');
 
       await questionFormFixture.clickCreateButton();
     });
