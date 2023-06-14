@@ -10,11 +10,11 @@
     <div class="align">
       <div>
         <p> Nom du patient
-          <input type="text" class="input-texte" [value]="patientAMettreJour?.nom" formControlName="nom" data-testid="input-nom-patient-modif" >
+          <input type="text" class="input-texte" [value]="patientAMettreJour?.nom" [formControlName]="'nom'" data-testid="input-nom-patient-modif" >
         </p>
 
         <p> Prénom du patient
-          <input type="text" class="input-texte"  [value]="patientAMettreJour?.prenom"formControlName="prenom" data-testid="input-prenom-patient-modif">
+          <input type="text" class="input-texte"  [value]="patientAMettreJour?.prenom" [formControlName]="'prenom'" data-testid="input-prenom-patient-modif">
         </p>
 
         <p> Date de naissance
@@ -23,7 +23,7 @@
       </div>
       <div class="center">
         <p class="image-patient"> Image
-          <input type="text" class="input-image" name="image" [value]="patientAMettreJour?.image"formControlName="image"data-testid="input-image-patient-modif" >
+          <input type="text" class="input-image" name="image" [value]="patientAMettreJour?.image" [formControlName]="'image'" data-testid="input-image-patient-modif" >
         </p>
       </div>
     </div>

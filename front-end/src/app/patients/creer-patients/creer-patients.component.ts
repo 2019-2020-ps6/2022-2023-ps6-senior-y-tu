@@ -38,7 +38,6 @@ export class CreerPatientsComponent implements  OnInit{
       prenom: valeur.prenom,
       dateNaissance: valeur.dateNaissance,
       image: valeur.image,
-      idstatistiques: valeur.idstatistiques,
       id: valeur.id
     };
 
