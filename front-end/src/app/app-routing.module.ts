@@ -42,8 +42,8 @@ const routes: Routes = [
   { path:'mes-patients', component: MesPatientsComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   { path: 'page-aide', component: PageAideComponent},
-  { path: 'quiz-resultat', component: QuizResultatComponent},
   { path: 'stat-accueil', component: PageStatistiqueComponent},
+  { path: 'quiz-resultat/:id', component: QuizResultatComponent},
   { path: 'stat-quiz/:id', component: StatQuizComponent},
   { path: 'list-stat-quiz/:id', component: ListStatQuizComponent},
 ];

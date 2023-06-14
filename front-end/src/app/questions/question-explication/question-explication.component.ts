@@ -45,10 +45,10 @@ export class QuestionExplicationComponent {
   public idRp: string | null;
 
   protected nbQuestion: number = 0;
+  public index : number = 0;
 
   public reponseListe: Reponse[] = [];
   public afficherBravo: boolean = false;
-  public nextquestion: string |undefined;
 
   constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
     this.idQz = this.route.snapshot.paramMap.get('id');
@@ -72,6 +72,15 @@ export class QuestionExplicationComponent {
 
     this.quizService.getNbQuestionsByQuizId(this.idQz)?.subscribe((nb) => {
       this.nbQuestion = nb;
+    });
+
+    this.quizService.getQuestionsByQuizId(this.idQz)?.subscribe((questions) => {
+      for (let i = 0; i < this.nbQuestion; i++) {
+        if (questions[i].id + "" === this.idQt) {
+          this.index = i;
+          break;
+        }
+      }
     });
 
 
@@ -98,7 +107,7 @@ export class QuestionExplicationComponent {
         const nextQuestionId = questions[nextIndex].id;
         this.router.navigate(['/show-question/' + this.idQz + '/' + nextQuestionId]);
       } else {
-        // Pas de question suivante
+        this.router.navigate(['/quiz-resultat/'+ this.idQz]);
         console.log('Pas de question suivante');
       }
     });
