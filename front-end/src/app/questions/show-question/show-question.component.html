@@ -2,13 +2,13 @@
 
 <div class="boite">
   <div class="align">
-    <p appPolice>{{index+1}}/{{nbQuestion}}</p>
+    <p [appPolice]="">{{index + 1}}/{{nbQuestion}}</p>
     <img src="assets/boutonRetour.png" [appClickable]="tupleRetour">
   </div>
 
   <div class="align">
     <div class="milieu">
-      <h2 appPolice>{{question?.intitule}}</h2>
+      <h2 [appPolice]="">{{question?.intitule}}</h2>
     </div>
 
     <img src="{{question?.image}}" width="200px"/>
@@ -16,22 +16,22 @@
 
   <div>
     <div class="reponse">
-      <button class="question1" [appQuestionDirective]="reponseListe[0]" appPolice>
+      <button class="question1" [appQuestionDirective]="reponseListe[0]" [appPolice]="">
         {{reponseListe[0].valeur}}
       </button>
     </div>
 
     <div class="reponse">
-      <button class="question2" [appQuestionDirective]="reponseListe[1]" appPolice>
+      <button class="question2" [appQuestionDirective]="reponseListe[1]" [appPolice]="">
         {{reponseListe[1].valeur}}
       </button>
-      <button class="question3" [appQuestionDirective]="reponseListe[3]" appPolice>
+      <button class="question3" [appQuestionDirective]="reponseListe[3]" [appPolice]="">
         {{reponseListe[3].valeur}}
       </button>
     </div>
 
     <div class="reponse">
-      <button class="question4" [appQuestionDirective]="reponseListe[2]" appPolice>
+      <button class="question4" [appQuestionDirective]="reponseListe[2]" [appPolice]="">
         {{reponseListe[2].valeur}}
       </button>
     </div>

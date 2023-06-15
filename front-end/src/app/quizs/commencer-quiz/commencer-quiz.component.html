@@ -3,9 +3,9 @@
 <div class="boite" >
   <div class="align">
     <div class="gauche">
-      <h2 appPolice>Thème : {{themeNom}}</h2>
-      <h2 appPolice>Quiz : {{quiz?.nom}}</h2>
-      <p appPolice>Nombre de questions: {{nbQuestion}}</p>
+      <h2 [appPolice]="">Thème : {{themeNom}}</h2>
+      <h2 [appPolice]="">Quiz : {{quiz?.nom}}</h2>
+      <p [appPolice]="">Nombre de questions: {{nbQuestion}}</p>
     </div>
     <img src="assets/boutonRetour.png" [appClickable]="tupleRetour" alt="image">
   </div>
@@ -13,9 +13,9 @@
   <div class="alignMilieu">
     <img src="{{quiz?.image}}" alt="image">
     <div>
-      <p appPolice>Meilleur score :</p>
-      <p appPolice>Nombre de parties jouées: </p>
-      <button [appClickable]="tupleEntrer" appPolice (click)="jouer()">Jouer</button>
+      <p [appPolice]="">Meilleur score : {{meilleurScore}}</p>
+      <p [appPolice]="">Nombre de parties jouées: {{nombreParties}} </p>
+      <button [appClickable]="tupleEntrer" [appPolice]="" (click)="jouer()">Jouer</button>
     </div>
     <div></div>
   </div>

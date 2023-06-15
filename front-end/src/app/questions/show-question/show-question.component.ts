@@ -14,8 +14,9 @@ import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 import {QuizService} from "../../../services/quiz.service";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
+import { StatistiqueQuiz } from 'src/models/statistique-quiz.model';
 import {StatistiqueQuizService} from "../../../services/statistique-quiz.service";
-import {StatistiqueQuiz} from "../../../models/statistique-quiz.model";
 
 @Component({
   selector: 'app-show-question',
@@ -41,11 +42,12 @@ export class ShowQuestionComponent implements OnInit{
   public idQz : string | null = null;
   public idQt : string | null = null;
   public idRp: string | undefined = "";
+  public idS: string | null;
 
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = localStorage.getItem("patient-handicap");
+    let handicap = (this.patientConfig.config == undefined)? "fort" : this.patientConfig.config?.handicap;
     if(handicap == null) handicap = "fort";
 
     if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['quiz-list']);
@@ -59,13 +61,13 @@ export class ShowQuestionComponent implements OnInit{
     this.changementDeplacement[1] = e2;
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService, public statistiqueService: StatistiqueQuizService) {
+  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService, private patientConfig: PatientConfiguration, private statistiqueService : StatistiqueQuizService) {
     this.idQz = this.route.snapshot.paramMap.get('id');
+    this.idS = this.route.snapshot.paramMap.get('statId')
 
-    let clickable = localStorage.getItem("patient-utilisation_souris");
-    if (clickable != null && clickable == "oui")
+    if (patientConfig.config != undefined && patientConfig.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
-
+    this.index = 1;
   }
 
   ngOnInit() {
@@ -145,15 +147,15 @@ export class ShowQuestionComponent implements OnInit{
   private reponseNavigation(reponse: Reponse): void {
     this.idRp = reponse.id;
 
-    if (this.idQz != null) {
-      this.statistiqueService.getStatistiqueByQuizId(this.idQz).subscribe((statistiqueQuiz) => {
-        const currentScore = statistiqueQuiz?.bonneReponse || 0;
-        const newScore = currentScore + 1;
-        this.statistiqueService.updateStatistiqueScore(this.idQz, newScore);
-      });
+    if(reponse.estCorrect){
+        this.statistiqueService.getStatistiqueByQuizId(this.idQz).subscribe((statistiqueQuiz) => {
+          const currentScore = statistiqueQuiz?.bonneReponse || 0;
+          const newScore = currentScore + 1;
+          this.statistiqueService.updateStatistiqueScore(this.idS, newScore);
+        });
     }
 
-    this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp]);
+    this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp+'/'+this.idS]);
 
   }
 }

@@ -1,4 +1,8 @@
-import {Directive, ElementRef} from "@angular/core";
+import {Directive, ElementRef, Input} from "@angular/core";
+import {Subject} from "rxjs";
+import {Configuration} from "../../models/configuration.model";
+import {PatientConfiguration} from "./patientConfiguration";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Directive({
@@ -7,8 +11,10 @@ import {Directive, ElementRef} from "@angular/core";
 
 export class PoliceDirective {
 
-  constructor(private el: ElementRef) {
-    let taille = localStorage.getItem("patient-taille");
-    this.el.nativeElement.style.fontSize = `${taille}px`;
+  @Input()
+  appPolice: Subject<Configuration> | undefined
+
+  constructor(private el: ElementRef, private p : PatientConfiguration) {
+      this.el.nativeElement.style.fontSize = `${p.config?.police}px`
   }
 }

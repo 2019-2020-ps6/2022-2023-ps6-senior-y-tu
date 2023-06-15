@@ -2,10 +2,10 @@ import {Component, HostListener} from '@angular/core';
 import { ThemeService} from "../../../services/theme.service";
 import { Theme} from "../../../models/theme.model";
 import { Router } from '@angular/router';
-import {Retour} from "../../../enums/enumPatient";
 import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 @Component({
   selector: 'app-theme-list',
@@ -32,7 +32,7 @@ export class ThemeListComponent {
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = localStorage.getItem("patient-handicap");
+    let handicap = (this.patientConfig.config == undefined)? "fort" : this.patientConfig.config?.handicap;
     if(handicap == null) handicap = "fort";
     if(handicap == "fort")
       this.buttonSelected = FonctionCommuneThemeQuiz.patientFort(e, this.nombreCaseLargeur, this.buttonSelected, this.root,
@@ -42,12 +42,11 @@ export class ThemeListComponent {
         '/quiz-list', this.themeList[this.buttonSelected - 1].id);
   }
 
-  constructor(public themeService: ThemeService, private root : Router) {
+  constructor(public themeService: ThemeService, private root : Router, private patientConfig : PatientConfiguration) {
     this.themeService.themes$.subscribe((themes: Theme[]) => {
       this.themeList = themes;
     });
-    let clickable = localStorage.getItem("patient-utilisation_souris");
-    if (clickable != null && clickable == "oui")
+    if(patientConfig.config != undefined && patientConfig.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
     this.changeDeplacementBouton(window.innerWidth);
   }

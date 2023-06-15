@@ -1,12 +1,12 @@
 <div class="card">
-  <h2 appPolice> {{theme?.nomTheme}}
+  <h2 [appPolice]=""> {{theme?.nomTheme}}
   </h2>
   <div id="images">
     <img alt="test" src="{{theme?.image}}" width="400px" height="200px">
   </div>
   <br>
   <button class="button-card" [style]="couleur? {'background-color': '#b4a7d6'} : ''" [appClickable]="goto"
-          *ngIf="utilisationSouris" appPolice>Continuer</button>
+          *ngIf="p.config?.souris == 'oui'" [appPolice]="">Continuer</button>
   <button class="button-card nonClickable" [style]="couleur? {'background-color' : '#b4a7d6'} : ''"
-          *ngIf="!utilisationSouris" appPolice>Continuer</button>
+          *ngIf="p.config?.souris != 'oui'" [appPolice]="">Continuer</button>
 </div>

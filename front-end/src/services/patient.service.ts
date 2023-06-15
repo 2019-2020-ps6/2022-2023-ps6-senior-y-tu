@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import { Patient} from "src/models/personne.model";
 import { PATIENT_LISTE} from '../mocks/personne-list.mock';
 import {StatQuiz} from "../models/stat-quiz.model";
@@ -32,6 +32,10 @@ export class PatientService {
     this.http.get<Patient>(this.patientsUrl + '/'+ id).subscribe((patient) => {
       this.patientSelected$.next(patient);
     })
+  }
+
+  getPatientId (id: string): Observable<Patient> {
+    return this.http.get<Patient>(this.patientsUrl + '/' + id);
   }
 
   retrievePatient(): void {

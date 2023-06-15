@@ -8,6 +8,7 @@ import {ThemeService} from "../../../services/theme.service";
 import {Theme} from "../../../models/theme.model";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 @Component({
   selector: 'app-quiz-list',
@@ -33,8 +34,7 @@ export class QuizListComponent implements OnInit{
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = localStorage.getItem("patient-handicap");
-    if(handicap == null) handicap = "fort";
+    let handicap = (this.patientConfig.config != undefined)? this.patientConfig.config.handicap : "fort";
     if (e.key == Retour.EGAL || e.key == Retour.BACKSPACE|| e.key == Retour.DOLLAR) this.root.navigate(['theme-list']);
     if(handicap == "fort")
       this.buttonSelected = FonctionCommuneThemeQuiz.patientFort(e, this.nombreCaseLargeur, this.buttonSelected, this.root,
@@ -44,14 +44,9 @@ export class QuizListComponent implements OnInit{
         "/commencer-quiz", this.quizList[this.buttonSelected - 1].id);
   }
 
-  constructor( public quizService: QuizService, private root : Router, private themeService : ThemeService, private rootT : ActivatedRoute) {
-    let clickable = localStorage.getItem("patient-utilisation_souris");
-    if (clickable != null && clickable == "oui")
+  constructor( public quizService: QuizService, private root : Router, private themeService : ThemeService, private rootT : ActivatedRoute, private patientConfig: PatientConfiguration) {
+    if (patientConfig.config?.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
-    FonctionCommuneThemeQuiz.changeDeplacementBouton(window.innerWidth);
-  }
-
-  ngOnInit() {
     let idTheme = this.rootT.snapshot.paramMap.get('id');
     if (idTheme != null) {
       this.quizService.recupererQuizs()
@@ -59,5 +54,8 @@ export class QuizListComponent implements OnInit{
         this.quizList = quizzes.filter((quiz) => quiz.themeId == idTheme);
       });
     }
+    FonctionCommuneThemeQuiz.changeDeplacementBouton(window.innerWidth);
   }
+
+  ngOnInit() {}
 }

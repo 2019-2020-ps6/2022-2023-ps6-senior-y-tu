@@ -3,9 +3,9 @@
 <div class="boite" >
   <div class="align">
     <div class="gauche">
-      <h2 appPolice>Thème : {{theme[0].nomTheme}}</h2>
-      <h2 appPolice>Quiz : {{quiz[0].nom}}</h2>
-      <p appPolice>Nombre de questions: {{nbQuestion}}</p>
+      <h2 [appPolice]="">Thème : {{theme[0].nomTheme}}</h2>
+      <h2 [appPolice]="">Quiz : {{quiz[0].nom}}</h2>
+      <p [appPolice]="">Nombre de questions: {{nbQuestion}}</p>
     </div>
     <img alt="image" src="assets/boutonRetour.png" [appClickable]="tupleRetour">
   </div>
@@ -13,14 +13,14 @@
   <div class="alignMilieu">
     <img src="{{quiz[0].image}}" alt="image" />
     <div>
-      <p *ngIf="nombreClick != 0" appPolice>Nombre d'utilisation souris : {{nombreClick}}</p>
-      <p *ngIf="autresLettreTaper.length != 1" appPolice>Utilisation autre touche :</p>
+      <p *ngIf="nombreClick != 0" [appPolice]="">Nombre d'utilisation souris : {{nombreClick}}</p>
+      <p *ngIf="autresLettreTaper.length != 1" [appPolice]="">Utilisation autre touche :</p>
       <div *ngFor="let lettre of autresLettreTaper">
         <p *ngIf="lettre.lettre != ''"> Lettre {{lettre.lettre}} utilisé {{lettre.occurence}} fois</p>
       </div>
-      <p appPolice>Résultat: </p>
-      <p appPolice>Temps : {{timer.minute}} min {{timer.seconde}} sec</p>
-      <button [appClickable]="tuple" appPolice (click)="rejouer()">Rejouer</button>
+      <p [appPolice]="">Résultat: {{score}} </p>
+      <p [appPolice]="">Temps : {{timer.minute}} min {{timer.seconde}} sec</p>
+      <button [appClickable]="tuple" [appPolice]="" (click)="rejouer()">Rejouer</button>
     </div>
     <div></div>
   </div>

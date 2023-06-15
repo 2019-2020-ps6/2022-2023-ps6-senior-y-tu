@@ -1,12 +1,12 @@
 <app-header-patient></app-header-patient>
 <div class="boite" >
   <div class="align" [appClickable]="tupleRetour">
-    <p appPolice>{{index+1}}/{{nbQuestion}}</p>
+    <p [appPolice]="">{{index + 1}}/{{nbQuestion}}</p>
     <img src="assets/boutonRetour.png">
   </div>
 
   <div class="align">
-    <div class="milieu" appPolice>
+    <div class="milieu" [appPolice]="">
       <h3>{{question?.intitule}}</h3>
     </div>
 
@@ -16,11 +16,11 @@
   <p class="bravo" *ngIf="afficherBravo">Bravo!</p>
 
   <div class="explication">
-    <p appPolice>La réponse: {{reponseCorrecte?.valeur}} </p>
-    <p appPolice>{{question?.explication}}</p>
+    <p [appPolice]="">La réponse: {{reponseCorrecte?.valeur}} </p>
+    <p [appPolice]="">{{question?.explication}}</p>
   </div>
 
-  <button class="boutton" appDirectiveQuestionExplication appPolice (click)="suivant()">Continuer</button>
+  <button class="boutton" [appPolice]="" appDirectiveQuestionExplication>Continuer</button>
 
 </div>
 

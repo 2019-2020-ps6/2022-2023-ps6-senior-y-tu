@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {PatientConfiguration} from "../../autre/patientConfiguration";
+import {Subject} from "rxjs";
+import {Patient} from "../../../models/personne.model";
 
 @Component({
   selector: 'app-header-patient',
@@ -6,13 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./headerPatient.component.scss']
 })
 export class HeaderPatientComponent implements OnInit {
-  public nom: string;
-  protected lienRetour = "/accueil";
 
-  constructor() {
-    let nomTemp = localStorage.getItem("patient-prenom");
-    this.nom = (nomTemp == null)? "James" : nomTemp;
-  }
+  constructor(protected patientConfig : PatientConfiguration) {}
 
   protected dialog(): void {
     let dialog = document.getElementsByTagName("dialog")[0];
