@@ -13,12 +13,12 @@ export class FooterComponent{
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
     let handicap = localStorage.getItem("patient-handicap");
-    if(handicap == null) handicap = " ";
+    if(handicap == null) handicap = "fort";
     if (handicap == "leger" && (e.key == Handicap_Leger_Aide.U || e.key == Handicap_Leger_Aide.ETOILE)) {
       this.rooter.navigate(['/page-aide'])
     }
-    else if(e.key == Handicap_Fort_Aide.TIRET_BAS || e.key == Handicap_Fort_Aide.C
-      || e.key == Handicap_Fort_Aide.U || e.key == Handicap_Fort_Aide.I) {
+    else if(handicap != "leger" && (e.key == Handicap_Fort_Aide.TIRET_BAS || e.key == Handicap_Fort_Aide.C
+      || e.key == Handicap_Fort_Aide.U || e.key == Handicap_Fort_Aide.I)) {
       this.rooter.navigate(['/page-aide']);
     }
   }
