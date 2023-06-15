@@ -15,6 +15,8 @@ import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 import {QuizService} from "../../../services/quiz.service";
 import {PatientConfiguration} from "../../autre/patientConfiguration";
+import { StatistiqueQuiz } from 'src/models/statistique-quiz.model';
+import {StatistiqueQuizService} from "../../../services/statistique-quiz.service";
 
 @Component({
   selector: 'app-show-question',
@@ -30,10 +32,12 @@ export class ShowQuestionComponent implements OnInit{
   @Input()
   question: Question | undefined;
   questionListe: Question[]  | undefined;
-  index : number | undefined =0;
+  index : number = 0;
 
   public reponseListe: Reponse[] = [];
   protected nbQuestion: number = 0;
+  public score: number = 0;
+  public statistique: StatistiqueQuiz | undefined;
 
   public idQz : string | null = null;
   public idQt : string | null = null;
@@ -56,18 +60,19 @@ export class ShowQuestionComponent implements OnInit{
     this.changementDeplacement[1] = e2;
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService, private patientConfig: PatientConfiguration) {
+  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService, private patientConfig: PatientConfiguration, private statistiqueService : StatistiqueQuizService) {
     if (patientConfig.config != undefined && patientConfig.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
     this.index = 1;
   }
 
   ngOnInit() {
-    this.idQz = this.route.snapshot.paramMap.get('id');
     this.idQt = this.route.snapshot.paramMap.get('questionId');
+
     this.quizService.getQuestionById(this.idQz, this.idQt)?.subscribe((question) => {
       this.question = question;
       const idQuiz = (this.idQz)? this.idQz: undefined
+
       this.quizService.getReponseListe(idQuiz, question.id).subscribe((reponse) =>{
         this.reponseListe = reponse;
       });
@@ -75,6 +80,15 @@ export class ShowQuestionComponent implements OnInit{
 
     this.quizService.getNbQuestionsByQuizId(this.idQz)?.subscribe((nb) => {
       this.nbQuestion = nb;
+    });
+
+    this.quizService.getQuestionsByQuizId(this.idQz)?.subscribe((questions) => {
+      for (let i = 0; i < this.nbQuestion; i++) {
+        if (questions[i].id + "" === this.idQt) {
+          this.index = i;
+          break;
+        }
+      }
     });
   }
 
@@ -98,14 +112,14 @@ export class ShowQuestionComponent implements OnInit{
     else if(e.key == Handicap_Fort_Bas.H || e.key == Handicap_Fort_Bas.J || e.key == Handicap_Fort_Bas.B
       || e.key == Handicap_Fort_Bas.N || e.key == Handicap_Fort_Bas.VIRGULE)
       {
-        reponse = (this.reponseListe)[2];
+        reponse = (this.reponseListe)[3];
       }
 
     //zone bleu
     else if(e.key == Handicap_Fort_Droite.O || e.key == Handicap_Fort_Droite.P || e.key == Handicap_Fort_Droite.L
       || e.key == Handicap_Fort_Droite.M || e.key== Handicap_Fort_Droite.DOUBLE_POINT || e.key == Handicap_Fort_Droite.POINT_EXCLAMATION)
       {
-        reponse = (this.reponseListe)[3];
+        reponse = (this.reponseListe)[2];
       }
     else
       FonctionCommuneThemeQuiz.ajouterAutreTouche(e);
@@ -119,8 +133,8 @@ export class ShowQuestionComponent implements OnInit{
     switch (e.key) {
       case Handicapt_Leger_Haut.FLECHE_HAUT : reponse = (this.reponseListe)[0]; break;
       case Handicap_Leger_Gauche.FLECHE_GAUCHE : reponse = (this.reponseListe)[1]; break;
-      case Handicap_Leger_Droite.FLECHE_DROITE : reponse = (this.reponseListe)[2]; break;
-      case Handicap_Leger_Bas.FLECHE_BAS : reponse = (this.reponseListe)[3]; break;
+      case Handicap_Leger_Droite.FLECHE_DROITE : reponse = (this.reponseListe)[3]; break;
+      case Handicap_Leger_Bas.FLECHE_BAS : reponse = (this.reponseListe)[2]; break;
       default: FonctionCommuneThemeQuiz.ajouterAutreTouche(e); break;
     }
     if (reponse != null) this.reponseNavigation(reponse);
@@ -128,6 +142,16 @@ export class ShowQuestionComponent implements OnInit{
 
   private reponseNavigation(reponse: Reponse): void {
     this.idRp = reponse.id;
+
+    if (this.idQz != null) {
+      this.statistiqueService.getStatistiqueByQuizId(this.idQz).subscribe((statistiqueQuiz) => {
+        const currentScore = statistiqueQuiz?.bonneReponse || 0;
+        const newScore = currentScore + 1;
+        this.statistiqueService.updateStatistiqueScore(this.idQz, newScore);
+      });
+    }
+
     this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp]);
+
   }
 }

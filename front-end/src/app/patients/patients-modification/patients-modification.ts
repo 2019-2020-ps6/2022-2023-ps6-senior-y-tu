@@ -19,11 +19,10 @@ export class PatientsModificationComponent {
     prenom: new FormControl(' '),
     dateNaisance: new FormControl(' '),
     image: new FormControl(' '),
-    idstatitique : new FormControl(' '),
-    police : new FormControl(' '),
-    explication: new FormControl(' '),
-    souris : new FormControl(' '),
-    handicap: new FormControl(' ')
+    police : new FormControl(''),
+    explication: new FormControl(''),
+    souris : new FormControl(''),
+    handicap: new FormControl('')
   });
 
   protected patientAMettreJour : Patient | undefined;
@@ -49,14 +48,13 @@ export class PatientsModificationComponent {
   modifierPatient() { // faire que prend aussi les valeur non modifier
     const valeur = this.valeurForm.getRawValue();
     const id = this.route.snapshot.paramMap.get('id');
-
+    console.log(valeur);
     if (id != null) {
       const patient: Patient = {
         nom: valeur.nom,
         prenom: valeur.prenom,
         dateNaissance: valeur.dateNaissance,
         image: valeur.image,
-        idstatistiques: valeur.idstatistiques,
         id: id
       };
       console.log('patient', patient)
@@ -73,7 +71,7 @@ export class PatientsModificationComponent {
         id: valeur.id
       }
       this.patientService.updatePatient(this.patientAMettreJour, patient);
-      this.configurationService.updateConfiguration(config)
+      this.configurationService.updateConfiguration(this.configurationAMettreJour, config)
       console.log('Configuration Modifier: ',config);
     }
   }

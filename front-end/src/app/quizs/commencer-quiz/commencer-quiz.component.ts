@@ -7,9 +7,9 @@ import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enum
 import {ClickableDirective} from "../../autre/ClickableDirective";
 import {Tuple} from "../../autre/Tuple";
 import {Question} from "../../../models/question.model";
-import {Subject} from "rxjs";
-import {Configuration} from "../../../models/configuration.model";
 import {PatientConfiguration} from "../../autre/patientConfiguration";
+import {StatistiqueQuizService} from "../../../services/statistique-quiz.service";
+import {StatistiqueQuiz} from "../../../models/statistique-quiz.model";
 
 
 @Component({
@@ -46,20 +46,19 @@ export class CommencerQuizComponent {
   }
 
 
-  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private config: PatientConfiguration) {
+  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private config: PatientConfiguration, public statistique: StatistiqueQuizService) {
     const idP = this.route.snapshot.paramMap.get('id');
     this.quizService.getQuizById(idP).subscribe((quiz)=>{
       this.quiz = quiz;
       let question1 = undefined;
       this.quizService.getQuestionsByQuizId(idP)?.subscribe((question) =>{
-        console.log(question)
         question1 = question[0].id;
         this.firstQuestion = question1;
         this.themeId = quiz.themeId
         this.tupleRetour = new Tuple('/quiz-list', quiz.themeId);
-        this.tupleEntrer = new Tuple('/show-question/' + this.quiz?.id + '/' + question1, undefined);
+        this.tupleEntrer = new Tuple('/show-question/' + this.quiz?.id + '/' + this.firstQuestion, undefined);
       });
-
+      this.themeNom = this.themeService.getThemeById(this.quiz?.themeId)?.nomTheme;
     });
 
     this.quizService.getQuestionsByQuizId(idP)?.subscribe((questions) => {
@@ -74,6 +73,7 @@ export class CommencerQuizComponent {
     this.quizService.getNbQuestionsByQuizId(idP)?.subscribe((nb) => {
       this.nbQuestion = nb;
     });
+
   }
 
   ngOnInit(): void {
@@ -82,7 +82,17 @@ export class CommencerQuizComponent {
 
   jouer() {
     this.quizService.startTimer();
-    this.questionListe;
+
+    const stat: StatistiqueQuiz = {
+      bonneReponse: 0,
+      nombreReponse: 0,
+      idPatient: '1',
+      idQuiz: ''+this.quiz?.id,
+      temp: 0,
+    };
+
+    this.statistique.addStatistiqueQuiz(stat);
+    console.log(this.statistique);
   }
 
 }

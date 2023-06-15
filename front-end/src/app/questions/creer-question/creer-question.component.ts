@@ -76,9 +76,20 @@ export class CreerQuestionComponent implements  OnInit{
 
   onCreerReponse(question : Question, valeur : any){
     const idQuestion = question.id;
+    this.isSend = true;
+    let lres: AbstractControl | undefined = this.reponses.controls.at(3)
+    let lreponse : Reponse| undefined;
+    if(lres != undefined) {
+      lreponse = {
+        valeur: lres.get('valeur')?.value,
+        estCorrect: lres.get('estCorrect')?.value,
+        questionId: idQuestion
+      };
+    }
 
 
     this.reponses.controls.forEach((reponse: AbstractControl) => {
+      this.isSend = false;
       const rep: Reponse = {
         valeur: reponse.get('valeur')?.value,
         estCorrect: reponse.get('estCorrect')?.value,
@@ -89,6 +100,11 @@ export class CreerQuestionComponent implements  OnInit{
     });
 
     this.reponses.clear();
+    let reponsesCreees = this.quizService.reponseSelected$.subscribe((reponse) => {
+      if(lreponse?.valeur == reponse.valeur){
+        this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
+      }
+    });
 
 
 

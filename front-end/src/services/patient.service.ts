@@ -16,7 +16,7 @@ export class PatientService {
   private httpOptions = httpOptionsBase;
 
   public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject(<Patient[]> []);
-public patientSelected$ : Subject<Patient> = new Subject<Patient>();
+  public patientSelected$ : Subject<Patient> = new Subject<Patient>();
   constructor(private http: HttpClient) {
     this.getPatients();
   }

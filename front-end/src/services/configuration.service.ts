@@ -31,7 +31,6 @@ export class ConfigurationService {
   }
 
   addConfiguration(configuration: Configuration): void {
-    console.log("je suis dans le service add configuration");
     this.http.post<Configuration>(this.configurationUrl, configuration, this.httpOptions).subscribe(() => this.retrieveConfiguration());
   }
 
@@ -46,9 +45,18 @@ export class ConfigurationService {
     });
   }
 
-  updateConfiguration(config: Configuration): void {
+  updateConfiguration(confiOrigine: Configuration | undefined, config: Configuration): void {
+    console.log("je suis dans update configuration");
     console.log(this.configurationUrl+'/'+config.idPatient)
-    this.http.put<Configuration>(this.configurationUrl+'/'+config.idPatient, config, this.httpOptions).subscribe( () => this.retrieveConfiguration());
+    if (confiOrigine != undefined) {
+      config.id = confiOrigine.id;
+      config.police = confiOrigine.police;
+      config.souris = confiOrigine.souris;
+      config.explication = confiOrigine.explication;
+      config.handicap = confiOrigine.handicap;
+      console.log("je suis dans config et je vais envoyer cette info", config)
+      this.http.put<Configuration>(this.configurationUrl + '/' + config.idPatient, config, this.httpOptions).subscribe(() => this.retrieveConfiguration());
+    }
   }
 
   deleteConfiguration(configuration: Configuration): void {

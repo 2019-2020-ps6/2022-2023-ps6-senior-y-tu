@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Timer} from "../../timer/Timer";
 import {Tuple} from "../../autre/Tuple";
 import {PatientConfiguration} from "../../autre/patientConfiguration";
+import {StatistiqueQuiz} from "../../../models/statistique-quiz.model";
 
 @Component({
   selector: 'app-quiz-resultat',
@@ -20,6 +21,8 @@ export class QuizResultatComponent {
   protected nombreClick: number = 0;
   protected autresLettreTaper : Array<{lettre: string, occurence: number}> = [];
   protected nbQuestion: number = 0;
+  public statistiqueQuiz: StatistiqueQuiz | undefined;
+
 
   @Input()
   theme: Theme[] = [];
@@ -62,7 +65,11 @@ export class QuizResultatComponent {
     this.quizService.getNbQuestionsByQuizId(id)?.subscribe((nb) => {
       this.nbQuestion = nb;
     });
+
+
   }
+
+
 
   private compterLettre(autreTouche: string) {
     let n: number = autreTouche.length;

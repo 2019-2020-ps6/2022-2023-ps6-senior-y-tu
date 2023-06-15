@@ -7,7 +7,6 @@ export interface Patient {
   prenom : string;
   dateNaissance: Date;
   image : string;
-  idstatistiques: string;
 }
 
 export interface Ergo {

@@ -45,6 +45,7 @@ export class QuestionExplicationComponent {
   public idRp: string | null;
 
   protected nbQuestion: number = 0;
+  public index : number = 0;
 
   public reponseListe: Reponse[] = [];
   public afficherBravo: boolean = false;
