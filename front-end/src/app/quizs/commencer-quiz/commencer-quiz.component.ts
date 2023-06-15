@@ -30,6 +30,9 @@ export class CommencerQuizComponent {
   private firstQuestion: string = ""
   private themeId: string = ""
   protected nbQuestion: number = 0;
+  public idS: string | undefined;
+  public meilleurScore: number |undefined;
+  public nombreParties: number | undefined;
 
   @HostListener("window:mousemove", ["$event.clientX", "$event.clientY"])
   onMouseMove(e: any, e2: any){
@@ -38,16 +41,32 @@ export class CommencerQuizComponent {
   }
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = (this.config.config == undefined)? "fort" : this.config.config?.handicap;
+    let handicap = (this.config.config == undefined) ? "fort" : this.config.config?.handicap;
 
     if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['quiz-list', this.themeId]);
-    else if (e.key == Handicap_Fort_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE) )
-      this.router.navigate(['show-question/' + this.quiz?.id, this.firstQuestion ]);
+    else if (e.key == Handicap_Fort_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE)){
+      this.quizService.startTimer();
+      this.router.navigate(['show-question/' + this.quiz?.id, this.firstQuestion, this.idS]);
+    }
   }
 
 
-  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private config: PatientConfiguration, public statistique: StatistiqueQuizService) {
+  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private config: PatientConfiguration, public statistiqueService: StatistiqueQuizService) {
+
     const idP = this.route.snapshot.paramMap.get('id');
+
+    this.statistiqueService.getStatistiqueWithBestScore().subscribe((stat)=>{
+      this.meilleurScore = stat?.bonneReponse || 0;
+    });
+
+    this.statistiqueService.getNombrePartiesJouees().subscribe((nombrePartiesJouees) => {
+      this.nombreParties = nombrePartiesJouees || 0;
+    });
+
+    this.quizService.getNbQuestionsByQuizId(idP)?.subscribe((nb) => {
+      this.nbQuestion = nb;
+    });
+
     this.quizService.getQuizById(idP).subscribe((quiz)=>{
       this.quiz = quiz;
       let question1 = undefined;
@@ -56,7 +75,23 @@ export class CommencerQuizComponent {
         this.firstQuestion = question1;
         this.themeId = quiz.themeId
         this.tupleRetour = new Tuple('/quiz-list', quiz.themeId);
-        this.tupleEntrer = new Tuple('/show-question/' + this.quiz?.id + '/' + this.firstQuestion, undefined);
+
+        const stat: StatistiqueQuiz = {
+          bonneReponse: 0,
+          nombreReponse: this.nbQuestion,
+          idPatient: '1',
+          idQuiz: ''+this.quiz?.id,
+          temp: 0,
+        };
+
+        this.statistiqueService.addStatistiqueQuiz(stat);
+
+        const idQ = (this.quiz)? this.quiz.id: null;
+        this.statistiqueService.getStatistiqueByQuizId(idQ).subscribe((stat)=>{
+          this.idS = stat.id;
+
+          this.tupleEntrer = new Tuple('/show-question/' + this.quiz?.id + '/' + this.firstQuestion + '/' + this.idS, undefined);
+        });
       });
       this.themeNom = this.themeService.getThemeById(this.quiz?.themeId)?.nomTheme;
     });
@@ -70,10 +105,6 @@ export class CommencerQuizComponent {
     if (config.config != undefined && config.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
 
-    this.quizService.getNbQuestionsByQuizId(idP)?.subscribe((nb) => {
-      this.nbQuestion = nb;
-    });
-
   }
 
   ngOnInit(): void {
@@ -82,17 +113,6 @@ export class CommencerQuizComponent {
 
   jouer() {
     this.quizService.startTimer();
-
-    const stat: StatistiqueQuiz = {
-      bonneReponse: 0,
-      nombreReponse: 0,
-      idPatient: '1',
-      idQuiz: ''+this.quiz?.id,
-      temp: 0,
-    };
-
-    this.statistique.addStatistiqueQuiz(stat);
-    console.log(this.statistique);
   }
 
 }

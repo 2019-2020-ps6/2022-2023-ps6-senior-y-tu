@@ -18,7 +18,7 @@
       <div *ngFor="let lettre of autresLettreTaper">
         <p *ngIf="lettre.lettre != ''"> Lettre {{lettre.lettre}} utilisé {{lettre.occurence}} fois</p>
       </div>
-      <p [appPolice]="">Résultat: </p>
+      <p [appPolice]="">Résultat: {{score}} </p>
       <p [appPolice]="">Temps : {{timer.minute}} min {{timer.seconde}} sec</p>
       <button [appClickable]="tuple" [appPolice]="" (click)="rejouer()">Rejouer</button>
     </div>

@@ -9,6 +9,7 @@ import {Timer} from "../../timer/Timer";
 import {Tuple} from "../../autre/Tuple";
 import {PatientConfiguration} from "../../autre/patientConfiguration";
 import {StatistiqueQuiz} from "../../../models/statistique-quiz.model";
+import {StatistiqueQuizService} from "../../../services/statistique-quiz.service";
 
 @Component({
   selector: 'app-quiz-resultat',
@@ -22,7 +23,8 @@ export class QuizResultatComponent {
   protected autresLettreTaper : Array<{lettre: string, occurence: number}> = [];
   protected nbQuestion: number = 0;
   public statistiqueQuiz: StatistiqueQuiz | undefined;
-
+  public id: string | null;
+  public score: number | undefined;
 
   @Input()
   theme: Theme[] = [];
@@ -40,7 +42,10 @@ export class QuizResultatComponent {
       this.rejouer();
   }
 
-  constructor(private activeRoot: ActivatedRoute, public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private patientConfig: PatientConfiguration) {
+
+  constructor(private activeRoot: ActivatedRoute, public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute,private patientConfig: PatientConfiguration, public statistiqueService: StatistiqueQuizService) {
+    const idS = this.route.snapshot.paramMap.get('statId');
+
     this.themeService.themes$.subscribe((themes: Theme[]) => {
       this.theme = themes;
     });
@@ -61,11 +66,14 @@ export class QuizResultatComponent {
     this.quizService.stopTimer();
     this.timer = this.quizService.timer;
 
-    const id = this.route.snapshot.paramMap.get('id');
-    this.quizService.getNbQuestionsByQuizId(id)?.subscribe((nb) => {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.quizService.getNbQuestionsByQuizId(this.id)?.subscribe((nb) => {
       this.nbQuestion = nb;
     });
 
+    this.statistiqueService.getStatistiqueById(idS).subscribe((stat)=>{
+      this.score = stat.bonneReponse;
+    });
 
   }
 
@@ -89,9 +97,7 @@ export class QuizResultatComponent {
   }
 
   rejouer() {
-    let idQuiz = this.activeRoot.snapshot.paramMap.get("id");
     this.quizService.resetTimer();
-    this.quizService.startTimer();
-    this.router.navigate(['commencer-quiz', idQuiz]);
+    this.router.navigate(['commencer-quiz', this.id]);
   }
 }

@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { StatistiqueQuiz} from "../models/statistique-quiz.model";
 import {httpOptionsBase, serverUrl} from "../configs/server.config";
 import {BehaviorSubject, map, Subject} from "rxjs";
-import {Quiz} from "../models/quiz.model";
+import {Timer} from "../app/timer/Timer";
 
 @Injectable( {
   providedIn:'root'
@@ -28,7 +28,7 @@ export class StatistiqueQuizService {
     });
   }
 
-  addStatistiqueQuiz(statistiqueQuiz: StatistiqueQuiz): void {
+  addStatistiqueQuiz(statistiqueQuiz: StatistiqueQuiz) {
     this.http.post<StatistiqueQuiz>(this.statistiqueQuizUrl, statistiqueQuiz, this.httpOptions).subscribe((statistiqueQuizAjouter) => {
       this.retrieveStatistiqueQuiz();
       this.statistiquequizSelectioner$.next(statistiqueQuizAjouter);
@@ -36,26 +36,60 @@ export class StatistiqueQuizService {
   }
 
   getStatistiqueByQuizId(id: string | null) {
-    const url = this.statistiqueQuizUrl+'?idQuiz='+id;
+    const url = this.statistiqueQuizUrl + '?idQuiz=' + id;
     return this.http.get<StatistiqueQuiz[]>(url).pipe(
-      map((statistiqueQuizList) => statistiqueQuizList.find((statistiqueQuiz) => statistiqueQuiz.idQuiz === id))
+      map((statistiqueQuizList) => {
+        const filteredStatistiqueQuiz = statistiqueQuizList.find(
+          (statistiqueQuiz) => statistiqueQuiz.idQuiz === id
+        );
+        const lastStatistiqueQuiz = statistiqueQuizList[statistiqueQuizList.length - 1];
+        return lastStatistiqueQuiz;
+      })
     );
   }
 
-  updateStatistiqueScore(quizId: string | null, newScore: number): void {
-    const url = this.statistiqueQuizUrl + '?idQuiz=' + quizId;
-    this.http.get<StatistiqueQuiz[]>(url).subscribe((statistiqueQuizList) => {
-      const firstStatistiqueQuiz = statistiqueQuizList[0]; // Get the first element
+  updateStatistiqueScore(idStat: string | null, newScore: number): void {
+    const url = this.statistiqueQuizUrl + '/' + idStat; // Append the ID to the URL
+    this.http.get<StatistiqueQuiz>(url).subscribe((statistiqueQuiz) => {
+      if (statistiqueQuiz) {
+        statistiqueQuiz.bonneReponse = newScore;
 
-      if (firstStatistiqueQuiz) {
-        firstStatistiqueQuiz.bonneReponse = newScore;
-        const updateUrl = this.statistiqueQuizUrl + '/' + firstStatistiqueQuiz.id;
-
-        this.http.put<StatistiqueQuiz>(updateUrl, firstStatistiqueQuiz, this.httpOptions)
+        const updateUrl = this.statistiqueQuizUrl + '/' + idStat;
+        this.http.put<StatistiqueQuiz>(updateUrl, statistiqueQuiz, this.httpOptions)
           .subscribe(() => {
             this.retrieveStatistiqueQuiz();
           });
       }
     });
   }
+
+  getStatistiqueById( idS: string | null) {
+    const urlWithId = this.statistiqueQuizUrl + '/' + idS;
+    return this.http.get<StatistiqueQuiz>(urlWithId);
+  }
+
+  getStatistiqueWithBestScore(){
+    return this.http.get<StatistiqueQuiz[]>(this.statistiqueQuizUrl).pipe(
+      map(statistiqueQuizList => {
+        // Recherche de la statistique avec le meilleur score
+        let bestStatistiqueQuiz: StatistiqueQuiz | undefined;
+        let bestScore = -1;
+
+        for (const statistiqueQuiz of statistiqueQuizList) {
+          if (statistiqueQuiz.bonneReponse > bestScore) {
+            bestStatistiqueQuiz = statistiqueQuiz;
+            bestScore = statistiqueQuiz.bonneReponse;
+          }
+        }
+        return bestStatistiqueQuiz;
+      })
+    );
+  }
+
+  getNombrePartiesJouees() {
+    return this.http.get<StatistiqueQuiz[]>(this.statistiqueQuizUrl).pipe(
+      map(statistiqueQuizList => statistiqueQuizList.length)
+    );
+  }
+
 }
