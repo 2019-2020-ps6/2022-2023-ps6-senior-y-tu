@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, HostListener} from '@angular/core';
 import {Location} from "@angular/common";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 @Component({
   selector: 'app-page-aide',
@@ -16,11 +17,10 @@ export class PageAideComponent implements AfterViewInit {
     }
   }
 
-  constructor(private location: Location) {}
+  constructor(private location: Location, protected patientConfig : PatientConfiguration) {}
 
   ngAfterViewInit() {
-    let handicap = localStorage.getItem("patient-handicap");
-    if(handicap == null) handicap = "fort";
+    let handicap = (this.patientConfig.config != undefined)? this.patientConfig.config.handicap : "fort";
     if(handicap == "fort") {
       let img = document.getElementById("imageClavier") as HTMLImageElement;
       img.src = "../../../assets/Clavier2.png";

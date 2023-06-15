@@ -35,6 +35,10 @@ export class ConfigurationService {
     this.http.post<Configuration>(this.configurationUrl, configuration, this.httpOptions).subscribe(() => this.retrieveConfiguration());
   }
 
+  getConfigId(idPatient : string){
+    return this.http.get<Configuration>(this.configurationUrl+'/'+idPatient)
+  }
+
   getSelectedConfiguration(userId: string): void {
     const urlWithId = this.configurationUrl + '/' + userId;
     this.http.get<Configuration>(urlWithId).subscribe((user) => {

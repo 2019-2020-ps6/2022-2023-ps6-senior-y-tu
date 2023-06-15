@@ -1,6 +1,7 @@
 import {Directive, Input, HostListener, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {Tuple} from "./Tuple";
+import {PatientConfiguration} from "./patientConfiguration";
 
 @Directive({
   selector: "[appClickable]"
@@ -21,8 +22,8 @@ export class ClickableDirective {
     }
   }
 
-  public constructor(private root: Router, private el: ElementRef) {
-    this.verifyUtilisationSouris = "oui" == localStorage.getItem("patient-utilisation_souris");
+  public constructor(private root: Router, private el: ElementRef, private patientConfig : PatientConfiguration) {
+    this.verifyUtilisationSouris = (patientConfig.config != undefined && patientConfig.config.souris == "oui");
     if (this.verifyUtilisationSouris) {
       el.nativeElement.style.cursor = "pointer";
     }

@@ -3,6 +3,9 @@ import {Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
 import {Quiz} from "../../../models/quiz.model";
 import {Tuple} from "../../autre/Tuple";
 import {ThemeService} from "../../../services/theme.service";
+import {Configuration} from "../../../models/configuration.model";
+import {Subject} from "rxjs";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 
 @Component({
@@ -30,9 +33,7 @@ export class QuizComponent implements OnInit {
 
   themeName: string | undefined = "";
 
-  constructor(private themeService: ThemeService) {
-    const id = this.quiz?.id;
-    this.lien = "/commencer-quiz/" + id;
+  constructor(private themeService: ThemeService, protected patientConfig: PatientConfiguration) {
     this.lienTuple = new Tuple(this.lien, undefined);
     this.themeName = themeService.getThemeById(this.quiz?.themeId)?.nomTheme;
   }
@@ -43,6 +44,12 @@ export class QuizComponent implements OnInit {
 
   deletedQuiz(){
     this.quizDeleted.emit(this.quiz);
+  }
+
+  protected changerPage() {
+    const id = this.quiz?.id;
+    this.lien = "/commencer-quiz/" + id;
+    return this.lien
   }
 
   //selectQuiz(): void {

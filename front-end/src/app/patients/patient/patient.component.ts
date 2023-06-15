@@ -2,8 +2,8 @@ import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import { Patient } from "src/models/personne.model";
 import {Router} from "@angular/router";
 import {ConfigurationService} from "../../../services/configuration.service";
-import {Configuration} from "../../../models/configuration.model";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 @Component({
   selector: 'app-patient',
@@ -19,7 +19,7 @@ export class PatientComponent implements OnInit{
   @Output()
   patientDeleted: EventEmitter<Patient> = new EventEmitter<Patient>();
 
-  constructor(private route : Router, public configurationService : ConfigurationService, private sanitizer: DomSanitizer) { }
+  constructor(private route : Router, public configurationService : ConfigurationService, private sanitizer: DomSanitizer, private p : PatientConfiguration) { }
 
   ngOnInit(): void { }
 
@@ -31,24 +31,15 @@ export class PatientComponent implements OnInit{
     if (this.patient != undefined) {
       this.configurationService.getSelectedConfiguration(this.patient.id)
       this.configurationService.configurationSelected$.subscribe((config) =>{
-        if (localStorage.getItem("patient-prenom") != undefined) {
-          localStorage.removeItem("patient-prenom");
-          localStorage.removeItem("patient-handicap");
-          localStorage.removeItem("patient-explication");
-          localStorage.removeItem("patient-taille");
-          localStorage.removeItem("patient-utilisation_souris")
+        if (localStorage.getItem("autresTouchesAppuyer") != null) {
           localStorage.removeItem("autresTouchesAppuyer")
           localStorage.removeItem("nombreDeplacement")
-          localStorage.removeItem("patient-utilisation_souris")
         }
-        if (this.patient != undefined)
-          localStorage.setItem("patient-prenom", this.patient.prenom);
-        localStorage.setItem("patient-handicap", config.handicap);
-        localStorage.setItem("patient-explication", config.explication);
-        localStorage.setItem("patient-taille", String(config.police));
         localStorage.setItem("autresTouchesAppuyer", "")
         localStorage.setItem("nombreDeplacement", "0")
-        localStorage.setItem("patient-utilisation_souris", config.souris);
+        document.cookie = "name=" + this.patient?.id + ";";
+        this.p.patient = this.patient;
+        this.p.config = config;
         this.route.navigate(['/theme-list'])
       })
     }

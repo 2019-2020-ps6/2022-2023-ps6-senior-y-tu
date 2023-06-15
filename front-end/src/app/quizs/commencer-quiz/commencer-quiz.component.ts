@@ -7,6 +7,9 @@ import {Handicap_Fort_Entree, Handicap_Leger_Entree, Retour} from "../../../enum
 import {ClickableDirective} from "../../autre/ClickableDirective";
 import {Tuple} from "../../autre/Tuple";
 import {Question} from "../../../models/question.model";
+import {Subject} from "rxjs";
+import {Configuration} from "../../../models/configuration.model";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 
 @Component({
@@ -35,8 +38,7 @@ export class CommencerQuizComponent {
   }
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = localStorage.getItem("patient-handicap");
-    if(handicap == null) handicap = "fort";
+    let handicap = (this.config.config == undefined)? "fort" : this.config.config?.handicap;
 
     if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['quiz-list', this.themeId]);
     else if (e.key == Handicap_Fort_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE) )
@@ -44,7 +46,7 @@ export class CommencerQuizComponent {
   }
 
 
-  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute) {
+  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private config: PatientConfiguration) {
     const idP = this.route.snapshot.paramMap.get('id');
     this.quizService.getQuizById(idP).subscribe((quiz)=>{
       this.quiz = quiz;
@@ -66,8 +68,7 @@ export class CommencerQuizComponent {
 
     this.themeNom = this.themeService.getThemeById(this.quiz?.themeId)?.nomTheme;
 
-    let clickable = localStorage.getItem("patient-utilisation_souris");
-    if (clickable != null && clickable == "oui")
+    if (config.config != undefined && config.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
 
     this.quizService.getNbQuestionsByQuizId(idP)?.subscribe((nb) => {

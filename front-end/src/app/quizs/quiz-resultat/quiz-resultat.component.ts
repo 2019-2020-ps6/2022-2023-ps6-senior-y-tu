@@ -7,6 +7,7 @@ import {QuizService} from "../../../services/quiz.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Timer} from "../../timer/Timer";
 import {Tuple} from "../../autre/Tuple";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 @Component({
   selector: 'app-quiz-resultat',
@@ -28,21 +29,22 @@ export class QuizResultatComponent {
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = localStorage.getItem("patient-handicap");
+    let handicap = (this.patientConfig.config != undefined)? this.patientConfig.config.handicap : "fort";
     if(handicap == null) handicap = "fort";
 
     if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['theme-list']);
     else if (e.key == Handicap_Fort_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE) )
-      this.router.navigate(['show-question',1]);
+      this.rejouer();
   }
 
-  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute) {
+  constructor(private activeRoot: ActivatedRoute, public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private patientConfig: PatientConfiguration) {
     this.themeService.themes$.subscribe((themes: Theme[]) => {
       this.theme = themes;
     });
     this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
       this.quiz = quizzes;
     });
+
     let clickable = localStorage.getItem("nombreDeplacement");
     if (clickable != null) {
       this.nombreClick = parseInt(clickable);
@@ -80,8 +82,9 @@ export class QuizResultatComponent {
   }
 
   rejouer() {
+    let idQuiz = this.activeRoot.snapshot.paramMap.get("id");
     this.quizService.resetTimer();
     this.quizService.startTimer();
-    this.router.navigate(['show-question',1]);
+    this.router.navigate(['commencer-quiz', idQuiz]);
   }
 }

@@ -6,7 +6,7 @@ import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 import {QuizService} from "../../../services/quiz.service";
-import {Quiz} from "../../../models/quiz.model";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 @Component({
   selector: 'app-question-explication',
@@ -19,10 +19,10 @@ export class QuestionExplicationComponent {
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = localStorage.getItem("patient-handicap");
-    if(handicap == null) handicap = "fort";
-    if(e.key == Handicap_Leger_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE)){
+    let handicap = (this.config.config == undefined)? "fort" : this.config.config.handicap ;
 
+    if(e.key == Handicap_Leger_Entree.ESPACE || (handicap == "leger" && e.key == Handicap_Leger_Entree.ENTREE)){
+      this.suivant();
     }
     else if (e.key == Retour.BACKSPACE || e.key == Retour.DOLLAR || e.key == Retour.EGAL)
       this.router.navigate(['quiz-list']);
@@ -48,9 +48,8 @@ export class QuestionExplicationComponent {
 
   public reponseListe: Reponse[] = [];
   public afficherBravo: boolean = false;
-  public nextquestion: string |undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
+  constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService, private config: PatientConfiguration) {
     this.idQz = this.route.snapshot.paramMap.get('id');
     this.idQt = this.route.snapshot.paramMap.get('questionId');
     this.idRp = this.route.snapshot.paramMap.get('reponseId');
@@ -74,16 +73,13 @@ export class QuestionExplicationComponent {
       this.nbQuestion = nb;
     });
 
-
-    let clickable = localStorage.getItem("patient-utilisation_souris");
-    if (clickable != null && clickable == "oui")
+    if (config.config != undefined && config.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
   }
 
   suivant(){
     this.quizService.getQuestionsByQuizId(this.idQz)?.subscribe((questions) => {
       let currentIndex = -1;
-      console.log(questions[0].id, this.idQt)
       for (let i = 0; i < this.nbQuestion; i++) {
         if (questions[i].id+"" === this.idQt) {
           currentIndex = i;
@@ -99,7 +95,7 @@ export class QuestionExplicationComponent {
         this.router.navigate(['/show-question/' + this.idQz + '/' + nextQuestionId]);
       } else {
         // Pas de question suivante
-        console.log('Pas de question suivante');
+        this.router.navigate(['/quiz-resultat', this.idQz]);
       }
     });
   }

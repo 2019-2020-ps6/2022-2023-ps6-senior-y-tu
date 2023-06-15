@@ -14,6 +14,7 @@ import {ClickableDirective} from "../../autre/ClickableDirective";
 import {FonctionCommuneThemeQuiz} from "../../autre/FonctionCommuneThemeQuiz";
 import {Tuple} from "../../autre/Tuple";
 import {QuizService} from "../../../services/quiz.service";
+import {PatientConfiguration} from "../../autre/patientConfiguration";
 
 @Component({
   selector: 'app-show-question',
@@ -41,7 +42,7 @@ export class ShowQuestionComponent implements OnInit{
 
   @HostListener("document:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
-    let handicap = localStorage.getItem("patient-handicap");
+    let handicap = (this.patientConfig.config == undefined)? "fort" : this.patientConfig.config?.handicap;
     if(handicap == null) handicap = "fort";
 
     if (e.key == Retour.EGAL || e.key == Retour.DOLLAR || e.key == Retour.BACKSPACE) this.router.navigate(['quiz-list']);
@@ -55,12 +56,9 @@ export class ShowQuestionComponent implements OnInit{
     this.changementDeplacement[1] = e2;
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService) {
-
-    let clickable = localStorage.getItem("patient-utilisation_souris");
-    if (clickable != null && clickable == "oui")
+  constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService, private patientConfig: PatientConfiguration) {
+    if (patientConfig.config != undefined && patientConfig.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
-
     this.index = 1;
   }
 

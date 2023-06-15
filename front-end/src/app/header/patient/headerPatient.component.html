@@ -5,7 +5,7 @@
 
   <div>
     <!--Nom du patient-->
-    <p appPolice>{{nom}}</p>
+    <p [appPolice]="">{{patientConfig.patient?.prenom }}</p>
     <button class="button-card" (click)="dialog()"> Deconnexion</button>
   </div>
 </div>
