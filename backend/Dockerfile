@@ -8,3 +8,4 @@ COPY --chown=node:node ./database /backend/database
 RUN npm install 
 EXPOSE 8000
 CMD ["npm", "start"]
+#rajouter curl 
