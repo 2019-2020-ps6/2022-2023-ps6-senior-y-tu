@@ -74,7 +74,8 @@ export class QuizResultatComponent {
     this.statistiqueService.getStatistiqueById(idS).subscribe((stat)=>{
       this.score = stat.bonneReponse;
     });
-
+    console.log(this.timer, this.timer.seconde);
+    this.statistiqueService.updateTimer(idS, this.timer.seconde);
   }
 
 

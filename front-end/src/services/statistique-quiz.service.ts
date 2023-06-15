@@ -92,4 +92,18 @@ export class StatistiqueQuizService {
     );
   }
 
+  updateTimer(idStat: string | null, newTime: number) {
+    const url = this.statistiqueQuizUrl + '/' + idStat;
+    this.http.get<StatistiqueQuiz>(url).subscribe((statistiqueQuiz) => {
+      if (statistiqueQuiz) {
+        statistiqueQuiz.temp= newTime;
+
+        const updateUrl = this.statistiqueQuizUrl + '/' + idStat;
+        this.http.put<StatistiqueQuiz>(updateUrl, statistiqueQuiz, this.httpOptions)
+        .subscribe(() => {
+          this.retrieveStatistiqueQuiz();
+        });
+      }
+    });
+  }
 }
