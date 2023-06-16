@@ -53,7 +53,7 @@ export class FonctionCommuneThemeQuiz {
     if (e.key == Handicap_Fort_Entree.ESPACE) FonctionCommuneThemeQuiz.goToEnter(root, vers, param);
     if (e.key == Handicap_Fort_Haut.T || e.key == Handicap_Fort_Haut.E || e.key == Handicap_Fort_Haut.APPOSTROPHE
       || e.key == Handicap_Fort_Haut.MOINS || e.key == Handicap_Fort_Haut.PARENTHESE_OUVERTE || e.key == Handicap_Fort_Haut.R)
-      return this.switchButton(nombreCaseLargeur, buttonSelected);
+      return this.switchButton(-1*nombreCaseLargeur, buttonSelected);
 
     else if (e.key == Handicap_Fort_Gauche.A || e.key == Handicap_Fort_Gauche.Z || e.key == Handicap_Fort_Gauche.Q
       || e.key == Handicap_Fort_Gauche.S || e.key == Handicap_Fort_Gauche.W || e.key == Handicap_Fort_Gauche.X)
