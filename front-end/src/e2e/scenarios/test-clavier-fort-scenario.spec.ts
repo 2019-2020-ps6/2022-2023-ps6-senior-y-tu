@@ -4,7 +4,7 @@ import {
   accueilUrl,
   creationPatientUrl, creationQuizUrl, pageAideUrl,
   pageStatGeneraleUrl,
-  patientUrl, quizListUrl,
+  patientUrl,
   quizsErgoUrl,
   themeListUrl
 } from "../e2e.config";
@@ -58,7 +58,7 @@ test.describe('Test touche pour le clavier leger ', () => {
       await dateEntree.type('12-12-1956');
       const imageEntree = await patientFromFixture.getInput('input-image-patient')
       await imageEntree.type('https://img.freepik.com/vecteurs-premium/personnes-agees-grand-pere-grand-pere-senior-personne-agee-personnage-dessin-anime_24640-61818.jpg?w=2000');
-      const handicapeEntree = await patientFromFixture.getInput('input-handicap-patient');
+      const handicapeEntree = await patientFromFixture.getInput('input-handicap-patient-fort');
       await handicapeEntree.check();
       const policeEntree = await patientFromFixture.getInput('input-police-patient');
       await policeEntree.check();
@@ -344,91 +344,73 @@ test.describe('Test touche pour le clavier leger ', () => {
 
     })
 
-    await test.step('deplacement à droite clavier fort qui ne fonctione pas', async () => {
-      await page.keyboard.press('KeyO');
-      let curseurColore = await page.locator('button.button-card').nth(1);
-      let color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
-      expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(2);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
-      expect(color).toBe('rgb(242, 215, 195)');
-
-      await page.keyboard.press('!');
-      curseurColore = await page.locator('button.button-card').nth(1);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
-      expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(2);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
-      expect(color).toBe('rgb(242, 215, 195)');
-    })
-
-    await test.step('deplacement à droite clavier faible', async () => {
+    await test.step('deplacement à droite clavier faible qui ne fonctionne pas', async () => {
       await page.keyboard.press('ArrowRight');
       let curseurColore = await page.locator('button.button-card').nth(1);
       let color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(242, 215, 195)');
+      expect(color).toBe('rgb(180, 167, 214)');
       curseurColore = await page.locator('button.button-card').nth(2);
       color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
+      expect(color).toBe('rgb(242, 215, 195)');
+
+      await page.keyboard.press('^');
+      curseurColore = await page.locator('button.button-card').nth(1);
+      color = await curseurColore.evaluate((element) => {
+        const computedStyle = getComputedStyle(element);
+        return computedStyle.backgroundColor;
+      })
       expect(color).toBe('rgb(180, 167, 214)');
+      await page.keyboard.press(';');
+      curseurColore = await page.locator('button.button-card').nth(1);
+      color = await curseurColore.evaluate((element) => {
+        const computedStyle = getComputedStyle(element);
+        return computedStyle.backgroundColor;
+      })
+      expect(color).toBe('rgb(180, 167, 214)');
+
     })
 
-    await test.step('deplacement en bas clavier fort qui ne fonctione pas', async () => {
-      await page.keyboard.press('KeyH');
-      let curseurColore = await page.locator('button.button-card').nth(2);
+    await test.step('deplacement à droite clavier fort', async () => {
+      await page.keyboard.press('KeyO');
+      let curseurColore = await page.locator('button.button-card').nth(1);
       let color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(4);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
       expect(color).toBe('rgb(242, 215, 195)');
-
-      await page.keyboard.press(',');
       curseurColore = await page.locator('button.button-card').nth(2);
       color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
       expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(4);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
-      expect(color).toBe('rgb(242, 215, 195)');
     })
 
-    await test.step('deplacement en bas clavier faible', async () => {
+    await test.step('deplacement en bas clavier faible qui ne fonctionne pas', async () => {
       await page.keyboard.press('ArrowDown');
       let curseurColore = await page.locator('button.button-card').nth(2);
       let color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(242, 215, 195)');
-      curseurColore = await page.locator('button.button-card').nth(4);
+      expect(color).toBe('rgb(180, 167, 214)');
+
+      await page.keyboard.press('KeyK');
+      curseurColore = await page.locator('button.button-card').nth(2);
+      color = await curseurColore.evaluate((element) => {
+        const computedStyle = getComputedStyle(element);
+        return computedStyle.backgroundColor;
+      })
+      expect(color).toBe('rgb(180, 167, 214)');
+
+      await page.keyboard.press('KeyV');
+      curseurColore = await page.locator('button.button-card').nth(2);
       color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
@@ -436,91 +418,71 @@ test.describe('Test touche pour le clavier leger ', () => {
       expect(color).toBe('rgb(180, 167, 214)');
     })
 
-    await test.step('deplacement à gauche clavier fort qui ne fonctione pas', async () => {
-      await page.keyboard.press('KeyX');
-      let curseurColore = await page.locator('button.button-card').nth(4);
+    await test.step('deplacement en bas clavier fort', async () => {
+      await page.keyboard.press('KeyH');
+      let curseurColore = await page.locator('button.button-card').nth(2);
       let color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(3);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
       expect(color).toBe('rgb(242, 215, 195)');
-
-      await page.keyboard.press('KeyA');
       curseurColore = await page.locator('button.button-card').nth(4);
       color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
       expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(3);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
-      expect(color).toBe('rgb(242, 215, 195)');
     })
 
-    await test.step('deplacement à gauche clavier faible', async () => {
+    await test.step('deplacement à gauche clavier faible qui ne fonctionne pas', async () => {
       await page.keyboard.press('ArrowLeft');
       let curseurColore = await page.locator('button.button-card').nth(4);
       let color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(242, 215, 195)');
+      expect(color).toBe('rgb(180, 167, 214)');
       curseurColore = await page.locator('button.button-card').nth(3);
       color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(180, 167, 214)');
+      expect(color).toBe('rgb(242, 215, 195)');
     })
 
-    await test.step('deplacement en haut clavier fort qui ne fonctione pas', async () => {
-      await page.keyboard.press("'");
-      let curseurColore = await page.locator('button.button-card').nth(3);
+    await test.step('deplacement à gauche clavier fort', async () => {
+      await page.keyboard.press('KeyX');
+      let curseurColore = await page.locator('button.button-card').nth(4);
       let color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(1);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
       expect(color).toBe('rgb(242, 215, 195)');
-
-      await page.keyboard.press('KeyT');
       curseurColore = await page.locator('button.button-card').nth(3);
       color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
       expect(color).toBe('rgb(180, 167, 214)');
-      curseurColore = await page.locator('button.button-card').nth(1);
-      color = await curseurColore.evaluate((element) => {
-        const computedStyle = getComputedStyle(element);
-        return computedStyle.backgroundColor;
-      })
-      expect(color).toBe('rgb(242, 215, 195)');
     })
 
-    await test.step('deplacement en haut clavier faible', async () => {
+    await test.step('deplacement en haut clavier faible qui ne fonctionne pas', async () => {
       await page.keyboard.press('ArrowUp');
       let curseurColore = await page.locator('button.button-card').nth(3);
       let color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
       })
-      expect(color).toBe('rgb(242, 215, 195)');
-      curseurColore = await page.locator('button.button-card').nth(1);
+      expect(color).toBe('rgb(180, 167, 214)');
+      await page.keyboard.press('KeyE');
+      curseurColore = await page.locator('button.button-card').nth(3);
+      color = await curseurColore.evaluate((element) => {
+        const computedStyle = getComputedStyle(element);
+        return computedStyle.backgroundColor;
+      })
+      expect(color).toBe('rgb(180, 167, 214)');
+      await page.keyboard.press('KeyY');
+      curseurColore = await page.locator('button.button-card').nth(3);
       color = await curseurColore.evaluate((element) => {
         const computedStyle = getComputedStyle(element);
         return computedStyle.backgroundColor;
@@ -528,15 +490,34 @@ test.describe('Test touche pour le clavier leger ', () => {
       expect(color).toBe('rgb(180, 167, 214)');
     })
 
-    await test.step('deplacement page d\'aide clavier fort qui ne fonctionne pas', async () => {
-      await page.keyboard.press('_');
-      await page.keyboard.press('KeyC', { shift: true });
+    await test.step('deplacement en haut clavier fort ', async () => {
+      await page.keyboard.press('KeyR');
+      let curseurColore = await page.locator('button.button-card').nth(3);
+      let color = await curseurColore.evaluate((element) => {
+        const computedStyle = getComputedStyle(element);
+        return computedStyle.backgroundColor;
+      })
+      expect(color).toBe('rgb(180, 167, 214)');
+      curseurColore = await page.locator('button.button-card').nth(1);
+      color = await curseurColore.evaluate((element) => {
+        const computedStyle = getComputedStyle(element);
+        return computedStyle.backgroundColor;
+      })
+      expect(color).toBe('rgb(242, 215, 195)');
+    })
+
+    await test.step('deplacement page d\'aide clavier leger qui ne fonctionne pas', async () => {
+      await page.keyboard.press(')');
+      await expect(page).toHaveURL(themeListUrl);
+      await expect(page).not.toHaveURL(pageAideUrl);
+
+      await page.keyboard.press('*');
       await expect(page).toHaveURL(themeListUrl);
       await expect(page).not.toHaveURL(pageAideUrl);
     })
 
     await test.step('deplacement page d\'aide clavier fort', async () => {
-      await page.keyboard.press('*');
+      await page.keyboard.press('KeyI');
       await expect(page).not.toHaveURL(themeListUrl);
       await expect(page).toHaveURL(pageAideUrl);
     })
@@ -547,7 +528,7 @@ test.describe('Test touche pour le clavier leger ', () => {
       await expect(page).not.toHaveURL(pageAideUrl);
     })
 
-    await test.step('valider la selection theme clavier ', async () => {
+    await test.step('valider avec clavier fort ', async () => {
       await page.keyboard.press('Space');
       await expect(page).not.toHaveURL(themeListUrl);
       const expectedURLListeQuiz = await page.url();
@@ -555,10 +536,12 @@ test.describe('Test touche pour le clavier leger ', () => {
       await expect(expectedURLListeQuiz).toMatch(expectedURLPatternListQuiz);
     })
 
-    await test.step('valider la selection quiz clavier', async () => {
+    await test.step('valider avec clavier faible qui ne fonctionne pas', async () => {
       await page.keyboard.press('Enter');
       const expectedURLListeQuiz = await page.url();
-      const expectedURLPatternListQuiz = /http:\/\/localhost:4200\/commencer-quiz\/\d+;?/;
+      const expectedURLPatternCommencerQuiz = /http:\/\/localhost:4200\/commencer-quiz\/\d+;?/;
+      await expect(expectedURLListeQuiz).not.toMatch(expectedURLPatternCommencerQuiz);
+      const expectedURLPatternListQuiz = /http:\/\/localhost:4200\/quiz-list\/\d+;?/;
       await expect(expectedURLListeQuiz).toMatch(expectedURLPatternListQuiz);
     })
   });
