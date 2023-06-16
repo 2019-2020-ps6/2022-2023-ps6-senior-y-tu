@@ -42,6 +42,7 @@ export class ShowQuestionComponent implements OnInit{
   public idQz : string | null = null;
   public idQt : string | null = null;
   public idRp: string | undefined = "";
+  public idS: string | null;
 
 
   @HostListener("document:keydown", ["$event"])
@@ -61,6 +62,9 @@ export class ShowQuestionComponent implements OnInit{
   }
 
   constructor(private route: ActivatedRoute, private router: Router, public quizService: QuizService, private patientConfig: PatientConfiguration, private statistiqueService : StatistiqueQuizService) {
+    this.idQz = this.route.snapshot.paramMap.get('id');
+    this.idS = this.route.snapshot.paramMap.get('statId')
+
     if (patientConfig.config != undefined && patientConfig.config.souris == "oui")
       ClickableDirective.deplacementPageCursor(this.changementDeplacement);
     this.index = 1;
@@ -143,15 +147,15 @@ export class ShowQuestionComponent implements OnInit{
   private reponseNavigation(reponse: Reponse): void {
     this.idRp = reponse.id;
 
-    if (this.idQz != null) {
-      this.statistiqueService.getStatistiqueByQuizId(this.idQz).subscribe((statistiqueQuiz) => {
-        const currentScore = statistiqueQuiz?.bonneReponse || 0;
-        const newScore = currentScore + 1;
-        this.statistiqueService.updateStatistiqueScore(this.idQz, newScore);
-      });
+    if(reponse.estCorrect){
+        this.statistiqueService.getStatistiqueByQuizId(this.idQz).subscribe((statistiqueQuiz) => {
+          const currentScore = statistiqueQuiz?.bonneReponse || 0;
+          const newScore = currentScore + 1;
+          this.statistiqueService.updateStatistiqueScore(this.idS, newScore);
+        });
     }
 
-    this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp]);
+    this.router.navigate(['question-explication/'+ this.idQz +'/'+this.idQt+'/'+this.idRp+'/'+this.idS]);
 
   }
 }

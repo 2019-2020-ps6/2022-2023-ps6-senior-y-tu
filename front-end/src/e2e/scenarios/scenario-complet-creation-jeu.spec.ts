@@ -1,6 +1,6 @@
 import  { test, expect } from '@playwright/test';
 import {QuizFormFixture} from "../../app/quizs/creer-quiz/creer-quiz.fixture";
-import {accueil, themeList} from "../e2e.config";
+import {accueilUrl, themeListUrl} from "../e2e.config";
 import {QuestionFormFixture} from "../../app/questions/creer-question/creer-question.fixture";
 import {PatientFormFixture} from "../../app/patients/mes-patients/mes-patients.fixture";
 
@@ -8,7 +8,7 @@ test.describe('Scenario Complet', () => {
   test('scenario complet', async ({page}) => {
     await test.step('Accès à la page d\'accueil', async () => {
 
-      await page.goto(accueil);
+      await page.goto(accueilUrl);
       await expect(page).toHaveURL("http://localhost:4200/accueil");
     });
 
@@ -181,7 +181,7 @@ test.describe('Scenario Complet', () => {
     await test.step('Se connecter en tant que patient', async () => {
       const boutonPatient = await page.locator('app-patient').last();
       await boutonPatient.click();
-      await expect(page).toHaveURL(themeList);
+      await expect(page).toHaveURL(themeListUrl);
 
     });
 

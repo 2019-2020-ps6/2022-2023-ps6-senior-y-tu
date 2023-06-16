@@ -13,6 +13,7 @@ export class ClickableDirectiveQuestionExplication {
     const idQuizz = this.activeRouteur.snapshot.paramMap.get('id');
     const idQuestion = this.activeRouteur.snapshot.paramMap.get('questionId');
     const idReponse = this.activeRouteur.snapshot.paramMap.get('reponseId');
+    const idStat = this.activeRouteur.snapshot.paramMap.get('statId');
 
     if (idQuizz != null && idQuestion != null && idReponse != null && this.estClickable) {
       this.quizService.getQuestionsByQuizId(idQuizz)?.subscribe((questions) => {
@@ -30,10 +31,10 @@ export class ClickableDirectiveQuestionExplication {
           // L'index de la question suivante
           const nextIndex = currentIndex + 1;
           const nextQuestionId = questions[nextIndex].id;
-          this.root.navigate(['/show-question/' + idQuizz + '/' + nextQuestionId]);
+          this.root.navigate(['/show-question/' + idQuizz + '/' + nextQuestionId +'/' + idStat]);
         } else {
           // Pas de question suivante
-          this.root.navigate(['/quiz-resultat', idQuizz])
+          this.root.navigate(['/quiz-resultat/'+ idQuizz +'/'+ idStat]);
         }
       });
     }

@@ -1,6 +1,6 @@
 import  { test, expect } from '@playwright/test';
 import {QuizFormFixture} from "../../app/quizs/creer-quiz/creer-quiz.fixture";
-import {quizsErgo} from "../e2e.config";
+import {quizsErgoUrl} from "../e2e.config";
 import {QuestionFormFixture} from "../../app/questions/creer-question/creer-question.fixture";
 import {QuizModificationFixture} from "../../app/quizs/quiz-modification/quiz-modification.fixture";
 import {QuestionModificationFixture} from "../../app/questions/question-modification/question-modification.fixture";
@@ -10,13 +10,13 @@ import {QuestionModificationFixture} from "../../app/questions/question-modifica
 test.describe('Creation quiz', () => {
 
   test('Accède à la page des quizs', async ({page}) => {
-    await page.goto(quizsErgo);
+    await page.goto(quizsErgoUrl);
 
-    await expect(page).toHaveURL(quizsErgo);
+    await expect(page).toHaveURL(quizsErgoUrl);
   });
 
   test('Création quiz', async  ({ page }) => {
-    await page.goto(quizsErgo);
+    await page.goto(quizsErgoUrl);
 
     const quizFormFixture = new QuizFormFixture(page);
     const questionFormFixture = new QuestionFormFixture(page);
@@ -75,7 +75,7 @@ test.describe('Creation quiz', () => {
     });
 
     await test.step('modifier quiz', async () => {
-      await page.goto(quizsErgo);
+      await page.goto(quizsErgoUrl);
 
       const quizModificationFixture = new QuizModificationFixture(page);
 
@@ -120,7 +120,7 @@ test.describe('Creation quiz', () => {
     });
 
     await test.step('supprimer quiz', async () => {
-      page.goto(quizsErgo);
+      page.goto(quizsErgoUrl);
       const boutonSupprimerQuiz = await page.locator('button.supprimer-quiz').last();
       await boutonSupprimerQuiz.evaluateHandle((element: { click: () => any; }) => element.click());
     });

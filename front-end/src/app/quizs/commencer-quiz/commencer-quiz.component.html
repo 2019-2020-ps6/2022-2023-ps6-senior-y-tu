@@ -13,8 +13,8 @@
   <div class="alignMilieu">
     <img src="{{quiz?.image}}" alt="image">
     <div>
-      <p [appPolice]="">Meilleur score : </p>
-      <p [appPolice]="">Nombre de parties jouées: </p>
+      <p [appPolice]="">Meilleur score : {{meilleurScore}}</p>
+      <p [appPolice]="">Nombre de parties jouées: {{nombreParties}} </p>
       <button [appClickable]="tupleEntrer" [appPolice]="" (click)="jouer()">Jouer</button>
     </div>
     <div></div>

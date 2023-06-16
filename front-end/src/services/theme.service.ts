@@ -4,6 +4,8 @@ import { Theme } from "../models/theme.model";
 import { THEME_LIST } from "../mocks/theme-list.mock";
 import {HttpClient} from "@angular/common/http";
 import {httpOptionsBase, serverUrl} from '../configs/server.config';
+import {Quiz} from "../models/quiz.model";
+import {QuizService} from "./quiz.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,7 @@ export class ThemeService {
   private httpOptions = httpOptionsBase;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private quizService: QuizService) {
     this.getThemes();
   }
 
@@ -80,6 +82,28 @@ export class ThemeService {
       this.addTheme(themeAdd);
       return this.themes.find(theme => theme.nomTheme === themeAdd.nomTheme)?.id || '';
     }
+  }
+
+  deleteTheme(id: string): void {
+    if (id!= null) {
+      this.quizService.recupererQuizs();
+      let quizList: Quiz[] = [];
+      this.quizService.quizs$.subscribe((quizzes: Quiz[]) => {
+        quizList = quizzes.filter((quiz) => quiz.themeId == id);
+        if (quizList.length == 0){
+          this.http.delete<Theme>(this.themeUrl + '/' + id, this.httpOptions).subscribe(() => {
+            this.themes = this.themes.filter(theme => theme.id !== id);
+            this.themes$.next(this.themes);
+          });
+        }
+      });
+
+      console.log('theme supprimé', id);
+
+    }
+
+
+
   }
 
 }

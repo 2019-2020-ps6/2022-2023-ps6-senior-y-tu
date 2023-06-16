@@ -29,6 +29,7 @@ export class QuizService {
   private httpOptions = httpOptionsBase;
   private questionsPath = 'questions';
   public questionSelected$: Subject<Question> = new Subject();
+  public questionDeleted : Question | undefined;
 
   private reponsesPath = 'reponses';
   public reponseSelected$: Subject<Reponse> = new Subject()
@@ -97,6 +98,7 @@ export class QuizService {
   deleteQuiz(quiz: Quiz): void {
     const urlWithId = this.quizUrl + '/' + quiz.id;
     this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.recupererQuizs());
+    console.log('Quiz Supprimé (QuizService): ', quiz);
   }
 
   //front
@@ -242,6 +244,25 @@ export class QuizService {
     const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
     this.http.delete<Question>(urlWithId, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
     console.log('Question Supprimée: ', question);
+
+    // Pour supprimer les reponses des questions : (petit problème de synchronisation de la page apres la supression)
+/*
+
+    this.getReponseListe(quiz.id, question.id).subscribe((reponses) => {
+       for(const reponse of reponses){
+        this.deleteReponse(reponse, question, quiz);
+       }
+
+      const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
+      this.http.delete<Question>(urlWithId, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+      console.log('Question Supprimée: ', question);
+      //this.setDeletedQuestion(question);
+
+
+    });
+
+ */
+
   }
 
   //front
@@ -286,6 +307,18 @@ export class QuizService {
     });
     console.log('Reponse Modifiée: ', reponse);
   }
+
+  deleteReponse(reponse: Reponse | undefined, question: Question |undefined, quiz: Quiz | undefined) {
+    if (!quiz) return;
+    if (!question) return;
+    if (!reponse) return;
+    const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id + '/' + this.reponsesPath + '/' + reponse.id;
+    console.log('urlWithId: ', urlWithId)
+    this.http.delete<Reponse>(urlWithId, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+    console.log('Reponse Supprimée: ', reponse);
+  }
+
+
 
   startTimer() {
     this.timer.start();

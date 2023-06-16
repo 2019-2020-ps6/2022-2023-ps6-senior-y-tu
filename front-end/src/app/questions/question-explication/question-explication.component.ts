@@ -43,6 +43,7 @@ export class QuestionExplicationComponent {
   public idQz: string | null;
   public idQt: string | null;
   public idRp: string | null;
+  public idS: string | null;
 
   protected nbQuestion: number = 0;
   public index : number = 0;
@@ -54,6 +55,7 @@ export class QuestionExplicationComponent {
     this.idQz = this.route.snapshot.paramMap.get('id');
     this.idQt = this.route.snapshot.paramMap.get('questionId');
     this.idRp = this.route.snapshot.paramMap.get('reponseId');
+    this.idS = this.route.snapshot.paramMap.get('statId');
 
     if(this.idQz == null) this.idQz = '1';
 
@@ -93,10 +95,10 @@ export class QuestionExplicationComponent {
         // L'index de la question suivante
         const nextIndex = currentIndex + 1;
         const nextQuestionId = questions[nextIndex].id;
-        this.router.navigate(['/show-question/' + this.idQz + '/' + nextQuestionId]);
+        this.router.navigate(['/show-question/' + this.idQz + '/' + nextQuestionId+'/'+this.idS]);
       } else {
-        // Pas de question suivante
-        this.router.navigate(['/quiz-resultat', this.idQz]);
+        this.router.navigate(['/quiz-resultat/'+ this.idQz+'/'+this.idS]);
+        console.log('Pas de question suivante');
       }
     });
   }
