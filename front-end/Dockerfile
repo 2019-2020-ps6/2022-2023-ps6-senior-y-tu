@@ -1,5 +1,7 @@
 FROM node:16.16.0-alpine as build
 
+RUN apk add sed
+RUN apk add curl
 ARG BACK_PORT
 ARG DOMAIN
 
