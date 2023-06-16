@@ -43,6 +43,7 @@ export class ThemeListComponent {
   }
 
   constructor(public themeService: ThemeService, private root : Router, private patientConfig : PatientConfiguration) {
+    this.themeService.getThemes();
     this.themeService.themes$.subscribe((themes: Theme[]) => {
       this.themeList = themes;
     });

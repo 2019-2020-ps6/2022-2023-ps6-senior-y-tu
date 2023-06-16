@@ -39,7 +39,7 @@ export class CommencerQuizComponent {
     this.changementDeplacement[0] = e;
     this.changementDeplacement[1] = e2;
   }
-  @HostListener("document:keydown", ["$event"])
+  @HostListener("window:keydown", ["$event"])
   onkeydown(e: KeyboardEvent) {
     let handicap = (this.config.config == undefined) ? "fort" : this.config.config?.handicap;
 
@@ -51,7 +51,7 @@ export class CommencerQuizComponent {
   }
 
 
-  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, private config: PatientConfiguration, public statistiqueService: StatistiqueQuizService) {
+  constructor(public themeService: ThemeService, public quizService: QuizService, public router: Router, private route: ActivatedRoute, protected config: PatientConfiguration, public statistiqueService: StatistiqueQuizService) {
 
     const idP = this.route.snapshot.paramMap.get('id');
 
@@ -113,6 +113,7 @@ export class CommencerQuizComponent {
 
   jouer() {
     this.quizService.startTimer();
+    this.router.navigate(['show-question/' + this.quiz?.id, this.firstQuestion, this.idS]);
   }
 
 }

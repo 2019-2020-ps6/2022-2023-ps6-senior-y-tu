@@ -4,8 +4,7 @@ import {
   accueilUrl,
   creationPatientUrl, creationQuizUrl, pageAideUrl,
   pageStatGeneraleUrl,
-  patientUrl, quizListUrl,
-  quizsErgoUrl,
+  patientUrl, quizsErgoUrl,
   themeListUrl
 } from "../e2e.config";
 import {QuestionFormFixture} from "../../app/questions/creer-question/creer-question.fixture";

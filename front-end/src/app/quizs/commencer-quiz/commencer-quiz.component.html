@@ -3,9 +3,9 @@
 <div class="boite" >
   <div class="align">
     <div class="gauche">
-      <h2 [appPolice]="">Thème : {{themeNom}}</h2>
+      <h2 class="nomQuiz" [appPolice]="">Thème : {{themeNom}}</h2>
       <h2 [appPolice]="">Quiz : {{quiz?.nom}}</h2>
-      <p [appPolice]="">Nombre de questions: {{nbQuestion}}</p>
+      <p class="nbQuestions" [appPolice]="">Nombre de questions: {{nbQuestion}}</p>
     </div>
     <img src="assets/boutonRetour.png" [appClickable]="tupleRetour" alt="image">
   </div>
@@ -13,9 +13,10 @@
   <div class="alignMilieu">
     <img src="{{quiz?.image}}" alt="image">
     <div>
-      <p [appPolice]="">Meilleur score : {{meilleurScore}}</p>
+      <p class="meilleurScore" [appPolice]="">Meilleur score : {{meilleurScore}}</p>
       <p [appPolice]="">Nombre de parties jouées: {{nombreParties}} </p>
-      <button [appClickable]="tupleEntrer" [appPolice]="" (click)="jouer()">Jouer</button>
+      <button class="commencer-quiz" *ngIf="config.config?.souris == 'oui'"   [appPolice]="" (click)="jouer()">Jouer</button>
+      <button class="commencer-quiz" *ngIf="config.config?.souris != 'oui'"  [appPolice]="" [style]="{'cursor': 'default'}">Jouer</button>
     </div>
     <div></div>
   </div>
