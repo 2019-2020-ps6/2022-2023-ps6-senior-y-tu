@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Quiz} from "../../../models/quiz.model";
 import {QuizService} from "../../../services/quiz.service";
+import {ThemeService} from "../../../services/theme.service";
 
 @Component({
   selector: 'app-mes-quizs',
@@ -12,7 +13,7 @@ export class MesQuizsComponent {
   public searchTerm: string = '';
 
 
-  constructor(public quizService: QuizService) {
+  constructor(public quizService: QuizService, public themeService: ThemeService) {
     this.quizService.quizs$.subscribe((quizListe) => {
       this.quizListe = quizListe;
     });
@@ -25,6 +26,7 @@ export class MesQuizsComponent {
   quizDeleted($event: Quiz) {
     console.log('event received from child:', $event);
     this.quizService.deleteQuiz($event);
+    this.themeService.deleteTheme($event.themeId);
   }
 
   public filterQuizs(searchTerm: string): any[] {
