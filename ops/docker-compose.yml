@@ -1,11 +1,18 @@
 services:
   backend:
-    build: ../backend/
+    build: 
+      context: ../backend/
     ports:
       - "8000:9428"
     image: backend:backend-node #nom_de_l'image_back
   frontend:
-    build: ../front-end/
+    build: 
+      context: ../front-end/
+      args:
+        - BACK_PORT=8000
+        - DOMAIN=localhost
     ports:
       - "8080:4200"
     image: front:frontend #nom_de_l'image_front
+    depends_on:
+      - backend
