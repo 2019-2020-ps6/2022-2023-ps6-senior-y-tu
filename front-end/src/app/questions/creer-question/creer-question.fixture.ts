@@ -17,7 +17,7 @@ export class QuestionFormFixture extends E2EComponentFixture {
   }
 
   clickCreateButton(numberOfClick = 1) {
-    return this.getCreateButton().click({ clickCount: numberOfClick });
+    return this.getCreateButton().click({ clickCount: numberOfClick, delay: 600 });
   }
 
   getInput(id: string) {

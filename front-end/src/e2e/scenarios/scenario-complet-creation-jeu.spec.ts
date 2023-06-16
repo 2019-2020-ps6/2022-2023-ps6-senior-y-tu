@@ -1,6 +1,6 @@
 import  { test, expect } from '@playwright/test';
 import {QuizFormFixture} from "../../app/quizs/creer-quiz/creer-quiz.fixture";
-import {accueilUrl, themeListUrl} from "../e2e.config";
+import {accueilUrl, baseUrl, themeListUrl} from "../e2e.config";
 import {QuestionFormFixture} from "../../app/questions/creer-question/creer-question.fixture";
 import {PatientFormFixture} from "../../app/patients/mes-patients/mes-patients.fixture";
 
@@ -9,7 +9,7 @@ test.describe('Scenario Complet', () => {
     await test.step('Accès à la page d\'accueil', async () => {
 
       await page.goto(accueilUrl);
-      await expect(page).toHaveURL("http://localhost:4200/accueil");
+      await expect(page).toHaveURL(baseUrl + "/accueil");
     });
 
     await test.step('Accès au profil ergo', async () => {
@@ -20,7 +20,7 @@ test.describe('Scenario Complet', () => {
       expect(await titreE.innerText()).toBe('Ergothérapeutes');
       await ergo.click();
 
-      await expect(page).toHaveURL('http://localhost:4200/page-stat-acceuil');
+      await expect(page).toHaveURL(baseUrl + '/page-stat-acceuil');
     });
 
 
@@ -28,7 +28,7 @@ test.describe('Scenario Complet', () => {
 
       const boutonMesPatients = await page.locator('a#mes-patients');
       boutonMesPatients.evaluateHandle((element: { click: () => any; }) => element.click());
-      await expect(page).toHaveURL('http://localhost:4200/mes-patients');
+      await expect(page).toHaveURL(baseUrl + '/mes-patients');
     });
 
 
@@ -36,7 +36,7 @@ test.describe('Scenario Complet', () => {
 
       const boutonCreationPatient = await page.locator('button.creation-patient');
       boutonCreationPatient.evaluateHandle((element: { click: () => any; }) => element.click());
-      await expect(page).toHaveURL('http://localhost:4200/creer-patient');
+      await expect(page).toHaveURL(baseUrl + '/creer-patient');
     });
 
     await test.step('Création d\'un patient', async () => {
@@ -63,14 +63,14 @@ test.describe('Scenario Complet', () => {
       const boutonValiderPatient = await page.locator('button#valider');
       boutonValiderPatient.evaluateHandle((element: { click: () => any; }) => element.click());
 
-      await expect(page).toHaveURL('http://localhost:4200/mes-patients');
+      await expect(page).toHaveURL(baseUrl + '/mes-patients');
     });
 
     await test.step('Accès à la page des quizs', async () => {
 
       const boutonMesQuiz = await page.locator('a#mes-quizs');
       boutonMesQuiz.evaluateHandle((element: { click: () => any; }) => element.click());
-      await expect(page).toHaveURL('http://localhost:4200/mes-quizs');
+      await expect(page).toHaveURL(baseUrl + '/mes-quizs');
     });
 
     await test.step('Accès à la page de création de quiz', async () => {
@@ -78,7 +78,7 @@ test.describe('Scenario Complet', () => {
       const boutonCreationQuiz = await page.locator('button.creation-quiz');
       await boutonCreationQuiz.evaluateHandle((element: { click: () => any; }) => element.click())
 
-      await expect(page).toHaveURL('http://localhost:4200/creer-quiz');
+      await expect(page).toHaveURL(baseUrl + '/creer-quiz');
     });
 
     await test.step('Création d\'un quiz', async () => {
@@ -163,10 +163,13 @@ test.describe('Scenario Complet', () => {
       const inputExplication2 = await questionFormFixture.getTextArea();
       await inputExplication2.type('Madrid est la capitale de l\'Espagne');
 
+      await page.waitForTimeout(1000);
       await questionFormFixture.clickCreateButton();
 
       const expectedURLListeQuestion = await page.url();
       const expectedURLPattern2 = /http:\/\/localhost:4200\/quiz\/\d+\/question-liste/;
+
+      await page.waitForTimeout(8000);
 
       await expect(expectedURLListeQuestion).toMatch(expectedURLPattern2);
 
@@ -175,13 +178,128 @@ test.describe('Scenario Complet', () => {
     await test.step('Se déconnecter', async () => {
       const boutonDeconnexion = await page.locator('button.button-card');
       await boutonDeconnexion.evaluateHandle((element: { click: () => any; }) => element.click());
-      await expect(page).toHaveURL('http://localhost:4200/accueil');
+      await expect(page).toHaveURL(baseUrl + '/accueil');
     });
 
     await test.step('Se connecter en tant que patient', async () => {
       const boutonPatient = await page.locator('app-patient').last();
       await boutonPatient.click();
       await expect(page).toHaveURL(themeListUrl);
+    });
+
+    await test.step('Choisir un theme', async () => {
+      await page.keyboard.press('ArrowRight');
+      await page.keyboard.press('Enter');
+
+      const idPattern = /\d+/;
+      const expectedURLPattern = baseUrl + `/quiz-list/${idPattern.source}`;
+
+      const currentURL = page.url();
+      await expect(currentURL).toEqual(expect.stringMatching(new RegExp(expectedURLPattern)));
+
+    });
+
+    await test.step('Choisir un quiz', async () => {
+      await page.keyboard.press('Enter');
+
+      const idPattern = /\d+/;
+      const expectedURLPattern = baseUrl + `/commencer-quiz/${idPattern.source}`;
+
+      const currentURL = page.url();
+      await expect(currentURL).toEqual(expect.stringMatching(new RegExp(expectedURLPattern)));
+
+    });
+
+    await test.step('Commencer le quiz', async () => {
+
+
+      const nbQuestion = await page.locator('p.nbQuestions');
+      expect(await nbQuestion.innerText()).toBe('Nombre de questions: 2');
+
+      const meilleurScore = await page.locator('p.meilleurScore');
+      expect(await meilleurScore.innerText()).toBe('Meilleur score : 0');
+
+      const nomQuiz = await page.locator('h2.nomQuiz');
+
+
+      await page.waitForTimeout(1000);
+
+      //await page.locator('h2.nomQuiz').focus();
+      /*
+      const boutonCommencerQuiz = await page.locator('button.commencer-quiz');
+      await boutonCommencerQuiz.evaluateHandle((element: { click: () => any; }) => element.click());
+      */
+
+      await page.getByText('Jouer').focus();
+      await page.keyboard.down('Enter');
+
+
+      //await page.waitForTimeout(6000)
+      //await page.waitForLoadState('domcontentloaded');
+
+      const idPattern = /\d+/;
+      const expectedURLPattern = baseUrl + `/show-question/${idPattern.source}/${idPattern.source}/${idPattern.source}`;
+
+      const currentURL = page.url();
+      await expect(currentURL).toEqual(expect.stringMatching(new RegExp(expectedURLPattern)));
+
+
+    });
+
+    await test.step('Répondre à la première question de manière juste', async () => {
+
+      const intituleQuestion = await page.locator('h2.intituleQuestion');
+      expect(await intituleQuestion.innerText()).toBe('Quel est le nom de la capitale de la France ?');
+
+      const indexQuestion = await page.locator('p.indexQuestion');
+      expect(await indexQuestion.innerText()).toBe('1/2');
+
+
+      await page.keyboard.press('ArrowUp');
+
+      const idPattern = /\d+/;
+      const expectedURLPattern = baseUrl + `/question-explication/${idPattern.source}/${idPattern.source}/${idPattern.source}`;
+
+      const currentURL = page.url();
+      await expect(currentURL).toEqual(expect.stringMatching(new RegExp(expectedURLPattern)));
+
+      const bravo = await page.locator('p.bravo');
+
+      expect(await bravo.innerText()).toBe('Bravo!');
+      await page.waitForTimeout(1000);
+      await page.keyboard.press('Enter');
+      await page.waitForTimeout(1000);
+      const expectedURLPattern2 = baseUrl + `/show-question/${idPattern.source}/${idPattern.source}/${idPattern.source}`;
+      const currentURL2 = page.url();
+      await expect(currentURL2).toEqual(expect.stringMatching(new RegExp(expectedURLPattern2)));
+
+    });
+
+    await test.step('Repondre à la deuxième question de manière fausse', async () => {
+      const intituleQuestion = await page.locator('h2.intituleQuestion');
+      expect(await intituleQuestion.innerText()).toBe('Quel est le nom de la capitale de l\'Espagne ?');
+
+      const indexQuestion = await page.locator('p.indexQuestion');
+      expect(await indexQuestion.innerText()).toBe('2/2');
+
+      await page.keyboard.press('ArrowDown');
+
+      const idPattern = /\d+/;
+      const expectedURLPattern = baseUrl + `/question-explication/${idPattern.source}/${idPattern.source}/${idPattern.source}`;
+
+      const currentURL = page.url();
+      await expect(currentURL).toEqual(expect.stringMatching(new RegExp(expectedURLPattern)));
+
+      const bravo = await page.locator('p.bravo');
+
+      await expect(bravo).not.toBeVisible();
+
+      await page.keyboard.press('Enter');
+
+      const expectedURLPattern2 = baseUrl + `/quiz-resultat/${idPattern.source}/${idPattern.source}`;
+
+      const currentURL2 = page.url();
+      await expect(currentURL2).toEqual(expect.stringMatching(new RegExp(expectedURLPattern2)));
 
     });
 
