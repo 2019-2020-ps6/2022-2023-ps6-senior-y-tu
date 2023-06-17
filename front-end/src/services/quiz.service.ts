@@ -32,7 +32,10 @@ export class QuizService {
   public questionDeleted : Question | undefined;
 
   private reponsesPath = 'reponses';
-  public reponseSelected$: Subject<Reponse> = new Subject()
+  public reponseSelected$: Subject<Reponse> = new Subject();
+
+  public questionListe: Question[] | undefined = [];
+  public questionListe$: BehaviorSubject<Question[]> = new BehaviorSubject(<Question[]>[]);
 
 
 
@@ -126,6 +129,17 @@ export class QuizService {
     if(taille === 0) return '';
     return this.quizs[taille - 1].id;
   }
+
+  recupererQuestions(quiz: Quiz | undefined) {
+    if (!quiz) return;
+    const urlWithId = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
+    this.http.get<Question[]>(urlWithId).subscribe((listeQuestions) => {
+      this.questionListe = listeQuestions;
+      this.questionListe$.next(this.questionListe);
+    });
+  }
+
+
 
 
   //front
