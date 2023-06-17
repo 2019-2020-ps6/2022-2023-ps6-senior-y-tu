@@ -2,7 +2,7 @@ import  { PlaywrightTestConfig } from "@playwright/test";
 
 const config : PlaywrightTestConfig = {
   testDir: "./src/e2e",
-  reporter : [['html', { open: 'always' }]],
+  reporter : [[ 'json', { outputFile: 'playwright-report/results.json' }]],
   timeout : 120000,
   use: {
     headless: false,

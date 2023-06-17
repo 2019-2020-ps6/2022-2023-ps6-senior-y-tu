@@ -1,0 +1,21 @@
+FROM alpine:3.17 as build
+
+WORKDIR /front-end
+
+COPY package*.json playwright.config.ts ./
+COPY ./src ./src/
+
+FROM mcr.microsoft.com/playwright:v1.35.0-jammy
+
+USER playwrightJammy
+
+WORKDIR /play
+
+COPY --chown=playwrightJammy:playwrightJammy --from=build  /front-end/package*.json ./
+COPY --chown=playwrightJammy:playwrightJammy --from=build /front-end/src ./src/
+
+RUN mkdir "test-results"
+RUN mkdir "playwright-report"
+RUN npm install
+
+CMD [ "npm", "run", "test:e2e" ]

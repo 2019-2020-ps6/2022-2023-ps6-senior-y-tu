@@ -1,0 +1,43 @@
+services:
+  backend:
+    build: 
+      context: ../backend/
+    ports:
+      - "8000:9428"
+    image: backend:backend-node #nom_de_l'image_back
+    healthcheck:
+        test: ["CMD-SHELL", "curl -f http://localhost:9428/api/status || exit 1"]
+        interval: 10s
+        timeout: 5s
+        retries: 2
+    volumes:
+      - db-data:/backend/database
+  frontend:
+    build: 
+      context: ../front-end/
+      args:
+        - BACK_PORT=8000
+        - DOMAIN=localhost
+      dockerfile: Dockerfile
+    ports:
+      - "8080:4200"
+    image: front:frontend #nom_de_l'image_front
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4200/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
+    depends_on:
+      backend:
+        condition: service_healthy
+  playwright:
+    build:
+      context: ../front-end/
+      dockerfile: Dockerfile.test
+    image: play:playwright
+    depends_on:
+      frontend:
+        condition: service_healthy
+
+volumes:
+  db-data:

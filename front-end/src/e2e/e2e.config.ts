@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:4200';
+export const baseUrl = 'http://localhost:8080';
 export const patientUrl = baseUrl + '/mes-patients';
 export const accueilUrl = baseUrl + '/accueil';
 export const creationPatientUrl = baseUrl + '/creer-patient';
