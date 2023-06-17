@@ -102,6 +102,7 @@ export class CreerQuestionComponent implements  OnInit{
     this.reponses.clear();
     let reponsesCreees = this.quizService.reponseSelected$.subscribe((reponse) => {
       if(lreponse?.valeur == reponse.valeur){
+        this.quizService.recupererQuestions(this.quiz);
         this.router.navigate(['/quiz/' + this.quiz?.id + '/question-liste']);
       }
     });
