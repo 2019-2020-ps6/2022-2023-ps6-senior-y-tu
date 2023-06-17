@@ -1,8 +1,8 @@
 # Readme livraison OPS 
 
 ## Status de la livraison  
-Etape 1 : Fait  
-Etape 2 : Fait  
+Etape 1 : Faite  
+Etape 2 : Faite  
 Etape 3 : Commencée mais pas fonctionnelle  
 Etape 4 : Pas commencée
 
