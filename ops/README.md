@@ -9,7 +9,7 @@ Etape 4 : Pas commencée
 ## Healthchecks  
 Pour le healthcheck coté frontend, on vérifie si la route du frontend au port 4200 (port dans le container du frontend) en localhost est toujours présente toutes les 10 secondes.  
 Pour le healthcheck coté backend, on vérifie si la route de api status du backend au port 9428 (port dans le container du backend) en localhost est toujours présente toutes les 10 secondes.  
-De plus le service du frontend, fonctionne que si le backend est en vie et donc il est dépendant au service du backend.  
+De plus le service du frontend, ne fonctionne que si le backend est en vie et donc il est dépendant au service du backend.  
 
 ## Explication  
 
@@ -26,6 +26,6 @@ Dans le docker-compose on ajoute le service playwright ainsi que dans le build d
 ## Utilisateur
 
 Le backend est avec l'utilisateur node et donc il y a que l'utilisateur node qui pourra éxécuter les données.  
-Le frontend est avec l'utilisateur nginx qui est ajouté lors du deuxième import (soit nginx) donc les fichiers compiler seront avec les droits uniquement pour l'utilsateur nginx.  
-Le playwright est avec l'utilisateur playwrightJammy (nom du noyau ajouté), et donc comme précedemment, les fichiers du site et des test sont accessible uniquement pour playwrightJammy.  
+Le frontend est avec l'utilisateur nginx qui est ajouté lors du deuxième import (soit nginx) donc les fichiers compilés seront avec les droits uniquement pour l'utilsateur nginx.  
+Le playwright est avec l'utilisateur playwrightJammy (nom du noyau ajouté), et donc comme précedemment, les fichiers du site et des tests sont accessibles uniquement pour playwrightJammy.  
 
