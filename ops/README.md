@@ -18,10 +18,10 @@ Puis, on ajoute les paquets nécessaires pour la vérification des routes du bac
 Ensuite, on copie les données importantes (source du front-end et app et database pour le backend).
 Après, on installe node et nginx qui permettent de transformer tous nos fichiers angular en fichiers html, css et javascript.  
 Pour le docker compose, on a ajouté 2 services à savoir le front-end et le backend.  
-Ainsi, on construit leurs images via le build et on leur spécifie le port, leur variables d'environnements à ajouter et leurs noms d'image.  
+Ainsi, on construit leur image via le build et on leur spécifie le port, leur variables d'environnements à ajouter et leurs noms d'image.  
 Puis, on a configuré le healthcheck (comme expliqué dans la partie healthcheck) et on a ajouté le volume pour la database (de nom db-data) pour rendre les données persistantes.  
 Pour la partie test, on ajoute un nouveau dockerfile pour executer le playwright, puisqu'il a besoin seulement du noyau alpine car le node est inclus dans l'image du playwright importé après.  
-Dans le docker-compose on ajoute le service playwright ainsi que dans le build de front et playwright, on ajoute une ligne dockerfile pour préciser le dockerfile à éxécuter pour construire l'image.  
+Dans le docker-compose, on ajoute le service playwright ainsi que dans le build de front et playwright, on ajoute une ligne dockerfile pour préciser le dockerfile à éxécuter pour construire l'image.  
 
 ## Utilisateur
 
