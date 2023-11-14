@@ -5,8 +5,7 @@
 .boite {
   text-align: center;
   background-color:white;
-  padding: 2%;
-  margin-top: 40px;
+  padding: 1%;
   margin-left: 10%;
   margin-right: 10%;
   border: 2px solid $beige;
@@ -22,6 +21,14 @@
 .gauche{
   display: flex;
   flex-direction: column;
+  margin-left: 10%;
+  max-width: 50%;
+  min-width: 40%;
+}
+
+.info{
+  max-width: 50%;
+  min-width: 50%;
 }
 
 button{
@@ -39,4 +46,18 @@ button{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+h2{
+  margin: 3%;
+}
+
+p{
+  margin: 3%;
+}
+
+img{
+  height: 100%;
+  max-height: 250px;
+  margin: 5% 5% auto;
 }

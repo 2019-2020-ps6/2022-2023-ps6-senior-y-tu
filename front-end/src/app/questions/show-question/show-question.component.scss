@@ -5,8 +5,7 @@
 .boite {
   text-align: center;
   background-color:white;
-  padding: 2%;
-  margin-top: 40px;
+  padding: 1.5%;
   margin-left: 10%;
   margin-right: 10%;
   border: 2px solid $beige;
@@ -50,4 +49,9 @@ button{
   margin: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+img{
+  max-height: 200px;
+  max-width: 200px;
 }

@@ -5,19 +5,24 @@
   flex-wrap: wrap;
 }
 
+.tete{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 #entete {
   text-align: center;
   background-color:$beige;
   padding:3px;
-  margin-top: 40px;
   margin-left: 10%;
   margin-right: 10%;
+  width: 100%;
 }
 
 .droite{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   margin-right: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 

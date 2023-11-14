@@ -1,13 +1,14 @@
 <app-header-patient></app-header-patient>
-<div id="entete">
-  <h1 [appPolice]="" >Choisissez un quiz du thème {{themeParent?.nomTheme}}</h1>
+<div class="tete">
+  <div id="entete">
+    <h1 [appPolice]="" >Choisissez un quiz du thème {{themeParent?.nomTheme}}</h1>
+  </div>
+  <div class="droite">
+    <img src="assets/boutonRetour.png" [appClickable]="tupleRetour">
+  </div>
 </div>
-<br>
 
-<div class="droite">
-  <div></div>
-  <img src="assets/boutonRetour.png" [appClickable]="tupleRetour">
-</div>
+<br>
 
 <div class="quiz-list">
   <div class="quiz" *ngFor="let quiz of quizList; index as i" [appPolice]="">

@@ -45,19 +45,36 @@
   border-style: solid;
   margin-left: 110px;
   display: inline-block;
+  min-height: 400px;
+  max-height: 400px;
+  position: relative;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 h2 {
   text-align: center;
+  margin-top: 5%;
+  margin-bottom: 10%;
 }
 
 #images {
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 
 .button-card {
   display: block;
-  margin: auto;
+  position: absolute;
+  bottom: 15px;
+  left: 40px;
+  right: 40px;
+}
+
+
+img{
+  max-height: 150px;
+  max-width: 150px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }

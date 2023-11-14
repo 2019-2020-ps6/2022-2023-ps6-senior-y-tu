@@ -5,8 +5,7 @@
 .boite {
   text-align: center;
   background-color:white;
-  padding: 2%;
-  margin-top: 40px;
+  padding: 1.5%;
   margin-left: 10%;
   margin-right: 10%;
   border: 2px solid $beige;
@@ -28,13 +27,16 @@
 
 .explication{
   background-color:$app-background-color;
-  padding: 2%;
-  margin-top: 40px;
+  padding: 1%;
   margin-left: 10%;
   margin-right: 10%;
   border: 2px solid $beige;
   border-radius: 5px;
   text-align: justify;
+}
+
+p{
+  margin: 10px;
 }
 
 .boutton{
@@ -50,4 +52,9 @@
 .bravo{
   color: green;
   display: block;
+}
+
+img{
+  max-height: 200px;
+  max-width: 200px;
 }
